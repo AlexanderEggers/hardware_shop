@@ -35,7 +35,7 @@ public class DatabaseCreator {
                 + " TEXT           TEXT                     NOT NULL, "
                 + " IMAGE          TEXT                     NOT NULL, "
                 + " RELEASE_DATE   TEXT                     NOT NULL, "
-                + " LAST_EDIT      TEXT                     NOT NULL, "
+                + " LAST_EDIT      INT                      NOT NULL, "
                 + " LAST_EDITOR    TEXT                     NOT NULL, "
                 + " VIEWS          INT                      NOT NULL)";
         stmt.executeUpdate(sql);

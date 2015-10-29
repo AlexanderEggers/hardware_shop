@@ -10,7 +10,7 @@ public class DatabaseCreator {
 
     public DatabaseCreator() throws ClassNotFoundException, SQLException {
         Class.forName("org.sqlite.JDBC");
-        c = DriverManager.getConnection("jdbc:sqlite:Database.sql");
+        c = DriverManager.getConnection("jdbc:sqlite:DB.sql");
         c.setAutoCommit(false);
         System.out.println("Opened database successfully");
     }

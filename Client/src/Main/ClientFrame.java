@@ -7,7 +7,7 @@ public class ClientFrame {
     
     public static JFrame frame;
     
-    public static void main(String[] args) {
+    public void startFrame() {
         frame = new JFrame("Hardware Shop - Client");
         frame.setSize(1200, 800);
         frame.setVisible(true);

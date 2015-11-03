@@ -6,8 +6,6 @@ package Main;
  */
 public class ClientManager {
 
-    public void init() {
-        //Hier werden die Objekte, wie GUI, Multithreading, Verbindung zur DB 
-        //usw. durchgeführt.
+    public static void init() {
     }
 }

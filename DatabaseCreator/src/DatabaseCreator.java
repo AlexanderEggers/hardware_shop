@@ -17,27 +17,90 @@ public class DatabaseCreator {
 
     private void builtData() throws Exception {
         stmt = c.createStatement();
-        String sql = "CREATE TABLE USERDB "
-                + "(USERID          INT     PRIMARY KEY     NOT NULL,"
-                + " USERNAME        CHAR(15)                NOT NULL, "
+        String sql = "CREATE TABLE USER "
+                + "(ID              INT     PRIMARY KEY     NOT NULL,"
+                + " NAME            CHAR(15)                NOT NULL, "
                 + " PASSWORD        CHAR(15)                NOT NULL, "
-                + " ROLE            BLOB                    NOT NULL)";
+                + " ROLE            INT                     NOT NULL)";
         stmt.executeUpdate(sql);
-        
+
         stmt = c.createStatement();
-        sql = "CREATE TABLE CONTENTDB "
+        sql = "CREATE TABLE MAIN "
                 + "(ID             INT      PRIMARY KEY     NOT NULL,"
-                + " CATEGORY       TEXT                     NOT NULL, "
-                + " MANUFACTURER   TEXT                     NOT NULL, "
-                + " NAME           TEXT                     NOT NULL, "
-                + " MODELL         TEXT                     NOT NULL, "
-                + " PRICE          REAL                     NOT NULL, "
-                + " TEXT           TEXT                     NOT NULL, "
-                + " IMAGE          TEXT                     NOT NULL, "
-                + " RELEASE_DATE   TEXT                     NOT NULL, "
-                + " LAST_EDIT      INT                      NOT NULL, "
-                + " LAST_EDITOR    TEXT                     NOT NULL, "
+                + " CATEGORY       INT                      , "
+                + " SUBCATEGORY    INT                      , "
+                + " MANUFACTURER   INT                      , "
+                + " EDITOR         INT                      , "
+                + " STATUS         INT                      NOT NULL, "
+                + " DATE           TEXT                     NOT NULL, "
+                + " LAST_EDIT      TEXT                     NOT NULL, "
                 + " VIEWS          INT                      NOT NULL)";
+        stmt.executeUpdate(sql);
+
+        stmt = c.createStatement();
+        sql = "CREATE TABLE CONTENT_GPU "
+                + "(ID             INT      PRIMARY KEY     NOT NULL,"
+                + " TEST           TEXT                     NOT NULL, "
+                + " TEST2          INT                      NOT NULL)";
+        stmt.executeUpdate(sql);
+
+        stmt = c.createStatement();
+        sql = "CREATE TABLE CONTENT_CPU "
+                + "(ID             INT      PRIMARY KEY     NOT NULL,"
+                + " TEST           TEXT                     NOT NULL, "
+                + " TEST2          INT                      NOT NULL)";
+        stmt.executeUpdate(sql);
+
+        stmt = c.createStatement();
+        sql = "CREATE TABLE CONTENT_RAM "
+                + "(ID             INT      PRIMARY KEY     NOT NULL,"
+                + " TEST           TEXT                     NOT NULL, "
+                + " TEST2          INT                      NOT NULL)";
+        stmt.executeUpdate(sql);
+
+        stmt = c.createStatement();
+        sql = "CREATE TABLE CATEGORY "
+                + "(ID             INT      PRIMARY KEY     NOT NULL,"
+                + " NAME           TEXT                     NOT NULL)";
+        stmt.executeUpdate(sql);
+
+        stmt = c.createStatement();
+        sql = "CREATE TABLE SUBCATEGORY "
+                + "(ID             INT      PRIMARY KEY     NOT NULL,"
+                + " NAME           TEXT                     NOT NULL)";
+        stmt.executeUpdate(sql);
+
+        stmt = c.createStatement();
+        sql = "CREATE TABLE MANUFACTURER "
+                + "(ID             INT      PRIMARY KEY     NOT NULL,"
+                + " NAME           TEXT                     NOT NULL)";
+        stmt.executeUpdate(sql);
+
+        stmt = c.createStatement();
+        sql = "CREATE TABLE SEARCH "
+                + "(ID             INT      PRIMARY KEY     NOT NULL,"
+                + " MAINID         INT                      NOT NULL, "
+                + " TAGID          INT                      NOT NULL)";
+        stmt.executeUpdate(sql);
+
+        stmt = c.createStatement();
+        sql = "CREATE TABLE TAG "
+                + "(ID             INT      PRIMARY KEY     NOT NULL,"
+                + " NAME           TEXT                     NOT NULL)";
+        stmt.executeUpdate(sql);
+
+        stmt = c.createStatement();
+        sql = "CREATE TABLE WISHLIST "
+                + "(ID             INT      PRIMARY KEY     NOT NULL,"
+                + " USERID         INT                      NOT NULL, "
+                + " MAINID         INT                      NOT NULL)";
+        stmt.executeUpdate(sql);
+    }
+
+    private void initStartContent() throws Exception {
+        stmt = c.createStatement();
+        String sql = "INSERT INTO USER (ID,NAME,PASSWORD,ROLE) "
+                + "VALUES (1, 'Admin', 'root', 1);";
         stmt.executeUpdate(sql);
     }
 
@@ -45,6 +108,7 @@ public class DatabaseCreator {
         try {
             DatabaseCreator creator = new DatabaseCreator();
             creator.builtData();
+            creator.initStartContent();
             stmt.close();
             c.commit();
             c.close();

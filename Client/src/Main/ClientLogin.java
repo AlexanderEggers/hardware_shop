@@ -1,6 +1,6 @@
 package Main;
 
-import GUI.LOGIN.ClientLoginWindow;
+import GUI.LOGIN.LoginWindow;
 import javax.swing.JFrame;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
 
@@ -9,8 +9,8 @@ public class ClientLogin extends JFrame {
     public ClientLogin(String title) {
         super(title);
 
-        ClientLoginWindow login = new ClientLoginWindow(this);
-        login.initGUIStructure();
+        LoginWindow login = new LoginWindow(this);
+        login.initStructure();
     }
 
     public static void main(String[] args) {

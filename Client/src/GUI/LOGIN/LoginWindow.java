@@ -1,5 +1,6 @@
 package GUI.LOGIN;
 
+import GUI.WindowObject;
 import Main.ClientFrame;
 import Input.LoginInput;
 import Util.ClientSettings;
@@ -22,7 +23,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-public class ClientLoginWindow {
+public class LoginWindow extends WindowObject {
 
     private JTextField userField;
     private JPasswordField passwordField;
@@ -30,14 +31,14 @@ public class ClientLoginWindow {
     private final LoginInput input;
     private Connection c;
     private Statement stmt;
-    private final JFrame frame;
 
-    public ClientLoginWindow(JFrame frame) {
-        this.frame = frame;
+    public LoginWindow(JFrame frame) {
+        super(frame, "LoginWindow");
         input = new LoginInput();
     }
 
-    public void initGUIStructure() {
+    @Override
+    public void initStructure() {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
@@ -90,7 +91,6 @@ public class ClientLoginWindow {
                             ClientSettings.currentState = ClientState.CLIENT;
                             ClientSettings.inputUser = userField.getText();
                             ClientSettings.clientFrame = new ClientFrame();
-                            ClientSettings.clientFrame.startFrame();
                         } else {
                             JOptionPane.showMessageDialog(frame,
                                     "Invalid input. Try again.",
@@ -107,7 +107,7 @@ public class ClientLoginWindow {
         });
         buttonPanel.add(button);
         panel.add(buttonPanel);
-        frame.add(panel);
+        referencePanel.add(panel);
     }
 
     public static void CLICK_LOGINBUTTON() {

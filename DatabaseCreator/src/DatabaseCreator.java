@@ -1,4 +1,5 @@
 
+import java.io.File;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -9,8 +10,11 @@ public class DatabaseCreator {
     private static Statement stmt;
 
     public DatabaseCreator() throws ClassNotFoundException, SQLException {
+        File file = new File("../DB.sql");
+        file.delete();
+
         Class.forName("org.sqlite.JDBC");
-        c = DriverManager.getConnection("jdbc:sqlite:DB.sql");
+        c = DriverManager.getConnection("jdbc:sqlite:../DB.sql");
         c.setAutoCommit(false);
         System.out.println("Opened database successfully");
     }
@@ -101,6 +105,11 @@ public class DatabaseCreator {
         stmt = c.createStatement();
         String sql = "INSERT INTO USER (ID,NAME,PASSWORD,ROLE) "
                 + "VALUES (1, 'Admin', 'root', 1);";
+        stmt.executeUpdate(sql);
+
+        stmt = c.createStatement();
+        sql = "INSERT INTO MAIN (ID,CATEGORY,SUBCATEGORY,MANUFACTURER,EDITOR,STATUS,DATE,LAST_EDIT,VIEWS) "
+                + "VALUES (1, 15, 0, 10, 1, 0, '15-11-04', '15-11-04-00-11', 0);";
         stmt.executeUpdate(sql);
     }
 

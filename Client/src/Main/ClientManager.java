@@ -1,6 +1,7 @@
 package Main;
 
 import GUI.WindowController;
+import Input.ClientInput;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -16,6 +17,7 @@ public class ClientManager {
     public static Connection g_dbConnection;
     public static Statement g_stmt;
     public static WindowController g_guiController;
+    public static ClientInput g_input;
 
     public void initClient(JFrame frame) {
         try {
@@ -25,6 +27,8 @@ public class ClientManager {
         } catch (ClassNotFoundException | SQLException e) {
         }
 
+        g_input = new ClientInput();
+        
         g_guiController = new WindowController(frame);
         ClientManager.g_guiController.windowControl("toggleVisibility", "", "SearchWindow");
     }

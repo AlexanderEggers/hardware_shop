@@ -1,5 +1,6 @@
 *.class
 *.properties
+*.xml
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
@@ -13,7 +14,8 @@ hs_err_pid*
 DatabaseCreator/build/
 DatabaseCreator/nbproject/
 DatabaseCreator/nbproject/private/
+DatabaseCreator/nbproject/private/private.xml
 Client/build/
 Client/nbproject/
 Client/nbproject/private/
-*.xml
+Client/nbproject/private/private.xml

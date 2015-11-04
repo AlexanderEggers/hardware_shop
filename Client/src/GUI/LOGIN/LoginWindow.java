@@ -71,7 +71,7 @@ public class LoginWindow extends WindowObject {
         button.addActionListener((ActionEvent ae) -> {
             try {
                 Class.forName("org.sqlite.JDBC");
-                c = DriverManager.getConnection("jdbc:sqlite:..//DB.sql");
+                c = DriverManager.getConnection("jdbc:sqlite:../DB.sql");
                 c.setAutoCommit(false);
                 stmt = c.createStatement();
                 ResultSet rs = stmt.executeQuery("SELECT ROLE,PASSWORD FROM USER WHERE NAME = '"

@@ -16,3 +16,5 @@ hs_err_pid*
 /Client/build/
 /Client/nbproject/
 /Client/nbproject/private/
+Client/nbproject/private/private.xml
+*.xml

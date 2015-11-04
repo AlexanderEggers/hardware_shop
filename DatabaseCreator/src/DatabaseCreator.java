@@ -34,7 +34,7 @@ public class DatabaseCreator {
                 + " CATEGORY       INT                      , "
                 + " SUBCATEGORY    INT                      , "
                 + " MANUFACTURER   INT                      , "
-                + " EDITOR         INT                      , "
+                + " EDITOR         INT                      NOT NULL, "
                 + " STATUS         INT                      NOT NULL, "
                 + " DATE           TEXT                     NOT NULL, "
                 + " LAST_EDIT      TEXT                     NOT NULL, "

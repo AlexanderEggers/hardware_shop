@@ -11,3 +11,6 @@
 hs_err_pid*
 /DatabaseCreator/build/
 /DatabaseCreator/nbproject/private/
+/Client/build/
+/Client/nbproject/private/
+*.properties

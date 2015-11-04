@@ -12,10 +12,6 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 DatabaseCreator/build/
-DatabaseCreator/nbproject/
 DatabaseCreator/nbproject/private/
-DatabaseCreator/nbproject/private/private.xml
 Client/build/
-Client/nbproject/
 Client/nbproject/private/
-Client/nbproject/private/private.xml

@@ -24,7 +24,6 @@ public class DatabaseCreator {
         Class.forName("org.sqlite.JDBC");
         c = DriverManager.getConnection("jdbc:sqlite:" + path);
         c.setAutoCommit(false);
-        System.out.println("Opened database successfully");
     }
 
     private void builtData() throws Exception {
@@ -119,6 +118,11 @@ public class DatabaseCreator {
         sql = "INSERT INTO MAIN (ID,CATEGORY,SUBCATEGORY,MANUFACTURER,EDITOR,STATUS,DATE,LAST_EDIT,VIEWS) "
                 + "VALUES (1, 15, 0, 10, 1, 0, '15-11-04', '15-11-04-00-11', 0);";
         stmt.executeUpdate(sql);
+        
+        stmt = c.createStatement();
+        sql = "INSERT INTO MAIN (ID,CATEGORY,SUBCATEGORY,MANUFACTURER,EDITOR,STATUS,DATE,LAST_EDIT,VIEWS) "
+                + "VALUES (2, 8, 0, 10, 1, 0, '15-11-04', '15-11-04-00-11', 0);";
+        stmt.executeUpdate(sql);
     }
 
     public static void main(String args[]) {
@@ -129,6 +133,7 @@ public class DatabaseCreator {
             stmt.close();
             c.commit();
             c.close();
+            System.out.println("Database successfully created.");
         } catch (Exception e) {
             Logger.getLogger(DatabaseCreator.class.getName()).log(Level.SEVERE, e.getMessage());
         }

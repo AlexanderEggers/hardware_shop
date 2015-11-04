@@ -2,10 +2,7 @@ package Main;
 
 import GUI.WindowController;
 import Input.ClientInput;
-import java.io.File;
 import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JFrame;
 
@@ -22,7 +19,6 @@ public class ClientManager {
 
     public void initClient(JFrame frame) {
         g_input = new ClientInput();
-
         g_guiController = new WindowController(frame);
         ClientManager.g_guiController.windowControl("toggleVisibility", "", "SearchWindow");
     }

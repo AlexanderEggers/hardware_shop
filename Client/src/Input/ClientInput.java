@@ -1,5 +1,6 @@
 package Input;
 
+import GUI.CLIENT.SearchWindow;
 import Main.ClientManager;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -34,7 +35,7 @@ public class ClientInput extends KeyAdapter {
                     + "WHERE ID = " + textField.getText() + " ;");
 
             while (rs.next()) {
-                System.out.println(rs.getInt("CATEGORY"));
+                SearchWindow.label.setText(rs.getInt("CATEGORY") + "");
             }
 
             rs.close();

@@ -22,7 +22,7 @@ public class ClientManager {
     public void initClient(JFrame frame) {
         try {
             Class.forName("org.sqlite.JDBC");
-            g_dbConnection = DriverManager.getConnection("jdbc:sqlite:..//DB.sql");
+            g_dbConnection = DriverManager.getConnection("jdbc:sqlite:../DB.sql");
             g_dbConnection.setAutoCommit(false);
         } catch (ClassNotFoundException | SQLException e) {
         }

@@ -2,6 +2,7 @@ package Main;
 
 import GUI.WindowController;
 import Input.ClientInput;
+import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -20,15 +21,8 @@ public class ClientManager {
     public static ClientInput g_input;
 
     public void initClient(JFrame frame) {
-        try {
-            Class.forName("org.sqlite.JDBC");
-            g_dbConnection = DriverManager.getConnection("jdbc:sqlite:../DB.sql");
-            g_dbConnection.setAutoCommit(false);
-        } catch (ClassNotFoundException | SQLException e) {
-        }
-
         g_input = new ClientInput();
-        
+
         g_guiController = new WindowController(frame);
         ClientManager.g_guiController.windowControl("toggleVisibility", "", "SearchWindow");
     }

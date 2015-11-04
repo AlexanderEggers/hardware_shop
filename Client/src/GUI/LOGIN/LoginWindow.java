@@ -3,16 +3,16 @@ package GUI.LOGIN;
 import GUI.WindowObject;
 import Main.ClientFrame;
 import Input.LoginInput;
+import Main.ClientManager;
 import Util.ClientSettings;
 import Util.ClientSettings.ClientState;
 import java.awt.FlowLayout;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
-import java.sql.Connection;
+import java.io.File;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -29,8 +29,6 @@ public class LoginWindow extends WindowObject {
     private JPasswordField passwordField;
     private static JButton button;
     private final LoginInput input;
-    private Connection c;
-    private Statement stmt;
 
     public LoginWindow(JFrame frame) {
         super(frame, "LoginWindow");
@@ -71,10 +69,17 @@ public class LoginWindow extends WindowObject {
         button.addActionListener((ActionEvent ae) -> {
             try {
                 Class.forName("org.sqlite.JDBC");
-                c = DriverManager.getConnection("jdbc:sqlite:../DB.sql");
-                c.setAutoCommit(false);
-                stmt = c.createStatement();
-                ResultSet rs = stmt.executeQuery("SELECT ROLE,PASSWORD FROM USER WHERE NAME = '"
+
+                String path = "../DB.sql";
+                File file = new File(path);
+                if (!file.exists()) {
+                    path = "../../DB.sql";
+                }
+
+                ClientManager.g_dbConnection = DriverManager.getConnection("jdbc:sqlite:" + path);
+                ClientManager.g_dbConnection.setAutoCommit(false);
+                ClientManager.g_stmt = ClientManager.g_dbConnection.createStatement();
+                ResultSet rs = ClientManager.g_stmt.executeQuery("SELECT ROLE,PASSWORD FROM USER WHERE NAME = '"
                         + userField.getText() + "';");
                 if (!rs.next()) {
                     JOptionPane.showMessageDialog(frame,
@@ -99,8 +104,6 @@ public class LoginWindow extends WindowObject {
                     } while (rs.next());
                 }
                 rs.close();
-                stmt.close();
-                c.close();
             } catch (ClassNotFoundException | SQLException | HeadlessException ex) {
                 System.out.println("Irgendetwas ist falsch gelaufen." + ex.getMessage());
             }

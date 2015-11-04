@@ -1,5 +1,6 @@
 
 import java.io.File;
+import java.io.IOException;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -9,12 +10,19 @@ public class DatabaseCreator {
     private static Connection c;
     private static Statement stmt;
 
-    public DatabaseCreator() throws ClassNotFoundException, SQLException {
-        File file = new File("../DB.sql");
+    public DatabaseCreator() throws ClassNotFoundException, SQLException, IOException {
+        String path = "../DB.sql";
+        File file = new File(path);
+        path = file.getCanonicalPath();
+
+        if (path.contains("DatabaseCreator")) {
+            path = "../../DB.sql";
+            file = new File(path);
+        }
         file.delete();
 
         Class.forName("org.sqlite.JDBC");
-        c = DriverManager.getConnection("jdbc:sqlite:../DB.sql");
+        c = DriverManager.getConnection("jdbc:sqlite:" + path);
         c.setAutoCommit(false);
         System.out.println("Opened database successfully");
     }

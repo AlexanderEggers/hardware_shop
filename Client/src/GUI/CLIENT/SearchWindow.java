@@ -131,7 +131,34 @@ public class SearchWindow extends WindowObject {
         
         entryDisplay = new JPanel();
         entryDisplay.setLayout(new BoxLayout(entryDisplay, BoxLayout.Y_AXIS));
+        
+        JPanel titlepanel = new JPanel();
+        titlepanel.setLayout(new BoxLayout(titlepanel, BoxLayout.X_AXIS));
+        
+        JPanel innerpanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
+        JLabel entryLabel = new JLabel("ID");
+        innerpanel.add(entryLabel);
+        titlepanel.add(innerpanel);
+        
+        innerpanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
+        entryLabel = new JLabel("Category");
+        innerpanel.add(entryLabel);
+        titlepanel.add(innerpanel);
+        
+        innerpanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
+        entryLabel = new JLabel("Sub-Category");
+        innerpanel.add(entryLabel);
+        titlepanel.add(innerpanel);
+        
+        innerpanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
+        entryLabel = new JLabel("Editor");
+        innerpanel.add(entryLabel);
+        titlepanel.add(innerpanel);
+        
         entryDisplay.add(new JPanel()).setSize(entryDisplay.getWidth(), 10);
+        entryDisplay.add(titlepanel);
+        entryDisplay.add(new JPanel()).setSize(entryDisplay.getWidth(), 10);
+        
         addEntry();
         
         panel.add(filterMenu);
@@ -144,25 +171,25 @@ public class SearchWindow extends WindowObject {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
         
-        JPanel innerpanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
+        JPanel innerpanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 5));
         JLabel entryLabel = new JLabel();
         innerpanel.add(entryLabel);
         labelList.add(entryLabel);
         panel.add(innerpanel);
         
-        innerpanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
+        innerpanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 5));
         entryLabel = new JLabel();
         innerpanel.add(entryLabel);
         labelList.add(entryLabel);
         panel.add(innerpanel);
         
-        innerpanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
+        innerpanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 5));
         entryLabel = new JLabel();
         innerpanel.add(entryLabel);
         labelList.add(entryLabel);
         panel.add(innerpanel);
         
-        innerpanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
+        innerpanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 5));
         entryLabel = new JLabel();
         innerpanel.add(entryLabel);
         labelList.add(entryLabel);

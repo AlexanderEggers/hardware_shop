@@ -35,6 +35,10 @@ public class ClientInput extends KeyAdapter {
             ResultSet rs = ClientManager.g_stmt.executeQuery("SELECT ID,CATEGORY,SUBCATEGORY,EDITOR FROM MAIN "
                     + "WHERE ID = " + textField.getText() + " ;");
 
+            /**
+             * Adding/Deleting list objects and it's content dynamicly to the
+             * search window based on the content which has been found
+             */
             while (rs.next()) {
                 ArrayList<Integer> content = new ArrayList<>();
                 content.add(rs.getInt("ID"));
@@ -42,6 +46,22 @@ public class ClientInput extends KeyAdapter {
                 content.add(rs.getInt("SUBCATEGORY"));
                 content.add(rs.getInt("EDITOR"));
 
+                /**
+                 * Resets all list objects at the search window
+                 */
+                SearchWindow.labelList.get(0).getParent().getParent().removeAll();
+                SearchWindow.labelList.clear();
+
+                /**
+                 * Creates new list objects
+                 */
+                for (int i = 0; i < content.size() / 4; i++) {
+                    SearchWindow.addEntry();
+                }
+
+                /**
+                 * Adds content to the list objects
+                 */
                 for (int i = 0; i < content.size(); i++) {
                     if (i < SearchWindow.labelList.size()) {
                         SearchWindow.labelList.get(i).setText(content.get(i) + "");
@@ -50,7 +70,6 @@ public class ClientInput extends KeyAdapter {
                     }
                 }
             }
-
             rs.close();
         } catch (Exception ex) {
             System.out.println(ex.getMessage());

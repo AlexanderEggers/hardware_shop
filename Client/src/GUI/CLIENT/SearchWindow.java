@@ -3,6 +3,7 @@ package GUI.CLIENT;
 import GUI.WindowObject;
 import Main.ClientManager;
 import java.awt.FlowLayout;
+import java.util.ArrayList;
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -13,9 +14,12 @@ public class SearchWindow extends WindowObject {
 
     public static JLabel label;
     public static JPanel entryDisplay;
+    public static ArrayList<JLabel> labelList;
     
     public SearchWindow(JFrame frame) {
         super(frame, "SearchWindow");
+        
+        labelList = new ArrayList<>();
     }
 
     @Override
@@ -127,31 +131,41 @@ public class SearchWindow extends WindowObject {
         
         entryDisplay = new JPanel();
         entryDisplay.setLayout(new BoxLayout(entryDisplay, BoxLayout.Y_AXIS));
-
+        entryDisplay.add(new JPanel()).setSize(entryDisplay.getWidth(), 10);
+        addEntry();
+        
         panel.add(filterMenu);
         panel.add(entryDisplay);
         
         referencePanel.add(panel);
     }
     
-    public static void addEntry(int id, int category, int subcategory, int owner) {
+    public static void addEntry() {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
         
         JPanel innerpanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
-        innerpanel.add(new JLabel(id + ""));
+        JLabel entryLabel = new JLabel();
+        innerpanel.add(entryLabel);
+        labelList.add(entryLabel);
         panel.add(innerpanel);
         
         innerpanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
-        innerpanel.add(new JLabel(category + ""));
+        entryLabel = new JLabel();
+        innerpanel.add(entryLabel);
+        labelList.add(entryLabel);
         panel.add(innerpanel);
         
         innerpanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
-        innerpanel.add(new JLabel(subcategory + ""));
+        entryLabel = new JLabel();
+        innerpanel.add(entryLabel);
+        labelList.add(entryLabel);
         panel.add(innerpanel);
         
         innerpanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
-        innerpanel.add(new JLabel(owner + ""));
+        entryLabel = new JLabel();
+        innerpanel.add(entryLabel);
+        labelList.add(entryLabel);
         panel.add(innerpanel);
         
         entryDisplay.add(panel);

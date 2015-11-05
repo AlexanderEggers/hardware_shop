@@ -5,6 +5,7 @@ import Main.ClientManager;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import javax.swing.JTextField;
 
 public class ClientInput extends KeyAdapter {
@@ -35,12 +36,19 @@ public class ClientInput extends KeyAdapter {
                     + "WHERE ID = " + textField.getText() + " ;");
 
             while (rs.next()) {
-                int id = rs.getInt("ID");
-                int category = rs.getInt("CATEGORY");
-                int subCategory = rs.getInt("SUBCATEGORY");
-                int editor = rs.getInt("EDITOR");
-                
-                SearchWindow.addEntry(id, category, subCategory, editor);
+                ArrayList<Integer> content = new ArrayList<>();
+                content.add(rs.getInt("ID"));
+                content.add(rs.getInt("CATEGORY"));
+                content.add(rs.getInt("SUBCATEGORY"));
+                content.add(rs.getInt("EDITOR"));
+
+                for (int i = 0; i < content.size(); i++) {
+                    if (i < SearchWindow.labelList.size()) {
+                        SearchWindow.labelList.get(i).setText(content.get(i) + "");
+                    } else {
+                        break;
+                    }
+                }
             }
 
             rs.close();

@@ -43,6 +43,9 @@ public class DatabaseCreator {
                 + " MANUFACTURER   INT                      , "
                 + " EDITOR         INT                      NOT NULL, "
                 + " STATUS         INT                      NOT NULL, "
+                + " TITLE          TEXT                     , "
+                + " URL            TEXT                     , "
+                + " NAME           TEXT                     , "
                 + " DATE           TEXT                     NOT NULL, "
                 + " LAST_EDIT      TEXT                     NOT NULL, "
                 + " VIEWS          INT                      NOT NULL)";
@@ -72,19 +75,25 @@ public class DatabaseCreator {
         stmt = c.createStatement();
         sql = "CREATE TABLE CATEGORY "
                 + "(ID             INT      PRIMARY KEY     NOT NULL,"
-                + " NAME           TEXT                     NOT NULL)";
+                + " NAME           TEXT                     NOT NULL, "
+                + " AMOUNT         INT                      NOT NULL, "
+                + " VIEWS          INT                      NOT NULL)";
         stmt.executeUpdate(sql);
 
         stmt = c.createStatement();
         sql = "CREATE TABLE SUBCATEGORY "
                 + "(ID             INT      PRIMARY KEY     NOT NULL,"
-                + " NAME           TEXT                     NOT NULL)";
+                + " NAME           TEXT                     NOT NULL, "
+                + " AMOUNT         INT                      NOT NULL, "
+                + " VIEWS          INT                      NOT NULL)";
         stmt.executeUpdate(sql);
 
         stmt = c.createStatement();
         sql = "CREATE TABLE MANUFACTURER "
                 + "(ID             INT      PRIMARY KEY     NOT NULL,"
-                + " NAME           TEXT                     NOT NULL)";
+                + " NAME           TEXT                     NOT NULL, "
+                + " AMOUNT         INT                      NOT NULL, "
+                + " VIEWS          INT                      NOT NULL)";
         stmt.executeUpdate(sql);
 
         stmt = c.createStatement();
@@ -97,7 +106,8 @@ public class DatabaseCreator {
         stmt = c.createStatement();
         sql = "CREATE TABLE TAG "
                 + "(ID             INT      PRIMARY KEY     NOT NULL,"
-                + " NAME           TEXT                     NOT NULL)";
+                + " NAME           TEXT                     NOT NULL, "
+                + " VIEWS          INT                      NOT NULL)";
         stmt.executeUpdate(sql);
 
         stmt = c.createStatement();
@@ -115,13 +125,13 @@ public class DatabaseCreator {
         stmt.executeUpdate(sql);
 
         stmt = c.createStatement();
-        sql = "INSERT INTO MAIN (ID,CATEGORY,SUBCATEGORY,MANUFACTURER,EDITOR,STATUS,DATE,LAST_EDIT,VIEWS) "
-                + "VALUES (1, 15, 0, 10, 1, 0, '15-11-04', '15-11-04-00-11', 0);";
+        sql = "INSERT INTO MAIN (ID,CATEGORY,SUBCATEGORY,MANUFACTURER,EDITOR,STATUS,TITLE,URL,NAME,DATE,LAST_EDIT,VIEWS) "
+                + "VALUES (1, 15, 0, 10, 1, 0, 'Test1', '/test1', 'Test Entry 1', '15-11-04', '15-11-04-00-11', 0);";
         stmt.executeUpdate(sql);
         
         stmt = c.createStatement();
-        sql = "INSERT INTO MAIN (ID,CATEGORY,SUBCATEGORY,MANUFACTURER,EDITOR,STATUS,DATE,LAST_EDIT,VIEWS) "
-                + "VALUES (2, 8, 0, 10, 1, 0, '15-11-04', '15-11-04-00-11', 0);";
+        sql = "INSERT INTO MAIN (ID,CATEGORY,SUBCATEGORY,MANUFACTURER,EDITOR,STATUS,TITLE,URL,NAME,DATE,LAST_EDIT,VIEWS) "
+                + "VALUES (2, 8, 0, 10, 1, 0, 'Test2', '/test2', 'Test Entry 2', '15-11-04', '15-11-04-00-11', 0);";
         stmt.executeUpdate(sql);
     }
 

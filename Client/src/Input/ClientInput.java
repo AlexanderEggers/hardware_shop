@@ -28,12 +28,20 @@ public class ClientInput extends KeyAdapter {
 
     private void executeTest(KeyEvent e) {
         JTextField textField = (JTextField) e.getComponent();
-
+        String inputCategory;
+        
+        if(SearchWindow.categoryField.getText() != null 
+                && !SearchWindow.categoryField.getText().equalsIgnoreCase("")) {
+            inputCategory = SearchWindow.categoryField.getText();
+        } else {
+            inputCategory = "ID";
+        }
+        
         try {
             ClientManager.g_stmt = ClientManager.g_dbConnection.createStatement();
 
             ResultSet rs = ClientManager.g_stmt.executeQuery("SELECT ID,CATEGORY,SUBCATEGORY,EDITOR FROM MAIN "
-                    + "WHERE ID = " + textField.getText() + " ;");
+                    + "WHERE " + inputCategory + " = " + textField.getText() + " ;");
 
             /**
              * Adding/Deleting list objects and it's content dynamicly to the
@@ -49,8 +57,10 @@ public class ClientInput extends KeyAdapter {
                 /**
                  * Resets all list objects at the search window
                  */
-                SearchWindow.labelList.get(0).getParent().getParent().removeAll();
-                SearchWindow.labelList.clear();
+                if (!SearchWindow.labelList.isEmpty()) {
+                    SearchWindow.labelList.get(0).getParent().getParent().removeAll();
+                    SearchWindow.labelList.clear();
+                }
 
                 /**
                  * Creates new list objects

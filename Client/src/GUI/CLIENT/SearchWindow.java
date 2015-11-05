@@ -12,7 +12,7 @@ import javax.swing.JTextField;
 
 public class SearchWindow extends WindowObject {
 
-    public static JLabel label;
+    public static JTextField categoryField;
     public static JPanel entryDisplay;
     public static ArrayList<JLabel> labelList;
 
@@ -42,8 +42,8 @@ public class SearchWindow extends WindowObject {
         filterMenu1.add(innerPanel);
 
         innerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
-        label = new JLabel("Das ist ein Test.");
-        innerPanel.add(label);
+        JLabel labeltest = new JLabel("Platzhalter");
+        innerPanel.add(labeltest);
 
         filterMenu1.add(innerPanel);
 
@@ -51,15 +51,15 @@ public class SearchWindow extends WindowObject {
         filterMenu2.setLayout(new BoxLayout(filterMenu2, BoxLayout.Y_AXIS));
 
         innerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
-        textField = new JTextField(20);
-        textField.setName("TextFieldSearch");
-        textField.addKeyListener(ClientManager.g_input);
-        innerPanel.add(textField);
+        categoryField = new JTextField(20);
+        categoryField.setName("TextFieldCategory");
+        categoryField.addKeyListener(ClientManager.g_input);
+        innerPanel.add(categoryField);
 
         filterMenu2.add(innerPanel);
 
         innerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
-        JLabel labeltest = new JLabel("Das ist ein Test.");
+        labeltest = new JLabel("Platzhalter");
         innerPanel.add(labeltest);
 
         filterMenu2.add(innerPanel);
@@ -68,15 +68,13 @@ public class SearchWindow extends WindowObject {
         filterMenu3.setLayout(new BoxLayout(filterMenu3, BoxLayout.Y_AXIS));
 
         innerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
-        textField = new JTextField(20);
-        textField.setName("TextFieldSearch");
-        textField.addKeyListener(ClientManager.g_input);
-        innerPanel.add(textField);
+        labeltest = new JLabel("Platzhalter");
+        innerPanel.add(labeltest);
 
         filterMenu3.add(innerPanel);
 
         innerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
-        labeltest = new JLabel("Das ist ein Test.");
+        labeltest = new JLabel("Platzhalter");
         innerPanel.add(labeltest);
 
         filterMenu3.add(innerPanel);
@@ -85,15 +83,13 @@ public class SearchWindow extends WindowObject {
         filterMenu4.setLayout(new BoxLayout(filterMenu4, BoxLayout.Y_AXIS));
 
         innerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
-        textField = new JTextField(20);
-        textField.setName("TextFieldSearch");
-        textField.addKeyListener(ClientManager.g_input);
-        innerPanel.add(textField);
+        labeltest = new JLabel("Platzhalter");
+        innerPanel.add(labeltest);
 
         filterMenu4.add(innerPanel);
 
         innerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
-        labeltest = new JLabel("Das ist ein Test.");
+        labeltest = new JLabel("Platzhalter");
         innerPanel.add(labeltest);
 
         filterMenu4.add(innerPanel);
@@ -102,15 +98,13 @@ public class SearchWindow extends WindowObject {
         filterMenu5.setLayout(new BoxLayout(filterMenu5, BoxLayout.Y_AXIS));
 
         innerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
-        textField = new JTextField(20);
-        textField.setName("TextFieldSearch");
-        textField.addKeyListener(ClientManager.g_input);
-        innerPanel.add(textField);
+        labeltest = new JLabel("Platzhalter");
+        innerPanel.add(labeltest);
 
         filterMenu5.add(innerPanel);
 
         innerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
-        labeltest = new JLabel("Das ist ein Test.");
+        labeltest = new JLabel("Platzhalter");
         innerPanel.add(labeltest);
 
         filterMenu5.add(innerPanel);

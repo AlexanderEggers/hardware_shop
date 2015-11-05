@@ -75,25 +75,19 @@ public class DatabaseCreator {
         stmt = c.createStatement();
         sql = "CREATE TABLE CATEGORY "
                 + "(ID             INT      PRIMARY KEY     NOT NULL,"
-                + " NAME           TEXT                     NOT NULL, "
-                + " AMOUNT         INT                      NOT NULL, "
-                + " VIEWS          INT                      NOT NULL)";
+                + " NAME           TEXT                     NOT NULL)";
         stmt.executeUpdate(sql);
 
         stmt = c.createStatement();
         sql = "CREATE TABLE SUBCATEGORY "
                 + "(ID             INT      PRIMARY KEY     NOT NULL,"
-                + " NAME           TEXT                     NOT NULL, "
-                + " AMOUNT         INT                      NOT NULL, "
-                + " VIEWS          INT                      NOT NULL)";
+                + " NAME           TEXT                     NOT NULL)";
         stmt.executeUpdate(sql);
 
         stmt = c.createStatement();
         sql = "CREATE TABLE MANUFACTURER "
                 + "(ID             INT      PRIMARY KEY     NOT NULL,"
-                + " NAME           TEXT                     NOT NULL, "
-                + " AMOUNT         INT                      NOT NULL, "
-                + " VIEWS          INT                      NOT NULL)";
+                + " NAME           TEXT                     NOT NULL)";
         stmt.executeUpdate(sql);
 
         stmt = c.createStatement();

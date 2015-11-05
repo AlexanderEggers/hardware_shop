@@ -31,11 +31,16 @@ public class ClientInput extends KeyAdapter {
         try {
             ClientManager.g_stmt = ClientManager.g_dbConnection.createStatement();
 
-            ResultSet rs = ClientManager.g_stmt.executeQuery("SELECT CATEGORY FROM MAIN "
+            ResultSet rs = ClientManager.g_stmt.executeQuery("SELECT ID,CATEGORY,SUBCATEGORY,EDITOR FROM MAIN "
                     + "WHERE ID = " + textField.getText() + " ;");
 
             while (rs.next()) {
-                SearchWindow.label.setText(rs.getInt("CATEGORY") + "");
+                int id = rs.getInt("ID");
+                int category = rs.getInt("CATEGORY");
+                int subCategory = rs.getInt("SUBCATEGORY");
+                int editor = rs.getInt("EDITOR");
+                
+                SearchWindow.addEntry(id, category, subCategory, editor);
             }
 
             rs.close();

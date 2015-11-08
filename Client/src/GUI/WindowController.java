@@ -60,6 +60,18 @@ public class WindowController {
                 activeWindowObject = windowObject;
                 activeWindowName = windowName;
             }
+        } else if (event.equalsIgnoreCase("showWindow")) {
+            if (activeWindowObject != null && !windowName.equalsIgnoreCase(activeWindowName)) {
+                activeWindowObject.getReferencePanel().setVisible(false);
+                activeWindowObject.internalMethod("closeWindow");
+            }
+
+            if (!windowObject.getReferencePanel().isVisible()) {
+                windowObject.getReferencePanel().setVisible(true);
+                windowObject.internalMethod("openWindow");
+                activeWindowObject = windowObject;
+                activeWindowName = windowName;
+            }
         } else if (event.equalsIgnoreCase("internalMethod")) {
             windowObject.internalMethod(additionalData);
         }

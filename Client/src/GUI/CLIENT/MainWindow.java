@@ -3,9 +3,9 @@ package GUI.CLIENT;
 import GUI.WindowObject;
 import Main.ClientManager;
 import java.awt.event.ActionEvent;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
 import javax.swing.SwingConstants;
 
 public class MainWindow extends WindowObject {
@@ -18,45 +18,45 @@ public class MainWindow extends WindowObject {
     public void initStructure() {
         JMenuBar menubar = new JMenuBar();
 
-        JMenuItem search = new JMenuItem("Search");
+        JButton search = new JButton("Search");
         search.addActionListener((ActionEvent e) -> {
-            ClientManager.g_guiController.windowControl("toggleVisibility", "", "SearchWindow");
+            ClientManager.g_guiController.windowControl("showWindow", "", "SearchWindow");
         });
         search.setHorizontalAlignment(SwingConstants.CENTER);
         
-        JMenuItem editor = new JMenuItem("Editor");
+        JButton editor = new JButton("Editor");
         editor.addActionListener((ActionEvent e) -> {
-            ClientManager.g_guiController.windowControl("toggleVisibility", "", "EditorWindow");
+            ClientManager.g_guiController.windowControl("showWindow", "", "EditorWindow");
         });
         editor.setHorizontalAlignment(SwingConstants.CENTER);
 
-        JMenuItem tags = new JMenuItem("TagsWindow");
+        JButton tags = new JButton("TagsWindow");
         tags.addActionListener((ActionEvent e) -> {
-            ClientManager.g_guiController.windowControl("toggleVisibility", "", "TagsWindow");
+            ClientManager.g_guiController.windowControl("showWindow", "", "TagsWindow");
         });
         tags.setHorizontalAlignment(SwingConstants.CENTER);
 
-        JMenuItem userlist = new JMenuItem("Userlist");
+        JButton userlist = new JButton("Userlist");
         userlist.addActionListener((ActionEvent e) -> {
-            ClientManager.g_guiController.windowControl("toggleVisibility", "", "UserlistWindow");
+            ClientManager.g_guiController.windowControl("showWindow", "", "UserlistWindow");
         });
         userlist.setHorizontalAlignment(SwingConstants.CENTER);
 
-        JMenuItem category = new JMenuItem("Category");
+        JButton category = new JButton("Category");
         category.addActionListener((ActionEvent e) -> {
-            ClientManager.g_guiController.windowControl("toggleVisibility", "", "CategoryWindow");
+            ClientManager.g_guiController.windowControl("showWindow", "", "CategoryWindow");
         });
         category.setHorizontalAlignment(SwingConstants.CENTER);
 
-        JMenuItem subCategory = new JMenuItem("SubCategory");
+        JButton subCategory = new JButton("SubCategory");
         subCategory.addActionListener((ActionEvent e) -> {
-            ClientManager.g_guiController.windowControl("toggleVisibility", "", "SubCategoryWindow");
+            ClientManager.g_guiController.windowControl("showWindow", "", "SubCategoryWindow");
         });
         subCategory.setHorizontalAlignment(SwingConstants.CENTER);
 
-        JMenuItem manufacturer = new JMenuItem("Manufacturer");
+        JButton manufacturer = new JButton("Manufacturer");
         manufacturer.addActionListener((ActionEvent e) -> {
-            ClientManager.g_guiController.windowControl("toggleVisibility", "", "ManufacturerWindow");
+            ClientManager.g_guiController.windowControl("showWindow", "", "ManufacturerWindow");
         });
         manufacturer.setHorizontalAlignment(SwingConstants.CENTER);
 

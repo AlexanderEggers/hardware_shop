@@ -11,14 +11,6 @@ import javax.swing.JTextField;
 public class ClientInput extends KeyAdapter {
 
     @Override
-    public void keyTyped(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_ENTER
-                && e.getComponent().getName().equalsIgnoreCase("TextFieldSearch")) {
-            executeTest(e);
-        }
-    }
-
-    @Override
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_ENTER
                 && e.getComponent().getName().equalsIgnoreCase("TextFieldSearch")) {
@@ -30,12 +22,14 @@ public class ClientInput extends KeyAdapter {
         JTextField textField = (JTextField) e.getComponent();
         String inputCategory;
         
-        if(SearchWindow.categoryField.getText() != null 
-                && !SearchWindow.categoryField.getText().equalsIgnoreCase("")) {
-            inputCategory = SearchWindow.categoryField.getText();
-        } else {
-            inputCategory = "ID";
-        }
+//        if(SearchWindow.categoryField.getText() != null 
+//                && !SearchWindow.categoryField.getText().equalsIgnoreCase("")) {
+//            inputCategory = SearchWindow.categoryField.getText();
+//        } else {
+//            inputCategory = "ID";
+//        }
+        
+        inputCategory = "ID";
         
         try {
             ClientManager.g_stmt = ClientManager.g_dbConnection.createStatement();

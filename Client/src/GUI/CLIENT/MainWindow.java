@@ -30,7 +30,7 @@ public class MainWindow extends WindowObject {
         });
         editor.setHorizontalAlignment(SwingConstants.CENTER);
 
-        JButton tags = new JButton("TagsWindow");
+        JButton tags = new JButton("Tags");
         tags.addActionListener((ActionEvent e) -> {
             ClientManager.g_guiController.windowControl("showWindow", "", "TagsWindow");
         });

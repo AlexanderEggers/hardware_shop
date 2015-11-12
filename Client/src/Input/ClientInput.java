@@ -2,24 +2,33 @@ package Input;
 
 import GUI.CLIENT.SearchWindow;
 import Main.ClientManager;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import javax.swing.JTextField;
 
-public class ClientInput extends KeyAdapter {
+public class ClientInput extends KeyAdapter implements ActionListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_ENTER
                 && e.getComponent().getName().equalsIgnoreCase("TextFieldSearch")) {
-            executeTest(e);
+            executeTest();
+        }
+    }
+    
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getActionCommand().equalsIgnoreCase("ButtonSearch")) {
+            executeTest();
         }
     }
 
-    private void executeTest(KeyEvent e) {
-        JTextField textField = (JTextField) e.getComponent();
+    private void executeTest() {
+        JTextField textField = SearchWindow.searchInput;
         String inputCategory;
         
 //        if(SearchWindow.categoryField.getText() != null 

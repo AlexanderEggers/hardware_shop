@@ -4,10 +4,6 @@ import GUI.WindowObject;
 import Main.ClientManager;
 import java.awt.Component;
 import java.awt.FlowLayout;
-import java.awt.Robot;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Properties;
 import javax.swing.*;
@@ -19,6 +15,7 @@ import org.jdatepicker.impl.UtilDateModel;
 public class SearchWindow extends WindowObject {
 
     public static JPanel entryDisplay;
+    public static JTextField searchInput;
     public static ArrayList<JLabel> labelList;
 
     public SearchWindow(JFrame frame) {
@@ -40,18 +37,13 @@ public class SearchWindow extends WindowObject {
         filterMenu1.setLayout(new BoxLayout(filterMenu1, BoxLayout.Y_AXIS));
 
         JPanel search = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        JTextField textField = new JTextField(15);
-        textField.setName("TextFieldSearch");
-        textField.addKeyListener(ClientManager.g_input);
-        search.add(textField);
+        searchInput = new JTextField(15);
+        searchInput.setName("TextFieldSearch");
+        searchInput.addKeyListener(ClientManager.g_input);
+        search.add(searchInput);
         JButton button = new JButton("Search");
-        button.setName("TextFieldSearch");
-        button.addActionListener((ActionEvent ae) -> {
-            try {
-                //Simulate enter key at textfield
-            } catch (Exception e) {
-            }
-        });
+        button.setActionCommand("ButtonSearch");
+        button.addActionListener(ClientManager.g_input);
         search.add(button);
         filterMenu1.add(search);
 

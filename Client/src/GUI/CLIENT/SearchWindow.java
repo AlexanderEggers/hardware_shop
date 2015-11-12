@@ -1,12 +1,21 @@
 package GUI.CLIENT;
 
+import Util.ContentTableRenderer;
 import GUI.WindowObject;
 import Main.ClientManager;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Properties;
 import javax.swing.*;
+import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED;
+import static javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 import org.jdatepicker.impl.DateComponentFormatter;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
@@ -17,6 +26,7 @@ public class SearchWindow extends WindowObject {
     public static JPanel entryDisplay;
     public static JTextField searchInput;
     public static ArrayList<JLabel> labelList;
+    public static DefaultTableModel contentList;
 
     public SearchWindow(JFrame frame) {
         super(frame, "SearchWindow");
@@ -31,7 +41,6 @@ public class SearchWindow extends WindowObject {
 
         JPanel filterMenu = new JPanel(new FlowLayout(FlowLayout.LEFT, 50, 0));
 
-        
         //Filter Menu 1 - beinhaltet Suche, Status und Ersteller
         JPanel filterMenu1 = new JPanel();
         filterMenu1.setLayout(new BoxLayout(filterMenu1, BoxLayout.Y_AXIS));
@@ -70,7 +79,6 @@ public class SearchWindow extends WindowObject {
         status.add(statusChooser);
         filterMenu1.add(status);
 
-        
         //Filter Menu 2 - beinhaltet Kategorie, SubKategorie und Hersteller
         JPanel filterMenu2 = new JPanel();
         filterMenu2.setLayout(new BoxLayout(filterMenu2, BoxLayout.Y_AXIS));
@@ -106,7 +114,6 @@ public class SearchWindow extends WindowObject {
         manufacturer.add(manufacturerChooser);
         filterMenu2.add(manufacturer);
 
-        
         //Filter Menu 3 - beinhaltet Datum, Last_Edit
         JPanel filterMenu3 = new JPanel();
         filterMenu3.setLayout(new BoxLayout(filterMenu3, BoxLayout.Y_AXIS));
@@ -120,9 +127,9 @@ public class SearchWindow extends WindowObject {
         JDatePickerImpl datePicker = new JDatePickerImpl(datePanel, new DateComponentFormatter());
         date.add(datePicker);
         filterMenu3.add(date);
-        
+
         filterMenu3.add(Box.createVerticalStrut(5));
-        
+
         JPanel lastDate = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JLabel lastDateDef = new JLabel("Bearbeitet: ");
         lastDate.add(lastDateDef);
@@ -132,10 +139,9 @@ public class SearchWindow extends WindowObject {
         lastDatePicker.setSize(20, 10);
         lastDate.add(lastDatePicker);
         filterMenu3.add(lastDate);
-        
+
         filterMenu3.add(Box.createVerticalStrut(40));
 
-        
         //Filter Menu 4 - beinhaltet LIMIT, SORT AUSWAHL, SORT Ausrichtung
         JPanel filterMenu4 = new JPanel();
         filterMenu4.setLayout(new BoxLayout(filterMenu4, BoxLayout.Y_AXIS));
@@ -169,12 +175,10 @@ public class SearchWindow extends WindowObject {
         sortDirc.add(sortCheckBox);
         filterMenu4.add(sortDirc);
 
-        
         filterMenu.add(filterMenu1);
         filterMenu.add(filterMenu2);
         filterMenu.add(filterMenu3);
         filterMenu.add(filterMenu4);
-
 
         panel.add(filterMenu);
         panel.add(addEntryArea());
@@ -185,64 +189,38 @@ public class SearchWindow extends WindowObject {
         entryDisplay = new JPanel();
         entryDisplay.setLayout(new BoxLayout(entryDisplay, BoxLayout.Y_AXIS));
 
-        JPanel titlepanel = new JPanel();
-        titlepanel.setLayout(new BoxLayout(titlepanel, BoxLayout.X_AXIS));
+        contentList = new DefaultTableModel() {
 
-        JPanel innerpanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
-        JLabel entryLabel = new JLabel("ID");
-        innerpanel.add(entryLabel);
-        titlepanel.add(innerpanel);
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
 
-        innerpanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
-        entryLabel = new JLabel("Category");
-        innerpanel.add(entryLabel);
-        titlepanel.add(innerpanel);
+        JTable table = new JTable(contentList);
+        table.addMouseListener(new MouseAdapter() {
 
-        innerpanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
-        entryLabel = new JLabel("Sub-Category");
-        innerpanel.add(entryLabel);
-        titlepanel.add(innerpanel);
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2) {
+                    System.out.println("Click");
+                    //hier müsste der Editor aufgerufen werden
+                }
+            }
+        });
+        table.setDefaultRenderer(Object.class, new ContentTableRenderer());
 
-        innerpanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
-        entryLabel = new JLabel("Editor");
-        innerpanel.add(entryLabel);
-        titlepanel.add(innerpanel);
+        contentList.addColumn("ID");
+        contentList.addColumn("Category");
+        contentList.addColumn("SubCategory");
+        contentList.addColumn("Editor");
+
+        JScrollPane scrollArea = new JScrollPane(table, VERTICAL_SCROLLBAR_ALWAYS, HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scrollArea.setPreferredSize(new Dimension(450, 570));
 
         entryDisplay.add(Box.createVerticalStrut(20));
-        entryDisplay.add(titlepanel);
-        entryDisplay.add(Box.createVerticalStrut(20));
+        entryDisplay.add(scrollArea);
 
         return entryDisplay;
-    }
-
-    public static void addEntry() {
-        JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
-
-        JPanel innerpanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 5));
-        JLabel entryLabel = new JLabel();
-        innerpanel.add(entryLabel);
-        labelList.add(entryLabel);
-        panel.add(innerpanel);
-
-        innerpanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 5));
-        entryLabel = new JLabel();
-        innerpanel.add(entryLabel);
-        labelList.add(entryLabel);
-        panel.add(innerpanel);
-
-        innerpanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 5));
-        entryLabel = new JLabel();
-        innerpanel.add(entryLabel);
-        labelList.add(entryLabel);
-        panel.add(innerpanel);
-
-        innerpanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 5));
-        entryLabel = new JLabel();
-        innerpanel.add(entryLabel);
-        labelList.add(entryLabel);
-        panel.add(innerpanel);
-
-        entryDisplay.add(panel);
     }
 }

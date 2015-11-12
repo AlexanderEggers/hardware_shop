@@ -60,27 +60,20 @@ public class ClientInput extends KeyAdapter implements ActionListener {
                 /**
                  * Resets all list objects at the search window
                  */
-                if (!SearchWindow.labelList.isEmpty()) {
-                    SearchWindow.labelList.get(0).getParent().getParent().removeAll();
-                    SearchWindow.labelList.clear();
-                }
-
-                /**
-                 * Creates new list objects
-                 */
-                for (int i = 0; i < content.size() / 4; i++) {
-                    SearchWindow.addEntry();
+                for (int i = 0; i < SearchWindow.contentList.getRowCount(); i++) {
+                    SearchWindow.contentList.removeRow(i);
                 }
 
                 /**
                  * Adds content to the list objects
                  */
-                for (int i = 0; i < content.size(); i++) {
-                    if (i < SearchWindow.labelList.size()) {
-                        SearchWindow.labelList.get(i).setText(content.get(i) + "");
-                    } else {
-                        break;
-                    }
+                for (int i = 0; i < content.size(); i+=4) {
+                    SearchWindow.contentList.addRow(new Integer[]{
+                        content.get(i), 
+                        content.get(i + 1),
+                        content.get(i + 2),
+                        content.get(i + 3)
+                    });
                 }
             }
             rs.close();

@@ -79,7 +79,7 @@ public class LoginWindow extends WindowObject {
                 ClientManager.g_dbConnection = DriverManager.getConnection("jdbc:sqlite:" + path);
                 ClientManager.g_dbConnection.setAutoCommit(false);
                 ClientManager.g_stmt = ClientManager.g_dbConnection.createStatement();
-                ResultSet rs = ClientManager.g_stmt.executeQuery("SELECT ROLE,PASSWORD FROM USER WHERE NAME = '"
+                ResultSet rs = ClientManager.g_stmt.executeQuery("SELECT ROLE,PASSWORD FROM USER WHERE USERNAME = '"
                         + userField.getText() + "';");
                 if (!rs.next()) {
                     JOptionPane.showMessageDialog(frame,

@@ -30,7 +30,7 @@ public class DatabaseCreator {
         stmt = c.createStatement();
         String sql = "CREATE TABLE USER "
                 + "(ID              INT     PRIMARY KEY     NOT NULL,"
-                + " NAME            CHAR(15)                NOT NULL, "
+                + " USERNAME        CHAR(15)                NOT NULL, "
                 + " PASSWORD        CHAR(15)                NOT NULL, "
                 + " ROLE            INT                     NOT NULL)";
         stmt.executeUpdate(sql);
@@ -60,34 +60,34 @@ public class DatabaseCreator {
 
         stmt = c.createStatement();
         sql = "CREATE TABLE CONTENT_CPU "
-                + "(ID             INT      PRIMARY KEY     NOT NULL,"
-                + " TEST           TEXT                     NOT NULL, "
-                + " TEST2          INT                      NOT NULL)";
+                + "(ID                INT      PRIMARY KEY     NOT NULL,"
+                + " TEST              TEXT                     NOT NULL, "
+                + " TEST2             INT                      NOT NULL)";
         stmt.executeUpdate(sql);
 
         stmt = c.createStatement();
         sql = "CREATE TABLE CONTENT_RAM "
-                + "(ID             INT      PRIMARY KEY     NOT NULL,"
-                + " TEST           TEXT                     NOT NULL, "
-                + " TEST2          INT                      NOT NULL)";
+                + "(ID                INT      PRIMARY KEY     NOT NULL,"
+                + " TEST              TEXT                     NOT NULL, "
+                + " TEST2             INT                      NOT NULL)";
         stmt.executeUpdate(sql);
 
         stmt = c.createStatement();
         sql = "CREATE TABLE CATEGORY "
-                + "(ID             INT      PRIMARY KEY     NOT NULL,"
-                + " NAME           TEXT                     NOT NULL)";
+                + "(ID                INT      PRIMARY KEY     NOT NULL,"
+                + " CATEGORY_NAME     TEXT                     NOT NULL)";
         stmt.executeUpdate(sql);
 
         stmt = c.createStatement();
         sql = "CREATE TABLE SUBCATEGORY "
-                + "(ID             INT      PRIMARY KEY     NOT NULL,"
-                + " NAME           TEXT                     NOT NULL)";
+                + "(ID                INT      PRIMARY KEY     NOT NULL,"
+                + " SUBCATEGORY_NAME  TEXT                     NOT NULL)";
         stmt.executeUpdate(sql);
 
         stmt = c.createStatement();
         sql = "CREATE TABLE MANUFACTURER "
-                + "(ID             INT      PRIMARY KEY     NOT NULL,"
-                + " NAME           TEXT                     NOT NULL)";
+                + "(ID                  INT      PRIMARY KEY     NOT NULL,"
+                + " MANUFACTURER_ NAME  TEXT                     NOT NULL)";
         stmt.executeUpdate(sql);
 
         stmt = c.createStatement();
@@ -114,18 +114,33 @@ public class DatabaseCreator {
 
     private void initStartContent() throws Exception {
         stmt = c.createStatement();
-        String sql = "INSERT INTO USER (ID,NAME,PASSWORD,ROLE) "
+        String sql = "INSERT INTO USER (ID,USERNAME,PASSWORD,ROLE) "
                 + "VALUES (1, 'Admin', 'root', 1);";
         stmt.executeUpdate(sql);
 
         stmt = c.createStatement();
         sql = "INSERT INTO MAIN (ID,CATEGORY,SUBCATEGORY,MANUFACTURER,EDITOR,STATUS,TITLE,URL,NAME,DATE,LAST_EDIT,VIEWS) "
-                + "VALUES (1, 15, 0, 10, 1, 0, 'Test1', '/test1', 'Test Entry 1', '15-11-04', '15-11-04-00-11', 0);";
+                + "VALUES (0, 0, 0, 10, 1, 0, 'Test1', '/test1', 'Test Entry 1', '15-11-04', '15-11-04-00-11', 0);";
         stmt.executeUpdate(sql);
         
         stmt = c.createStatement();
         sql = "INSERT INTO MAIN (ID,CATEGORY,SUBCATEGORY,MANUFACTURER,EDITOR,STATUS,TITLE,URL,NAME,DATE,LAST_EDIT,VIEWS) "
-                + "VALUES (2, 8, 0, 10, 1, 0, 'Test2', '/test2', 'Test Entry 2', '15-11-04', '15-11-04-00-11', 0);";
+                + "VALUES (1, 1, 0, 10, 1, 0, 'Test2', '/test2', 'Test Entry 2', '15-11-04', '15-11-04-00-11', 0);";
+        stmt.executeUpdate(sql);
+        
+        stmt = c.createStatement();
+        sql = "INSERT INTO CATEGORY (ID,CATEGORY_NAME) "
+                + "VALUES (0, 'Category0');";
+        stmt.executeUpdate(sql);
+        
+        stmt = c.createStatement();
+        sql = "INSERT INTO CATEGORY (ID,CATEGORY_NAME) "
+                + "VALUES (1, 'Category1');";
+        stmt.executeUpdate(sql);
+        
+        stmt = c.createStatement();
+        sql = "INSERT INTO SUBCATEGORY (ID,SUBCATEGORY_NAME) "
+                + "VALUES (0, 'SubCategory0');";
         stmt.executeUpdate(sql);
     }
 

@@ -79,7 +79,7 @@ public class LoginWindow extends WindowObject {
                 ClientManager.g_dbConnection = DriverManager.getConnection("jdbc:sqlite:" + path);
                 ClientManager.g_dbConnection.setAutoCommit(false);
                 ClientManager.g_stmt = ClientManager.g_dbConnection.createStatement();
-                ResultSet rs = ClientManager.g_stmt.executeQuery("SELECT ROLE,PASSWORD FROM USER WHERE USERNAME = '"
+                ResultSet rs = ClientManager.g_stmt.executeQuery("SELECT role,password FROM user WHERE username = '"
                         + userField.getText() + "';");
                 if (!rs.next()) {
                     JOptionPane.showMessageDialog(frame,
@@ -87,8 +87,8 @@ public class LoginWindow extends WindowObject {
                             "Error Message", JOptionPane.ERROR_MESSAGE);
                 } else {
                     do {
-                        int role = rs.getInt("ROLE");
-                        String password = rs.getString("PASSWORD");
+                        int role = rs.getInt("role");
+                        String password = rs.getString("password");
                         String typedPassWord = new String(passwordField.getPassword());
 
                         if (role == 1 && password.equalsIgnoreCase(typedPassWord)) {

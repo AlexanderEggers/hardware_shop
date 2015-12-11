@@ -41,30 +41,31 @@ public class ClientInput extends KeyAdapter implements ActionListener {
 //        } else {
 //            inputCategory = "ID";
 //        }
-        inputCategory = "MAIN.ID"; //aktuell nur zum testen
+        inputCategory = "main.id"; //aktuell nur zum testen
 
         try {
             ClientManager.g_stmt = ClientManager.g_dbConnection.createStatement();
 
-            ResultSet rs = ClientManager.g_stmt.executeQuery("SELECT MAIN.ID,CATEGORY_NAME,SUBCATEGORY_NAME,USERNAME FROM MAIN "
-                    + "INNER JOIN CATEGORY ON MAIN.CATEGORY = CATEGORY.ID "
-                    + "INNER JOIN SUBCATEGORY ON MAIN.SUBCATEGORY = SUBCATEGORY.ID "
-                    + "INNER JOIN USER ON MAIN.EDITOR = USER.ID "
+            ResultSet rs = ClientManager.g_stmt.executeQuery("SELECT main.id,category_name,"
+                    + "subcategory_name,username FROM main "
+                    + "INNER JOIN category ON main.category = category.id "
+                    + "INNER JOIN subcategory ON main.subcategory = subcategory.id "
+                    + "INNER JOIN user ON main.editor = user.id "
                     + "WHERE " + inputCategory + " = " + textField.getText() + ";");
             /**
              * SELECT name FROM MAIN LEFT JOIN category USING(ID)
              */
 
             /**
-             * Adding/Deleting list objects and it's content dynamicly to the
+             * Adding/Deleting list objects and it's content dynamically to the
              * search window based on the content which has been found
              */
             while (rs.next()) {
                 ArrayList<String> content = new ArrayList<>();
-                content.add(rs.getInt("ID") + "");
-                content.add(rs.getString("CATEGORY_NAME"));
-                content.add(rs.getString("SUBCATEGORY_NAME"));
-                content.add(rs.getString("USERNAME"));
+                content.add(rs.getInt("id") + "");
+                content.add(rs.getString("category_name"));
+                content.add(rs.getString("subcategory_name"));
+                content.add(rs.getString("username"));
 
                 /**
                  * Resets all list objects at the search window

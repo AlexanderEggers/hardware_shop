@@ -50,6 +50,12 @@ public class DatabaseCreator {
                 + " last_edit      TEXT                     NOT NULL, "
                 + " views          INT                      NOT NULL)";
         stmt.executeUpdate(sql);
+        
+        stmt = c.createStatement();
+        sql = "CREATE TABLE content_access "
+                + "(id             INT      PRIMARY KEY     NOT NULL,"
+                + " access         INT                              )";
+        stmt.executeUpdate(sql);
 
         stmt = c.createStatement();
         sql = "CREATE TABLE content_GPU "

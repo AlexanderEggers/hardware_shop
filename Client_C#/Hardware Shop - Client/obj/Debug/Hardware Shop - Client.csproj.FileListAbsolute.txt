@@ -1,0 +1,34 @@
+C:\Users\Alexander\Desktop\Hardware Shop - Client\Hardware Shop - Client\bin\Debug\Hardware Shop - Client.exe.config
+C:\Users\Alexander\Desktop\Hardware Shop - Client\Hardware Shop - Client\bin\Debug\Hardware Shop - Client.exe
+C:\Users\Alexander\Desktop\Hardware Shop - Client\Hardware Shop - Client\bin\Debug\Hardware Shop - Client.pdb
+C:\Users\Alexander\Desktop\Hardware Shop - Client\Hardware Shop - Client\obj\Debug\Hardware Shop - Client.csprojResolveAssemblyReference.cache
+C:\Users\Alexander\Desktop\Hardware Shop - Client\Hardware Shop - Client\obj\Debug\Hardware_Shop_Client.Login.resources
+C:\Users\Alexander\Desktop\Hardware Shop - Client\Hardware Shop - Client\obj\Debug\Hardware Shop - Client.csproj.GenerateResource.Cache
+C:\Users\Alexander\Desktop\Hardware Shop - Client\Hardware Shop - Client\obj\Debug\Hardware Shop - Client.exe
+C:\Users\Alexander\Desktop\Hardware Shop - Client\Hardware Shop - Client\obj\Debug\Hardware Shop - Client.pdb
+C:\Users\Alexander\Desktop\Hardware Shop - Client\Hardware Shop - Client\bin\Debug\EntityFramework.dll
+C:\Users\Alexander\Desktop\Hardware Shop - Client\Hardware Shop - Client\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Alexander\Desktop\Hardware Shop - Client\Hardware Shop - Client\bin\Debug\System.Data.SQLite.dll
+C:\Users\Alexander\Desktop\Hardware Shop - Client\Hardware Shop - Client\bin\Debug\System.Data.SQLite.EF6.dll
+C:\Users\Alexander\Desktop\Hardware Shop - Client\Hardware Shop - Client\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\Alexander\Desktop\Hardware Shop - Client\Hardware Shop - Client\bin\Debug\System.Data.SQLite.xml
+C:\Users\Alexander\Desktop\Hardware Shop - Client\Hardware Shop - Client\bin\Debug\EntityFramework.xml
+C:\Users\Alexander\Desktop\Hardware Shop - Client\Hardware Shop - Client\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Alexander\Desktop\Hardware Shop - Client\Hardware Shop - Client\obj\Debug\Hardware_Shop_Client.Properties.Resources.resources
+C:\Users\Alexander\Documents\Projekte\HardwareShop\Client_C#\Hardware Shop - Client\bin\Debug\Hardware Shop - Client.exe.config
+C:\Users\Alexander\Documents\Projekte\HardwareShop\Client_C#\Hardware Shop - Client\obj\Debug\Hardware Shop - Client.exe
+C:\Users\Alexander\Documents\Projekte\HardwareShop\Client_C#\Hardware Shop - Client\obj\Debug\Hardware Shop - Client.pdb
+C:\Users\Alexander\Documents\Projekte\HardwareShop\Client_C#\Hardware Shop - Client\bin\Debug\Hardware Shop - Client.exe
+C:\Users\Alexander\Documents\Projekte\HardwareShop\Client_C#\Hardware Shop - Client\bin\Debug\Hardware Shop - Client.pdb
+C:\Users\Alexander\Documents\Projekte\HardwareShop\Client_C#\Hardware Shop - Client\bin\Debug\EntityFramework.dll
+C:\Users\Alexander\Documents\Projekte\HardwareShop\Client_C#\Hardware Shop - Client\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Alexander\Documents\Projekte\HardwareShop\Client_C#\Hardware Shop - Client\bin\Debug\System.Data.SQLite.dll
+C:\Users\Alexander\Documents\Projekte\HardwareShop\Client_C#\Hardware Shop - Client\bin\Debug\System.Data.SQLite.EF6.dll
+C:\Users\Alexander\Documents\Projekte\HardwareShop\Client_C#\Hardware Shop - Client\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\Alexander\Documents\Projekte\HardwareShop\Client_C#\Hardware Shop - Client\bin\Debug\System.Data.SQLite.xml
+C:\Users\Alexander\Documents\Projekte\HardwareShop\Client_C#\Hardware Shop - Client\bin\Debug\EntityFramework.xml
+C:\Users\Alexander\Documents\Projekte\HardwareShop\Client_C#\Hardware Shop - Client\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Alexander\Documents\Projekte\HardwareShop\Client_C#\Hardware Shop - Client\obj\Debug\Hardware Shop - Client.csprojResolveAssemblyReference.cache
+C:\Users\Alexander\Documents\Projekte\HardwareShop\Client_C#\Hardware Shop - Client\obj\Debug\Hardware_Shop_Client.Login.resources
+C:\Users\Alexander\Documents\Projekte\HardwareShop\Client_C#\Hardware Shop - Client\obj\Debug\Hardware_Shop_Client.Properties.Resources.resources
+C:\Users\Alexander\Documents\Projekte\HardwareShop\Client_C#\Hardware Shop - Client\obj\Debug\Hardware Shop - Client.csproj.GenerateResource.Cache

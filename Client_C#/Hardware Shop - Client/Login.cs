@@ -12,6 +12,12 @@ namespace Hardware_Shop_Client
             this.StartPosition = FormStartPosition.CenterScreen;
         }
 
+        protected override void OnClosed(EventArgs e)
+        {
+            base.OnClosed(e);
+            Program.databaseController.getConnection().Close();
+        }
+
         private void button_login_Click(object sender, EventArgs e)
         {
             loginUser();
@@ -46,6 +52,7 @@ namespace Hardware_Shop_Client
                 MessageBox.Show("Invalid input. Try again.", "Error Message");
                 Console.WriteLine("User fehlt!!");
             }
+            reader.Close();
         }
     }
 }

@@ -11,9 +11,6 @@ namespace Hardware_Shop_Client
     {
         public static DatabaseController databaseController;
 
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
         [STAThread]
         static void Main()
         {
@@ -23,5 +20,7 @@ namespace Hardware_Shop_Client
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Login());
         }
+
+        //TODO: Exit Funktion überschreiben, sodass die Verbindung zur DB geschlossen wird
     }
 }

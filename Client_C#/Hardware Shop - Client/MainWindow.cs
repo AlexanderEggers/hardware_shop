@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data.SQLite;
 using System.Windows.Forms;
 
 namespace Hardware_Shop_Client
@@ -22,27 +16,57 @@ namespace Hardware_Shop_Client
         protected override void OnClosed(EventArgs e)
         {
             base.OnClosed(e);
+            Program.databaseController.getConnection().Close();
             Application.Exit();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-
+            executeTest();
         }
 
-        private void label7_Click(object sender, EventArgs e)
+        private void dataGridView1_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-
+            Console.WriteLine("Double Click Test");
         }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        private void executeTest()
         {
+            string text = this.textBox1.Text;
+            String inputCategory;
 
-        }
+            if (text == "")
+            {
+                return;
+            }
 
-        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
-        {
+            inputCategory = "main.id"; //aktuell nur zum testen
 
+            string sql = "SELECT main.id,category_name,"
+                        + "subcategory_name,username FROM main "
+                        + "INNER JOIN category ON main.category = category.id "
+                        + "INNER JOIN subcategory ON main.subcategory = subcategory.id "
+                        + "INNER JOIN user ON main.editor = user.id "
+                        + "WHERE " + inputCategory + " = " + text + ";";
+                SQLiteCommand command = new SQLiteCommand(sql, Program.databaseController.getConnection());
+            /**
+             * SELECT name FROM MAIN LEFT JOIN category USING(ID)
+             */
+
+            /**
+             * Adding/Deleting list objects and it's content dynamically to the
+             * search window based on the content which has been found
+             */
+            dataGridView1.Rows.Clear();
+            SQLiteDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                Console.WriteLine(reader["id"]);
+
+                dataGridView1.Rows.Add((int)reader["id"], (string)reader["username"], 
+                    (string)reader["category_name"], (string)reader["subcategory_name"]);
+            }
+            reader.Close();
         }
     }
 }

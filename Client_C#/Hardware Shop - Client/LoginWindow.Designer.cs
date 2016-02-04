@@ -1,6 +1,6 @@
 ﻿namespace Hardware_Shop_Client
 {
-    partial class Login
+    partial class LoginWindow
     {
         /// <summary>
         /// Required designer variable.

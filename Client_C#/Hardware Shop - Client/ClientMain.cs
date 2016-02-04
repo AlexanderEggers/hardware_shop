@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.SQLite;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Hardware_Shop_Client
 {
-    static class Program
+    static class ClientMain
     {
         public static DatabaseController databaseController;
 
@@ -18,9 +14,7 @@ namespace Hardware_Shop_Client
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Login());
+            Application.Run(new LoginWindow());
         }
-
-        //TODO: Exit Funktion überschreiben, sodass die Verbindung zur DB geschlossen wird
     }
 }

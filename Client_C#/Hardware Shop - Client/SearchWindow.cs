@@ -4,35 +4,34 @@ using System.Windows.Forms;
 
 namespace Hardware_Shop_Client
 {
-    public partial class MainWindow : Form
+    public partial class SearchWindow : Form
     {
-        public MainWindow()
+        public SearchWindow()
         {
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;
         }
 
-        //aktuell noch nicht optimal aber funktioniert erstmal
         protected override void OnClosed(EventArgs e)
         {
             base.OnClosed(e);
-            Program.databaseController.getConnection().Close();
+            ClientMain.databaseController.getConnection().Close();
             Application.Exit();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button_search_Click(object sender, EventArgs e)
         {
             executeTest();
         }
 
-        private void dataGridView1_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        private void searchDataView_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             Console.WriteLine("Double Click Test");
         }
 
         private void executeTest()
         {
-            string text = this.textBox1.Text;
+            string text = this.textBox_search.Text;
             String inputCategory;
 
             if (text == "")
@@ -48,22 +47,16 @@ namespace Hardware_Shop_Client
                         + "INNER JOIN subcategory ON main.subcategory = subcategory.id "
                         + "INNER JOIN user ON main.editor = user.id "
                         + "WHERE " + inputCategory + " = " + text + ";";
-                SQLiteCommand command = new SQLiteCommand(sql, Program.databaseController.getConnection());
+            SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
             /**
              * SELECT name FROM MAIN LEFT JOIN category USING(ID)
              */
 
-            /**
-             * Adding/Deleting list objects and it's content dynamically to the
-             * search window based on the content which has been found
-             */
-            dataGridView1.Rows.Clear();
+            searchDataView.Rows.Clear();
             SQLiteDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {
-                Console.WriteLine(reader["id"]);
-
-                dataGridView1.Rows.Add((int)reader["id"], (string)reader["username"], 
+                searchDataView.Rows.Add((int)reader["id"], (string)reader["username"],
                     (string)reader["category_name"], (string)reader["subcategory_name"]);
             }
             reader.Close();

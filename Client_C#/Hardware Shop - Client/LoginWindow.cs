@@ -4,9 +4,9 @@ using System.Windows.Forms;
 
 namespace Hardware_Shop_Client
 {
-    public partial class Login : Form
+    public partial class LoginWindow : Form
     {
-        public Login()
+        public LoginWindow()
         {
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;
@@ -15,7 +15,7 @@ namespace Hardware_Shop_Client
         protected override void OnClosed(EventArgs e)
         {
             base.OnClosed(e);
-            Program.databaseController.getConnection().Close();
+            ClientMain.databaseController.getConnection().Close();
         }
 
         private void button_login_Click(object sender, EventArgs e)
@@ -33,21 +33,21 @@ namespace Hardware_Shop_Client
 
         private void loginUser()
         {
-            string sql = "SELECT role, password FROM user WHERE username = '"
-                         + textBox_user.Text + "';";
-            SQLiteCommand command = new SQLiteCommand(sql, Program.databaseController.getConnection());
+            string sql = "SELECT role, password FROM user WHERE username = '" + textBox_user.Text + "';";
+            SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
             SQLiteDataReader reader = command.ExecuteReader();
 
             if (reader.Read())
             {
-                if((string)reader["password"] == textBox_password.Text && 
+                if ((string)reader["password"] == textBox_password.Text &&
                     (int)reader["role"] == 1)
                 {
                     Hide();
-                    MainWindow main = new MainWindow();
+                    SearchWindow main = new SearchWindow();
                     main.Show();
                 }
-            } else
+            }
+            else
             {
                 MessageBox.Show("Invalid input. Try again.", "Error Message");
                 Console.WriteLine("User fehlt!!");

@@ -29,7 +29,7 @@ C:\Users\Alexander\Documents\Projekte\HardwareShop\Client_C#\Hardware Shop - Cli
 C:\Users\Alexander\Documents\Projekte\HardwareShop\Client_C#\Hardware Shop - Client\bin\Debug\EntityFramework.xml
 C:\Users\Alexander\Documents\Projekte\HardwareShop\Client_C#\Hardware Shop - Client\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\Alexander\Documents\Projekte\HardwareShop\Client_C#\Hardware Shop - Client\obj\Debug\Hardware Shop - Client.csprojResolveAssemblyReference.cache
-C:\Users\Alexander\Documents\Projekte\HardwareShop\Client_C#\Hardware Shop - Client\obj\Debug\Hardware_Shop_Client.Login.resources
 C:\Users\Alexander\Documents\Projekte\HardwareShop\Client_C#\Hardware Shop - Client\obj\Debug\Hardware_Shop_Client.Properties.Resources.resources
 C:\Users\Alexander\Documents\Projekte\HardwareShop\Client_C#\Hardware Shop - Client\obj\Debug\Hardware Shop - Client.csproj.GenerateResource.Cache
-C:\Users\Alexander\Documents\Projekte\HardwareShop\Client_C#\Hardware Shop - Client\obj\Debug\Hardware_Shop_Client.MainWindow.resources
+C:\Users\Alexander\Documents\Projekte\HardwareShop\Client_C#\Hardware Shop - Client\obj\Debug\Hardware_Shop_Client.SearchWindow.resources
+C:\Users\Alexander\Documents\Projekte\HardwareShop\Client_C#\Hardware Shop - Client\obj\Debug\Hardware_Shop_Client.LoginWindow.resources

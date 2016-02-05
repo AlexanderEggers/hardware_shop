@@ -429,7 +429,7 @@
             this.Controls.Add(this.button_editor);
             this.Controls.Add(this.button_search);
             this.Name = "SearchWindow";
-            this.Text = "MainWindow";
+            this.Text = "Hardware Shop - Search";
             ((System.ComponentModel.ISupportInitialize)(this.searchDataView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

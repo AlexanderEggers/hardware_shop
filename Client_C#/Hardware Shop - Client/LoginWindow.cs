@@ -6,6 +6,7 @@ namespace Hardware_Shop_Client
 {
     public partial class LoginWindow : Form
     {
+
         public LoginWindow()
         {
             InitializeComponent();
@@ -43,8 +44,7 @@ namespace Hardware_Shop_Client
                     (int)reader["role"] == 1)
                 {
                     Hide();
-                    SearchWindow main = new SearchWindow();
-                    main.Show();
+                    ClientMain.searchWindow.Show();
                 }
             }
             else

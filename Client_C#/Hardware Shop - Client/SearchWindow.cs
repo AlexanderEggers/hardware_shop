@@ -26,7 +26,8 @@ namespace Hardware_Shop_Client
 
         private void searchDataView_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            Console.WriteLine("Double Click Test");
+            Hide();
+            ClientMain.editorWindow.Show();
         }
 
         private void executeTest()

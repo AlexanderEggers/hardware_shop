@@ -6,6 +6,8 @@ namespace Hardware_Shop_Client
 {
     public partial class EditorWindow : Form
     {
+        private int currrentItemId;
+
         public EditorWindow()
         {
             InitializeComponent();
@@ -57,14 +59,18 @@ namespace Hardware_Shop_Client
 
             //es fehlen noch manufacture und status
 
+            date_creationDate.Value = DateTime.Today;
             label_id.Text = "ID:";
+            textBox_name.Text = "";
+            textBox_title.Text = "";
+            textBox_url.Text = "";
         }
 
         //Updates all fields regarding the database entry
         public void openExistingItem(int id)
         {
             string sql = "SELECT main.id,category_name,"
-                        + "subcategory_name,username FROM main "
+                        + "subcategory_name,username, title, url, name, date FROM main "
                         + "INNER JOIN category ON main.category = category.id "
                         + "INNER JOIN subcategory ON main.subcategory = subcategory.id "
                         + "INNER JOIN user ON main.editor = user.id "
@@ -77,7 +83,18 @@ namespace Hardware_Shop_Client
                 comboBox_category.SelectedIndex = comboBox_category.FindStringExact((string)reader["category_name"]);
                 comboBox_subCategory.SelectedIndex = comboBox_subCategory.FindStringExact((string)reader["subcategory_name"]);
                 comboBox_editor.SelectedIndex = comboBox_editor.FindStringExact((string)reader["username"]);
+
+                string date = (string)reader["date"];
+                string[] dateSplite = date.Split(new Char[] { '-' });
+
+                date_creationDate.Value = new DateTime(int.Parse("20" + dateSplite[0]), int.Parse(dateSplite[1]), int.Parse(dateSplite[2]));
+
+                this.currrentItemId = (int)reader["id"];
                 label_id.Text = "ID: " + reader["id"];
+
+                textBox_name.Text = reader["name"] + "";
+                textBox_title.Text = reader["title"] + "";
+                textBox_url.Text = reader["url"] + "";
             }
             reader.Close();
         }
@@ -91,6 +108,62 @@ namespace Hardware_Shop_Client
         private void button_new_Click(object sender, EventArgs e)
         {
             resetEditor();
+        }
+
+        private void button_save_Click(object sender, EventArgs e)
+        {
+            saveCurrentItem();
+        }
+
+        private void saveCurrentItem()
+        {
+            int category = -1, subcategory = -1, editor = -1;
+
+            string sql = "SELECT id FROM category WHERE category_name = '" + comboBox_category.Text + "';";
+            SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
+
+            SQLiteDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                category = (int)reader["id"];
+            }
+            reader.Close();
+
+            sql = "SELECT id FROM subcategory WHERE subcategory_name = '" + comboBox_subCategory.Text + "';";
+            command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
+
+            reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                subcategory = (int)reader["id"];
+            }
+            reader.Close();
+
+            sql = "SELECT id FROM user WHERE username = '" + comboBox_editor.Text + "';";
+            command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
+
+            reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                editor = (int)reader["id"];
+            }
+            reader.Close();
+
+            if (category != -1 && subcategory != -1 && editor != -1)
+            {
+                sql = "UPDATE main " +
+                "SET category = " + category + "," +
+                "subcategory = " + subcategory + "," +
+                "title = '" + textBox_title.Text + "'," +
+                "name = '" + textBox_name.Text + "'," +
+                "url = '" + textBox_url.Text + "'," +
+                "date = '" + date_creationDate.Value.ToString("yy-MM-dd") + "'," +
+                "editor = " + editor +
+                " WHERE id = " + currrentItemId + ";";
+
+                command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
+                command.ExecuteNonQuery();
+            }
         }
     }
 }

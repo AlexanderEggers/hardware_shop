@@ -330,6 +330,7 @@
             // 
             // searchDataView
             // 
+            this.searchDataView.AllowUserToAddRows = false;
             this.searchDataView.AllowUserToDeleteRows = false;
             this.searchDataView.AllowUserToResizeColumns = false;
             this.searchDataView.AllowUserToResizeRows = false;

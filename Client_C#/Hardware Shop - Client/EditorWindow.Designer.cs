@@ -32,10 +32,10 @@
             this.label_editor = new System.Windows.Forms.Label();
             this.comboBox_status = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.button_save = new System.Windows.Forms.Button();
             this.button_new = new System.Windows.Forms.Button();
             this.button_close = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.button_delete = new System.Windows.Forms.Button();
             this.comboBox_subCategory = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.comboBox_category = new System.Windows.Forms.ComboBox();
@@ -76,6 +76,10 @@
             // 
             this.comboBox_status.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_status.FormattingEnabled = true;
+            this.comboBox_status.Items.AddRange(new object[] {
+            "Work in progress",
+            "Released",
+            "Archived"});
             this.comboBox_status.Location = new System.Drawing.Point(67, 101);
             this.comboBox_status.Name = "comboBox_status";
             this.comboBox_status.Size = new System.Drawing.Size(170, 21);
@@ -91,14 +95,15 @@
             this.label1.TabIndex = 14;
             this.label1.Text = "Status:";
             // 
-            // button1
+            // button_save
             // 
-            this.button1.Location = new System.Drawing.Point(658, 12);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 33;
-            this.button1.Text = "Save";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button_save.Location = new System.Drawing.Point(658, 12);
+            this.button_save.Name = "button_save";
+            this.button_save.Size = new System.Drawing.Size(75, 23);
+            this.button_save.TabIndex = 33;
+            this.button_save.Text = "Save";
+            this.button_save.UseVisualStyleBackColor = true;
+            this.button_save.Click += new System.EventHandler(this.button_save_Click);
             // 
             // button_new
             // 
@@ -120,14 +125,14 @@
             this.button_close.UseVisualStyleBackColor = true;
             this.button_close.Click += new System.EventHandler(this.button_close_Click);
             // 
-            // button4
+            // button_delete
             // 
-            this.button4.Location = new System.Drawing.Point(901, 12);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 36;
-            this.button4.Text = "Delete";
-            this.button4.UseVisualStyleBackColor = true;
+            this.button_delete.Location = new System.Drawing.Point(901, 12);
+            this.button_delete.Name = "button_delete";
+            this.button_delete.Size = new System.Drawing.Size(75, 23);
+            this.button_delete.TabIndex = 36;
+            this.button_delete.Text = "Delete";
+            this.button_delete.UseVisualStyleBackColor = true;
             // 
             // comboBox_subCategory
             // 
@@ -282,10 +287,10 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.comboBox_category);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.button4);
+            this.Controls.Add(this.button_delete);
             this.Controls.Add(this.button_close);
             this.Controls.Add(this.button_new);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.button_save);
             this.Controls.Add(this.comboBox_status);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBox_editor);
@@ -304,10 +309,10 @@
         private System.Windows.Forms.Label label_editor;
         private System.Windows.Forms.ComboBox comboBox_status;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button_save;
         private System.Windows.Forms.Button button_new;
         private System.Windows.Forms.Button button_close;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button_delete;
         private System.Windows.Forms.ComboBox comboBox_subCategory;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox comboBox_category;

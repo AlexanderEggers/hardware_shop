@@ -9,14 +9,12 @@ namespace Hardware_Shop_Client
         public SearchWindow()
         {
             InitializeComponent();
-            this.StartPosition = FormStartPosition.CenterScreen;
         }
 
         protected override void OnClosed(EventArgs e)
         {
             base.OnClosed(e);
-            ClientMain.databaseController.getConnection().Close();
-            Application.Exit();
+            ClientMain.exit();
         }
 
         private void button_search_Click(object sender, EventArgs e)
@@ -24,9 +22,20 @@ namespace Hardware_Shop_Client
             executeTest();
         }
 
+        private void textBox_search_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                executeTest();
+
+                e.Handled = true;
+            }
+        }
+
         private void searchDataView_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             Hide();
+            ClientMain.editorWindow.openEditor();
             ClientMain.editorWindow.Show();
         }
 

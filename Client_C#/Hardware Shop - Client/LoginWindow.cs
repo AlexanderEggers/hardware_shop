@@ -24,14 +24,6 @@ namespace Hardware_Shop_Client
             loginUser();
         }
 
-        private void textBox_password_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == (char)Keys.Enter)
-            {
-                loginUser();
-            }
-        }
-
         private void loginUser()
         {
             string sql = "SELECT role, password FROM user WHERE username = '" + textBox_user.Text + "';";

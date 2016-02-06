@@ -139,6 +139,7 @@
             this.textBox_search.Name = "textBox_search";
             this.textBox_search.Size = new System.Drawing.Size(143, 20);
             this.textBox_search.TabIndex = 7;
+            this.textBox_search.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_search_KeyPress);
             // 
             // button1
             // 
@@ -429,6 +430,7 @@
             this.Controls.Add(this.button_editor);
             this.Controls.Add(this.button_search);
             this.Name = "SearchWindow";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Hardware Shop - Search";
             ((System.ComponentModel.ISupportInitialize)(this.searchDataView)).EndInit();
             this.ResumeLayout(false);

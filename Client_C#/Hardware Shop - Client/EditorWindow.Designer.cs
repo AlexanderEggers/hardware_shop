@@ -30,27 +30,26 @@
         {
             this.comboBox_editor = new System.Windows.Forms.ComboBox();
             this.label_editor = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.comboBox_status = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button_close = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.comboBox_subCategory = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.comboBox_category = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.comboBox4 = new System.Windows.Forms.ComboBox();
+            this.comboBox_manufacture = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
+            this.label_id = new System.Windows.Forms.Label();
             this.label_date = new System.Windows.Forms.Label();
             this.date_creationDate = new System.Windows.Forms.DateTimePicker();
             this.label8 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBox_title = new System.Windows.Forms.TextBox();
+            this.textBox_name = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.textBox_url = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -73,14 +72,14 @@
             this.label_editor.TabIndex = 12;
             this.label_editor.Text = "Editor:";
             // 
-            // comboBox1
+            // comboBox_status
             // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(67, 101);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(170, 21);
-            this.comboBox1.TabIndex = 15;
+            this.comboBox_status.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_status.FormattingEnabled = true;
+            this.comboBox_status.Location = new System.Drawing.Point(67, 101);
+            this.comboBox_status.Name = "comboBox_status";
+            this.comboBox_status.Size = new System.Drawing.Size(170, 21);
+            this.comboBox_status.TabIndex = 15;
             // 
             // label1
             // 
@@ -129,14 +128,14 @@
             this.button4.Text = "Delete";
             this.button4.UseVisualStyleBackColor = true;
             // 
-            // comboBox2
+            // comboBox_subCategory
             // 
-            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(387, 101);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(170, 21);
-            this.comboBox2.TabIndex = 40;
+            this.comboBox_subCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_subCategory.FormattingEnabled = true;
+            this.comboBox_subCategory.Location = new System.Drawing.Point(387, 101);
+            this.comboBox_subCategory.Name = "comboBox_subCategory";
+            this.comboBox_subCategory.Size = new System.Drawing.Size(170, 21);
+            this.comboBox_subCategory.TabIndex = 40;
             // 
             // label2
             // 
@@ -148,14 +147,14 @@
             this.label2.TabIndex = 39;
             this.label2.Text = "Sub-Category:";
             // 
-            // comboBox3
+            // comboBox_category
             // 
-            this.comboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(387, 69);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(170, 21);
-            this.comboBox3.TabIndex = 38;
+            this.comboBox_category.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_category.FormattingEnabled = true;
+            this.comboBox_category.Location = new System.Drawing.Point(387, 69);
+            this.comboBox_category.Name = "comboBox_category";
+            this.comboBox_category.Size = new System.Drawing.Size(170, 21);
+            this.comboBox_category.TabIndex = 38;
             // 
             // label3
             // 
@@ -167,14 +166,14 @@
             this.label3.TabIndex = 37;
             this.label3.Text = "Category:";
             // 
-            // comboBox4
+            // comboBox_manufacture
             // 
-            this.comboBox4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox4.FormattingEnabled = true;
-            this.comboBox4.Location = new System.Drawing.Point(387, 133);
-            this.comboBox4.Name = "comboBox4";
-            this.comboBox4.Size = new System.Drawing.Size(170, 21);
-            this.comboBox4.TabIndex = 42;
+            this.comboBox_manufacture.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_manufacture.FormattingEnabled = true;
+            this.comboBox_manufacture.Location = new System.Drawing.Point(387, 133);
+            this.comboBox_manufacture.Name = "comboBox_manufacture";
+            this.comboBox_manufacture.Size = new System.Drawing.Size(170, 21);
+            this.comboBox_manufacture.TabIndex = 42;
             // 
             // label4
             // 
@@ -186,23 +185,14 @@
             this.label4.TabIndex = 41;
             this.label4.Text = "Manufacture:";
             // 
-            // label5
+            // label_id
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(399, 9);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(21, 13);
-            this.label5.TabIndex = 43;
-            this.label5.Text = "ID:";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(421, 9);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(13, 13);
-            this.label6.TabIndex = 44;
-            this.label6.Text = "0";
+            this.label_id.AutoSize = true;
+            this.label_id.Location = new System.Drawing.Point(409, 9);
+            this.label_id.Name = "label_id";
+            this.label_id.Size = new System.Drawing.Size(21, 13);
+            this.label_id.TabIndex = 43;
+            this.label_id.Text = "ID:";
             // 
             // label_date
             // 
@@ -230,19 +220,19 @@
             this.label8.TabIndex = 49;
             this.label8.Text = "Titel:";
             // 
-            // textBox1
+            // textBox_title
             // 
-            this.textBox1.Location = new System.Drawing.Point(67, 188);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(170, 20);
-            this.textBox1.TabIndex = 50;
+            this.textBox_title.Location = new System.Drawing.Point(67, 188);
+            this.textBox_title.Name = "textBox_title";
+            this.textBox_title.Size = new System.Drawing.Size(170, 20);
+            this.textBox_title.TabIndex = 50;
             // 
-            // textBox2
+            // textBox_name
             // 
-            this.textBox2.Location = new System.Drawing.Point(67, 219);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(170, 20);
-            this.textBox2.TabIndex = 52;
+            this.textBox_name.Location = new System.Drawing.Point(67, 219);
+            this.textBox_name.Name = "textBox_name";
+            this.textBox_name.Size = new System.Drawing.Size(170, 20);
+            this.textBox_name.TabIndex = 52;
             // 
             // label9
             // 
@@ -254,12 +244,12 @@
             this.label9.TabIndex = 51;
             this.label9.Text = "Name:";
             // 
-            // textBox3
+            // textBox_url
             // 
-            this.textBox3.Location = new System.Drawing.Point(67, 249);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(170, 20);
-            this.textBox3.TabIndex = 54;
+            this.textBox_url.Location = new System.Drawing.Point(67, 249);
+            this.textBox_url.Name = "textBox_url";
+            this.textBox_url.Size = new System.Drawing.Size(170, 20);
+            this.textBox_url.TabIndex = 54;
             // 
             // label10
             // 
@@ -276,27 +266,26 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(988, 568);
-            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.textBox_url);
             this.Controls.Add(this.label10);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.textBox_name);
             this.Controls.Add(this.label9);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.textBox_title);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label_date);
             this.Controls.Add(this.date_creationDate);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.comboBox4);
+            this.Controls.Add(this.label_id);
+            this.Controls.Add(this.comboBox_manufacture);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.comboBox2);
+            this.Controls.Add(this.comboBox_subCategory);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.comboBox3);
+            this.Controls.Add(this.comboBox_category);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button_close);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.comboBox_status);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBox_editor);
             this.Controls.Add(this.label_editor);
@@ -312,27 +301,26 @@
 
         private System.Windows.Forms.ComboBox comboBox_editor;
         private System.Windows.Forms.Label label_editor;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox comboBox_status;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button_close;
         private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox comboBox_subCategory;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox comboBox3;
+        private System.Windows.Forms.ComboBox comboBox_category;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox comboBox4;
+        private System.Windows.Forms.ComboBox comboBox_manufacture;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label_id;
         private System.Windows.Forms.Label label_date;
         private System.Windows.Forms.DateTimePicker date_creationDate;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox textBox_title;
+        private System.Windows.Forms.TextBox textBox_name;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox textBox_url;
         private System.Windows.Forms.Label label10;
     }
 }

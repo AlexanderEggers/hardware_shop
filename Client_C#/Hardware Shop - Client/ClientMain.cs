@@ -22,5 +22,11 @@ namespace Hardware_Shop_Client
 
             Application.Run(new LoginWindow());
         }
+
+        public static void exit()
+        {
+            ClientMain.databaseController.getConnection().Close();
+            Application.Exit();
+        }
     }
 }

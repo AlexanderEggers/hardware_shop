@@ -18,7 +18,7 @@ namespace Hardware_Shop_Client
         }
 
         //Updates all possible choices according to latest database entries
-        public void openEditor()
+        public void resetEditor()
         {
             string sql = "SELECT category_name FROM category;";
             SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
@@ -55,26 +55,42 @@ namespace Hardware_Shop_Client
             }
             reader.Close();
 
-
             //es fehlen noch manufacture und status
+
+            label_id.Text = "ID:";
         }
 
         //Updates all fields regarding the database entry
         public void openExistingItem(int id)
         {
+            string sql = "SELECT main.id,category_name,"
+                        + "subcategory_name,username FROM main "
+                        + "INNER JOIN category ON main.category = category.id "
+                        + "INNER JOIN subcategory ON main.subcategory = subcategory.id "
+                        + "INNER JOIN user ON main.editor = user.id "
+                        + "WHERE main.id = " + id + ";";
+            SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
 
-        }
-
-        //Resets all fields
-        public void openNewItem()
-        {
-
+            SQLiteDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                comboBox_category.SelectedIndex = comboBox_category.FindStringExact((string)reader["category_name"]);
+                comboBox_subCategory.SelectedIndex = comboBox_subCategory.FindStringExact((string)reader["subcategory_name"]);
+                comboBox_editor.SelectedIndex = comboBox_editor.FindStringExact((string)reader["username"]);
+                label_id.Text = "ID: " + reader["id"];
+            }
+            reader.Close();
         }
 
         private void button_close_Click(object sender, EventArgs e)
         {
             Hide();
             ClientMain.searchWindow.Show();
+        }
+
+        private void button_new_Click(object sender, EventArgs e)
+        {
+            resetEditor();
         }
     }
 }

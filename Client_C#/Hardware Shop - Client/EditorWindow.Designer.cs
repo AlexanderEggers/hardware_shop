@@ -33,7 +33,7 @@
             this.comboBox_status = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.button_new = new System.Windows.Forms.Button();
             this.button_close = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.comboBox_subCategory = new System.Windows.Forms.ComboBox();
@@ -100,14 +100,15 @@
             this.button1.Text = "Save";
             this.button1.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // button_new
             // 
-            this.button2.Location = new System.Drawing.Point(739, 12);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 34;
-            this.button2.Text = "New";
-            this.button2.UseVisualStyleBackColor = true;
+            this.button_new.Location = new System.Drawing.Point(739, 12);
+            this.button_new.Name = "button_new";
+            this.button_new.Size = new System.Drawing.Size(75, 23);
+            this.button_new.TabIndex = 34;
+            this.button_new.Text = "New";
+            this.button_new.UseVisualStyleBackColor = true;
+            this.button_new.Click += new System.EventHandler(this.button_new_Click);
             // 
             // button_close
             // 
@@ -283,7 +284,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button_close);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button_new);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.comboBox_status);
             this.Controls.Add(this.label1);
@@ -304,7 +305,7 @@
         private System.Windows.Forms.ComboBox comboBox_status;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button_new;
         private System.Windows.Forms.Button button_close;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.ComboBox comboBox_subCategory;

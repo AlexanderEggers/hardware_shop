@@ -34,8 +34,18 @@ namespace Hardware_Shop_Client
 
         private void searchDataView_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
+            int databaseRecordId = (int)searchDataView.Rows[e.RowIndex].Cells[0].Value;
+
             Hide();
-            ClientMain.editorWindow.openEditor();
+            ClientMain.editorWindow.resetEditor();
+            ClientMain.editorWindow.openExistingItem(databaseRecordId);
+            ClientMain.editorWindow.Show();
+        }
+
+        private void button_editor_Click(object sender, EventArgs e)
+        {
+            Hide();
+            ClientMain.editorWindow.resetEditor();
             ClientMain.editorWindow.Show();
         }
 

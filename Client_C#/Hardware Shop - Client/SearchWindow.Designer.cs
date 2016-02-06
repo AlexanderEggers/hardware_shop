@@ -87,6 +87,7 @@
             this.button_editor.TabIndex = 1;
             this.button_editor.Text = "Editor";
             this.button_editor.UseVisualStyleBackColor = true;
+            this.button_editor.Click += new System.EventHandler(this.button_editor_Click);
             // 
             // button_tags
             // 

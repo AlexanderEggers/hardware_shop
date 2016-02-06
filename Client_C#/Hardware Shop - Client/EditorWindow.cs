@@ -163,6 +163,11 @@ namespace Hardware_Shop_Client
 
                 command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
                 command.ExecuteNonQuery();
+
+                MessageBox.Show("Item has been saved.", "Info");
+            } else
+            {
+                MessageBox.Show("Something went wrong.", "Error Message");
             }
         }
     }

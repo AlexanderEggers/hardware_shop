@@ -6,7 +6,7 @@ namespace Hardware_Shop_Client
 {
     public partial class EditorWindow : Form
     {
-        private int currrentItemId;
+        private int currrentItemId = -1;
 
         public EditorWindow()
         {
@@ -103,6 +103,8 @@ namespace Hardware_Shop_Client
         {
             Hide();
             ClientMain.searchWindow.Show();
+            ClientMain.searchWindow.executeTest(); //resets the search results
+            currrentItemId = -1;
         }
 
         private void button_new_Click(object sender, EventArgs e)
@@ -112,7 +114,13 @@ namespace Hardware_Shop_Client
 
         private void button_save_Click(object sender, EventArgs e)
         {
-            saveCurrentItem();
+            if(currrentItemId != -1)
+            {
+                saveCurrentItem();
+            } else
+            {
+                saveNewItem();
+            }
         }
 
         private void saveCurrentItem()
@@ -169,6 +177,95 @@ namespace Hardware_Shop_Client
             {
                 MessageBox.Show("Something went wrong.", "Error Message");
             }
+        }
+
+        private void saveNewItem()
+        {
+            int amount = 0, category = -1, subcategory = -1, editor = -1;
+
+            string sql = "SELECT id from main;";
+            SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
+
+            SQLiteDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                amount++;
+            }
+            reader.Close();
+
+            sql = "SELECT id FROM category WHERE category_name = '" + comboBox_category.Text + "';";
+            command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
+
+            reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                category = (int)reader["id"];
+            }
+            reader.Close();
+
+            sql = "SELECT id FROM subcategory WHERE subcategory_name = '" + comboBox_subCategory.Text + "';";
+            command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
+
+            reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                subcategory = (int)reader["id"];
+            }
+            reader.Close();
+
+            sql = "SELECT id FROM user WHERE username = '" + comboBox_editor.Text + "';";
+            command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
+
+            reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                editor = (int)reader["id"];
+            }
+            reader.Close();
+
+            if (category != -1 && subcategory != -1 && editor != -1)
+            {
+                sql = "INSERT INTO main (id,category,subcategory,manufacturer,editor,status,title,url,name,date,last_edit,views) "
+                + "VALUES (" +
+                amount + "," +
+                category + "," +
+                subcategory + "," +
+                10 + "," +
+                editor + "," +
+                0 + "," +
+                "'" + textBox_title.Text + "' ," +
+                "'" + textBox_url.Text + "' ," +
+                "'" + textBox_name.Text + "' ," +
+                "'" + date_creationDate.Value.ToString("yy-MM-dd") + "' ," +
+                "'15-11-04-00-11'," +
+                0 + ");";
+                command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
+                command.ExecuteNonQuery();
+
+                MessageBox.Show("Item has been created.", "Info");
+                openExistingItem(amount);
+            } else
+            {
+                MessageBox.Show("Something went wrong.", "Error Message");
+            }
+        }
+
+        private void button_delete_Click(object sender, EventArgs e)
+        {
+            if(currrentItemId != -1)
+            {
+                deleteItem(currrentItemId);
+            }
+        }
+
+        private void deleteItem(int id)
+        {
+            string sql = "DELETE FROM main WHERE id = " + id + ";";
+            SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
+            command.ExecuteNonQuery();
+
+            MessageBox.Show("Item has been deleted.", "Info");
+            resetEditor();
         }
     }
 }

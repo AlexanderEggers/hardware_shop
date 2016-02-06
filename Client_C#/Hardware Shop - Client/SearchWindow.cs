@@ -49,7 +49,7 @@ namespace Hardware_Shop_Client
             ClientMain.editorWindow.Show();
         }
 
-        private void executeTest()
+        public void executeTest()
         {
             string text = this.textBox_search.Text;
             String inputCategory;

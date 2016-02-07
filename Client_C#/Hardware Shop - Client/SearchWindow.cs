@@ -17,17 +17,46 @@ namespace Hardware_Shop_Client
             ClientMain.exit();
         }
 
+        public void resetSearchWindow()
+        {
+            string sql = "SELECT main.id,category_name,"
+                        + "subcategory_name,username FROM main "
+                        + "INNER JOIN category ON main.category = category.id "
+                        + "INNER JOIN subcategory ON main.subcategory = subcategory.id "
+                        + "INNER JOIN user ON main.editor = user.id LIMIT " + getMaxResultsInput() + ";";
+            SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
+
+            searchDataView.Rows.Clear();
+            SQLiteDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                searchDataView.Rows.Add((int)reader["id"], (string)reader["username"],
+                    (string)reader["category_name"], (string)reader["subcategory_name"]);
+            }
+            reader.Close();
+        }
+
         private void button_search_Click(object sender, EventArgs e)
         {
-            executeTest();
+            int itemID = -1;
+
+            if(int.TryParse(textBox_search.Text, out itemID))
+            {
+                Hide();
+                ClientMain.editorWindow.resetEditor();
+                ClientMain.editorWindow.openExistingItem(itemID);
+                ClientMain.editorWindow.Show();
+            } else
+            {
+                executeSearch();
+            }
         }
 
         private void textBox_search_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Enter)
             {
-                executeTest();
-
+                executeSearch();
                 e.Handled = true;
             }
         }
@@ -49,24 +78,45 @@ namespace Hardware_Shop_Client
             ClientMain.editorWindow.Show();
         }
 
-        public void executeTest()
+        /// <summary>
+        /// Search is only possible via item id or item title.<para/>
+        /// <para/>
+        /// Current missing features:<para/>
+        /// # Search by category, subcategory, manufacturer, editor, status<para/>
+        /// # Function for sort by and sort desc<para/>
+        /// # Function to list all items from the last 1,3,6,12 month (example)<para/>
+        /// # Function to list all item which have been last edited the last 1,3,6,12 month (example)
+        /// </summary>
+        public void executeSearch()
         {
             string text = this.textBox_search.Text;
-            String inputCategory;
+            String sql;
+            int tempItemID;
 
             if (text == "")
             {
+                resetSearchWindow();
                 return;
             }
 
-            inputCategory = "main.id"; //aktuell nur zum testen
-
-            string sql = "SELECT main.id,category_name,"
+            if (int.TryParse(textBox_search.Text, out tempItemID))
+            {
+                sql = "SELECT main.id,category_name,"
                         + "subcategory_name,username FROM main "
                         + "INNER JOIN category ON main.category = category.id "
                         + "INNER JOIN subcategory ON main.subcategory = subcategory.id "
                         + "INNER JOIN user ON main.editor = user.id "
-                        + "WHERE " + inputCategory + " = " + text + ";";
+                        + "WHERE main.id = " + text + " LIMIT " + getMaxResultsInput() + " ;";
+            } else
+            {
+                sql = "SELECT main.id,category_name,"
+                        + "subcategory_name,username FROM main "
+                        + "INNER JOIN category ON main.category = category.id "
+                        + "INNER JOIN subcategory ON main.subcategory = subcategory.id "
+                        + "INNER JOIN user ON main.editor = user.id "
+                        + "WHERE main.title LIKE '%" + text + "%' LIMIT " + getMaxResultsInput() + " ;";
+            }
+            
             SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
             /**
              * SELECT name FROM MAIN LEFT JOIN category USING(ID)
@@ -80,6 +130,19 @@ namespace Hardware_Shop_Client
                     (string)reader["category_name"], (string)reader["subcategory_name"]);
             }
             reader.Close();
+        }
+
+        private int getMaxResultsInput()
+        {
+            int limit;
+            if (int.TryParse(textBox_maxResults.Text, out limit))
+            {
+                return limit;
+            }
+            else
+            {
+                return int.MaxValue;
+            }
         }
     }
 }

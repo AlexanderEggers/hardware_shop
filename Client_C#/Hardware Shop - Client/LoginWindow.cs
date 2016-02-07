@@ -36,6 +36,7 @@ namespace Hardware_Shop_Client
                     (int)reader["role"] == 1)
                 {
                     Hide();
+                    ClientMain.searchWindow.resetSearchWindow();
                     ClientMain.searchWindow.Show();
                 }
             }

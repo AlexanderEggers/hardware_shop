@@ -60,7 +60,7 @@
             this.textBox_maxResults = new System.Windows.Forms.TextBox();
             this.comboBox_sortBy = new System.Windows.Forms.ComboBox();
             this.label_sortBy = new System.Windows.Forms.Label();
-            this.checkBox_sortItems = new System.Windows.Forms.CheckBox();
+            this.checkBox_sortDescending = new System.Windows.Forms.CheckBox();
             this.searchDataView = new System.Windows.Forms.DataGridView();
             this.Column_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column_Editor = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -318,15 +318,15 @@
             this.label_sortBy.TabIndex = 25;
             this.label_sortBy.Text = "Sort by:";
             // 
-            // checkBox_sortItems
+            // checkBox_sortDescending
             // 
-            this.checkBox_sortItems.AutoSize = true;
-            this.checkBox_sortItems.Location = new System.Drawing.Point(776, 112);
-            this.checkBox_sortItems.Name = "checkBox_sortItems";
-            this.checkBox_sortItems.Size = new System.Drawing.Size(72, 17);
-            this.checkBox_sortItems.TabIndex = 27;
-            this.checkBox_sortItems.Text = "Sort items";
-            this.checkBox_sortItems.UseVisualStyleBackColor = true;
+            this.checkBox_sortDescending.AutoSize = true;
+            this.checkBox_sortDescending.Location = new System.Drawing.Point(776, 112);
+            this.checkBox_sortDescending.Name = "checkBox_sortDescending";
+            this.checkBox_sortDescending.Size = new System.Drawing.Size(103, 17);
+            this.checkBox_sortDescending.TabIndex = 27;
+            this.checkBox_sortDescending.Text = "Sort descending";
+            this.checkBox_sortDescending.UseVisualStyleBackColor = true;
             // 
             // searchDataView
             // 
@@ -403,7 +403,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(988, 568);
             this.Controls.Add(this.searchDataView);
-            this.Controls.Add(this.checkBox_sortItems);
+            this.Controls.Add(this.checkBox_sortDescending);
             this.Controls.Add(this.comboBox_sortBy);
             this.Controls.Add(this.label_sortBy);
             this.Controls.Add(this.textBox_maxResults);
@@ -469,7 +469,7 @@
         private System.Windows.Forms.TextBox textBox_maxResults;
         private System.Windows.Forms.ComboBox comboBox_sortBy;
         private System.Windows.Forms.Label label_sortBy;
-        private System.Windows.Forms.CheckBox checkBox_sortItems;
+        private System.Windows.Forms.CheckBox checkBox_sortDescending;
         private System.Windows.Forms.DataGridView searchDataView;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_Editor;

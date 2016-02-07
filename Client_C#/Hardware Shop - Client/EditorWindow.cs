@@ -4,6 +4,14 @@ using System.Windows.Forms;
 
 namespace Hardware_Shop_Client
 {
+    /// <summary>
+    /// Missing following features:<para/>
+    /// # Input for item releating stuff, like Number of Cores or RAM amount.<para/>
+    /// # Tags<para/>
+    /// # Status<para/>
+    /// # Manufacture<para/>
+    /// # Last edit
+    /// </summary>
     public partial class EditorWindow : Form
     {
         private int currrentItemId = -1;
@@ -103,7 +111,7 @@ namespace Hardware_Shop_Client
         {
             Hide();
             ClientMain.searchWindow.Show();
-            ClientMain.searchWindow.executeTest(); //resets the search results
+            ClientMain.searchWindow.executeSearch(); //resets the search results
             currrentItemId = -1;
         }
 

@@ -123,11 +123,10 @@ namespace Hardware_Shop_Client
         /// <summary>
         /// Search is only possible via item id or item title.<para/>
         /// <para/>
-        /// Current missing features:<para/>
-        /// # Search by manufacturer, status<para/>
-        /// # Function for sort by and sort desc<para/>
-        /// # Function to list all items from the last 1,3,6,12 month (example)<para/>
-        /// # Function to list all item which have been last edited the last 1,3,6,12 month (example)
+        /// Current missing core features:<para/>
+        /// # Implementation of manufacture, order by (desc/asc), status, editor (logic/sql part is missing only)
+        /// # Function to list all items from the last 1,3,6,12 month<para/>
+        /// # Function to list all item which have been last edited the last 1,3,6,12 month
         /// </summary>
         public void executeSearch()
         {
@@ -141,7 +140,7 @@ namespace Hardware_Shop_Client
                         + "INNER JOIN category ON main.category = category.id "
                         + "INNER JOIN subcategory ON main.subcategory = subcategory.id "
                         + "INNER JOIN user ON main.editor = user.id "
-                        + "WHERE";
+                        + "WHERE ";
 
             if (int.TryParse(textBox_search.Text, out tempItemID))
             {
@@ -157,19 +156,29 @@ namespace Hardware_Shop_Client
                       + getFilterSQLData("subcategory", comboBox_subCategory, insertFilter, out insertFilter)
                       + getFilterSQLData("editor", comboBox_editor, insertFilter, out insertFilter) 
                       + getFilterSQLData("manufacture", comboBox_manufacture, insertFilter, out insertFilter)
-                      + getFilterSQLData("status", comboBox_status, insertFilter, out insertFilter) 
-                      + " LIMIT " + getMaxResultsInput() + " ;";
+                      + getFilterSQLData("status", comboBox_status, insertFilter, out insertFilter);
 
-            if(sql.Contains("WHERE LIMIT"))
+            if(comboBox_sortBy.Text != "")
+            {
+                if (checkBox_sortDescending.Checked)
+                {
+                    sql = sql + " ORDER BY " + comboBox_sortBy.Text + " ASC ";
+                }
+                else
+                {
+                    sql = sql + " ORDER BY " + comboBox_sortBy.Text + " DESC ";
+                }
+            }
+
+            sql = sql + "LIMIT " + getMaxResultsInput() + " ;";
+
+            if (sql.Contains("WHERE ORDER BY") || sql.Contains("WHERE LIMIT"))
             {
                 resetSearchWindow();
                 return;
             }
 
             SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
-            /**
-             * SELECT name FROM MAIN LEFT JOIN category USING(ID)
-             */
 
             Console.WriteLine(sql);
 
@@ -195,10 +204,10 @@ namespace Hardware_Shop_Client
 
                     if (filterBefore)
                     {
-                        return " AND main." + type + " = " + sqlID;
+                        return "AND main." + type + " = " + sqlID + " ";
                     } else
                     {
-                        return " main." + type + " = " + sqlID;
+                        return "main." + type + " = " + sqlID + " ";
                     }
                 } else
                 {

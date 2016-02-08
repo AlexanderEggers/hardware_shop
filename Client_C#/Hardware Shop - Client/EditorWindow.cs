@@ -34,6 +34,7 @@ namespace Hardware_Shop_Client
             SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
 
             comboBox_category.Items.Clear();
+            comboBox_category.Items.Add("");
             SQLiteDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {
@@ -46,6 +47,7 @@ namespace Hardware_Shop_Client
             command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
 
             comboBox_subCategory.Items.Clear();
+            comboBox_subCategory.Items.Add("");
             reader = command.ExecuteReader();
             while (reader.Read())
             {
@@ -58,6 +60,7 @@ namespace Hardware_Shop_Client
             command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
 
             comboBox_editor.Items.Clear();
+            comboBox_editor.Items.Add("");
             reader = command.ExecuteReader();
             while (reader.Read())
             {

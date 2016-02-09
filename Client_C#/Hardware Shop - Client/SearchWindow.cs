@@ -20,18 +20,18 @@ namespace Hardware_Shop_Client
         public void resetSearchWindow()
         {
             string sql = "SELECT main.id,category_name,"
-                        + "subcategory_name,username FROM main "
+                        + "manufacturer_name,user_name FROM main "
                         + "INNER JOIN category ON main.category = category.id "
-                        + "INNER JOIN subcategory ON main.subcategory = subcategory.id "
-                        + "INNER JOIN user ON main.editor = user.id LIMIT " + getMaxResultsInput() + ";";
+                        + "INNER JOIN manufacturer ON main.manufacturer = manufacturer.id "
+                        + "INNER JOIN user ON main.user = user.id LIMIT " + getMaxResultsInput() + ";";
             SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
 
             searchDataView.Rows.Clear();
             SQLiteDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {
-                searchDataView.Rows.Add((int)reader["id"], (string)reader["username"],
-                    (string)reader["category_name"], (string)reader["subcategory_name"]);
+                searchDataView.Rows.Add((int)reader["id"], (string)reader["user_name"],
+                    (string)reader["category_name"], (string)reader["manufacturer_name"]);
             }
             reader.Close();
 
@@ -63,8 +63,20 @@ namespace Hardware_Shop_Client
             }
             reader.Close();
 
+            sql = "SELECT manufacturer_name FROM manufacturer;";
+            command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
 
-            sql = "SELECT username FROM user;";
+            comboBox_manufacturer.Items.Clear();
+            comboBox_manufacturer.Items.Add("");
+
+            reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                comboBox_manufacturer.Items.Add((string)reader["manufacturer_name"]);
+            }
+            reader.Close();
+
+            sql = "SELECT user_name FROM user;";
             command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
 
             comboBox_editor.Items.Clear();
@@ -73,9 +85,14 @@ namespace Hardware_Shop_Client
             reader = command.ExecuteReader();
             while (reader.Read())
             {
-                comboBox_editor.Items.Add((string)reader["username"]);
+                comboBox_editor.Items.Add((string)reader["user_name"]);
             }
             reader.Close();
+
+            comboBox_sortBy.Items.Add("");
+            comboBox_sortBy.Items.Add("id");
+            comboBox_sortBy.Items.Add("title");
+            comboBox_sortBy.Items.Add("categorey");
         }
 
         private void button_search_Click(object sender, EventArgs e)
@@ -124,7 +141,7 @@ namespace Hardware_Shop_Client
         /// Search is only possible via item id or item title.<para/>
         /// <para/>
         /// Current missing core features:<para/>
-        /// # Implementation of manufacture, order by (desc/asc), status, editor (logic/sql part is missing only)
+        /// # Implementation of status (logic part is missing only)
         /// # Function to list all items from the last 1,3,6,12 month<para/>
         /// # Function to list all item which have been last edited the last 1,3,6,12 month
         /// </summary>
@@ -136,46 +153,45 @@ namespace Hardware_Shop_Client
             bool insertFilter = false;
 
             sql = "SELECT main.id,category_name,"
-                        + "subcategory_name,username FROM main "
+                        + "subcategory_name,user_name,main.manufacturer FROM main "
                         + "INNER JOIN category ON main.category = category.id "
                         + "INNER JOIN subcategory ON main.subcategory = subcategory.id "
-                        + "INNER JOIN user ON main.editor = user.id "
-                        + "WHERE ";
+                        + "INNER JOIN user ON main.user = user.id "
+                        + "WHERE";
 
             if (int.TryParse(textBox_search.Text, out tempItemID))
             {
-                sql = sql +  "main.id = " + text;
+                sql = sql +  " main.id = " + text;
                 insertFilter = true;
             } else if(textBox_search.Text != "")
             {
-                sql = sql +  "main.title LIKE '%" + text + "%'";
+                sql = sql +  " main.title LIKE '%" + text + "%'";
                 insertFilter = true;
             }
 
             sql = sql + getFilterSQLData("category", comboBox_category, insertFilter, out insertFilter) 
                       + getFilterSQLData("subcategory", comboBox_subCategory, insertFilter, out insertFilter)
-                      + getFilterSQLData("editor", comboBox_editor, insertFilter, out insertFilter) 
-                      + getFilterSQLData("manufacture", comboBox_manufacture, insertFilter, out insertFilter)
+                      + getFilterSQLData("user", comboBox_editor, insertFilter, out insertFilter) 
+                      + getFilterSQLData("manufacturer", comboBox_manufacturer, insertFilter, out insertFilter)
                       + getFilterSQLData("status", comboBox_status, insertFilter, out insertFilter);
 
             if(comboBox_sortBy.Text != "")
             {
                 if (checkBox_sortDescending.Checked)
                 {
-                    sql = sql + " ORDER BY " + comboBox_sortBy.Text + " ASC ";
+                    sql = sql + " ORDER BY main." + comboBox_sortBy.Text + " ASC";
                 }
                 else
                 {
-                    sql = sql + " ORDER BY " + comboBox_sortBy.Text + " DESC ";
+                    sql = sql + " ORDER BY main." + comboBox_sortBy.Text + " DESC";
                 }
             }
 
-            sql = sql + "LIMIT " + getMaxResultsInput() + " ;";
+            sql = sql + " LIMIT " + getMaxResultsInput() + " ;";
 
             if (sql.Contains("WHERE ORDER BY") || sql.Contains("WHERE LIMIT"))
             {
-                resetSearchWindow();
-                return;
+                sql = sql.Replace(" WHERE", "");
             }
 
             SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
@@ -186,7 +202,7 @@ namespace Hardware_Shop_Client
             SQLiteDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {
-                searchDataView.Rows.Add((int)reader["id"], (string)reader["username"],
+                searchDataView.Rows.Add((int)reader["id"], (string)reader["user_name"],
                     (string)reader["category_name"], (string)reader["subcategory_name"]);
             }
             reader.Close();
@@ -204,10 +220,10 @@ namespace Hardware_Shop_Client
 
                     if (filterBefore)
                     {
-                        return "AND main." + type + " = " + sqlID + " ";
+                        return " AND main." + type + " = " + sqlID;
                     } else
                     {
-                        return "main." + type + " = " + sqlID + " ";
+                        return " main." + type + " = " + sqlID;
                     }
                 } else
                 {
@@ -247,7 +263,7 @@ namespace Hardware_Shop_Client
             }
             else
             {
-                return int.MaxValue;
+                return 30; //um nicht zu viele Objekte in die Liste zu laden
             }
         }
     }

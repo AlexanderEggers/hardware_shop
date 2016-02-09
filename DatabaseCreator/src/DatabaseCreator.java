@@ -30,7 +30,7 @@ public class DatabaseCreator {
         stmt = c.createStatement();
         String sql = "CREATE TABLE user "
                 + "(id              INT     PRIMARY KEY     NOT NULL,"
-                + " username        CHAR(15)                NOT NULL, "
+                + " user_name       CHAR(15)                NOT NULL, "
                 + " password        CHAR(15)                NOT NULL, "
                 + " role            INT                     NOT NULL)";
         stmt.executeUpdate(sql);
@@ -41,7 +41,7 @@ public class DatabaseCreator {
                 + " category       INT                      , "
                 + " subcategory    INT                      , "
                 + " manufacturer   INT                      , "
-                + " editor         INT                      NOT NULL, "
+                + " user           INT                      NOT NULL, "
                 + " status         INT                      NOT NULL, "
                 + " title          TEXT                     , "
                 + " url            TEXT                     , "
@@ -93,7 +93,7 @@ public class DatabaseCreator {
         stmt = c.createStatement();
         sql = "CREATE TABLE manufacturer "
                 + "(id                  INT      PRIMARY KEY     NOT NULL,"
-                + " manufacturer_ name  TEXT                     NOT NULL)";
+                + " manufacturer_name  TEXT                     NOT NULL)";
         stmt.executeUpdate(sql);
 
         stmt = c.createStatement();
@@ -120,18 +120,18 @@ public class DatabaseCreator {
 
     private void initStartContent() throws Exception {
         stmt = c.createStatement();
-        String sql = "INSERT INTO user (id,username,password,role) "
+        String sql = "INSERT INTO user (id,user_name,password,role) "
                 + "VALUES (1, 'Admin', 'root', 1);";
         stmt.executeUpdate(sql);
 
         stmt = c.createStatement();
-        sql = "INSERT INTO main (id,category,subcategory,manufacturer,editor,status,title,url,name,date,last_edit,views) "
-                + "VALUES (0, 0, 0, 10, 1, 0, 'Test1', '/test1', 'Test Entry 1', '15-11-04', '15-11-04-00-11', 0);";
+        sql = "INSERT INTO main (id,category,subcategory,manufacturer,user,status,title,url,name,date,last_edit,views) "
+                + "VALUES (0, 0, 0, 0, 1, 0, 'Test1', '/test1', 'Test Entry 1', '15-11-04', '15-11-04-00-11', 0);";
         stmt.executeUpdate(sql);
         
         stmt = c.createStatement();
-        sql = "INSERT INTO main (id,category,subcategory,manufacturer,editor,status,title,url,name,date,last_edit,views) "
-                + "VALUES (1, 1, 0, 10, 1, 0, 'Test2', '/test2', 'Test Entry 2', '15-11-04', '15-11-04-00-11', 0);";
+        sql = "INSERT INTO main (id,category,subcategory,manufacturer,user,status,title,url,name,date,last_edit,views) "
+                + "VALUES (1, 1, 0, 1, 1, 0, 'Test2', '/test2', 'Test Entry 2', '15-11-04', '15-11-04-00-11', 0);";
         stmt.executeUpdate(sql);
         
         stmt = c.createStatement();
@@ -147,6 +147,16 @@ public class DatabaseCreator {
         stmt = c.createStatement();
         sql = "INSERT INTO subcategory (id,subcategory_name) "
                 + "VALUES (0, 'SubCategory0');";
+        stmt.executeUpdate(sql);
+        
+        stmt = c.createStatement();
+        sql = "INSERT INTO manufacturer (id,manufacturer_name) "
+                + "VALUES (0, 'Intel');";
+        stmt.executeUpdate(sql);
+        
+        stmt = c.createStatement();
+        sql = "INSERT INTO manufacturer (id,manufacturer_name) "
+                + "VALUES (1, 'AMD');";
         stmt.executeUpdate(sql);
     }
 

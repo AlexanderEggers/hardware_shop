@@ -50,7 +50,7 @@
             this.label_category = new System.Windows.Forms.Label();
             this.comboBox_subCategory = new System.Windows.Forms.ComboBox();
             this.label_subCategory = new System.Windows.Forms.Label();
-            this.comboBox_manufacture = new System.Windows.Forms.ComboBox();
+            this.comboBox_manufacturer = new System.Windows.Forms.ComboBox();
             this.label_manufacture = new System.Windows.Forms.Label();
             this.date_creationDate = new System.Windows.Forms.DateTimePicker();
             this.date_editDate = new System.Windows.Forms.DateTimePicker();
@@ -65,7 +65,7 @@
             this.Column_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column_Editor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column_Category = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column_SubCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column_Manufacturer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.searchDataView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -232,14 +232,14 @@
             this.label_subCategory.TabIndex = 15;
             this.label_subCategory.Text = "Sub-Category:";
             // 
-            // comboBox_manufacture
+            // comboBox_manufacturer
             // 
-            this.comboBox_manufacture.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox_manufacture.FormattingEnabled = true;
-            this.comboBox_manufacture.Location = new System.Drawing.Point(365, 113);
-            this.comboBox_manufacture.Name = "comboBox_manufacture";
-            this.comboBox_manufacture.Size = new System.Drawing.Size(121, 21);
-            this.comboBox_manufacture.TabIndex = 18;
+            this.comboBox_manufacturer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_manufacturer.FormattingEnabled = true;
+            this.comboBox_manufacturer.Location = new System.Drawing.Point(365, 113);
+            this.comboBox_manufacturer.Name = "comboBox_manufacturer";
+            this.comboBox_manufacturer.Size = new System.Drawing.Size(121, 21);
+            this.comboBox_manufacturer.TabIndex = 18;
             // 
             // label_manufacture
             // 
@@ -349,7 +349,7 @@
             this.Column_ID,
             this.Column_Editor,
             this.Column_Category,
-            this.Column_SubCategory});
+            this.Column_Manufacturer});
             this.searchDataView.Location = new System.Drawing.Point(3, 150);
             this.searchDataView.Name = "searchDataView";
             this.searchDataView.ReadOnly = true;
@@ -388,14 +388,14 @@
             this.Column_Category.ReadOnly = true;
             this.Column_Category.Width = 245;
             // 
-            // Column_SubCategory
+            // Column_Manufacturer
             // 
             dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-            this.Column_SubCategory.DefaultCellStyle = dataGridViewCellStyle5;
-            this.Column_SubCategory.HeaderText = "SubCategory";
-            this.Column_SubCategory.Name = "Column_SubCategory";
-            this.Column_SubCategory.ReadOnly = true;
-            this.Column_SubCategory.Width = 245;
+            this.Column_Manufacturer.DefaultCellStyle = dataGridViewCellStyle5;
+            this.Column_Manufacturer.HeaderText = "Manufacturer";
+            this.Column_Manufacturer.Name = "Column_Manufacturer";
+            this.Column_Manufacturer.ReadOnly = true;
+            this.Column_Manufacturer.Width = 245;
             // 
             // SearchWindow
             // 
@@ -412,7 +412,7 @@
             this.Controls.Add(this.label_date);
             this.Controls.Add(this.date_editDate);
             this.Controls.Add(this.date_creationDate);
-            this.Controls.Add(this.comboBox_manufacture);
+            this.Controls.Add(this.comboBox_manufacturer);
             this.Controls.Add(this.label_manufacture);
             this.Controls.Add(this.comboBox_subCategory);
             this.Controls.Add(this.label_subCategory);
@@ -459,7 +459,7 @@
         private System.Windows.Forms.Label label_category;
         private System.Windows.Forms.ComboBox comboBox_subCategory;
         private System.Windows.Forms.Label label_subCategory;
-        private System.Windows.Forms.ComboBox comboBox_manufacture;
+        private System.Windows.Forms.ComboBox comboBox_manufacturer;
         private System.Windows.Forms.Label label_manufacture;
         private System.Windows.Forms.DateTimePicker date_creationDate;
         private System.Windows.Forms.DateTimePicker date_editDate;
@@ -474,6 +474,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_Editor;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_Category;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column_SubCategory;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column_Manufacturer;
     }
 }

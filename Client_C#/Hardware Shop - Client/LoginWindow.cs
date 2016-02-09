@@ -26,7 +26,7 @@ namespace Hardware_Shop_Client
 
         private void loginUser()
         {
-            string sql = "SELECT role, password FROM user WHERE username = '" + textBox_user.Text + "';";
+            string sql = "SELECT role, password FROM user WHERE user_name = '" + textBox_user.Text + "';";
             SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
             SQLiteDataReader reader = command.ExecuteReader();
 

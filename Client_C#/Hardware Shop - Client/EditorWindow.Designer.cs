@@ -40,7 +40,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.comboBox_category = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.comboBox_manufacture = new System.Windows.Forms.ComboBox();
+            this.comboBox_manufacturer = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label_id = new System.Windows.Forms.Label();
             this.label_date = new System.Windows.Forms.Label();
@@ -175,12 +175,12 @@
             // 
             // comboBox_manufacture
             // 
-            this.comboBox_manufacture.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox_manufacture.FormattingEnabled = true;
-            this.comboBox_manufacture.Location = new System.Drawing.Point(387, 133);
-            this.comboBox_manufacture.Name = "comboBox_manufacture";
-            this.comboBox_manufacture.Size = new System.Drawing.Size(170, 21);
-            this.comboBox_manufacture.TabIndex = 42;
+            this.comboBox_manufacturer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_manufacturer.FormattingEnabled = true;
+            this.comboBox_manufacturer.Location = new System.Drawing.Point(387, 133);
+            this.comboBox_manufacturer.Name = "comboBox_manufacture";
+            this.comboBox_manufacturer.Size = new System.Drawing.Size(170, 21);
+            this.comboBox_manufacturer.TabIndex = 42;
             // 
             // label4
             // 
@@ -282,7 +282,7 @@
             this.Controls.Add(this.label_date);
             this.Controls.Add(this.date_creationDate);
             this.Controls.Add(this.label_id);
-            this.Controls.Add(this.comboBox_manufacture);
+            this.Controls.Add(this.comboBox_manufacturer);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.comboBox_subCategory);
             this.Controls.Add(this.label2);
@@ -318,7 +318,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox comboBox_category;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox comboBox_manufacture;
+        private System.Windows.Forms.ComboBox comboBox_manufacturer;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label_id;
         private System.Windows.Forms.Label label_date;

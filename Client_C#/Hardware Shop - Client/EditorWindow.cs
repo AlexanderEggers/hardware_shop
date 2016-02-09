@@ -9,7 +9,6 @@ namespace Hardware_Shop_Client
     /// # Input for item releating stuff, like Number of Cores or RAM amount.<para/>
     /// # Tags<para/>
     /// # Status<para/>
-    /// # Manufacture<para/>
     /// # Last edit
     /// </summary>
     public partial class EditorWindow : Form
@@ -56,7 +55,20 @@ namespace Hardware_Shop_Client
             reader.Close();
 
 
-            sql = "SELECT username FROM user;";
+            sql = "SELECT manufacturer_name FROM manufacturer;";
+            command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
+
+            comboBox_manufacturer.Items.Clear();
+            comboBox_manufacturer.Items.Add("");
+            reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                comboBox_manufacturer.Items.Add((string)reader["manufacturer_name"]);
+            }
+            reader.Close();
+
+
+            sql = "SELECT user_name FROM user;";
             command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
 
             comboBox_editor.Items.Clear();
@@ -64,7 +76,7 @@ namespace Hardware_Shop_Client
             reader = command.ExecuteReader();
             while (reader.Read())
             {
-                comboBox_editor.Items.Add((string)reader["username"]);
+                comboBox_editor.Items.Add((string)reader["user_name"]);
             }
             reader.Close();
 
@@ -81,10 +93,11 @@ namespace Hardware_Shop_Client
         public void openExistingItem(int id)
         {
             string sql = "SELECT main.id,category_name,"
-                        + "subcategory_name,username, title, url, name, date FROM main "
+                        + "subcategory_name,user_name, title, url, name, date, manufacturer_name FROM main "
                         + "INNER JOIN category ON main.category = category.id "
                         + "INNER JOIN subcategory ON main.subcategory = subcategory.id "
-                        + "INNER JOIN user ON main.editor = user.id "
+                        + "INNER JOIN manufacturer ON main.manufacturer = manufacturer.id "
+                        + "INNER JOIN user ON main.user = user.id "
                         + "WHERE main.id = " + id + ";";
             SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
 
@@ -93,8 +106,9 @@ namespace Hardware_Shop_Client
             {
                 comboBox_category.SelectedIndex = comboBox_category.FindStringExact((string)reader["category_name"]);
                 comboBox_subCategory.SelectedIndex = comboBox_subCategory.FindStringExact((string)reader["subcategory_name"]);
-                comboBox_editor.SelectedIndex = comboBox_editor.FindStringExact((string)reader["username"]);
-
+                comboBox_manufacturer.SelectedIndex = comboBox_manufacturer.FindStringExact((string)reader["manufacturer_name"]);
+                comboBox_editor.SelectedIndex = comboBox_editor.FindStringExact((string)reader["user_name"]);
+                
                 string date = (string)reader["date"];
                 string[] dateSplite = date.Split(new Char[] { '-' });
 
@@ -136,7 +150,7 @@ namespace Hardware_Shop_Client
 
         private void saveCurrentItem()
         {
-            int category = -1, subcategory = -1, editor = -1;
+            int category = -1, subcategory = -1, manufacturer = -1, user = -1;
 
             string sql = "SELECT id FROM category WHERE category_name = '" + comboBox_category.Text + "';";
             SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
@@ -158,26 +172,37 @@ namespace Hardware_Shop_Client
             }
             reader.Close();
 
-            sql = "SELECT id FROM user WHERE username = '" + comboBox_editor.Text + "';";
+            sql = "SELECT id FROM manufacturer WHERE manufacturer_name = '" + comboBox_manufacturer.Text + "';";
             command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
 
             reader = command.ExecuteReader();
             while (reader.Read())
             {
-                editor = (int)reader["id"];
+                manufacturer = (int)reader["id"];
             }
             reader.Close();
 
-            if (category != -1 && subcategory != -1 && editor != -1)
+            sql = "SELECT id FROM user WHERE user_name = '" + comboBox_editor.Text + "';";
+            command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
+
+            reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                user = (int)reader["id"];
+            }
+            reader.Close();
+
+            if (category != -1 && subcategory != -1 && manufacturer != -1 && user != -1)
             {
                 sql = "UPDATE main " +
                 "SET category = " + category + "," +
                 "subcategory = " + subcategory + "," +
+                "manufacturer = " + manufacturer + "," +
                 "title = '" + textBox_title.Text + "'," +
                 "name = '" + textBox_name.Text + "'," +
                 "url = '" + textBox_url.Text + "'," +
                 "date = '" + date_creationDate.Value.ToString("yy-MM-dd") + "'," +
-                "editor = " + editor +
+                "user = " + user +
                 " WHERE id = " + currrentItemId + ";";
 
                 command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
@@ -192,7 +217,7 @@ namespace Hardware_Shop_Client
 
         private void saveNewItem()
         {
-            int amount = 0, category = -1, subcategory = -1, editor = -1;
+            int amount = 0, category = -1, subcategory = -1, manufacturer = -1, user = -1;
 
             string sql = "SELECT id from main;";
             SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
@@ -224,25 +249,35 @@ namespace Hardware_Shop_Client
             }
             reader.Close();
 
-            sql = "SELECT id FROM user WHERE username = '" + comboBox_editor.Text + "';";
+            sql = "SELECT id FROM manufacturer WHERE manufacturer_name = '" + comboBox_manufacturer.Text + "';";
             command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
 
             reader = command.ExecuteReader();
             while (reader.Read())
             {
-                editor = (int)reader["id"];
+                manufacturer = (int)reader["id"];
             }
             reader.Close();
 
-            if (category != -1 && subcategory != -1 && editor != -1)
+            sql = "SELECT id FROM user WHERE user_name = '" + comboBox_editor.Text + "';";
+            command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
+
+            reader = command.ExecuteReader();
+            while (reader.Read())
             {
-                sql = "INSERT INTO main (id,category,subcategory,manufacturer,editor,status,title,url,name,date,last_edit,views) "
+                user = (int)reader["id"];
+            }
+            reader.Close();
+
+            if (category != -1 && subcategory != -1 && manufacturer != -1 && user != -1)
+            {
+                sql = "INSERT INTO main (id,category,subcategory,manufacturer,user,status,title,url,name,date,last_edit,views) "
                 + "VALUES (" +
                 amount + "," +
                 category + "," +
                 subcategory + "," +
-                10 + "," +
-                editor + "," +
+                manufacturer + "," +
+                user + "," +
                 0 + "," +
                 "'" + textBox_title.Text + "' ," +
                 "'" + textBox_url.Text + "' ," +

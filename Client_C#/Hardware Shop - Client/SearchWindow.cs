@@ -104,9 +104,9 @@ namespace Hardware_Shop_Client
             bool insertFilter = false;
 
             sql = "SELECT main.id,category_name,"
-                        + "subcategory_name,user_name,main.manufacturer FROM main "
+                        + "manufacturer_name,user_name FROM main "
                         + "INNER JOIN category ON main.category = category.id "
-                        + "INNER JOIN subcategory ON main.subcategory = subcategory.id "
+                        + "INNER JOIN manufacturer ON main.manufacturer = manufacturer.id "
                         + "INNER JOIN user ON main.user = user.id "
                         + "WHERE";
 
@@ -154,7 +154,7 @@ namespace Hardware_Shop_Client
             while (reader.Read())
             {
                 searchDataView.Rows.Add((int)reader["id"], (string)reader["user_name"],
-                    (string)reader["category_name"], (string)reader["subcategory_name"]);
+                    (string)reader["category_name"], (string)reader["manufacturer_name"]);
             }
             reader.Close();
         }

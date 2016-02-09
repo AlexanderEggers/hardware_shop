@@ -53,12 +53,12 @@
             this.label10 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // comboBox_editor
+            // comboBox_user
             // 
             this.comboBox_user.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_user.FormattingEnabled = true;
             this.comboBox_user.Location = new System.Drawing.Point(67, 69);
-            this.comboBox_user.Name = "comboBox_editor";
+            this.comboBox_user.Name = "comboBox_user";
             this.comboBox_user.Size = new System.Drawing.Size(170, 21);
             this.comboBox_user.TabIndex = 13;
             // 
@@ -76,10 +76,6 @@
             // 
             this.comboBox_status.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_status.FormattingEnabled = true;
-            this.comboBox_status.Items.AddRange(new object[] {
-            "Work in progress",
-            "Released",
-            "Archived"});
             this.comboBox_status.Location = new System.Drawing.Point(67, 101);
             this.comboBox_status.Name = "comboBox_status";
             this.comboBox_status.Size = new System.Drawing.Size(170, 21);
@@ -135,12 +131,12 @@
             this.button_delete.UseVisualStyleBackColor = true;
             this.button_delete.Click += new System.EventHandler(this.button_delete_Click);
             // 
-            // comboBox_subCategory
+            // comboBox_subcategory
             // 
             this.comboBox_subcategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_subcategory.FormattingEnabled = true;
             this.comboBox_subcategory.Location = new System.Drawing.Point(387, 101);
-            this.comboBox_subcategory.Name = "comboBox_subCategory";
+            this.comboBox_subcategory.Name = "comboBox_subcategory";
             this.comboBox_subcategory.Size = new System.Drawing.Size(170, 21);
             this.comboBox_subcategory.TabIndex = 40;
             // 
@@ -173,12 +169,12 @@
             this.label3.TabIndex = 37;
             this.label3.Text = "Category:";
             // 
-            // comboBox_manufacture
+            // comboBox_manufacturer
             // 
             this.comboBox_manufacturer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_manufacturer.FormattingEnabled = true;
             this.comboBox_manufacturer.Location = new System.Drawing.Point(387, 133);
-            this.comboBox_manufacturer.Name = "comboBox_manufacture";
+            this.comboBox_manufacturer.Name = "comboBox_manufacturer";
             this.comboBox_manufacturer.Size = new System.Drawing.Size(170, 21);
             this.comboBox_manufacturer.TabIndex = 42;
             // 

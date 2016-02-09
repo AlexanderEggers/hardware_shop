@@ -39,6 +39,7 @@ namespace Hardware_Shop_Client
             resetGUIObject("subcategory", comboBox_subcategory);
             resetGUIObject("manufacturer", comboBox_manufacturer);
             resetGUIObject("user", comboBox_user);
+            resetGUIObject("status", comboBox_status);
 
             comboBox_sortBy.Items.Add("");
             comboBox_sortBy.Items.Add("id");
@@ -50,13 +51,14 @@ namespace Hardware_Shop_Client
         {
             int itemID = -1;
 
-            if(int.TryParse(textBox_search.Text, out itemID))
+            if (int.TryParse(textBox_search.Text, out itemID))
             {
                 Hide();
                 ClientMain.editorWindow.resetEditor();
                 ClientMain.editorWindow.openExistingItem(itemID);
                 ClientMain.editorWindow.Show();
-            } else
+            }
+            else
             {
                 executeSearch();
             }
@@ -92,7 +94,6 @@ namespace Hardware_Shop_Client
         /// Search is only possible via item id or item title.<para/>
         /// <para/>
         /// Current missing core features:<para/>
-        /// # Implementation of status (logic part is missing only)
         /// # Function to list all items from the last 1,3,6,12 month<para/>
         /// # Function to list all item which have been last edited the last 1,3,6,12 month
         /// </summary>
@@ -112,21 +113,22 @@ namespace Hardware_Shop_Client
 
             if (int.TryParse(textBox_search.Text, out tempItemID))
             {
-                sql = sql +  " main.id = " + text;
+                sql = sql + " main.id = " + text;
                 insertFilter = true;
-            } else if(textBox_search.Text != "")
+            }
+            else if (textBox_search.Text != "")
             {
-                sql = sql +  " main.title LIKE '%" + text + "%'";
+                sql = sql + " main.title LIKE '%" + text + "%'";
                 insertFilter = true;
             }
 
-            sql = sql + getFilterSQLData("category", comboBox_category, insertFilter, out insertFilter) 
+            sql = sql + getFilterSQLData("category", comboBox_category, insertFilter, out insertFilter)
                       + getFilterSQLData("subcategory", comboBox_subcategory, insertFilter, out insertFilter)
-                      + getFilterSQLData("user", comboBox_user, insertFilter, out insertFilter) 
+                      + getFilterSQLData("user", comboBox_user, insertFilter, out insertFilter)
                       + getFilterSQLData("manufacturer", comboBox_manufacturer, insertFilter, out insertFilter)
                       + getFilterSQLData("status", comboBox_status, insertFilter, out insertFilter);
 
-            if(comboBox_sortBy.Text != "")
+            if (comboBox_sortBy.Text != "")
             {
                 if (checkBox_sortDescending.Checked)
                 {
@@ -172,16 +174,19 @@ namespace Hardware_Shop_Client
                     if (filterBefore)
                     {
                         return " AND main." + type + " = " + sqlID;
-                    } else
+                    }
+                    else
                     {
                         return " main." + type + " = " + sqlID;
                     }
-                } else
+                }
+                else
                 {
                     success = false;
                     return "";
                 }
-            } else
+            }
+            else
             {
                 success = false;
                 return "";

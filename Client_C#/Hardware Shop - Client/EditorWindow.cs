@@ -8,7 +8,6 @@ namespace Hardware_Shop_Client
     /// Missing following features:<para/>
     /// # Input for item releating stuff, like Number of Cores or RAM amount.<para/>
     /// # Tags<para/>
-    /// # Status<para/>
     /// # Last edit
     /// </summary>
     public partial class EditorWindow : Form
@@ -32,8 +31,7 @@ namespace Hardware_Shop_Client
             resetGUIObject("subcategory", comboBox_subcategory);
             resetGUIObject("manufacturer", comboBox_manufacturer);
             resetGUIObject("user", comboBox_user);
-
-            //es fehlt noch status
+            resetGUIObject("status", comboBox_status);
 
             date_creationDate.Value = DateTime.Today;
             label_id.Text = "ID:";
@@ -45,12 +43,13 @@ namespace Hardware_Shop_Client
         //Updates all fields regarding the database entry
         public void openExistingItem(int id)
         {
-            string sql = "SELECT main.id,category_name,"
+            string sql = "SELECT main.id,category_name, status_name,"
                         + "subcategory_name,user_name, title, url, name, date, manufacturer_name FROM main "
                         + "INNER JOIN category ON main.category = category.id "
                         + "INNER JOIN subcategory ON main.subcategory = subcategory.id "
                         + "INNER JOIN manufacturer ON main.manufacturer = manufacturer.id "
                         + "INNER JOIN user ON main.user = user.id "
+                        + "INNER JOIN status ON main.status = status.id "
                         + "WHERE main.id = " + id + ";";
             SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
 
@@ -61,7 +60,8 @@ namespace Hardware_Shop_Client
                 comboBox_subcategory.SelectedIndex = comboBox_subcategory.FindStringExact((string)reader["subcategory_name"]);
                 comboBox_manufacturer.SelectedIndex = comboBox_manufacturer.FindStringExact((string)reader["manufacturer_name"]);
                 comboBox_user.SelectedIndex = comboBox_user.FindStringExact((string)reader["user_name"]);
-                
+                comboBox_status.SelectedIndex = comboBox_status.FindStringExact((string)reader["status_name"]);
+
                 string date = (string)reader["date"];
                 string[] dateSplite = date.Split(new Char[] { '-' });
 
@@ -107,10 +107,11 @@ namespace Hardware_Shop_Client
 
         private void button_save_Click(object sender, EventArgs e)
         {
-            if(currrentItemId != -1)
+            if (currrentItemId != -1)
             {
                 saveCurrentItem();
-            } else
+            }
+            else
             {
                 saveNewItem();
             }
@@ -118,19 +119,21 @@ namespace Hardware_Shop_Client
 
         private void saveCurrentItem()
         {
-            int category = -1, subcategory = -1, manufacturer = -1, user = -1;
+            int category = -1, subcategory = -1, manufacturer = -1, user = -1, status = -1;
 
             category = getItemID("category", comboBox_category);
             subcategory = getItemID("subcategory", comboBox_subcategory);
             manufacturer = getItemID("manufacturer", comboBox_manufacturer);
             user = getItemID("user", comboBox_user);
+            status = getItemID("status", comboBox_status);
 
-            if (category != -1 && subcategory != -1 && manufacturer != -1 && user != -1)
+            if (category != -1 && subcategory != -1 && manufacturer != -1 && user != -1 && status != -1)
             {
                 string sql = "UPDATE main " +
                 "SET category = " + category + "," +
                 "subcategory = " + subcategory + "," +
                 "manufacturer = " + manufacturer + "," +
+                "status = " + status + "," +
                 "title = '" + textBox_title.Text + "'," +
                 "name = '" + textBox_name.Text + "'," +
                 "url = '" + textBox_url.Text + "'," +
@@ -142,7 +145,8 @@ namespace Hardware_Shop_Client
                 command.ExecuteNonQuery();
 
                 MessageBox.Show("Item has been saved.", "Info");
-            } else
+            }
+            else
             {
                 MessageBox.Show("Something went wrong.", "Error Message");
             }
@@ -150,7 +154,7 @@ namespace Hardware_Shop_Client
 
         private void saveNewItem()
         {
-            int amount = 0, category = -1, subcategory = -1, manufacturer = -1, user = -1;
+            int amount = 0, category = -1, subcategory = -1, manufacturer = -1, user = -1, status = -1;
 
             string sql = "SELECT id from main;";
             SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
@@ -166,8 +170,9 @@ namespace Hardware_Shop_Client
             subcategory = getItemID("subcategory", comboBox_subcategory);
             manufacturer = getItemID("manufacturer", comboBox_manufacturer);
             user = getItemID("user", comboBox_user);
+            status = getItemID("status", comboBox_status);
 
-            if (category != -1 && subcategory != -1 && manufacturer != -1 && user != -1)
+            if (category != -1 && subcategory != -1 && manufacturer != -1 && user != -1 && status != -1)
             {
                 sql = "INSERT INTO main (id,category,subcategory,manufacturer,user,status,title,url,name,date,last_edit,views) "
                 + "VALUES (" +
@@ -176,7 +181,7 @@ namespace Hardware_Shop_Client
                 subcategory + "," +
                 manufacturer + "," +
                 user + "," +
-                0 + "," +
+                status + "," +
                 "'" + textBox_title.Text + "' ," +
                 "'" + textBox_url.Text + "' ," +
                 "'" + textBox_name.Text + "' ," +
@@ -188,7 +193,8 @@ namespace Hardware_Shop_Client
 
                 MessageBox.Show("Item has been created.", "Info");
                 openExistingItem(amount);
-            } else
+            }
+            else
             {
                 MessageBox.Show("Something went wrong.", "Error Message");
             }
@@ -196,7 +202,7 @@ namespace Hardware_Shop_Client
 
         private void button_delete_Click(object sender, EventArgs e)
         {
-            if(currrentItemId != -1)
+            if (currrentItemId != -1)
             {
                 deleteItem(currrentItemId);
             }

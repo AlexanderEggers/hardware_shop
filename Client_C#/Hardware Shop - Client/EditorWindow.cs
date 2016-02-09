@@ -26,61 +26,14 @@ namespace Hardware_Shop_Client
             ClientMain.exit();
         }
 
-        //Updates all possible choices according to latest database entries
         public void resetEditor()
         {
-            string sql = "SELECT category_name FROM category;";
-            SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
+            resetGUIObject("category", comboBox_category);
+            resetGUIObject("subcategory", comboBox_subcategory);
+            resetGUIObject("manufacturer", comboBox_manufacturer);
+            resetGUIObject("user", comboBox_user);
 
-            comboBox_category.Items.Clear();
-            comboBox_category.Items.Add("");
-            SQLiteDataReader reader = command.ExecuteReader();
-            while (reader.Read())
-            {
-                comboBox_category.Items.Add((string)reader["category_name"]);
-            }
-            reader.Close();
-
-
-            sql = "SELECT subcategory_name FROM subcategory;";
-            command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
-
-            comboBox_subCategory.Items.Clear();
-            comboBox_subCategory.Items.Add("");
-            reader = command.ExecuteReader();
-            while (reader.Read())
-            {
-                comboBox_subCategory.Items.Add((string)reader["subcategory_name"]);
-            }
-            reader.Close();
-
-
-            sql = "SELECT manufacturer_name FROM manufacturer;";
-            command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
-
-            comboBox_manufacturer.Items.Clear();
-            comboBox_manufacturer.Items.Add("");
-            reader = command.ExecuteReader();
-            while (reader.Read())
-            {
-                comboBox_manufacturer.Items.Add((string)reader["manufacturer_name"]);
-            }
-            reader.Close();
-
-
-            sql = "SELECT user_name FROM user;";
-            command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
-
-            comboBox_editor.Items.Clear();
-            comboBox_editor.Items.Add("");
-            reader = command.ExecuteReader();
-            while (reader.Read())
-            {
-                comboBox_editor.Items.Add((string)reader["user_name"]);
-            }
-            reader.Close();
-
-            //es fehlen noch manufacture und status
+            //es fehlt noch status
 
             date_creationDate.Value = DateTime.Today;
             label_id.Text = "ID:";
@@ -105,9 +58,9 @@ namespace Hardware_Shop_Client
             while (reader.Read())
             {
                 comboBox_category.SelectedIndex = comboBox_category.FindStringExact((string)reader["category_name"]);
-                comboBox_subCategory.SelectedIndex = comboBox_subCategory.FindStringExact((string)reader["subcategory_name"]);
+                comboBox_subcategory.SelectedIndex = comboBox_subcategory.FindStringExact((string)reader["subcategory_name"]);
                 comboBox_manufacturer.SelectedIndex = comboBox_manufacturer.FindStringExact((string)reader["manufacturer_name"]);
-                comboBox_editor.SelectedIndex = comboBox_editor.FindStringExact((string)reader["user_name"]);
+                comboBox_user.SelectedIndex = comboBox_user.FindStringExact((string)reader["user_name"]);
                 
                 string date = (string)reader["date"];
                 string[] dateSplite = date.Split(new Char[] { '-' });
@@ -120,6 +73,21 @@ namespace Hardware_Shop_Client
                 textBox_name.Text = reader["name"] + "";
                 textBox_title.Text = reader["title"] + "";
                 textBox_url.Text = reader["url"] + "";
+            }
+            reader.Close();
+        }
+
+        private void resetGUIObject(String table, ComboBox reference)
+        {
+            string sql = "SELECT " + table + "_name FROM " + table + ";";
+            SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
+
+            reference.Items.Clear();
+            reference.Items.Add("");
+            SQLiteDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                reference.Items.Add((string)reader[table + "_name"]);
             }
             reader.Close();
         }
@@ -152,49 +120,14 @@ namespace Hardware_Shop_Client
         {
             int category = -1, subcategory = -1, manufacturer = -1, user = -1;
 
-            string sql = "SELECT id FROM category WHERE category_name = '" + comboBox_category.Text + "';";
-            SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
-
-            SQLiteDataReader reader = command.ExecuteReader();
-            while (reader.Read())
-            {
-                category = (int)reader["id"];
-            }
-            reader.Close();
-
-            sql = "SELECT id FROM subcategory WHERE subcategory_name = '" + comboBox_subCategory.Text + "';";
-            command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
-
-            reader = command.ExecuteReader();
-            while (reader.Read())
-            {
-                subcategory = (int)reader["id"];
-            }
-            reader.Close();
-
-            sql = "SELECT id FROM manufacturer WHERE manufacturer_name = '" + comboBox_manufacturer.Text + "';";
-            command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
-
-            reader = command.ExecuteReader();
-            while (reader.Read())
-            {
-                manufacturer = (int)reader["id"];
-            }
-            reader.Close();
-
-            sql = "SELECT id FROM user WHERE user_name = '" + comboBox_editor.Text + "';";
-            command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
-
-            reader = command.ExecuteReader();
-            while (reader.Read())
-            {
-                user = (int)reader["id"];
-            }
-            reader.Close();
+            category = getItemID("category", comboBox_category);
+            subcategory = getItemID("subcategory", comboBox_subcategory);
+            manufacturer = getItemID("manufacturer", comboBox_manufacturer);
+            user = getItemID("user", comboBox_user);
 
             if (category != -1 && subcategory != -1 && manufacturer != -1 && user != -1)
             {
-                sql = "UPDATE main " +
+                string sql = "UPDATE main " +
                 "SET category = " + category + "," +
                 "subcategory = " + subcategory + "," +
                 "manufacturer = " + manufacturer + "," +
@@ -205,7 +138,7 @@ namespace Hardware_Shop_Client
                 "user = " + user +
                 " WHERE id = " + currrentItemId + ";";
 
-                command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
+                SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
                 command.ExecuteNonQuery();
 
                 MessageBox.Show("Item has been saved.", "Info");
@@ -229,45 +162,10 @@ namespace Hardware_Shop_Client
             }
             reader.Close();
 
-            sql = "SELECT id FROM category WHERE category_name = '" + comboBox_category.Text + "';";
-            command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
-
-            reader = command.ExecuteReader();
-            while (reader.Read())
-            {
-                category = (int)reader["id"];
-            }
-            reader.Close();
-
-            sql = "SELECT id FROM subcategory WHERE subcategory_name = '" + comboBox_subCategory.Text + "';";
-            command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
-
-            reader = command.ExecuteReader();
-            while (reader.Read())
-            {
-                subcategory = (int)reader["id"];
-            }
-            reader.Close();
-
-            sql = "SELECT id FROM manufacturer WHERE manufacturer_name = '" + comboBox_manufacturer.Text + "';";
-            command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
-
-            reader = command.ExecuteReader();
-            while (reader.Read())
-            {
-                manufacturer = (int)reader["id"];
-            }
-            reader.Close();
-
-            sql = "SELECT id FROM user WHERE user_name = '" + comboBox_editor.Text + "';";
-            command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
-
-            reader = command.ExecuteReader();
-            while (reader.Read())
-            {
-                user = (int)reader["id"];
-            }
-            reader.Close();
+            category = getItemID("category", comboBox_category);
+            subcategory = getItemID("subcategory", comboBox_subcategory);
+            manufacturer = getItemID("manufacturer", comboBox_manufacturer);
+            user = getItemID("user", comboBox_user);
 
             if (category != -1 && subcategory != -1 && manufacturer != -1 && user != -1)
             {
@@ -312,6 +210,22 @@ namespace Hardware_Shop_Client
 
             MessageBox.Show("Item has been deleted.", "Info");
             resetEditor();
+        }
+
+        private int getItemID(String table, ComboBox reference)
+        {
+            int id = -1;
+            string sql = "SELECT id FROM " + table + " WHERE " + table + "_name = '" + reference.Text + "';";
+            SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
+
+            SQLiteDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                id = (int)reader["id"];
+            }
+            reader.Close();
+
+            return id;
         }
     }
 }

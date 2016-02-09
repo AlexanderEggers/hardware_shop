@@ -35,59 +35,10 @@ namespace Hardware_Shop_Client
             }
             reader.Close();
 
-
-            sql = "SELECT category_name FROM category;";
-            command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
-
-            comboBox_category.Items.Clear();
-            comboBox_category.Items.Add("");
-
-            reader = command.ExecuteReader();
-            while (reader.Read())
-            {
-                comboBox_category.Items.Add((string)reader["category_name"]);
-            }
-            reader.Close();
-
-
-            sql = "SELECT subcategory_name FROM subcategory;";
-            command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
-
-            comboBox_subCategory.Items.Clear();
-            comboBox_subCategory.Items.Add("");
-
-            reader = command.ExecuteReader();
-            while (reader.Read())
-            {
-                comboBox_subCategory.Items.Add((string)reader["subcategory_name"]);
-            }
-            reader.Close();
-
-            sql = "SELECT manufacturer_name FROM manufacturer;";
-            command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
-
-            comboBox_manufacturer.Items.Clear();
-            comboBox_manufacturer.Items.Add("");
-
-            reader = command.ExecuteReader();
-            while (reader.Read())
-            {
-                comboBox_manufacturer.Items.Add((string)reader["manufacturer_name"]);
-            }
-            reader.Close();
-
-            sql = "SELECT user_name FROM user;";
-            command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
-
-            comboBox_editor.Items.Clear();
-            comboBox_editor.Items.Add("");
-
-            reader = command.ExecuteReader();
-            while (reader.Read())
-            {
-                comboBox_editor.Items.Add((string)reader["user_name"]);
-            }
-            reader.Close();
+            resetGUIObject("category", comboBox_category);
+            resetGUIObject("subcategory", comboBox_subcategory);
+            resetGUIObject("manufacturer", comboBox_manufacturer);
+            resetGUIObject("user", comboBox_user);
 
             comboBox_sortBy.Items.Add("");
             comboBox_sortBy.Items.Add("id");
@@ -170,8 +121,8 @@ namespace Hardware_Shop_Client
             }
 
             sql = sql + getFilterSQLData("category", comboBox_category, insertFilter, out insertFilter) 
-                      + getFilterSQLData("subcategory", comboBox_subCategory, insertFilter, out insertFilter)
-                      + getFilterSQLData("user", comboBox_editor, insertFilter, out insertFilter) 
+                      + getFilterSQLData("subcategory", comboBox_subcategory, insertFilter, out insertFilter)
+                      + getFilterSQLData("user", comboBox_user, insertFilter, out insertFilter) 
                       + getFilterSQLData("manufacturer", comboBox_manufacturer, insertFilter, out insertFilter)
                       + getFilterSQLData("status", comboBox_status, insertFilter, out insertFilter);
 
@@ -265,6 +216,21 @@ namespace Hardware_Shop_Client
             {
                 return 30; //um nicht zu viele Objekte in die Liste zu laden
             }
+        }
+
+        private void resetGUIObject(String table, ComboBox reference)
+        {
+            string sql = "SELECT " + table + "_name FROM " + table + ";";
+            SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
+
+            reference.Items.Clear();
+            reference.Items.Add("");
+            SQLiteDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                reference.Items.Add((string)reader[table + "_name"]);
+            }
+            reader.Close();
         }
     }
 }

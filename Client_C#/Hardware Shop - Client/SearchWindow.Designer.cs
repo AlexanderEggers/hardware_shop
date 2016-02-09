@@ -44,11 +44,11 @@
             this.button1 = new System.Windows.Forms.Button();
             this.label_editor = new System.Windows.Forms.Label();
             this.label_status = new System.Windows.Forms.Label();
-            this.comboBox_editor = new System.Windows.Forms.ComboBox();
+            this.comboBox_user = new System.Windows.Forms.ComboBox();
             this.comboBox_status = new System.Windows.Forms.ComboBox();
             this.comboBox_category = new System.Windows.Forms.ComboBox();
             this.label_category = new System.Windows.Forms.Label();
-            this.comboBox_subCategory = new System.Windows.Forms.ComboBox();
+            this.comboBox_subcategory = new System.Windows.Forms.ComboBox();
             this.label_subCategory = new System.Windows.Forms.Label();
             this.comboBox_manufacturer = new System.Windows.Forms.ComboBox();
             this.label_manufacture = new System.Windows.Forms.Label();
@@ -174,12 +174,12 @@
             // 
             // comboBox_editor
             // 
-            this.comboBox_editor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox_editor.FormattingEnabled = true;
-            this.comboBox_editor.Location = new System.Drawing.Point(83, 77);
-            this.comboBox_editor.Name = "comboBox_editor";
-            this.comboBox_editor.Size = new System.Drawing.Size(170, 21);
-            this.comboBox_editor.TabIndex = 11;
+            this.comboBox_user.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_user.FormattingEnabled = true;
+            this.comboBox_user.Location = new System.Drawing.Point(83, 77);
+            this.comboBox_user.Name = "comboBox_editor";
+            this.comboBox_user.Size = new System.Drawing.Size(170, 21);
+            this.comboBox_user.TabIndex = 11;
             // 
             // comboBox_status
             // 
@@ -215,12 +215,12 @@
             // 
             // comboBox_subCategory
             // 
-            this.comboBox_subCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox_subCategory.FormattingEnabled = true;
-            this.comboBox_subCategory.Location = new System.Drawing.Point(365, 77);
-            this.comboBox_subCategory.Name = "comboBox_subCategory";
-            this.comboBox_subCategory.Size = new System.Drawing.Size(121, 21);
-            this.comboBox_subCategory.TabIndex = 16;
+            this.comboBox_subcategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_subcategory.FormattingEnabled = true;
+            this.comboBox_subcategory.Location = new System.Drawing.Point(365, 77);
+            this.comboBox_subcategory.Name = "comboBox_subCategory";
+            this.comboBox_subcategory.Size = new System.Drawing.Size(121, 21);
+            this.comboBox_subcategory.TabIndex = 16;
             // 
             // label_subCategory
             // 
@@ -414,12 +414,12 @@
             this.Controls.Add(this.date_creationDate);
             this.Controls.Add(this.comboBox_manufacturer);
             this.Controls.Add(this.label_manufacture);
-            this.Controls.Add(this.comboBox_subCategory);
+            this.Controls.Add(this.comboBox_subcategory);
             this.Controls.Add(this.label_subCategory);
             this.Controls.Add(this.comboBox_category);
             this.Controls.Add(this.label_category);
             this.Controls.Add(this.comboBox_status);
-            this.Controls.Add(this.comboBox_editor);
+            this.Controls.Add(this.comboBox_user);
             this.Controls.Add(this.label_status);
             this.Controls.Add(this.label_editor);
             this.Controls.Add(this.button1);
@@ -453,11 +453,11 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label_editor;
         private System.Windows.Forms.Label label_status;
-        private System.Windows.Forms.ComboBox comboBox_editor;
+        private System.Windows.Forms.ComboBox comboBox_user;
         private System.Windows.Forms.ComboBox comboBox_status;
         private System.Windows.Forms.ComboBox comboBox_category;
         private System.Windows.Forms.Label label_category;
-        private System.Windows.Forms.ComboBox comboBox_subCategory;
+        private System.Windows.Forms.ComboBox comboBox_subcategory;
         private System.Windows.Forms.Label label_subCategory;
         private System.Windows.Forms.ComboBox comboBox_manufacturer;
         private System.Windows.Forms.Label label_manufacture;

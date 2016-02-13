@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Windows.Forms;
 
@@ -8,10 +9,9 @@ namespace Hardware_Shop_Client
     /// <summary>
     /// Search is only possible via item id or item title.<para/>
     /// <para/>
-    /// Current missing core features:<para/>
-    /// # Function to list all items from the last 1,3,6,12 month<para/>
-    /// # Function to list all item which have been last edited the last 1,3,6,12 month
+    /// TODO:<para/>
     /// # Optional: Search by tags (only primary tags)
+    /// # Cleanup code
     /// </summary>
     public partial class SearchWindow : Form
     {
@@ -54,6 +54,15 @@ namespace Hardware_Shop_Client
             comboBox_sortBy.Items.Add("id");
             comboBox_sortBy.Items.Add("title");
             comboBox_sortBy.Items.Add("category");
+
+            comboBox_date.SelectedText = "";
+            comboBox_edit.SelectedText = "";
+
+            comboBox_sortBy.SelectedText = "";
+            checkBox_sortDescending.CheckState = CheckState.Unchecked;
+
+            textBox_maxResults.Text = "";
+            textBox_search.Text = "";
         }
 
         private void button_search_Click(object sender, EventArgs e)
@@ -107,7 +116,7 @@ namespace Hardware_Shop_Client
             bool insertFilter = false;
 
             sql = "SELECT main.id,category_name,"
-                        + "manufacturer_name,user_name FROM main "
+                        + "manufacturer_name,user_name,date FROM main "
                         + "INNER JOIN category ON main.category = category.id "
                         + "INNER JOIN manufacturer ON main.manufacturer = manufacturer.id "
                         + "INNER JOIN user ON main.user = user.id "
@@ -153,20 +162,48 @@ namespace Hardware_Shop_Client
 
             Console.WriteLine(sql);
 
-            searchDataView.Rows.Clear();
+            Dictionary<int, ArrayList> searchResults = new Dictionary<int, ArrayList>();
             SQLiteDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {
-                searchDataView.Rows.Add((int)reader["id"], (string)reader["user_name"],
-                    (string)reader["category_name"], (string)reader["manufacturer_name"]);
+                ArrayList data = new ArrayList();
+                data.Add(reader["id"]);
+                data.Add(reader["user_name"]);
+                data.Add(reader["category_name"]);
+                data.Add(reader["manufacturer_name"]);
+                data.Add(reader["date"]);
+
+                searchResults.Add((int)data[0], data);
             }
             reader.Close();
+
+            searchResults = adjustSearchResultsByDate(searchResults, comboBox_date.Text);
+            searchResults = adjustSearchResultsByDate(searchResults, comboBox_edit.Text);
+            searchDataView.Rows.Clear();
+
+            List<int> keyList = new List<int>(searchResults.Keys);
+            for (int i = 0; i <= getMaxResultsInput() && i < keyList.Count; i++)
+            {
+                ArrayList data = searchResults[keyList[i]];
+                searchDataView.Rows.Add(data[0], data[1], data[2], data[3]);
+            }
         }
 
-        private ArrayList adjustSearchResultsByCreation(ArrayList searchResults, string creationFilter)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="searchResults">Dictionary which hold structure: id, user_name, category_name, manufacture_name, date</param>
+        /// <param name="dateFilter">Reference which date filter have been selected</param>
+        /// <returns></returns>
+        private Dictionary<int, ArrayList> adjustSearchResultsByDate(Dictionary<int, ArrayList> searchResults, string dateFilter)
         {
+            if(dateFilter == "")
+            {
+                return searchResults;
+            }
+
             int maxTimeDiff;
-            switch(creationFilter)
+            switch(dateFilter)
             {
                 case "1 month ago":
                     maxTimeDiff = 1;
@@ -178,30 +215,28 @@ namespace Hardware_Shop_Client
                     maxTimeDiff = 6;
                     break;
                 default:
-                    maxTimeDiff = 1;
+                    maxTimeDiff = int.MaxValue;
                     break;
             }
 
-            foreach (int id in searchResults) {
-                string sql = "SELECT date FROM main WHERE id = " + id;
+            List<int> removed = new List<int>();
+            foreach (ArrayList data in searchResults.Values) {
+                string date = (string)data[4];
+                string[] dateSplite = date.Split(new Char[] { '-' });
 
-                SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
-                SQLiteDataReader reader = command.ExecuteReader();
-                while (reader.Read())
+                DateTime creation = new DateTime(int.Parse("20" + dateSplite[0]), int.Parse(dateSplite[1]), int.Parse(dateSplite[2]));
+                TimeSpan diff = DateTime.Today - creation;
+                int months = (int)((double)diff.Days / 30.436875); //30.436875 = durchschnittliche Monatslänge (in Tagen)
+
+                if (months > maxTimeDiff)
                 {
-                    string date = (string)reader["date"];
-                    string[] dateSplite = date.Split(new Char[] { '-' });
-
-                    DateTime creation = new DateTime(int.Parse("20" + dateSplite[0]), int.Parse(dateSplite[1]), int.Parse(dateSplite[2]));
-                    TimeSpan diff = DateTime.Today - creation;
-                    int months = (int)((double)diff.Days / 30.436875); //30.436875 durchschnittliche Monatslänge
-
-                    if(months > maxTimeDiff)
-                    {
-                        searchResults.Remove(id);
-                    }
+                    removed.Add((int)data[0]);
                 }
-                reader.Close();
+            }
+
+            for (int i = 0; i < removed.Count; i++)
+            {
+                searchResults.Remove(removed[i]);
             }
 
             return searchResults;

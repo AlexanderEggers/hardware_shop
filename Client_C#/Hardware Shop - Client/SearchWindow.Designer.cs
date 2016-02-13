@@ -28,11 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.button_search = new System.Windows.Forms.Button();
             this.button_editor = new System.Windows.Forms.Button();
             this.button_tags = new System.Windows.Forms.Button();
@@ -52,7 +52,7 @@
             this.label_subCategory = new System.Windows.Forms.Label();
             this.comboBox_manufacturer = new System.Windows.Forms.ComboBox();
             this.label_manufacture = new System.Windows.Forms.Label();
-            this.label_creation = new System.Windows.Forms.Label();
+            this.label_date = new System.Windows.Forms.Label();
             this.label_edit = new System.Windows.Forms.Label();
             this.label_maxResults = new System.Windows.Forms.Label();
             this.textBox_maxResults = new System.Windows.Forms.TextBox();
@@ -64,8 +64,8 @@
             this.Column_Editor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column_Category = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column_Manufacturer = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.comboBox_date = new System.Windows.Forms.ComboBox();
+            this.comboBox_edit = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.searchDataView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -251,14 +251,14 @@
             this.label_manufacture.TabIndex = 17;
             this.label_manufacture.Text = "Manufacture:";
             // 
-            // label_creation
+            // label_date
             // 
-            this.label_creation.AutoSize = true;
-            this.label_creation.Location = new System.Drawing.Point(530, 43);
-            this.label_creation.Name = "label_creation";
-            this.label_creation.Size = new System.Drawing.Size(49, 13);
-            this.label_creation.TabIndex = 21;
-            this.label_creation.Text = "Creation:";
+            this.label_date.AutoSize = true;
+            this.label_date.Location = new System.Drawing.Point(530, 43);
+            this.label_date.Name = "label_date";
+            this.label_date.Size = new System.Drawing.Size(33, 13);
+            this.label_date.TabIndex = 21;
+            this.label_date.Text = "Date:";
             // 
             // label_edit
             // 
@@ -322,14 +322,14 @@
             this.searchDataView.AllowUserToResizeRows = false;
             this.searchDataView.BackgroundColor = System.Drawing.SystemColors.Control;
             this.searchDataView.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.searchDataView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.searchDataView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.searchDataView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.searchDataView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column_ID,
@@ -349,8 +349,8 @@
             // 
             // Column_ID
             // 
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
-            this.Column_ID.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            this.Column_ID.DefaultCellStyle = dataGridViewCellStyle2;
             this.Column_ID.HeaderText = "ID";
             this.Column_ID.Name = "Column_ID";
             this.Column_ID.ReadOnly = true;
@@ -358,8 +358,8 @@
             // 
             // Column_Editor
             // 
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
-            this.Column_Editor.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            this.Column_Editor.DefaultCellStyle = dataGridViewCellStyle3;
             this.Column_Editor.HeaderText = "Editor";
             this.Column_Editor.Name = "Column_Editor";
             this.Column_Editor.ReadOnly = true;
@@ -367,8 +367,8 @@
             // 
             // Column_Category
             // 
-            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
-            this.Column_Category.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            this.Column_Category.DefaultCellStyle = dataGridViewCellStyle4;
             this.Column_Category.HeaderText = "Category";
             this.Column_Category.Name = "Column_Category";
             this.Column_Category.ReadOnly = true;
@@ -376,48 +376,48 @@
             // 
             // Column_Manufacturer
             // 
-            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control;
-            this.Column_Manufacturer.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            this.Column_Manufacturer.DefaultCellStyle = dataGridViewCellStyle5;
             this.Column_Manufacturer.HeaderText = "Manufacturer";
             this.Column_Manufacturer.Name = "Column_Manufacturer";
             this.Column_Manufacturer.ReadOnly = true;
             this.Column_Manufacturer.Width = 245;
             // 
-            // comboBox1
+            // comboBox_date
             // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.comboBox_date.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_date.FormattingEnabled = true;
+            this.comboBox_date.Items.AddRange(new object[] {
             "",
             "1 month ago",
             "3 months ago",
             "6 months ago"});
-            this.comboBox1.Location = new System.Drawing.Point(585, 39);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 29;
+            this.comboBox_date.Location = new System.Drawing.Point(585, 39);
+            this.comboBox_date.Name = "comboBox_date";
+            this.comboBox_date.Size = new System.Drawing.Size(121, 21);
+            this.comboBox_date.TabIndex = 29;
             // 
-            // comboBox2
+            // comboBox_edit
             // 
-            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Items.AddRange(new object[] {
+            this.comboBox_edit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_edit.FormattingEnabled = true;
+            this.comboBox_edit.Items.AddRange(new object[] {
             "",
             "1 month ago",
             "3 months ago",
             "6 months ago"});
-            this.comboBox2.Location = new System.Drawing.Point(585, 80);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(121, 21);
-            this.comboBox2.TabIndex = 30;
+            this.comboBox_edit.Location = new System.Drawing.Point(585, 80);
+            this.comboBox_edit.Name = "comboBox_edit";
+            this.comboBox_edit.Size = new System.Drawing.Size(121, 21);
+            this.comboBox_edit.TabIndex = 30;
             // 
             // SearchWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(988, 568);
-            this.Controls.Add(this.comboBox2);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.comboBox_edit);
+            this.Controls.Add(this.comboBox_date);
             this.Controls.Add(this.searchDataView);
             this.Controls.Add(this.checkBox_sortDescending);
             this.Controls.Add(this.comboBox_sortBy);
@@ -425,7 +425,7 @@
             this.Controls.Add(this.textBox_maxResults);
             this.Controls.Add(this.label_maxResults);
             this.Controls.Add(this.label_edit);
-            this.Controls.Add(this.label_creation);
+            this.Controls.Add(this.label_date);
             this.Controls.Add(this.comboBox_manufacturer);
             this.Controls.Add(this.label_manufacture);
             this.Controls.Add(this.comboBox_subcategory);
@@ -475,7 +475,7 @@
         private System.Windows.Forms.Label label_subCategory;
         private System.Windows.Forms.ComboBox comboBox_manufacturer;
         private System.Windows.Forms.Label label_manufacture;
-        private System.Windows.Forms.Label label_creation;
+        private System.Windows.Forms.Label label_date;
         private System.Windows.Forms.Label label_edit;
         private System.Windows.Forms.Label label_maxResults;
         private System.Windows.Forms.TextBox textBox_maxResults;
@@ -487,7 +487,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_Editor;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_Category;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_Manufacturer;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox comboBox_date;
+        private System.Windows.Forms.ComboBox comboBox_edit;
     }
 }

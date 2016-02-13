@@ -1,9 +1,18 @@
 ﻿using System;
+using System.Collections;
 using System.Data.SQLite;
 using System.Windows.Forms;
 
 namespace Hardware_Shop_Client
 {
+    /// <summary>
+    /// Search is only possible via item id or item title.<para/>
+    /// <para/>
+    /// Current missing core features:<para/>
+    /// # Function to list all items from the last 1,3,6,12 month<para/>
+    /// # Function to list all item which have been last edited the last 1,3,6,12 month
+    /// # Optional: Search by tags (only primary tags)
+    /// </summary>
     public partial class SearchWindow : Form
     {
         public SearchWindow()
@@ -44,7 +53,7 @@ namespace Hardware_Shop_Client
             comboBox_sortBy.Items.Add("");
             comboBox_sortBy.Items.Add("id");
             comboBox_sortBy.Items.Add("title");
-            comboBox_sortBy.Items.Add("categorey");
+            comboBox_sortBy.Items.Add("category");
         }
 
         private void button_search_Click(object sender, EventArgs e)
@@ -90,13 +99,6 @@ namespace Hardware_Shop_Client
             ClientMain.editorWindow.Show();
         }
 
-        /// <summary>
-        /// Search is only possible via item id or item title.<para/>
-        /// <para/>
-        /// Current missing core features:<para/>
-        /// # Function to list all items from the last 1,3,6,12 month<para/>
-        /// # Function to list all item which have been last edited the last 1,3,6,12 month
-        /// </summary>
         public void executeSearch()
         {
             string text = this.textBox_search.Text;
@@ -161,28 +163,70 @@ namespace Hardware_Shop_Client
             reader.Close();
         }
 
+        private ArrayList adjustSearchResultsByCreation(ArrayList searchResults, string creationFilter)
+        {
+            int maxTimeDiff;
+            switch(creationFilter)
+            {
+                case "1 month ago":
+                    maxTimeDiff = 1;
+                    break;
+                case "3 months ago":
+                    maxTimeDiff = 3;
+                    break;
+                case "6 months ago":
+                    maxTimeDiff = 6;
+                    break;
+                default:
+                    maxTimeDiff = 1;
+                    break;
+            }
+
+            foreach (int id in searchResults) {
+                string sql = "SELECT date FROM main WHERE id = " + id;
+
+                SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
+                SQLiteDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    string date = (string)reader["date"];
+                    string[] dateSplite = date.Split(new Char[] { '-' });
+
+                    DateTime creation = new DateTime(int.Parse("20" + dateSplite[0]), int.Parse(dateSplite[1]), int.Parse(dateSplite[2]));
+                    TimeSpan diff = DateTime.Today - creation;
+                    int months = (int)((double)diff.Days / 30.436875); //30.436875 durchschnittliche Monatslänge
+
+                    if(months > maxTimeDiff)
+                    {
+                        searchResults.Remove(id);
+                    }
+                }
+                reader.Close();
+            }
+
+            return searchResults;
+        }
+
         private string getFilterSQLData(string type, ComboBox reference, bool filterBefore, out bool success)
         {
             if (reference.Text != "")
             {
-                int sqlID = getSQLContentID(reference.Text, type);
+                int id;
+                success = getSQLContentID(reference.Text, type, out id);
 
-                if (sqlID != -1)
+                if (success)
                 {
-                    success = true;
-
                     if (filterBefore)
                     {
-                        return " AND main." + type + " = " + sqlID;
+                        return " AND main." + type + " = " + id;
                     }
                     else
                     {
-                        return " main." + type + " = " + sqlID;
+                        return " main." + type + " = " + id;
                     }
                 }
                 else
                 {
-                    success = false;
                     return "";
                 }
             }
@@ -193,9 +237,9 @@ namespace Hardware_Shop_Client
             }
         }
 
-        private int getSQLContentID(string reference, string type)
+        private bool getSQLContentID(string reference, string type, out int id)
         {
-            int sqlID = -1;
+            id = -1;
             string sql = "SELECT id FROM " + type
                         + " WHERE " + type + "_name = '" + reference + "' ;";
             SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
@@ -203,11 +247,11 @@ namespace Hardware_Shop_Client
 
             while (reader.Read())
             {
-                sqlID = (int)reader["id"];
+                id = (int)reader["id"];
             }
             reader.Close();
 
-            return sqlID;
+            return id != -1 ? true : false;
         }
 
         private int getMaxResultsInput()

@@ -47,7 +47,7 @@ public class DatabaseCreator {
                 + " url            TEXT                     , "
                 + " name           TEXT                     , "
                 + " date           TEXT                     NOT NULL, "
-                + " last_edit      TEXT                     NOT NULL, "
+                + " edit           TEXT                     NOT NULL, "
                 + " views          INT                      NOT NULL)";
         stmt.executeUpdate(sql);
         
@@ -131,13 +131,13 @@ public class DatabaseCreator {
         stmt.executeUpdate(sql);
 
         stmt = c.createStatement();
-        sql = "INSERT INTO main (id,category,subcategory,manufacturer,user,status,title,url,name,date,last_edit,views) "
-                + "VALUES (0, 0, 0, 0, 0, 0, 'Test1', '/test1', 'Test Entry 1', '15-11-04', '15-11-04-00-11', 0);";
+        sql = "INSERT INTO main (id,category,subcategory,manufacturer,user,status,title,url,name,date,edit,views) "
+                + "VALUES (0, 0, 0, 0, 0, 0, 'Test1', '/test1', 'Test Entry 1', '15-11-04', '15-11-04-00-11-57', 0);";
         stmt.executeUpdate(sql);
         
         stmt = c.createStatement();
-        sql = "INSERT INTO main (id,category,subcategory,manufacturer,user,status,title,url,name,date,last_edit,views) "
-                + "VALUES (1, 1, 0, 1, 0, 1, 'Test2', '/test2', 'Test Entry 2', '15-11-04', '15-11-04-00-11', 0);";
+        sql = "INSERT INTO main (id,category,subcategory,manufacturer,user,status,title,url,name,date,edit,views) "
+                + "VALUES (1, 1, 0, 1, 0, 1, 'Test2', '/test2', 'Test Entry 2', '15-11-04', '15-11-04-00-11-43', 0);";
         stmt.executeUpdate(sql);
         
         stmt = c.createStatement();

@@ -51,6 +51,7 @@
             this.label9 = new System.Windows.Forms.Label();
             this.textBox_url = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
+            this.label_edit = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // comboBox_user
@@ -264,11 +265,21 @@
             this.label10.TabIndex = 53;
             this.label10.Text = "URL:";
             // 
+            // label_edit
+            // 
+            this.label_edit.AutoSize = true;
+            this.label_edit.Location = new System.Drawing.Point(13, 9);
+            this.label_edit.Name = "label_edit";
+            this.label_edit.Size = new System.Drawing.Size(54, 13);
+            this.label_edit.TabIndex = 55;
+            this.label_edit.Text = "Last Edit: ";
+            // 
             // EditorWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(988, 568);
+            this.Controls.Add(this.label_edit);
             this.Controls.Add(this.textBox_url);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.textBox_name);
@@ -325,5 +336,6 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox textBox_url;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label_edit;
     }
 }

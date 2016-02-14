@@ -28,11 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
             this.button_search = new System.Windows.Forms.Button();
             this.button_editor = new System.Windows.Forms.Button();
             this.button_tags = new System.Windows.Forms.Button();
@@ -55,7 +55,6 @@
             this.label_date = new System.Windows.Forms.Label();
             this.label_edit = new System.Windows.Forms.Label();
             this.label_maxResults = new System.Windows.Forms.Label();
-            this.textBox_maxResults = new System.Windows.Forms.TextBox();
             this.comboBox_sortBy = new System.Windows.Forms.ComboBox();
             this.label_sortBy = new System.Windows.Forms.Label();
             this.checkBox_sortDescending = new System.Windows.Forms.CheckBox();
@@ -66,6 +65,8 @@
             this.Column_Manufacturer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.comboBox_date = new System.Windows.Forms.ComboBox();
             this.comboBox_edit = new System.Windows.Forms.ComboBox();
+            this.button_reset = new System.Windows.Forms.Button();
+            this.comboBox_maxResults = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.searchDataView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -138,15 +139,15 @@
             // 
             this.textBox_search.Location = new System.Drawing.Point(29, 40);
             this.textBox_search.Name = "textBox_search";
-            this.textBox_search.Size = new System.Drawing.Size(143, 20);
+            this.textBox_search.Size = new System.Drawing.Size(130, 20);
             this.textBox_search.TabIndex = 7;
             this.textBox_search.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_search_KeyPress);
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(178, 38);
+            this.button1.Location = new System.Drawing.Point(165, 38);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(63, 23);
             this.button1.TabIndex = 8;
             this.button1.Text = "Search";
             this.button1.UseVisualStyleBackColor = true;
@@ -278,17 +279,15 @@
             this.label_maxResults.TabIndex = 23;
             this.label_maxResults.Text = "Max. Results: ";
             // 
-            // textBox_maxResults
-            // 
-            this.textBox_maxResults.Location = new System.Drawing.Point(881, 35);
-            this.textBox_maxResults.Name = "textBox_maxResults";
-            this.textBox_maxResults.Size = new System.Drawing.Size(44, 20);
-            this.textBox_maxResults.TabIndex = 24;
-            // 
             // comboBox_sortBy
             // 
             this.comboBox_sortBy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_sortBy.FormattingEnabled = true;
+            this.comboBox_sortBy.Items.AddRange(new object[] {
+            "",
+            "id",
+            "title",
+            "category"});
             this.comboBox_sortBy.Location = new System.Drawing.Point(881, 74);
             this.comboBox_sortBy.Name = "comboBox_sortBy";
             this.comboBox_sortBy.Size = new System.Drawing.Size(95, 21);
@@ -322,14 +321,14 @@
             this.searchDataView.AllowUserToResizeRows = false;
             this.searchDataView.BackgroundColor = System.Drawing.SystemColors.Control;
             this.searchDataView.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.searchDataView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.searchDataView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
             this.searchDataView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.searchDataView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column_ID,
@@ -349,8 +348,8 @@
             // 
             // Column_ID
             // 
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            this.Column_ID.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control;
+            this.Column_ID.DefaultCellStyle = dataGridViewCellStyle12;
             this.Column_ID.HeaderText = "ID";
             this.Column_ID.Name = "Column_ID";
             this.Column_ID.ReadOnly = true;
@@ -358,8 +357,8 @@
             // 
             // Column_Editor
             // 
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            this.Column_Editor.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Control;
+            this.Column_Editor.DefaultCellStyle = dataGridViewCellStyle13;
             this.Column_Editor.HeaderText = "Editor";
             this.Column_Editor.Name = "Column_Editor";
             this.Column_Editor.ReadOnly = true;
@@ -367,8 +366,8 @@
             // 
             // Column_Category
             // 
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            this.Column_Category.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Control;
+            this.Column_Category.DefaultCellStyle = dataGridViewCellStyle14;
             this.Column_Category.HeaderText = "Category";
             this.Column_Category.Name = "Column_Category";
             this.Column_Category.ReadOnly = true;
@@ -376,8 +375,8 @@
             // 
             // Column_Manufacturer
             // 
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-            this.Column_Manufacturer.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Control;
+            this.Column_Manufacturer.DefaultCellStyle = dataGridViewCellStyle15;
             this.Column_Manufacturer.HeaderText = "Manufacturer";
             this.Column_Manufacturer.Name = "Column_Manufacturer";
             this.Column_Manufacturer.ReadOnly = true;
@@ -411,18 +410,42 @@
             this.comboBox_edit.Size = new System.Drawing.Size(121, 21);
             this.comboBox_edit.TabIndex = 30;
             // 
+            // button_reset
+            // 
+            this.button_reset.Location = new System.Drawing.Point(234, 38);
+            this.button_reset.Name = "button_reset";
+            this.button_reset.Size = new System.Drawing.Size(19, 23);
+            this.button_reset.TabIndex = 31;
+            this.button_reset.Text = "X";
+            this.button_reset.UseVisualStyleBackColor = true;
+            this.button_reset.Click += new System.EventHandler(this.button_reset_Click);
+            // 
+            // comboBox_maxResults
+            // 
+            this.comboBox_maxResults.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_maxResults.FormattingEnabled = true;
+            this.comboBox_maxResults.Items.AddRange(new object[] {
+            "10",
+            "30",
+            "100"});
+            this.comboBox_maxResults.Location = new System.Drawing.Point(881, 35);
+            this.comboBox_maxResults.Name = "comboBox_maxResults";
+            this.comboBox_maxResults.Size = new System.Drawing.Size(95, 21);
+            this.comboBox_maxResults.TabIndex = 32;
+            // 
             // SearchWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(988, 568);
+            this.Controls.Add(this.comboBox_maxResults);
+            this.Controls.Add(this.button_reset);
             this.Controls.Add(this.comboBox_edit);
             this.Controls.Add(this.comboBox_date);
             this.Controls.Add(this.searchDataView);
             this.Controls.Add(this.checkBox_sortDescending);
             this.Controls.Add(this.comboBox_sortBy);
             this.Controls.Add(this.label_sortBy);
-            this.Controls.Add(this.textBox_maxResults);
             this.Controls.Add(this.label_maxResults);
             this.Controls.Add(this.label_edit);
             this.Controls.Add(this.label_date);
@@ -478,7 +501,6 @@
         private System.Windows.Forms.Label label_date;
         private System.Windows.Forms.Label label_edit;
         private System.Windows.Forms.Label label_maxResults;
-        private System.Windows.Forms.TextBox textBox_maxResults;
         private System.Windows.Forms.ComboBox comboBox_sortBy;
         private System.Windows.Forms.Label label_sortBy;
         private System.Windows.Forms.CheckBox checkBox_sortDescending;
@@ -489,5 +511,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_Manufacturer;
         private System.Windows.Forms.ComboBox comboBox_date;
         private System.Windows.Forms.ComboBox comboBox_edit;
+        private System.Windows.Forms.Button button_reset;
+        private System.Windows.Forms.ComboBox comboBox_maxResults;
     }
 }

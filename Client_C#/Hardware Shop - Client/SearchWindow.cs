@@ -11,7 +11,6 @@ namespace Hardware_Shop_Client
     /// <para/>
     /// TODO:<para/>
     /// # Optional: Search by tags (only primary tags)
-    /// # Cleanup code
     /// </summary>
     public partial class SearchWindow : Form
     {
@@ -28,11 +27,26 @@ namespace Hardware_Shop_Client
 
         public void resetSearchWindow()
         {
+            resetGUIObject("category", comboBox_category);
+            resetGUIObject("subcategory", comboBox_subcategory);
+            resetGUIObject("manufacturer", comboBox_manufacturer);
+            resetGUIObject("user", comboBox_user);
+            resetGUIObject("status", comboBox_status);
+
+            comboBox_date.SelectedText = "";
+            comboBox_edit.SelectedText = "";
+
+            comboBox_sortBy.SelectedText = "";
+            checkBox_sortDescending.CheckState = CheckState.Unchecked;
+
+            comboBox_maxResults.Text = "30";
+            textBox_search.Text = "";
+
             string sql = "SELECT main.id,category_name,"
                         + "manufacturer_name,user_name FROM main "
                         + "INNER JOIN category ON main.category = category.id "
                         + "INNER JOIN manufacturer ON main.manufacturer = manufacturer.id "
-                        + "INNER JOIN user ON main.user = user.id LIMIT " + getMaxResultsInput() + ";";
+                        + "INNER JOIN user ON main.user = user.id LIMIT " + comboBox_maxResults.Text + ";";
             SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
 
             searchDataView.Rows.Clear();
@@ -43,26 +57,6 @@ namespace Hardware_Shop_Client
                     (string)reader["category_name"], (string)reader["manufacturer_name"]);
             }
             reader.Close();
-
-            resetGUIObject("category", comboBox_category);
-            resetGUIObject("subcategory", comboBox_subcategory);
-            resetGUIObject("manufacturer", comboBox_manufacturer);
-            resetGUIObject("user", comboBox_user);
-            resetGUIObject("status", comboBox_status);
-
-            comboBox_sortBy.Items.Add("");
-            comboBox_sortBy.Items.Add("id");
-            comboBox_sortBy.Items.Add("title");
-            comboBox_sortBy.Items.Add("category");
-
-            comboBox_date.SelectedText = "";
-            comboBox_edit.SelectedText = "";
-
-            comboBox_sortBy.SelectedText = "";
-            checkBox_sortDescending.CheckState = CheckState.Unchecked;
-
-            textBox_maxResults.Text = "";
-            textBox_search.Text = "";
         }
 
         private void button_search_Click(object sender, EventArgs e)
@@ -108,6 +102,11 @@ namespace Hardware_Shop_Client
             ClientMain.editorWindow.Show();
         }
 
+        private void button_reset_Click(object sender, EventArgs e)
+        {
+            resetSearchWindow();
+        }
+
         public void executeSearch()
         {
             string text = this.textBox_search.Text;
@@ -116,7 +115,7 @@ namespace Hardware_Shop_Client
             bool insertFilter = false;
 
             sql = "SELECT main.id,category_name,"
-                        + "manufacturer_name,user_name,date FROM main "
+                        + "manufacturer_name,user_name,date,edit FROM main "
                         + "INNER JOIN category ON main.category = category.id "
                         + "INNER JOIN manufacturer ON main.manufacturer = manufacturer.id "
                         + "INNER JOIN user ON main.user = user.id "
@@ -151,7 +150,7 @@ namespace Hardware_Shop_Client
                 }
             }
 
-            sql = sql + " LIMIT " + getMaxResultsInput() + " ;";
+            sql = sql + " LIMIT " + comboBox_maxResults.Text + " ;";
 
             if (sql.Contains("WHERE ORDER BY") || sql.Contains("WHERE LIMIT"))
             {
@@ -172,17 +171,18 @@ namespace Hardware_Shop_Client
                 data.Add(reader["category_name"]);
                 data.Add(reader["manufacturer_name"]);
                 data.Add(reader["date"]);
+                data.Add(reader["edit"]);
 
                 searchResults.Add((int)data[0], data);
             }
             reader.Close();
 
-            searchResults = adjustSearchResultsByDate(searchResults, comboBox_date.Text);
-            searchResults = adjustSearchResultsByDate(searchResults, comboBox_edit.Text);
+            searchResults = adjustSearchResultsByDate(searchResults, comboBox_date.Text, "date");
+            searchResults = adjustSearchResultsByDate(searchResults, comboBox_edit.Text, "edit");
             searchDataView.Rows.Clear();
 
             List<int> keyList = new List<int>(searchResults.Keys);
-            for (int i = 0; i <= getMaxResultsInput() && i < keyList.Count; i++)
+            for (int i = 0; i <= int.Parse(comboBox_maxResults.Text) && i < keyList.Count; i++)
             {
                 ArrayList data = searchResults[keyList[i]];
                 searchDataView.Rows.Add(data[0], data[1], data[2], data[3]);
@@ -192,18 +192,18 @@ namespace Hardware_Shop_Client
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="searchResults">Dictionary which hold structure: id, user_name, category_name, manufacture_name, date</param>
+        /// <param name="searchResults">Dictionary which hold structure: id, user_name, category_name, manufacture_name, date, edit</param>
         /// <param name="dateFilter">Reference which date filter have been selected</param>
         /// <returns></returns>
-        private Dictionary<int, ArrayList> adjustSearchResultsByDate(Dictionary<int, ArrayList> searchResults, string dateFilter)
+        private Dictionary<int, ArrayList> adjustSearchResultsByDate(Dictionary<int, ArrayList> searchResults, string dateFilter, string reference)
         {
-            if(dateFilter == "")
+            if (dateFilter == "")
             {
                 return searchResults;
             }
 
             int maxTimeDiff;
-            switch(dateFilter)
+            switch (dateFilter)
             {
                 case "1 month ago":
                     maxTimeDiff = 1;
@@ -220,8 +220,18 @@ namespace Hardware_Shop_Client
             }
 
             List<int> removed = new List<int>();
-            foreach (ArrayList data in searchResults.Values) {
-                string date = (string)data[4];
+            foreach (ArrayList data in searchResults.Values)
+            {
+                string date;
+
+                if(reference == "Date")
+                {
+                    date = (string)data[4];
+                } else
+                {
+                    date = (string)data[5];
+                }
+
                 string[] dateSplite = date.Split(new Char[] { '-' });
 
                 DateTime creation = new DateTime(int.Parse("20" + dateSplite[0]), int.Parse(dateSplite[1]), int.Parse(dateSplite[2]));
@@ -287,19 +297,6 @@ namespace Hardware_Shop_Client
             reader.Close();
 
             return id != -1 ? true : false;
-        }
-
-        private int getMaxResultsInput()
-        {
-            int limit;
-            if (int.TryParse(textBox_maxResults.Text, out limit))
-            {
-                return limit;
-            }
-            else
-            {
-                return 30; //um nicht zu viele Objekte in die Liste zu laden
-            }
         }
 
         private void resetGUIObject(String table, ComboBox reference)

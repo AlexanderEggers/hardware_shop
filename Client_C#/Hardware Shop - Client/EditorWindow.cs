@@ -8,7 +8,6 @@ namespace Hardware_Shop_Client
     /// Missing following features:<para/>
     /// # Input for item releating stuff, like Number of Cores or RAM amount.<para/>
     /// # Tags<para/>
-    /// # Last edit
     /// </summary>
     public partial class EditorWindow : Form
     {
@@ -35,6 +34,7 @@ namespace Hardware_Shop_Client
 
             date_creationDate.Value = DateTime.Today;
             label_id.Text = "ID:";
+            label_edit.Text = "Last Edit:";
             textBox_name.Text = "";
             textBox_title.Text = "";
             textBox_url.Text = "";
@@ -44,7 +44,7 @@ namespace Hardware_Shop_Client
         public void openExistingItem(int id)
         {
             string sql = "SELECT main.id,category_name, status_name,"
-                        + "subcategory_name,user_name, title, url, name, date, manufacturer_name FROM main "
+                        + "subcategory_name,user_name, title, url, name, date, edit, manufacturer_name FROM main "
                         + "INNER JOIN category ON main.category = category.id "
                         + "INNER JOIN subcategory ON main.subcategory = subcategory.id "
                         + "INNER JOIN manufacturer ON main.manufacturer = manufacturer.id "
@@ -69,6 +69,7 @@ namespace Hardware_Shop_Client
 
                 this.currrentItemId = (int)reader["id"];
                 label_id.Text = "ID: " + reader["id"];
+                label_edit.Text = "Last Edit: " + reader["edit"];
 
                 textBox_name.Text = reader["name"] + "";
                 textBox_title.Text = reader["title"] + "";
@@ -138,6 +139,7 @@ namespace Hardware_Shop_Client
                 "name = '" + textBox_name.Text + "'," +
                 "url = '" + textBox_url.Text + "'," +
                 "date = '" + date_creationDate.Value.ToString("yy-MM-dd") + "'," +
+                "edit = '" + DateTime.Now.ToString("yy-MM-dd-HH-mm-ss") + "'," +
                 "user = " + user +
                 " WHERE id = " + currrentItemId + ";";
 
@@ -174,7 +176,7 @@ namespace Hardware_Shop_Client
 
             if (category != -1 && subcategory != -1 && manufacturer != -1 && user != -1 && status != -1)
             {
-                sql = "INSERT INTO main (id,category,subcategory,manufacturer,user,status,title,url,name,date,last_edit,views) "
+                sql = "INSERT INTO main (id,category,subcategory,manufacturer,user,status,title,url,name,date,edit,views) "
                 + "VALUES (" +
                 amount + "," +
                 category + "," +
@@ -186,7 +188,7 @@ namespace Hardware_Shop_Client
                 "'" + textBox_url.Text + "' ," +
                 "'" + textBox_name.Text + "' ," +
                 "'" + date_creationDate.Value.ToString("yy-MM-dd") + "' ," +
-                "'15-11-04-00-11'," +
+                "'" + DateTime.Now.ToString("yy-MM-dd-HH-mm-ss") + "'," +
                 0 + ");";
                 command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
                 command.ExecuteNonQuery();

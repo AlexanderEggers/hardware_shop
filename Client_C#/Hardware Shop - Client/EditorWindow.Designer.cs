@@ -186,7 +186,7 @@
             this.comboBox_category.Name = "comboBox_category";
             this.comboBox_category.Size = new System.Drawing.Size(170, 21);
             this.comboBox_category.TabIndex = 38;
-            this.comboBox_category.SelectedValueChanged += new System.EventHandler(this.comboBox_category_SelectedValueChanged);
+            this.comboBox_category.SelectionChangeCommitted += new System.EventHandler(this.comboBox_category_SelectionChangeCommitted);
             // 
             // label_category
             // 

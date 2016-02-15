@@ -5,6 +5,10 @@ using System.Windows.Forms;
 
 namespace Hardware_Shop_Client
 {
+    /// <summary>
+    /// Missing feature:
+    /// # Function in editor/search window to use the content access feature to block user.
+    /// </summary>
     public partial class EditorWindow : Form
     {
         private int currentItemId = -1;
@@ -110,8 +114,12 @@ namespace Hardware_Shop_Client
             }
         }
 
-        private void comboBox_category_SelectedValueChanged(object sender, EventArgs e)
+        private void comboBox_category_SelectionChangeCommitted(object sender, EventArgs e)
         {
+            string sql = "DELETE FROM content_input WHERE main_id = " + currentItemId + ";";
+            SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
+            command.ExecuteNonQuery();
+
             initContentTable();
         }
 
@@ -292,7 +300,7 @@ namespace Hardware_Shop_Client
         private void updateContent(int value1, string value2)
         {
             string sql = "UPDATE content_input " +
-                "SET value2 = " + value2 +
+                "SET value2 = '" + value2 + "'" +
                 " WHERE id = " + value1 + ";";
             SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
             command.ExecuteNonQuery();

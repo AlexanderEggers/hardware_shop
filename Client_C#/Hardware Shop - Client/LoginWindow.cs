@@ -36,14 +36,17 @@ namespace Hardware_Shop_Client
                     (int)reader["role"] == 1)
                 {
                     Hide();
+                    ClientMain.user = textBox_user.Text;
                     ClientMain.searchWindow.resetSearchWindow();
                     ClientMain.searchWindow.Show();
+                } else
+                {
+                    MessageBox.Show("Invalid input. Try again.", "Error Message");
                 }
             }
             else
             {
                 MessageBox.Show("Invalid input. Try again.", "Error Message");
-                Console.WriteLine("User fehlt!!");
             }
             reader.Close();
         }

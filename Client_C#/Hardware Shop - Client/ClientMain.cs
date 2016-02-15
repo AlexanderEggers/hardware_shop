@@ -9,6 +9,7 @@ namespace Hardware_Shop_Client
         public static SearchWindow searchWindow;
         public static EditorWindow editorWindow;
         public static TagWindow tagWindow;
+        public static string user;
 
         [STAThread]
         static void Main()

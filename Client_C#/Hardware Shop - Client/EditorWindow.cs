@@ -6,7 +6,7 @@ namespace Hardware_Shop_Client
 {
     /// <summary>
     /// Missing following features:<para/>
-    /// # Input for item releating stuff, like Number of Cores or RAM amount.<para/>
+    /// # Input for item releating stuff, like Number of Cores or RAM amount.
     /// </summary>
     public partial class EditorWindow : Form
     {
@@ -37,6 +37,7 @@ namespace Hardware_Shop_Client
             textBox_name.Text = "";
             textBox_title.Text = "";
             textBox_url.Text = "";
+            comboBox_user.Text = ClientMain.user;
         }
 
         //Updates all fields regarding the database entry
@@ -112,10 +113,10 @@ namespace Hardware_Shop_Client
 
         private void button_editTags_Click(object sender, EventArgs e)
         {
+            Enabled = false;
             ClientMain.tagWindow = new TagWindow();
             ClientMain.tagWindow.Show();
             ClientMain.tagWindow.openWindow(currrentItemId);
-            //TODO: editor window muss geblock werden bzgl. Input
         }
 
         private void saveCurrentItem()

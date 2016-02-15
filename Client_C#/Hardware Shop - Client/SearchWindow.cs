@@ -7,10 +7,8 @@ using System.Windows.Forms;
 namespace Hardware_Shop_Client
 {
     /// <summary>
-    /// Search is only possible via item id or item title.<para/>
-    /// <para/>
-    /// TODO:<para/>
-    /// # Optional: Search by tags (only primary tags)
+    /// Missing following features:<para/>
+    /// # block access to a item if it's already opened (table: content_access)
     /// </summary>
     public partial class SearchWindow : Form
     {
@@ -183,7 +181,8 @@ namespace Hardware_Shop_Client
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="searchResults">Dictionary which hold structure: id, user_name, category_name, manufacture_name, date, edit</param>
+        /// <param name="searchResults">Dictionary which hold structure: id, user_name, 
+        /// category_name, manufacture_name, date, edit</param>
         /// <param name="dateFilter">Reference which date filter have been selected</param>
         /// <returns></returns>
         private Dictionary<int, ArrayList> adjustSearchResultsByDate(Dictionary<int, ArrayList> searchResults, string dateFilter, string reference)

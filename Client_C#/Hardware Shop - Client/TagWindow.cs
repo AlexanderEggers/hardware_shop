@@ -15,6 +15,12 @@ namespace Hardware_Shop_Client
             InitializeComponent();
         }
 
+        protected override void OnClosed(EventArgs e)
+        {
+            base.OnClosed(e);
+            ClientMain.editorWindow.Enabled = true;
+        }
+
         public void openWindow(int itemID)
         {
             this.itemID = itemID;

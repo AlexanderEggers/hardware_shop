@@ -122,17 +122,22 @@ public class DatabaseCreator {
     private void initStartContent() throws Exception {
         stmt = c.createStatement();
         String sql = "INSERT INTO user (id,user_name,password,role) "
-                + "VALUES (0, 'Admin', 'root', 1);";
+                + "VALUES (0, 'n/a', '12345', 0);";
         stmt.executeUpdate(sql);
-
+        
         stmt = c.createStatement();
-        sql = "INSERT INTO main (id,category,subcategory,manufacturer,user,status,title,url,name,date,edit,views) "
-                + "VALUES (0, 1, 1, 1, 0, 0, 'Test1', '/test1', 'Test Entry 1', '15-11-04', '15-11-04-00-11-57', 0);";
+        sql = "INSERT INTO user (id,user_name,password,role) "
+                + "VALUES (1, 'Admin', 'root', 1);";
         stmt.executeUpdate(sql);
         
         stmt = c.createStatement();
         sql = "INSERT INTO main (id,category,subcategory,manufacturer,user,status,title,url,name,date,edit,views) "
-                + "VALUES (1, 2, 1, 2, 0, 1, 'Test2', '/test2', 'Test Entry 2', '15-11-04', '15-11-04-00-11-43', 0);";
+                + "VALUES (0, 1, 1, 1, 1, 0, 'Test1', '/test1', 'Test Entry 1', '15-11-04', '15-11-04-00-11-57', 0);";
+        stmt.executeUpdate(sql);
+        
+        stmt = c.createStatement();
+        sql = "INSERT INTO main (id,category,subcategory,manufacturer,user,status,title,url,name,date,edit,views) "
+                + "VALUES (1, 2, 1, 2, 1, 1, 'Test2', '/test2', 'Test Entry 2', '15-11-04', '15-11-04-00-11-43', 0);";
         stmt.executeUpdate(sql);
         
         stmt = c.createStatement();

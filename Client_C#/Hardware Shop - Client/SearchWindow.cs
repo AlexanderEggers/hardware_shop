@@ -71,9 +71,7 @@ namespace Hardware_Shop_Client
                 ClientMain.editorWindow.Show();
             }
             else
-            {
                 executeSearch();
-            }
         }
 
         private void textBox_search_KeyPress(object sender, KeyPressEventArgs e)
@@ -109,12 +107,11 @@ namespace Hardware_Shop_Client
 
         public void executeSearch()
         {
-            string text = this.textBox_search.Text;
-            String sql;
+            string text = textBox_search.Text;
             int tempItemID;
             bool insertFilter = false;
 
-            sql = "SELECT main.id,category_name,"
+            string sql = "SELECT main.id,category_name,"
                         + "manufacturer_name,user_name,date,edit FROM main "
                         + "INNER JOIN category ON main.category = category.id "
                         + "INNER JOIN manufacturer ON main.manufacturer = manufacturer.id "
@@ -141,21 +138,15 @@ namespace Hardware_Shop_Client
             if (comboBox_sortBy.Text != "")
             {
                 if (checkBox_sortDescending.Checked)
-                {
                     sql = sql + " ORDER BY main." + comboBox_sortBy.Text + " ASC";
-                }
                 else
-                {
                     sql = sql + " ORDER BY main." + comboBox_sortBy.Text + " DESC";
-                }
             }
 
             sql = sql + " LIMIT " + comboBox_maxResults.Text + " ;";
 
             if (sql.Contains("WHERE ORDER BY") || sql.Contains("WHERE LIMIT"))
-            {
                 sql = sql.Replace(" WHERE", "");
-            }
 
             SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
 
@@ -198,9 +189,7 @@ namespace Hardware_Shop_Client
         private Dictionary<int, ArrayList> adjustSearchResultsByDate(Dictionary<int, ArrayList> searchResults, string dateFilter, string reference)
         {
             if (dateFilter == "")
-            {
                 return searchResults;
-            }
 
             int maxTimeDiff;
             switch (dateFilter)
@@ -224,13 +213,10 @@ namespace Hardware_Shop_Client
             {
                 string date;
 
-                if(reference == "Date")
-                {
+                if (reference == "Date")
                     date = (string)data[4];
-                } else
-                {
+                else
                     date = (string)data[5];
-                }
 
                 string[] dateSplite = date.Split(new Char[] { '-' });
 
@@ -239,15 +225,11 @@ namespace Hardware_Shop_Client
                 int months = (int)((double)diff.Days / 30.436875); //30.436875 = durchschnittliche Monatslänge (in Tagen)
 
                 if (months > maxTimeDiff)
-                {
                     removed.Add((int)data[0]);
-                }
             }
 
             for (int i = 0; i < removed.Count; i++)
-            {
                 searchResults.Remove(removed[i]);
-            }
 
             return searchResults;
         }
@@ -262,18 +244,12 @@ namespace Hardware_Shop_Client
                 if (success)
                 {
                     if (filterBefore)
-                    {
                         return " AND main." + type + " = " + id;
-                    }
                     else
-                    {
                         return " main." + type + " = " + id;
-                    }
                 }
                 else
-                {
                     return "";
-                }
             }
             else
             {
@@ -291,9 +267,7 @@ namespace Hardware_Shop_Client
             SQLiteDataReader reader = command.ExecuteReader();
 
             while (reader.Read())
-            {
                 id = (int)reader["id"];
-            }
             reader.Close();
 
             return id != -1 ? true : false;
@@ -307,9 +281,7 @@ namespace Hardware_Shop_Client
             reference.Items.Clear();
             SQLiteDataReader reader = command.ExecuteReader();
             while (reader.Read())
-            {
                 reference.Items.Add((string)reader[table + "_name"]);
-            }
             reader.Close();
         }
     }

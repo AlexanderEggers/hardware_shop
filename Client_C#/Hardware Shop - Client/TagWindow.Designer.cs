@@ -28,122 +28,158 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.dataView_tags = new System.Windows.Forms.DataGridView();
-            this.Column_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column_Editor = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.textBox_title = new System.Windows.Forms.TextBox();
+            this.dataGridView_tags = new System.Windows.Forms.DataGridView();
+            this.Column_searchID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column_searchTag = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridView_normalTags = new System.Windows.Forms.DataGridView();
+            this.Column_tagID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column_tagName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column_tagViews = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.textBox_search = new System.Windows.Forms.TextBox();
             this.button_save = new System.Windows.Forms.Button();
             this.button_close = new System.Windows.Forms.Button();
             this.button_addTag = new System.Windows.Forms.Button();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.dataGridView_masterTags = new System.Windows.Forms.DataGridView();
+            this.Column_masterTagID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column_masterTagName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column_masterTagViews = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button_addMasterTag = new System.Windows.Forms.Button();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Views = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button_search = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataView_tags)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            this.button_removeTag = new System.Windows.Forms.Button();
+            this.button_removeMasterTag = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_tags)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_normalTags)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_masterTags)).BeginInit();
             this.SuspendLayout();
             // 
-            // dataView_tags
+            // dataGridView_tags
             // 
-            this.dataView_tags.AllowUserToAddRows = false;
-            this.dataView_tags.AllowUserToDeleteRows = false;
-            this.dataView_tags.AllowUserToResizeColumns = false;
-            this.dataView_tags.AllowUserToResizeRows = false;
-            this.dataView_tags.BackgroundColor = System.Drawing.SystemColors.Control;
-            this.dataView_tags.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataView_tags.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
-            this.dataView_tags.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataView_tags.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column_ID,
-            this.Column_Editor});
-            this.dataView_tags.Location = new System.Drawing.Point(12, 46);
-            this.dataView_tags.Name = "dataView_tags";
-            this.dataView_tags.ReadOnly = true;
-            this.dataView_tags.RowHeadersVisible = false;
-            this.dataView_tags.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.dataView_tags.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.dataView_tags.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataView_tags.Size = new System.Drawing.Size(237, 432);
-            this.dataView_tags.TabIndex = 57;
+            this.dataGridView_tags.AllowUserToAddRows = false;
+            this.dataGridView_tags.AllowUserToDeleteRows = false;
+            this.dataGridView_tags.AllowUserToResizeColumns = false;
+            this.dataGridView_tags.AllowUserToResizeRows = false;
+            this.dataGridView_tags.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.dataGridView_tags.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView_tags.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dataGridView_tags.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView_tags.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column_searchID,
+            this.Column_searchTag});
+            this.dataGridView_tags.Location = new System.Drawing.Point(12, 46);
+            this.dataGridView_tags.MultiSelect = false;
+            this.dataGridView_tags.Name = "dataGridView_tags";
+            this.dataGridView_tags.ReadOnly = true;
+            this.dataGridView_tags.RowHeadersVisible = false;
+            this.dataGridView_tags.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.dataGridView_tags.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.dataGridView_tags.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView_tags.Size = new System.Drawing.Size(237, 432);
+            this.dataGridView_tags.TabIndex = 57;
+            this.dataGridView_tags.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView_tags_CellMouseDoubleClick);
             // 
-            // Column_ID
+            // Column_searchID
             // 
-            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control;
-            this.Column_ID.DefaultCellStyle = dataGridViewCellStyle12;
-            this.Column_ID.HeaderText = "ID";
-            this.Column_ID.Name = "Column_ID";
-            this.Column_ID.ReadOnly = true;
-            this.Column_ID.Width = 70;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            this.Column_searchID.DefaultCellStyle = dataGridViewCellStyle2;
+            this.Column_searchID.HeaderText = "ID";
+            this.Column_searchID.Name = "Column_searchID";
+            this.Column_searchID.ReadOnly = true;
+            this.Column_searchID.Width = 70;
             // 
-            // Column_Editor
+            // Column_searchTag
             // 
-            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Control;
-            this.Column_Editor.DefaultCellStyle = dataGridViewCellStyle13;
-            this.Column_Editor.HeaderText = "Tag";
-            this.Column_Editor.Name = "Column_Editor";
-            this.Column_Editor.ReadOnly = true;
-            this.Column_Editor.Width = 167;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            this.Column_searchTag.DefaultCellStyle = dataGridViewCellStyle3;
+            this.Column_searchTag.HeaderText = "Tag";
+            this.Column_searchTag.Name = "Column_searchTag";
+            this.Column_searchTag.ReadOnly = true;
+            this.Column_searchTag.Width = 167;
             // 
-            // dataGridView1
+            // dataGridView_normalTags
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.AllowUserToResizeColumns = false;
-            this.dataGridView1.AllowUserToResizeRows = false;
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Control;
-            this.dataGridView1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle14.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle14;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1,
-            this.dataGridViewTextBoxColumn2,
-            this.Views});
-            this.dataGridView1.Location = new System.Drawing.Point(290, 46);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.dataGridView1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(237, 266);
-            this.dataGridView1.TabIndex = 58;
+            this.dataGridView_normalTags.AllowUserToAddRows = false;
+            this.dataGridView_normalTags.AllowUserToDeleteRows = false;
+            this.dataGridView_normalTags.AllowUserToResizeColumns = false;
+            this.dataGridView_normalTags.AllowUserToResizeRows = false;
+            this.dataGridView_normalTags.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.dataGridView_normalTags.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView_normalTags.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            this.dataGridView_normalTags.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView_normalTags.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column_tagID,
+            this.Column_tagName,
+            this.Column_tagViews});
+            this.dataGridView_normalTags.Location = new System.Drawing.Point(290, 46);
+            this.dataGridView_normalTags.MultiSelect = false;
+            this.dataGridView_normalTags.Name = "dataGridView_normalTags";
+            this.dataGridView_normalTags.ReadOnly = true;
+            this.dataGridView_normalTags.RowHeadersVisible = false;
+            this.dataGridView_normalTags.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.dataGridView_normalTags.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.dataGridView_normalTags.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView_normalTags.Size = new System.Drawing.Size(237, 266);
+            this.dataGridView_normalTags.TabIndex = 58;
+            this.dataGridView_normalTags.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataGridView_normalTags_KeyDown);
             // 
-            // textBox_title
+            // Column_tagID
             // 
-            this.textBox_title.Location = new System.Drawing.Point(12, 12);
-            this.textBox_title.Name = "textBox_title";
-            this.textBox_title.Size = new System.Drawing.Size(156, 20);
-            this.textBox_title.TabIndex = 59;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            this.Column_tagID.DefaultCellStyle = dataGridViewCellStyle5;
+            this.Column_tagID.HeaderText = "ID";
+            this.Column_tagID.Name = "Column_tagID";
+            this.Column_tagID.ReadOnly = true;
+            this.Column_tagID.Width = 70;
+            // 
+            // Column_tagName
+            // 
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            this.Column_tagName.DefaultCellStyle = dataGridViewCellStyle6;
+            this.Column_tagName.HeaderText = "Tag";
+            this.Column_tagName.Name = "Column_tagName";
+            this.Column_tagName.ReadOnly = true;
+            this.Column_tagName.Width = 117;
+            // 
+            // Column_tagViews
+            // 
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
+            this.Column_tagViews.DefaultCellStyle = dataGridViewCellStyle7;
+            this.Column_tagViews.HeaderText = "Views";
+            this.Column_tagViews.Name = "Column_tagViews";
+            this.Column_tagViews.ReadOnly = true;
+            this.Column_tagViews.Width = 50;
+            // 
+            // textBox_search
+            // 
+            this.textBox_search.Location = new System.Drawing.Point(12, 12);
+            this.textBox_search.Name = "textBox_search";
+            this.textBox_search.Size = new System.Drawing.Size(156, 20);
+            this.textBox_search.TabIndex = 59;
+            this.textBox_search.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_search_KeyPress);
             // 
             // button_save
             // 
@@ -153,6 +189,7 @@
             this.button_save.TabIndex = 61;
             this.button_save.Text = "Save";
             this.button_save.UseVisualStyleBackColor = true;
+            this.button_save.Click += new System.EventHandler(this.button_save_Click);
             // 
             // button_close
             // 
@@ -162,6 +199,7 @@
             this.button_close.TabIndex = 62;
             this.button_close.Text = "Close";
             this.button_close.UseVisualStyleBackColor = true;
+            this.button_close.Click += new System.EventHandler(this.button_close_Click);
             // 
             // button_addTag
             // 
@@ -171,90 +209,77 @@
             this.button_addTag.TabIndex = 63;
             this.button_addTag.Text = ">>";
             this.button_addTag.UseVisualStyleBackColor = true;
+            this.button_addTag.Click += new System.EventHandler(this.button_addTag_Click);
             // 
-            // dataGridView2
+            // dataGridView_masterTags
             // 
-            this.dataGridView2.AllowUserToAddRows = false;
-            this.dataGridView2.AllowUserToDeleteRows = false;
-            this.dataGridView2.AllowUserToResizeColumns = false;
-            this.dataGridView2.AllowUserToResizeRows = false;
-            this.dataGridView2.BackgroundColor = System.Drawing.SystemColors.Control;
-            this.dataGridView2.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle18.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle18.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView2.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle18;
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn3,
-            this.dataGridViewTextBoxColumn4});
-            this.dataGridView2.Location = new System.Drawing.Point(290, 347);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.ReadOnly = true;
-            this.dataGridView2.RowHeadersVisible = false;
-            this.dataGridView2.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.dataGridView2.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.dataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView2.Size = new System.Drawing.Size(237, 131);
-            this.dataGridView2.TabIndex = 64;
+            this.dataGridView_masterTags.AllowUserToAddRows = false;
+            this.dataGridView_masterTags.AllowUserToDeleteRows = false;
+            this.dataGridView_masterTags.AllowUserToResizeColumns = false;
+            this.dataGridView_masterTags.AllowUserToResizeRows = false;
+            this.dataGridView_masterTags.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.dataGridView_masterTags.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView_masterTags.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
+            this.dataGridView_masterTags.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView_masterTags.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column_masterTagID,
+            this.Column_masterTagName,
+            this.Column_masterTagViews});
+            this.dataGridView_masterTags.Location = new System.Drawing.Point(290, 347);
+            this.dataGridView_masterTags.MultiSelect = false;
+            this.dataGridView_masterTags.Name = "dataGridView_masterTags";
+            this.dataGridView_masterTags.ReadOnly = true;
+            this.dataGridView_masterTags.RowHeadersVisible = false;
+            this.dataGridView_masterTags.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.dataGridView_masterTags.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.dataGridView_masterTags.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView_masterTags.Size = new System.Drawing.Size(237, 131);
+            this.dataGridView_masterTags.TabIndex = 64;
+            this.dataGridView_masterTags.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataGridView_masterTags_KeyDown);
+            // 
+            // Column_masterTagID
+            // 
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
+            this.Column_masterTagID.DefaultCellStyle = dataGridViewCellStyle9;
+            this.Column_masterTagID.HeaderText = "ID";
+            this.Column_masterTagID.Name = "Column_masterTagID";
+            this.Column_masterTagID.ReadOnly = true;
+            this.Column_masterTagID.Width = 70;
+            // 
+            // Column_masterTagName
+            // 
+            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control;
+            this.Column_masterTagName.DefaultCellStyle = dataGridViewCellStyle10;
+            this.Column_masterTagName.HeaderText = "Master Tag";
+            this.Column_masterTagName.Name = "Column_masterTagName";
+            this.Column_masterTagName.ReadOnly = true;
+            this.Column_masterTagName.Width = 117;
+            // 
+            // Column_masterTagViews
+            // 
+            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Control;
+            this.Column_masterTagViews.DefaultCellStyle = dataGridViewCellStyle11;
+            this.Column_masterTagViews.HeaderText = "Views";
+            this.Column_masterTagViews.Name = "Column_masterTagViews";
+            this.Column_masterTagViews.ReadOnly = true;
+            this.Column_masterTagViews.Width = 50;
             // 
             // button_addMasterTag
             // 
-            this.button_addMasterTag.Location = new System.Drawing.Point(357, 318);
+            this.button_addMasterTag.Location = new System.Drawing.Point(350, 318);
             this.button_addMasterTag.Name = "button_addMasterTag";
-            this.button_addMasterTag.Size = new System.Drawing.Size(107, 23);
+            this.button_addMasterTag.Size = new System.Drawing.Size(43, 23);
             this.button_addMasterTag.TabIndex = 65;
-            this.button_addMasterTag.Text = "Add Master Tag";
+            this.button_addMasterTag.Text = "Add";
             this.button_addMasterTag.UseVisualStyleBackColor = true;
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            dataGridViewCellStyle19.BackColor = System.Drawing.SystemColors.Control;
-            this.dataGridViewTextBoxColumn3.DefaultCellStyle = dataGridViewCellStyle19;
-            this.dataGridViewTextBoxColumn3.HeaderText = "ID";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.ReadOnly = true;
-            this.dataGridViewTextBoxColumn3.Width = 70;
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            dataGridViewCellStyle20.BackColor = System.Drawing.SystemColors.Control;
-            this.dataGridViewTextBoxColumn4.DefaultCellStyle = dataGridViewCellStyle20;
-            this.dataGridViewTextBoxColumn4.HeaderText = "Master Tag";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.ReadOnly = true;
-            this.dataGridViewTextBoxColumn4.Width = 167;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Control;
-            this.dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle15;
-            this.dataGridViewTextBoxColumn1.HeaderText = "ID";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            this.dataGridViewTextBoxColumn1.Width = 70;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            dataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.Control;
-            this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle16;
-            this.dataGridViewTextBoxColumn2.HeaderText = "Tag";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            this.dataGridViewTextBoxColumn2.Width = 117;
-            // 
-            // Views
-            // 
-            dataGridViewCellStyle17.BackColor = System.Drawing.SystemColors.Control;
-            this.Views.DefaultCellStyle = dataGridViewCellStyle17;
-            this.Views.HeaderText = "Views";
-            this.Views.Name = "Views";
-            this.Views.ReadOnly = true;
-            this.Views.Width = 50;
+            this.button_addMasterTag.Click += new System.EventHandler(this.button_addMasterTag_Click);
             // 
             // button_search
             // 
@@ -264,27 +289,50 @@
             this.button_search.TabIndex = 66;
             this.button_search.Text = "Search";
             this.button_search.UseVisualStyleBackColor = true;
+            this.button_search.Click += new System.EventHandler(this.button_search_Click);
+            // 
+            // button_removeTag
+            // 
+            this.button_removeTag.Location = new System.Drawing.Point(256, 208);
+            this.button_removeTag.Name = "button_removeTag";
+            this.button_removeTag.Size = new System.Drawing.Size(28, 23);
+            this.button_removeTag.TabIndex = 67;
+            this.button_removeTag.Text = "<<";
+            this.button_removeTag.UseVisualStyleBackColor = true;
+            this.button_removeTag.Click += new System.EventHandler(this.button_removeTag_Click);
+            // 
+            // button_removeMasterTag
+            // 
+            this.button_removeMasterTag.Location = new System.Drawing.Point(419, 318);
+            this.button_removeMasterTag.Name = "button_removeMasterTag";
+            this.button_removeMasterTag.Size = new System.Drawing.Size(57, 23);
+            this.button_removeMasterTag.TabIndex = 68;
+            this.button_removeMasterTag.Text = "Remove";
+            this.button_removeMasterTag.UseVisualStyleBackColor = true;
+            this.button_removeMasterTag.Click += new System.EventHandler(this.button_removeMasterTag_Click);
             // 
             // TagWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(539, 514);
+            this.Controls.Add(this.button_removeMasterTag);
+            this.Controls.Add(this.button_removeTag);
             this.Controls.Add(this.button_search);
             this.Controls.Add(this.button_addMasterTag);
-            this.Controls.Add(this.dataGridView2);
+            this.Controls.Add(this.dataGridView_masterTags);
             this.Controls.Add(this.button_addTag);
             this.Controls.Add(this.button_close);
             this.Controls.Add(this.button_save);
-            this.Controls.Add(this.textBox_title);
-            this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.dataView_tags);
+            this.Controls.Add(this.textBox_search);
+            this.Controls.Add(this.dataGridView_normalTags);
+            this.Controls.Add(this.dataGridView_tags);
             this.Name = "TagWindow";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Hardware Shop - Tag Manager";
-            ((System.ComponentModel.ISupportInitialize)(this.dataView_tags)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_tags)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_normalTags)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_masterTags)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -292,21 +340,24 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataView_tags;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column_ID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column_Editor;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.TextBox textBox_title;
+        private System.Windows.Forms.DataGridView dataGridView_tags;
+        private System.Windows.Forms.DataGridView dataGridView_normalTags;
+        private System.Windows.Forms.TextBox textBox_search;
         private System.Windows.Forms.Button button_save;
         private System.Windows.Forms.Button button_close;
         private System.Windows.Forms.Button button_addTag;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Views;
-        private System.Windows.Forms.DataGridView dataGridView2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridView dataGridView_masterTags;
         private System.Windows.Forms.Button button_addMasterTag;
         private System.Windows.Forms.Button button_search;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column_searchID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column_searchTag;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column_tagID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column_tagName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column_tagViews;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column_masterTagID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column_masterTagName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column_masterTagViews;
+        private System.Windows.Forms.Button button_removeTag;
+        private System.Windows.Forms.Button button_removeMasterTag;
     }
 }

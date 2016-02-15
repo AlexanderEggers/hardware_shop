@@ -95,6 +95,7 @@ public class DatabaseCreator {
                 + "(id              INT      PRIMARY KEY     NOT NULL,"
                 + " main_id         INT                      NOT NULL,"
                 + " tag_id          INT                      NOT NULL,"
+                + " tag_category    INT                      NOT NULL,"
                 + " views           INT                      NOT NULL)";
         stmt.executeUpdate(sql);
 
@@ -187,6 +188,26 @@ public class DatabaseCreator {
         stmt = c.createStatement();
         sql = "INSERT INTO status (id,status_name) "
                 + "VALUES (2, 'Archived');";
+        stmt.executeUpdate(sql);
+        
+        stmt = c.createStatement();
+        sql = "INSERT INTO tag (id,tag_name) "
+                + "VALUES (0, 'CPU');";
+        stmt.executeUpdate(sql);
+        
+        stmt = c.createStatement();
+        sql = "INSERT INTO tag (id,tag_name) "
+                + "VALUES (1, 'GPU');";
+        stmt.executeUpdate(sql);
+        
+        stmt = c.createStatement();
+        sql = "INSERT INTO search (id,main_id,tag_id,tag_category,views) "
+                + "VALUES (0, 0, 0, 0, 5);";
+        stmt.executeUpdate(sql);
+        
+        stmt = c.createStatement();
+        sql = "INSERT INTO search (id,main_id,tag_id,tag_category,views) "
+                + "VALUES (1, 0, 1, 1, 15);";
         stmt.executeUpdate(sql);
     }
 

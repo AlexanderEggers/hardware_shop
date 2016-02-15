@@ -7,7 +7,6 @@ namespace Hardware_Shop_Client
     /// <summary>
     /// Missing following features:<para/>
     /// # Input for item releating stuff, like Number of Cores or RAM amount.<para/>
-    /// # Tags<para/>
     /// </summary>
     public partial class EditorWindow : Form
     {
@@ -86,9 +85,7 @@ namespace Hardware_Shop_Client
             reference.Items.Clear();
             SQLiteDataReader reader = command.ExecuteReader();
             while (reader.Read())
-            {
                 reference.Items.Add((string)reader[table + "_name"]);
-            }
             reader.Close();
         }
 
@@ -108,18 +105,17 @@ namespace Hardware_Shop_Client
         private void button_save_Click(object sender, EventArgs e)
         {
             if (currrentItemId != -1)
-            {
                 saveCurrentItem();
-            }
             else
-            {
                 saveNewItem();
-            }
         }
 
         private void button_editTags_Click(object sender, EventArgs e)
         {
+            ClientMain.tagWindow = new TagWindow();
             ClientMain.tagWindow.Show();
+            ClientMain.tagWindow.openWindow(currrentItemId);
+            //TODO: editor window muss geblock werden bzgl. Input
         }
 
         private void saveCurrentItem()
@@ -153,9 +149,7 @@ namespace Hardware_Shop_Client
                 MessageBox.Show("Item has been saved.", "Info");
             }
             else
-            {
                 MessageBox.Show("Something went wrong.", "Error Message");
-            }
         }
 
         private void saveNewItem()
@@ -167,9 +161,7 @@ namespace Hardware_Shop_Client
 
             SQLiteDataReader reader = command.ExecuteReader();
             while (reader.Read())
-            {
                 amount++;
-            }
             reader.Close();
 
             category = getItemID("category", comboBox_category);
@@ -209,9 +201,7 @@ namespace Hardware_Shop_Client
         private void button_delete_Click(object sender, EventArgs e)
         {
             if (currrentItemId != -1)
-            {
                 deleteItem(currrentItemId);
-            }
         }
 
         private void deleteItem(int id)
@@ -232,9 +222,7 @@ namespace Hardware_Shop_Client
 
             SQLiteDataReader reader = command.ExecuteReader();
             while (reader.Read())
-            {
                 id = (int)reader["id"];
-            }
             reader.Close();
 
             return id;

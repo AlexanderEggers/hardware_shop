@@ -28,11 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.button_search = new System.Windows.Forms.Button();
             this.button_editor = new System.Windows.Forms.Button();
             this.button_tags = new System.Windows.Forms.Button();
@@ -321,14 +321,14 @@
             this.searchDataView.AllowUserToResizeRows = false;
             this.searchDataView.BackgroundColor = System.Drawing.SystemColors.Control;
             this.searchDataView.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.searchDataView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.searchDataView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.searchDataView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.searchDataView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column_ID,
@@ -336,6 +336,7 @@
             this.Column_Category,
             this.Column_Manufacturer});
             this.searchDataView.Location = new System.Drawing.Point(3, 150);
+            this.searchDataView.MultiSelect = false;
             this.searchDataView.Name = "searchDataView";
             this.searchDataView.ReadOnly = true;
             this.searchDataView.RowHeadersVisible = false;
@@ -348,8 +349,8 @@
             // 
             // Column_ID
             // 
-            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control;
-            this.Column_ID.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            this.Column_ID.DefaultCellStyle = dataGridViewCellStyle2;
             this.Column_ID.HeaderText = "ID";
             this.Column_ID.Name = "Column_ID";
             this.Column_ID.ReadOnly = true;
@@ -357,8 +358,8 @@
             // 
             // Column_Editor
             // 
-            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Control;
-            this.Column_Editor.DefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            this.Column_Editor.DefaultCellStyle = dataGridViewCellStyle3;
             this.Column_Editor.HeaderText = "Editor";
             this.Column_Editor.Name = "Column_Editor";
             this.Column_Editor.ReadOnly = true;
@@ -366,8 +367,8 @@
             // 
             // Column_Category
             // 
-            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Control;
-            this.Column_Category.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            this.Column_Category.DefaultCellStyle = dataGridViewCellStyle4;
             this.Column_Category.HeaderText = "Category";
             this.Column_Category.Name = "Column_Category";
             this.Column_Category.ReadOnly = true;
@@ -375,8 +376,8 @@
             // 
             // Column_Manufacturer
             // 
-            dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Control;
-            this.Column_Manufacturer.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            this.Column_Manufacturer.DefaultCellStyle = dataGridViewCellStyle5;
             this.Column_Manufacturer.HeaderText = "Manufacturer";
             this.Column_Manufacturer.Name = "Column_Manufacturer";
             this.Column_Manufacturer.ReadOnly = true;

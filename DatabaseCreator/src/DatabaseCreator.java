@@ -63,7 +63,7 @@ public class DatabaseCreator {
         sql = "CREATE TABLE input "
                 + "(id             INT      PRIMARY KEY     NOT NULL,"
                 + " category_id    INT                      NOT NULL,"
-                + " value2         TEXT                     NOT NULL)";
+                + " value1         TEXT                     NOT NULL)";
         stmt.executeUpdate(sql);
 
         stmt = c.createStatement();
@@ -138,6 +138,11 @@ public class DatabaseCreator {
         stmt = c.createStatement();
         sql = "INSERT INTO main (id,category,subcategory,manufacturer,user,status,title,url,name,date,edit,views) "
                 + "VALUES (1, 2, 1, 2, 1, 1, 'Test2', '/test2', 'Test Entry 2', '15-11-04', '15-11-04-00-11-43', 0);";
+        stmt.executeUpdate(sql);
+        
+        stmt = c.createStatement();
+        sql = "INSERT INTO input (id,category_id,value1) "
+                + "VALUES (0, 1, 'Test1');";
         stmt.executeUpdate(sql);
         
         stmt = c.createStatement();

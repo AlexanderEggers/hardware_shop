@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Windows.Forms;
 
@@ -10,7 +11,7 @@ namespace Hardware_Shop_Client
     /// </summary>
     public partial class EditorWindow : Form
     {
-        private int currrentItemId = -1;
+        private int currentItemId = -1;
 
         public EditorWindow()
         {
@@ -64,10 +65,9 @@ namespace Hardware_Shop_Client
 
                 string date = (string)reader["date"];
                 string[] dateSplite = date.Split(new Char[] { '-' });
-
                 date_creationDate.Value = new DateTime(int.Parse("20" + dateSplite[0]), int.Parse(dateSplite[1]), int.Parse(dateSplite[2]));
 
-                this.currrentItemId = (int)reader["id"];
+                currentItemId = (int)reader["id"];
                 label_id.Text = "ID: " + reader["id"];
                 label_edit.Text = "Last Edit: " + reader["edit"];
 
@@ -76,18 +76,47 @@ namespace Hardware_Shop_Client
                 textBox_url.Text = reader["url"] + "";
             }
             reader.Close();
+
+            resetTagWindows();
+            initContentTable();
         }
 
-        private void resetGUIObject(String table, ComboBox reference)
+        public void initContentTable()
         {
-            string sql = "SELECT " + table + "_name FROM " + table + ";";
-            SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
+            dataGridView_content.Rows.Clear();
 
-            reference.Items.Clear();
-            SQLiteDataReader reader = command.ExecuteReader();
-            while (reader.Read())
-                reference.Items.Add((string)reader[table + "_name"]);
-            reader.Close();
+            if (comboBox_category.Text != "")
+            {
+                Dictionary<int, string> content = new Dictionary<int, string>();
+
+                string sql = "SELECT value1, value2 FROM content_input "
+                + "WHERE main_id = " + currentItemId + ";";
+                SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
+
+                SQLiteDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                    content.Add((int)reader["value1"], (string)reader["value2"]);
+                reader.Close();
+
+                string sql2 = "SELECT id, value1 FROM input "
+                + "WHERE category_id = " + getItemID("category", comboBox_category) + ";";
+                SQLiteCommand command2 = new SQLiteCommand(sql2, ClientMain.databaseController.getConnection());
+
+                SQLiteDataReader reader2 = command2.ExecuteReader();
+                while (reader2.Read())
+                {
+                    if (content.ContainsKey((int)reader2["id"]))
+                        dataGridView_content.Rows.Add(reader2["value1"], content[(int)reader2["id"]]);
+                    else
+                        dataGridView_content.Rows.Add(reader2["value1"], "");
+                }
+                reader2.Close();
+            }
+        }
+
+        private void comboBox_category_SelectedValueChanged(object sender, EventArgs e)
+        {
+            initContentTable();
         }
 
         private void button_close_Click(object sender, EventArgs e)
@@ -95,7 +124,7 @@ namespace Hardware_Shop_Client
             Hide();
             ClientMain.searchWindow.Show();
             ClientMain.searchWindow.executeSearch(); //resets the search results
-            currrentItemId = -1;
+            currentItemId = -1;
         }
 
         private void button_new_Click(object sender, EventArgs e)
@@ -105,7 +134,7 @@ namespace Hardware_Shop_Client
 
         private void button_save_Click(object sender, EventArgs e)
         {
-            if (currrentItemId != -1)
+            if (currentItemId != -1)
                 saveCurrentItem();
             else
                 saveNewItem();
@@ -116,7 +145,7 @@ namespace Hardware_Shop_Client
             Enabled = false;
             ClientMain.tagWindow = new TagWindow();
             ClientMain.tagWindow.Show();
-            ClientMain.tagWindow.openWindow(currrentItemId);
+            ClientMain.tagWindow.openWindow(currentItemId);
         }
 
         private void saveCurrentItem()
@@ -142,15 +171,23 @@ namespace Hardware_Shop_Client
                 "date = '" + date_creationDate.Value.ToString("yy-MM-dd") + "'," +
                 "edit = '" + DateTime.Now.ToString("yy-MM-dd-HH-mm-ss") + "'," +
                 "user = " + user +
-                " WHERE id = " + currrentItemId + ";";
+                " WHERE id = " + currentItemId + ";";
 
                 SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
                 command.ExecuteNonQuery();
+
+                //Es fehlt noch das Speichern der Content Elemente aus dem dataGridView_content
 
                 MessageBox.Show("Item has been saved.", "Info");
             }
             else
                 MessageBox.Show("Something went wrong.", "Error Message");
+        }
+
+        private void button_delete_Click(object sender, EventArgs e)
+        {
+            if (currentItemId != -1)
+                deleteItem(currentItemId);
         }
 
         private void saveNewItem()
@@ -190,6 +227,8 @@ namespace Hardware_Shop_Client
                 command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
                 command.ExecuteNonQuery();
 
+                //Es fehlt noch das Speichern der Content Elemente aus dem dataGridView_content
+
                 MessageBox.Show("Item has been created.", "Info");
                 openExistingItem(amount);
             }
@@ -197,12 +236,6 @@ namespace Hardware_Shop_Client
             {
                 MessageBox.Show("Something went wrong.", "Error Message");
             }
-        }
-
-        private void button_delete_Click(object sender, EventArgs e)
-        {
-            if (currrentItemId != -1)
-                deleteItem(currrentItemId);
         }
 
         private void deleteItem(int id)
@@ -227,6 +260,45 @@ namespace Hardware_Shop_Client
             reader.Close();
 
             return id;
+        }
+
+        public void resetTagWindows()
+        {
+            dataGridView_normalTags.Rows.Clear();
+            dataGridView_masterTags.Rows.Clear();
+
+            string sql = "SELECT tag_id, tag_category, tag_name, views FROM search "
+                        + "INNER JOIN tag ON search.tag_id = tag.id "
+                        + "WHERE main_id = " + currentItemId + ";";
+            SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
+
+            SQLiteDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                int tagID = (int)reader["tag_id"];
+
+                if ((int)reader["tag_category"] == 0)
+                {
+                    dataGridView_normalTags.Rows.Add(tagID, reader["tag_name"], reader["Views"]);
+                }
+                else
+                {
+                    dataGridView_masterTags.Rows.Add(tagID, reader["tag_name"], reader["Views"]);
+                }
+            }
+            reader.Close();
+        }
+
+        private void resetGUIObject(String table, ComboBox reference)
+        {
+            string sql = "SELECT " + table + "_name FROM " + table + ";";
+            SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
+
+            reference.Items.Clear();
+            SQLiteDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+                reference.Items.Add((string)reader[table + "_name"]);
+            reader.Close();
         }
     }
 }

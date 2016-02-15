@@ -19,6 +19,7 @@ namespace Hardware_Shop_Client
         {
             base.OnClosed(e);
             ClientMain.editorWindow.Enabled = true;
+            ClientMain.editorWindow.resetTagWindows();
         }
 
         public void openWindow(int itemID)

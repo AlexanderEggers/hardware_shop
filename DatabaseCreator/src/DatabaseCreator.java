@@ -115,7 +115,8 @@ public class DatabaseCreator {
         stmt = c.createStatement();
         sql = "CREATE TABLE content_access "
                 + "(id             INT      PRIMARY KEY     NOT NULL,"
-                + " user_id        INT                              )";
+                + " main_id        INT                      NOT NULL,"
+                + " user_id        INT                      NOT NULL)";
         stmt.executeUpdate(sql);
     }
 

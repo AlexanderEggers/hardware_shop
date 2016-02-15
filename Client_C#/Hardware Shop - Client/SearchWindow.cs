@@ -6,10 +6,6 @@ using System.Windows.Forms;
 
 namespace Hardware_Shop_Client
 {
-    /// <summary>
-    /// Missing following features:<para/>
-    /// # block access to a item if it's already opened (table: content_access)
-    /// </summary>
     public partial class SearchWindow : Form
     {
         public SearchWindow()
@@ -61,7 +57,7 @@ namespace Hardware_Shop_Client
         {
             int itemID = -1;
 
-            if (int.TryParse(textBox_search.Text, out itemID))
+            if (int.TryParse(textBox_search.Text, out itemID) && isAccessible(itemID))
             {
                 Hide();
                 ClientMain.editorWindow.resetEditor();
@@ -83,12 +79,15 @@ namespace Hardware_Shop_Client
 
         private void searchDataView_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            int databaseRecordId = (int)searchDataView.Rows[e.RowIndex].Cells[0].Value;
+            int itemID = (int)searchDataView.Rows[e.RowIndex].Cells[0].Value;
 
-            Hide();
-            ClientMain.editorWindow.resetEditor();
-            ClientMain.editorWindow.openExistingItem(databaseRecordId);
-            ClientMain.editorWindow.Show();
+            if (isAccessible(itemID))
+            {
+                Hide();
+                ClientMain.editorWindow.resetEditor();
+                ClientMain.editorWindow.openExistingItem(itemID);
+                ClientMain.editorWindow.Show();
+            }
         }
 
         private void button_editor_Click(object sender, EventArgs e)
@@ -181,7 +180,7 @@ namespace Hardware_Shop_Client
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="searchResults">Dictionary which hold structure: id, user_name, 
+        /// <param name="searchResults">Dictionary which hold a arraylist structure: id, user_name, 
         /// category_name, manufacture_name, date, edit</param>
         /// <param name="dateFilter">Reference which date filter have been selected</param>
         /// <returns></returns>
@@ -282,6 +281,39 @@ namespace Hardware_Shop_Client
             while (reader.Read())
                 reference.Items.Add((string)reader[table + "_name"]);
             reader.Close();
+        }
+
+        /// <summary>
+        /// Checks if a certain item can be access regarding the rule that only ONE editor can access a specific item.
+        /// </summary>
+        /// <param name="itemID">Specific item id which needs to be checked.</param>
+        /// <returns>boolean which let the open request through or not.</returns>
+        private bool isAccessible(int itemID)
+        {
+            string user = "";
+
+            string sql = "SELECT user_name FROM content_access "
+                        + "INNER JOIN user ON content_access.user_id = user.id "
+                        + "WHERE main_id = " + itemID + ";";
+            SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
+
+            searchDataView.Rows.Clear();
+            SQLiteDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                user = (string)reader["user_name"];
+            }
+            reader.Close();
+
+            if (user == "")
+            {
+                return true;
+            }
+            else
+            {
+                MessageBox.Show("This item is currently opened by " + user + ".", "Info");
+                return false;
+            }
         }
     }
 }

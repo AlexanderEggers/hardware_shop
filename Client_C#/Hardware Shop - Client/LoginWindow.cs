@@ -39,7 +39,8 @@ namespace Hardware_Shop_Client
                     ClientMain.user = textBox_user.Text;
                     ClientMain.searchWindow.resetSearchWindow();
                     ClientMain.searchWindow.Show();
-                } else
+                }
+                else
                 {
                     MessageBox.Show("Invalid input. Try again.", "Error Message");
                 }

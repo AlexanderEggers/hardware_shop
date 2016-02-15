@@ -236,7 +236,7 @@ namespace Hardware_Shop_Client
 
         private void saveContentFields()
         {
-            for(int i = 0; i < dataGridView_content.Rows.Count; i++)
+            for (int i = 0; i < dataGridView_content.Rows.Count; i++)
             {
                 string value1 = (string)dataGridView_content.Rows[i].Cells[0].Value;
                 string value2 = (string)dataGridView_content.Rows[i].Cells[1].Value;
@@ -251,7 +251,7 @@ namespace Hardware_Shop_Client
                     contentID = (int)reader["id"];
                 reader.Close();
 
-                if(contentID != -1)
+                if (contentID != -1)
                 {
                     bool success = false;
                     sql = "SELECT value2 FROM content_input "
@@ -263,7 +263,7 @@ namespace Hardware_Shop_Client
                         success = true;
                     reader.Close();
 
-                    if(success)
+                    if (success)
                         updateContent(contentID, value2);
                     else
                         insertNewContent(contentID, value2);

@@ -55,7 +55,7 @@ public class DatabaseCreator {
         sql = "CREATE TABLE content_input "
                 + "(id             INT      PRIMARY KEY     NOT NULL,"
                 + " main_id        TEXT                     NOT NULL,"
-                + " value1         TEXT                     NOT NULL,"
+                + " value1         INT                      NOT NULL,"
                 + " value2         TEXT                     NOT NULL)";
         stmt.executeUpdate(sql);
         

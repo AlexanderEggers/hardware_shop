@@ -5,10 +5,6 @@ using System.Windows.Forms;
 
 namespace Hardware_Shop_Client
 {
-    /// <summary>
-    /// Missing following features:<para/>
-    /// # Input for item releating stuff, like Number of Cores or RAM amount.
-    /// </summary>
     public partial class EditorWindow : Form
     {
         private int currentItemId = -1;
@@ -148,42 +144,6 @@ namespace Hardware_Shop_Client
             ClientMain.tagWindow.openWindow(currentItemId);
         }
 
-        private void saveCurrentItem()
-        {
-            int category = -1, subcategory = -1, manufacturer = -1, user = -1, status = -1;
-
-            category = getItemID("category", comboBox_category);
-            subcategory = getItemID("subcategory", comboBox_subcategory);
-            manufacturer = getItemID("manufacturer", comboBox_manufacturer);
-            user = getItemID("user", comboBox_user);
-            status = getItemID("status", comboBox_status);
-
-            if (category != -1 && subcategory != -1 && manufacturer != -1 && user != -1 && status != -1)
-            {
-                string sql = "UPDATE main " +
-                "SET category = " + category + "," +
-                "subcategory = " + subcategory + "," +
-                "manufacturer = " + manufacturer + "," +
-                "status = " + status + "," +
-                "title = '" + textBox_title.Text + "'," +
-                "name = '" + textBox_name.Text + "'," +
-                "url = '" + textBox_url.Text + "'," +
-                "date = '" + date_creationDate.Value.ToString("yy-MM-dd") + "'," +
-                "edit = '" + DateTime.Now.ToString("yy-MM-dd-HH-mm-ss") + "'," +
-                "user = " + user +
-                " WHERE id = " + currentItemId + ";";
-
-                SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
-                command.ExecuteNonQuery();
-
-                //Es fehlt noch das Speichern der Content Elemente aus dem dataGridView_content
-
-                MessageBox.Show("Item has been saved.", "Info");
-            }
-            else
-                MessageBox.Show("Something went wrong.", "Error Message");
-        }
-
         private void button_delete_Click(object sender, EventArgs e)
         {
             if (currentItemId != -1)
@@ -227,7 +187,7 @@ namespace Hardware_Shop_Client
                 command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
                 command.ExecuteNonQuery();
 
-                //Es fehlt noch das Speichern der Content Elemente aus dem dataGridView_content
+                saveContentFields();
 
                 MessageBox.Show("Item has been created.", "Info");
                 openExistingItem(amount);
@@ -236,6 +196,106 @@ namespace Hardware_Shop_Client
             {
                 MessageBox.Show("Something went wrong.", "Error Message");
             }
+        }
+
+        private void saveCurrentItem()
+        {
+            int category = -1, subcategory = -1, manufacturer = -1, user = -1, status = -1;
+
+            category = getItemID("category", comboBox_category);
+            subcategory = getItemID("subcategory", comboBox_subcategory);
+            manufacturer = getItemID("manufacturer", comboBox_manufacturer);
+            user = getItemID("user", comboBox_user);
+            status = getItemID("status", comboBox_status);
+
+            if (category != -1 && subcategory != -1 && manufacturer != -1 && user != -1 && status != -1)
+            {
+                string sql = "UPDATE main " +
+                "SET category = " + category + "," +
+                "subcategory = " + subcategory + "," +
+                "manufacturer = " + manufacturer + "," +
+                "status = " + status + "," +
+                "title = '" + textBox_title.Text + "'," +
+                "name = '" + textBox_name.Text + "'," +
+                "url = '" + textBox_url.Text + "'," +
+                "date = '" + date_creationDate.Value.ToString("yy-MM-dd") + "'," +
+                "edit = '" + DateTime.Now.ToString("yy-MM-dd-HH-mm-ss") + "'," +
+                "user = " + user +
+                " WHERE id = " + currentItemId + ";";
+
+                SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
+                command.ExecuteNonQuery();
+
+                saveContentFields();
+
+                MessageBox.Show("Item has been saved.", "Info");
+            }
+            else
+                MessageBox.Show("Something went wrong.", "Error Message");
+        }
+
+        private void saveContentFields()
+        {
+            for(int i = 0; i < dataGridView_content.Rows.Count; i++)
+            {
+                string value1 = (string)dataGridView_content.Rows[i].Cells[0].Value;
+                string value2 = (string)dataGridView_content.Rows[i].Cells[1].Value;
+                int contentID = -1;
+
+                string sql = "SELECT id FROM input "
+                + "WHERE value1 = '" + value1 + "';";
+                SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
+
+                SQLiteDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                    contentID = (int)reader["id"];
+                reader.Close();
+
+                if(contentID != -1)
+                {
+                    bool success = false;
+                    sql = "SELECT value2 FROM content_input "
+                    + "WHERE main_id = " + currentItemId + " AND value1 = " + contentID + ";";
+                    command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
+
+                    reader = command.ExecuteReader();
+                    while (reader.Read())
+                        success = true;
+                    reader.Close();
+
+                    if(success)
+                        updateContent(contentID, value2);
+                    else
+                        insertNewContent(contentID, value2);
+                }
+            }
+        }
+
+        private void insertNewContent(int value1, string value2)
+        {
+            int amount = 0;
+
+            string sql = "SELECT id FROM content_input;";
+            SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
+
+            SQLiteDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+                amount++;
+            reader.Close();
+
+            sql = "INSERT INTO content_input (id,main_id,value1,value2) "
+                + "VALUES (" + amount + "," + currentItemId + "," + value1 + ", '" + value2 + "');";
+            command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
+            command.ExecuteNonQuery();
+        }
+
+        private void updateContent(int value1, string value2)
+        {
+            string sql = "UPDATE content_input " +
+                "SET value2 = " + value2 +
+                " WHERE id = " + value1 + ";";
+            SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
+            command.ExecuteNonQuery();
         }
 
         private void deleteItem(int id)

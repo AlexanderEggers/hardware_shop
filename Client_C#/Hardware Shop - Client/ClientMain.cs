@@ -8,6 +8,7 @@ namespace Hardware_Shop_Client
         public static DatabaseController databaseController;
         public static SearchWindow searchWindow;
         public static EditorWindow editorWindow;
+        public static TagWindow tagWindow;
 
         [STAThread]
         static void Main()
@@ -19,6 +20,7 @@ namespace Hardware_Shop_Client
 
             searchWindow = new SearchWindow();
             editorWindow = new EditorWindow();
+            tagWindow = new TagWindow();
 
             Application.Run(new LoginWindow());
         }

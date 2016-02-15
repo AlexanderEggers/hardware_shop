@@ -28,30 +28,38 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.comboBox_user = new System.Windows.Forms.ComboBox();
             this.label_editor = new System.Windows.Forms.Label();
             this.comboBox_status = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.label_status = new System.Windows.Forms.Label();
             this.button_save = new System.Windows.Forms.Button();
             this.button_new = new System.Windows.Forms.Button();
             this.button_close = new System.Windows.Forms.Button();
             this.button_delete = new System.Windows.Forms.Button();
             this.comboBox_subcategory = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.label_subcategory = new System.Windows.Forms.Label();
             this.comboBox_category = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
+            this.label_category = new System.Windows.Forms.Label();
             this.comboBox_manufacturer = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
+            this.label_manufacture = new System.Windows.Forms.Label();
             this.label_id = new System.Windows.Forms.Label();
             this.label_date = new System.Windows.Forms.Label();
             this.date_creationDate = new System.Windows.Forms.DateTimePicker();
-            this.label8 = new System.Windows.Forms.Label();
+            this.label_title = new System.Windows.Forms.Label();
             this.textBox_title = new System.Windows.Forms.TextBox();
             this.textBox_name = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
+            this.label_name = new System.Windows.Forms.Label();
             this.textBox_url = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
+            this.label_url = new System.Windows.Forms.Label();
             this.label_edit = new System.Windows.Forms.Label();
+            this.dataView_tags = new System.Windows.Forms.DataGridView();
+            this.button_editTags = new System.Windows.Forms.Button();
+            this.Column_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column_Editor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.dataView_tags)).BeginInit();
             this.SuspendLayout();
             // 
             // comboBox_user
@@ -82,15 +90,15 @@
             this.comboBox_status.Size = new System.Drawing.Size(170, 21);
             this.comboBox_status.TabIndex = 15;
             // 
-            // label1
+            // label_status
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(10, 104);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(40, 13);
-            this.label1.TabIndex = 14;
-            this.label1.Text = "Status:";
+            this.label_status.AutoSize = true;
+            this.label_status.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_status.Location = new System.Drawing.Point(10, 104);
+            this.label_status.Name = "label_status";
+            this.label_status.Size = new System.Drawing.Size(40, 13);
+            this.label_status.TabIndex = 14;
+            this.label_status.Text = "Status:";
             // 
             // button_save
             // 
@@ -141,15 +149,15 @@
             this.comboBox_subcategory.Size = new System.Drawing.Size(170, 21);
             this.comboBox_subcategory.TabIndex = 40;
             // 
-            // label2
+            // label_subcategory
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(303, 104);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(74, 13);
-            this.label2.TabIndex = 39;
-            this.label2.Text = "Sub-Category:";
+            this.label_subcategory.AutoSize = true;
+            this.label_subcategory.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_subcategory.Location = new System.Drawing.Point(303, 104);
+            this.label_subcategory.Name = "label_subcategory";
+            this.label_subcategory.Size = new System.Drawing.Size(74, 13);
+            this.label_subcategory.TabIndex = 39;
+            this.label_subcategory.Text = "Sub-Category:";
             // 
             // comboBox_category
             // 
@@ -160,15 +168,15 @@
             this.comboBox_category.Size = new System.Drawing.Size(170, 21);
             this.comboBox_category.TabIndex = 38;
             // 
-            // label3
+            // label_category
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(303, 72);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(52, 13);
-            this.label3.TabIndex = 37;
-            this.label3.Text = "Category:";
+            this.label_category.AutoSize = true;
+            this.label_category.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_category.Location = new System.Drawing.Point(303, 72);
+            this.label_category.Name = "label_category";
+            this.label_category.Size = new System.Drawing.Size(52, 13);
+            this.label_category.TabIndex = 37;
+            this.label_category.Text = "Category:";
             // 
             // comboBox_manufacturer
             // 
@@ -179,15 +187,15 @@
             this.comboBox_manufacturer.Size = new System.Drawing.Size(170, 21);
             this.comboBox_manufacturer.TabIndex = 42;
             // 
-            // label4
+            // label_manufacture
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(303, 136);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(70, 13);
-            this.label4.TabIndex = 41;
-            this.label4.Text = "Manufacture:";
+            this.label_manufacture.AutoSize = true;
+            this.label_manufacture.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_manufacture.Location = new System.Drawing.Point(303, 136);
+            this.label_manufacture.Name = "label_manufacture";
+            this.label_manufacture.Size = new System.Drawing.Size(70, 13);
+            this.label_manufacture.TabIndex = 41;
+            this.label_manufacture.Text = "Manufacture:";
             // 
             // label_id
             // 
@@ -214,15 +222,15 @@
             this.date_creationDate.Size = new System.Drawing.Size(145, 20);
             this.date_creationDate.TabIndex = 45;
             // 
-            // label8
+            // label_title
             // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(10, 191);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(30, 13);
-            this.label8.TabIndex = 49;
-            this.label8.Text = "Titel:";
+            this.label_title.AutoSize = true;
+            this.label_title.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_title.Location = new System.Drawing.Point(10, 191);
+            this.label_title.Name = "label_title";
+            this.label_title.Size = new System.Drawing.Size(30, 13);
+            this.label_title.TabIndex = 49;
+            this.label_title.Text = "Title:";
             // 
             // textBox_title
             // 
@@ -238,15 +246,15 @@
             this.textBox_name.Size = new System.Drawing.Size(170, 20);
             this.textBox_name.TabIndex = 52;
             // 
-            // label9
+            // label_name
             // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(10, 222);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(38, 13);
-            this.label9.TabIndex = 51;
-            this.label9.Text = "Name:";
+            this.label_name.AutoSize = true;
+            this.label_name.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_name.Location = new System.Drawing.Point(10, 222);
+            this.label_name.Name = "label_name";
+            this.label_name.Size = new System.Drawing.Size(38, 13);
+            this.label_name.TabIndex = 51;
+            this.label_name.Text = "Name:";
             // 
             // textBox_url
             // 
@@ -255,15 +263,15 @@
             this.textBox_url.Size = new System.Drawing.Size(170, 20);
             this.textBox_url.TabIndex = 54;
             // 
-            // label10
+            // label_url
             // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(10, 252);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(32, 13);
-            this.label10.TabIndex = 53;
-            this.label10.Text = "URL:";
+            this.label_url.AutoSize = true;
+            this.label_url.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_url.Location = new System.Drawing.Point(10, 252);
+            this.label_url.Name = "label_url";
+            this.label_url.Size = new System.Drawing.Size(32, 13);
+            this.label_url.TabIndex = 53;
+            this.label_url.Text = "URL:";
             // 
             // label_edit
             // 
@@ -274,38 +282,99 @@
             this.label_edit.TabIndex = 55;
             this.label_edit.Text = "Last Edit: ";
             // 
+            // dataView_tags
+            // 
+            this.dataView_tags.AllowUserToAddRows = false;
+            this.dataView_tags.AllowUserToDeleteRows = false;
+            this.dataView_tags.AllowUserToResizeColumns = false;
+            this.dataView_tags.AllowUserToResizeRows = false;
+            this.dataView_tags.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.dataView_tags.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataView_tags.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            this.dataView_tags.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataView_tags.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column_ID,
+            this.Column_Editor});
+            this.dataView_tags.Location = new System.Drawing.Point(739, 104);
+            this.dataView_tags.Name = "dataView_tags";
+            this.dataView_tags.ReadOnly = true;
+            this.dataView_tags.RowHeadersVisible = false;
+            this.dataView_tags.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.dataView_tags.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.dataView_tags.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataView_tags.Size = new System.Drawing.Size(237, 432);
+            this.dataView_tags.TabIndex = 56;
+            // 
+            // button_editTags
+            // 
+            this.button_editTags.Location = new System.Drawing.Point(739, 67);
+            this.button_editTags.Name = "button_editTags";
+            this.button_editTags.Size = new System.Drawing.Size(75, 23);
+            this.button_editTags.TabIndex = 57;
+            this.button_editTags.Text = "Edit Tags";
+            this.button_editTags.UseVisualStyleBackColor = true;
+            this.button_editTags.Click += new System.EventHandler(this.button_editTags_Click);
+            // 
+            // Column_ID
+            // 
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            this.Column_ID.DefaultCellStyle = dataGridViewCellStyle5;
+            this.Column_ID.HeaderText = "ID";
+            this.Column_ID.Name = "Column_ID";
+            this.Column_ID.ReadOnly = true;
+            this.Column_ID.Width = 70;
+            // 
+            // Column_Editor
+            // 
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            this.Column_Editor.DefaultCellStyle = dataGridViewCellStyle6;
+            this.Column_Editor.HeaderText = "Tag";
+            this.Column_Editor.Name = "Column_Editor";
+            this.Column_Editor.ReadOnly = true;
+            this.Column_Editor.Width = 167;
+            // 
             // EditorWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(988, 568);
+            this.Controls.Add(this.button_editTags);
+            this.Controls.Add(this.dataView_tags);
             this.Controls.Add(this.label_edit);
             this.Controls.Add(this.textBox_url);
-            this.Controls.Add(this.label10);
+            this.Controls.Add(this.label_url);
             this.Controls.Add(this.textBox_name);
-            this.Controls.Add(this.label9);
+            this.Controls.Add(this.label_name);
             this.Controls.Add(this.textBox_title);
-            this.Controls.Add(this.label8);
+            this.Controls.Add(this.label_title);
             this.Controls.Add(this.label_date);
             this.Controls.Add(this.date_creationDate);
             this.Controls.Add(this.label_id);
             this.Controls.Add(this.comboBox_manufacturer);
-            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label_manufacture);
             this.Controls.Add(this.comboBox_subcategory);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label_subcategory);
             this.Controls.Add(this.comboBox_category);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label_category);
             this.Controls.Add(this.button_delete);
             this.Controls.Add(this.button_close);
             this.Controls.Add(this.button_new);
             this.Controls.Add(this.button_save);
             this.Controls.Add(this.comboBox_status);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.label_status);
             this.Controls.Add(this.comboBox_user);
             this.Controls.Add(this.label_editor);
             this.Name = "EditorWindow";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Hardware Shop - Editor";
+            ((System.ComponentModel.ISupportInitialize)(this.dataView_tags)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -316,26 +385,30 @@
         private System.Windows.Forms.ComboBox comboBox_user;
         private System.Windows.Forms.Label label_editor;
         private System.Windows.Forms.ComboBox comboBox_status;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label_status;
         private System.Windows.Forms.Button button_save;
         private System.Windows.Forms.Button button_new;
         private System.Windows.Forms.Button button_close;
         private System.Windows.Forms.Button button_delete;
         private System.Windows.Forms.ComboBox comboBox_subcategory;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label_subcategory;
         private System.Windows.Forms.ComboBox comboBox_category;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label_category;
         private System.Windows.Forms.ComboBox comboBox_manufacturer;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label_manufacture;
         private System.Windows.Forms.Label label_id;
         private System.Windows.Forms.Label label_date;
         private System.Windows.Forms.DateTimePicker date_creationDate;
-        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label_title;
         private System.Windows.Forms.TextBox textBox_title;
         private System.Windows.Forms.TextBox textBox_name;
-        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label_name;
         private System.Windows.Forms.TextBox textBox_url;
-        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label_url;
         private System.Windows.Forms.Label label_edit;
+        private System.Windows.Forms.DataGridView dataView_tags;
+        private System.Windows.Forms.Button button_editTags;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column_ID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column_Editor;
     }
 }

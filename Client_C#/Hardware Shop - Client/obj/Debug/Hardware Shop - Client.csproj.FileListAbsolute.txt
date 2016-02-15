@@ -34,3 +34,4 @@ C:\Users\Alexander\Documents\Projekte\HardwareShop\Client_C#\Hardware Shop - Cli
 C:\Users\Alexander\Documents\Projekte\HardwareShop\Client_C#\Hardware Shop - Client\obj\Debug\Hardware_Shop_Client.SearchWindow.resources
 C:\Users\Alexander\Documents\Projekte\HardwareShop\Client_C#\Hardware Shop - Client\obj\Debug\Hardware_Shop_Client.LoginWindow.resources
 C:\Users\Alexander\Documents\Projekte\HardwareShop\Client_C#\Hardware Shop - Client\obj\Debug\Hardware_Shop_Client.EditorWindow.resources
+C:\Users\Alexander\Documents\Projekte\HardwareShop\Client_C#\Hardware Shop - Client\obj\Debug\Hardware_Shop_Client.TagWindow.resources

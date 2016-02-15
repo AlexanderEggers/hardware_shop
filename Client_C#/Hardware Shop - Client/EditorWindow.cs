@@ -84,7 +84,6 @@ namespace Hardware_Shop_Client
             SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
 
             reference.Items.Clear();
-            reference.Items.Add("");
             SQLiteDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {
@@ -116,6 +115,11 @@ namespace Hardware_Shop_Client
             {
                 saveNewItem();
             }
+        }
+
+        private void button_editTags_Click(object sender, EventArgs e)
+        {
+            ClientMain.tagWindow.Show();
         }
 
         private void saveCurrentItem()

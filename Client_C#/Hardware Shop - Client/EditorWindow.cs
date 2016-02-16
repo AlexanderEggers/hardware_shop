@@ -374,7 +374,7 @@ namespace Hardware_Shop_Client
 
         private void deleteContentAccessBlock()
         {
-            if(currentItemId != -1)
+            if (currentItemId != -1)
             {
                 string sql = "DELETE FROM content_access WHERE main_id = " + currentItemId + ";";
                 SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());

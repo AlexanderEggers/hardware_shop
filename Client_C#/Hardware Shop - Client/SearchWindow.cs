@@ -325,8 +325,15 @@ namespace Hardware_Shop_Client
             }
             else
             {
-                MessageBox.Show("This item is currently opened by " + user + " since " + date + ".", "Info");
-                return false;
+                if (user == ClientMain.user)
+                {
+                    return true;
+                }
+                else
+                {
+                    MessageBox.Show("This item is currently opened by " + user + " since " + date + ".", "Info");
+                    return false;
+                }
             }
         }
 
@@ -354,7 +361,7 @@ namespace Hardware_Shop_Client
             }
             reader.Close();
 
-            if(userID != -1)
+            if (userID != -1)
             {
                 sql = "INSERT INTO content_access (id,main_id,user_id,date) "
                 + "VALUES (" + amount + ", " + itemID + ", " + userID + ", " + DateTime.Now + ");";

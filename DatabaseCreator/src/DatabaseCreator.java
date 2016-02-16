@@ -116,7 +116,8 @@ public class DatabaseCreator {
         sql = "CREATE TABLE content_access "
                 + "(id             INT      PRIMARY KEY     NOT NULL,"
                 + " main_id        INT                      NOT NULL,"
-                + " user_id        INT                      NOT NULL)";
+                + " user_id        INT                      NOT NULL,"
+                + " date           TEXT                     NOT NULL)";
         stmt.executeUpdate(sql);
     }
 

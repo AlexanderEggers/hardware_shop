@@ -59,6 +59,7 @@ namespace Hardware_Shop_Client
 
             if (int.TryParse(textBox_search.Text, out itemID) && isAccessible(itemID))
             {
+                addContentAccessBlock(itemID);
                 Hide();
                 ClientMain.editorWindow.resetEditor();
                 ClientMain.editorWindow.openExistingItem(itemID);
@@ -83,6 +84,7 @@ namespace Hardware_Shop_Client
 
             if (isAccessible(itemID))
             {
+                addContentAccessBlock(itemID);
                 Hide();
                 ClientMain.editorWindow.resetEditor();
                 ClientMain.editorWindow.openExistingItem(itemID);
@@ -106,7 +108,7 @@ namespace Hardware_Shop_Client
         {
             string text = textBox_search.Text;
             int tempItemID;
-            bool insertFilter = false;
+            bool insertFilter = false, numberic = false;
 
             string sql = "SELECT main.id,category_name,"
                         + "manufacturer_name,user_name,date,edit FROM main "
@@ -119,6 +121,7 @@ namespace Hardware_Shop_Client
             {
                 sql = sql + " main.id = " + text;
                 insertFilter = true;
+                numberic = true;
             }
             else if (textBox_search.Text != "")
             {
@@ -126,18 +129,28 @@ namespace Hardware_Shop_Client
                 insertFilter = true;
             }
 
-            sql = sql + getFilterSQLData("category", comboBox_category, insertFilter, out insertFilter)
+            if (!numberic)
+            {
+                sql = sql + getFilterSQLData("category", comboBox_category, insertFilter, out insertFilter)
                       + getFilterSQLData("subcategory", comboBox_subcategory, insertFilter, out insertFilter)
                       + getFilterSQLData("user", comboBox_user, insertFilter, out insertFilter)
                       + getFilterSQLData("manufacturer", comboBox_manufacturer, insertFilter, out insertFilter)
                       + getFilterSQLData("status", comboBox_status, insertFilter, out insertFilter);
 
-            if (comboBox_sortBy.Text != "")
+                if (comboBox_sortBy.Text != "")
+                {
+                    if (checkBox_sortDescending.Checked)
+                        sql = sql + " ORDER BY main." + comboBox_sortBy.Text + " ASC";
+                    else
+                        sql = sql + " ORDER BY main." + comboBox_sortBy.Text + " DESC";
+                }
+            }
+            else
             {
-                if (checkBox_sortDescending.Checked)
-                    sql = sql + " ORDER BY main." + comboBox_sortBy.Text + " ASC";
-                else
-                    sql = sql + " ORDER BY main." + comboBox_sortBy.Text + " DESC";
+                string backupText = textBox_search.Text;
+                resetSearchWindow();
+                textBox_search.Text = backupText;
+                textBox_search.Select(backupText.Length, 0);
             }
 
             sql = sql + " LIMIT " + comboBox_maxResults.Text + " ;";
@@ -290,9 +303,9 @@ namespace Hardware_Shop_Client
         /// <returns>boolean which let the open request through or not.</returns>
         private bool isAccessible(int itemID)
         {
-            string user = "";
+            string user = "", date = "";
 
-            string sql = "SELECT user_name FROM content_access "
+            string sql = "SELECT user_name, date FROM content_access "
                         + "INNER JOIN user ON content_access.user_id = user.id "
                         + "WHERE main_id = " + itemID + ";";
             SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
@@ -302,17 +315,51 @@ namespace Hardware_Shop_Client
             while (reader.Read())
             {
                 user = (string)reader["user_name"];
+                date = (string)reader["date"];
             }
             reader.Close();
 
-            if (user == "")
+            if (user == "" && date == "")
             {
                 return true;
             }
             else
             {
-                MessageBox.Show("This item is currently opened by " + user + ".", "Info");
+                MessageBox.Show("This item is currently opened by " + user + " since " + date + ".", "Info");
                 return false;
+            }
+        }
+
+        private void addContentAccessBlock(int itemID)
+        {
+            int amount = 0, userID = -1;
+
+            string sql = "SELECT id FROM content_access;";
+            SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
+
+            SQLiteDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                amount++;
+            }
+            reader.Close();
+
+            sql = "SELECT id FROM user WHERE user_name = '" + ClientMain.user + "';";
+            command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
+
+            reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                amount++;
+            }
+            reader.Close();
+
+            if(userID != -1)
+            {
+                sql = "INSERT INTO content_access (id,main_id,user_id,date) "
+                + "VALUES (" + amount + ", " + itemID + ", " + userID + ", " + DateTime.Now + ");";
+                command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
+                command.ExecuteNonQuery();
             }
         }
     }

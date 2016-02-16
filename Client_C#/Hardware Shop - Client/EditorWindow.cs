@@ -5,10 +5,6 @@ using System.Windows.Forms;
 
 namespace Hardware_Shop_Client
 {
-    /// <summary>
-    /// Missing feature:
-    /// # Function in editor/search window to use the content access feature to block user.
-    /// </summary>
     public partial class EditorWindow : Form
     {
         private int currentItemId = -1;
@@ -20,6 +16,7 @@ namespace Hardware_Shop_Client
 
         protected override void OnClosed(EventArgs e)
         {
+            deleteContentAccessBlock();
             base.OnClosed(e);
             ClientMain.exit();
         }
@@ -125,6 +122,7 @@ namespace Hardware_Shop_Client
 
         private void button_close_Click(object sender, EventArgs e)
         {
+            deleteContentAccessBlock();
             Hide();
             ClientMain.searchWindow.Show();
             ClientMain.searchWindow.executeSearch(); //resets the search results
@@ -146,10 +144,15 @@ namespace Hardware_Shop_Client
 
         private void button_editTags_Click(object sender, EventArgs e)
         {
-            Enabled = false;
-            ClientMain.tagWindow = new TagWindow();
-            ClientMain.tagWindow.Show();
-            ClientMain.tagWindow.openWindow(currentItemId);
+            if (currentItemId != -1)
+            {
+                Enabled = false;
+                ClientMain.tagWindow = new TagWindow();
+                ClientMain.tagWindow.Show();
+                ClientMain.tagWindow.openWindow(currentItemId);
+            }
+            else
+                MessageBox.Show("Item needs to be saved to access the tag manager.", "Error Message");
         }
 
         private void button_delete_Click(object sender, EventArgs e)
@@ -367,6 +370,16 @@ namespace Hardware_Shop_Client
             while (reader.Read())
                 reference.Items.Add((string)reader[table + "_name"]);
             reader.Close();
+        }
+
+        private void deleteContentAccessBlock()
+        {
+            if(currentItemId != -1)
+            {
+                string sql = "DELETE FROM content_access WHERE main_id = " + currentItemId + ";";
+                SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
+                command.ExecuteNonQuery();
+            }
         }
     }
 }

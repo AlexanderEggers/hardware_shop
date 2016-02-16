@@ -17,7 +17,7 @@ namespace Hardware_Shop_Client
             ClientMain.searchWindow.Enabled = true;
         }
 
-        private void button_createTag_Click(object sender, EventArgs e)
+        private void button_create_Click(object sender, EventArgs e)
         {
             int amount = 0;
 
@@ -30,35 +30,35 @@ namespace Hardware_Shop_Client
             reader.Close();
 
             sql = "INSERT INTO tag (id,tag_name) "
-                + "VALUES (" + amount + ", '" + textBox_createName.Text + "');";
+                + "VALUES (" + amount + ", '" + textBox_create.Text + "');";
             command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
             command.ExecuteNonQuery();
 
             MessageBox.Show("Tag has been created.", "Info");
 
-            textBox_search.Text = textBox_createName.Text;
+            textBox_search.Text = textBox_create.Text;
             executeSearch();
         }
 
-        private void button_editTag_Click(object sender, EventArgs e)
+        private void button_edit_Click(object sender, EventArgs e)
         {
-            int tagID = (int)dataGridView_tags.SelectedRows[0].Cells[0].Value;
+            int tagID = (int)dataGridView_results.SelectedRows[0].Cells[0].Value;
 
             string sql = "UPDATE tag " +
-                "SET tag_name = '" + textBox_editTag.Text + "'" +
+                "SET tag_name = '" + textBox_edit.Text + "'" +
                 " WHERE id = " + tagID + ";";
             SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
             command.ExecuteNonQuery();
 
             MessageBox.Show("Tag has been edited.", "Info");
 
-            textBox_search.Text = textBox_editTag.Text;
+            textBox_search.Text = textBox_edit.Text;
             executeSearch();
         }
 
-        private void button_deleteTag_Click(object sender, EventArgs e)
+        private void button_delete_Click(object sender, EventArgs e)
         {
-            int tagID = (int)dataGridView_tags.SelectedRows[0].Cells[0].Value, amount = 0;
+            int tagID = (int)dataGridView_results.SelectedRows[0].Cells[0].Value, amount = 0;
 
             string sql = "SELECT id FROM search WHERE tag_id = " + tagID + ";";
             SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
@@ -97,10 +97,10 @@ namespace Hardware_Shop_Client
             }
         }
 
-        private void dataGridView_tags_SelectionChanged(object sender, EventArgs e)
+        private void dataGridView_results_SelectionChanged(object sender, EventArgs e)
         {
-            if (dataGridView_tags.SelectedRows.Count > 0)
-                textBox_editTag.Text = (string)dataGridView_tags.SelectedRows[0].Cells[1].Value;
+            if (dataGridView_results.SelectedRows.Count > 0)
+                textBox_edit.Text = (string)dataGridView_results.SelectedRows[0].Cells[1].Value;
         }
 
         private void executeSearch()
@@ -117,7 +117,7 @@ namespace Hardware_Shop_Client
             SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
             SQLiteDataReader reader = command.ExecuteReader();
 
-            dataGridView_tags.Rows.Clear();
+            dataGridView_results.Rows.Clear();
             while (reader.Read())
             {
                 int amount = 0;
@@ -130,7 +130,7 @@ namespace Hardware_Shop_Client
                     amount++;
                 reader2.Close();
 
-                dataGridView_tags.Rows.Add((int)reader["id"], (string)reader["tag_name"], amount);
+                dataGridView_results.Rows.Add((int)reader["id"], (string)reader["tag_name"], amount);
             }
             reader.Close();
         }

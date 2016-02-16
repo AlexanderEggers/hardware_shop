@@ -17,7 +17,7 @@ namespace Hardware_Shop_Client.Tools
             ClientMain.searchWindow.Enabled = true;
         }
 
-        private void button_createCategory_Click(object sender, EventArgs e)
+        private void button_create_Click(object sender, EventArgs e)
         {
             int amount = 0;
 
@@ -30,35 +30,35 @@ namespace Hardware_Shop_Client.Tools
             reader.Close();
 
             sql = "INSERT INTO category (id,category_name) "
-                + "VALUES (" + amount + ", '" + textBox_createCategory.Text + "');";
+                + "VALUES (" + amount + ", '" + textBox_create.Text + "');";
             command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
             command.ExecuteNonQuery();
 
             MessageBox.Show("Category has been created.", "Info");
 
-            textBox_search.Text = textBox_createCategory.Text;
+            textBox_search.Text = textBox_create.Text;
             executeSearch();
         }
 
-        private void button_editCategory_Click(object sender, EventArgs e)
+        private void button_edit_Click(object sender, EventArgs e)
         {
-            int categoryID = (int)dataGridView_categories.SelectedRows[0].Cells[0].Value;
+            int categoryID = (int)dataGridView_results.SelectedRows[0].Cells[0].Value;
 
             string sql = "UPDATE category " +
-                "SET category_name = '" + textBox_editCategory.Text + "'" +
+                "SET category_name = '" + textBox_edit.Text + "'" +
                 " WHERE id = " + categoryID + ";";
             SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
             command.ExecuteNonQuery();
 
             MessageBox.Show("Category has been edited.", "Info");
 
-            textBox_search.Text = textBox_editCategory.Text;
+            textBox_search.Text = textBox_edit.Text;
             executeSearch();
         }
 
-        private void button_deleteCategory_Click(object sender, EventArgs e)
+        private void button_delete_Click(object sender, EventArgs e)
         {
-            int categoryID = (int)dataGridView_categories.SelectedRows[0].Cells[0].Value, amount = 0;
+            int categoryID = (int)dataGridView_results.SelectedRows[0].Cells[0].Value, amount = 0;
 
             string sql = "SELECT id FROM main WHERE category = " + categoryID + ";";
             SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
@@ -97,10 +97,10 @@ namespace Hardware_Shop_Client.Tools
             }
         }
 
-        private void dataGridView_categories_SelectionChanged(object sender, EventArgs e)
+        private void dataGridView_results_SelectionChanged(object sender, EventArgs e)
         {
-            if (dataGridView_categories.SelectedRows.Count > 0)
-                textBox_editCategory.Text = (string)dataGridView_categories.SelectedRows[0].Cells[1].Value;
+            if (dataGridView_results.SelectedRows.Count > 0)
+                textBox_edit.Text = (string)dataGridView_results.SelectedRows[0].Cells[1].Value;
         }
 
         private void executeSearch()
@@ -117,7 +117,7 @@ namespace Hardware_Shop_Client.Tools
             SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
             SQLiteDataReader reader = command.ExecuteReader();
 
-            dataGridView_categories.Rows.Clear();
+            dataGridView_results.Rows.Clear();
             while (reader.Read())
             {
                 int amount = 0;
@@ -132,7 +132,7 @@ namespace Hardware_Shop_Client.Tools
 
                 if((string)reader["category_name"] != "")
                 {
-                    dataGridView_categories.Rows.Add((int)reader["id"], (string)reader["category_name"], amount);
+                    dataGridView_results.Rows.Add((int)reader["id"], (string)reader["category_name"], amount);
                 }
             }
 

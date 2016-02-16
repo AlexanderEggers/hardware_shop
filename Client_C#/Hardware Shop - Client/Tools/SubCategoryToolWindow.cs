@@ -1,12 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Data.SQLite;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Hardware_Shop_Client.Tools
@@ -24,7 +17,7 @@ namespace Hardware_Shop_Client.Tools
             ClientMain.searchWindow.Enabled = true;
         }
 
-        private void button_createSubCategory_Click(object sender, EventArgs e)
+        private void button_create_Click(object sender, EventArgs e)
         {
             int amount = 0;
 
@@ -37,35 +30,35 @@ namespace Hardware_Shop_Client.Tools
             reader.Close();
 
             sql = "INSERT INTO subcategory (id,subcategory_name) "
-                + "VALUES (" + amount + ", '" + textBox_createSubCategory.Text + "');";
+                + "VALUES (" + amount + ", '" + textBox_create.Text + "');";
             command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
             command.ExecuteNonQuery();
 
             MessageBox.Show("Subcategory has been created.", "Info");
 
-            textBox_search.Text = textBox_createSubCategory.Text;
+            textBox_search.Text = textBox_create.Text;
             executeSearch();
         }
 
-        private void button_editSubCategory_Click(object sender, EventArgs e)
+        private void button_edit_Click(object sender, EventArgs e)
         {
-            int subcategoryID = (int)dataGridView_subcategories.SelectedRows[0].Cells[0].Value;
+            int subcategoryID = (int)dataGridView_results.SelectedRows[0].Cells[0].Value;
 
             string sql = "UPDATE subcategory " +
-                "SET subcategory_name = '" + textBox_editSubCategory.Text + "'" +
+                "SET subcategory_name = '" + textBox_edit.Text + "'" +
                 " WHERE id = " + subcategoryID + ";";
             SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
             command.ExecuteNonQuery();
 
             MessageBox.Show("Subcategory has been edited.", "Info");
 
-            textBox_search.Text = textBox_editSubCategory.Text;
+            textBox_search.Text = textBox_edit.Text;
             executeSearch();
         }
 
-        private void button_deleteSubCategory_Click(object sender, EventArgs e)
+        private void button_delete_Click(object sender, EventArgs e)
         {
-            int subcategoryID = (int)dataGridView_subcategories.SelectedRows[0].Cells[0].Value, amount = 0;
+            int subcategoryID = (int)dataGridView_results.SelectedRows[0].Cells[0].Value, amount = 0;
 
             string sql = "SELECT id FROM main WHERE subcategory = " + subcategoryID + ";";
             SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
@@ -104,10 +97,10 @@ namespace Hardware_Shop_Client.Tools
             }
         }
 
-        private void dataGridView_subcategories_SelectionChanged(object sender, EventArgs e)
+        private void dataGridView_results_SelectionChanged(object sender, EventArgs e)
         {
-            if (dataGridView_subcategories.SelectedRows.Count > 0)
-                textBox_editSubCategory.Text = (string)dataGridView_subcategories.SelectedRows[0].Cells[1].Value;
+            if (dataGridView_results.SelectedRows.Count > 0)
+                textBox_edit.Text = (string)dataGridView_results.SelectedRows[0].Cells[1].Value;
         }
 
         private void executeSearch()
@@ -124,7 +117,7 @@ namespace Hardware_Shop_Client.Tools
             SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
             SQLiteDataReader reader = command.ExecuteReader();
 
-            dataGridView_subcategories.Rows.Clear();
+            dataGridView_results.Rows.Clear();
             while (reader.Read())
             {
                 int amount = 0;
@@ -139,7 +132,7 @@ namespace Hardware_Shop_Client.Tools
 
                 if ((string)reader["subcategory_name"] != "")
                 {
-                    dataGridView_subcategories.Rows.Add((int)reader["id"], (string)reader["subcategory_name"], amount);
+                    dataGridView_results.Rows.Add((int)reader["id"], (string)reader["subcategory_name"], amount);
                 }
             }
 

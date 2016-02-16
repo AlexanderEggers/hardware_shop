@@ -28,14 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.button_search = new System.Windows.Forms.Button();
             this.textBox_search = new System.Windows.Forms.TextBox();
             this.dataGridView_tags = new System.Windows.Forms.DataGridView();
-            this.Column_searchID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column_searchTag = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label1 = new System.Windows.Forms.Label();
             this.label_createTag = new System.Windows.Forms.Label();
             this.textBox_createName = new System.Windows.Forms.TextBox();
@@ -45,6 +44,9 @@
             this.label_editTag = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.button_deleteTag = new System.Windows.Forms.Button();
+            this.Column_searchID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column_searchTag = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column_Items = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_tags)).BeginInit();
             this.SuspendLayout();
             // 
@@ -74,18 +76,19 @@
             this.dataGridView_tags.AllowUserToResizeRows = false;
             this.dataGridView_tags.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dataGridView_tags.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView_tags.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView_tags.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView_tags.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_tags.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column_searchID,
-            this.Column_searchTag});
+            this.Column_searchTag,
+            this.Column_Items});
             this.dataGridView_tags.Location = new System.Drawing.Point(245, 48);
             this.dataGridView_tags.MultiSelect = false;
             this.dataGridView_tags.Name = "dataGridView_tags";
@@ -97,24 +100,6 @@
             this.dataGridView_tags.Size = new System.Drawing.Size(237, 199);
             this.dataGridView_tags.TabIndex = 67;
             this.dataGridView_tags.SelectionChanged += new System.EventHandler(this.dataGridView_tags_SelectionChanged);
-            // 
-            // Column_searchID
-            // 
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-            this.Column_searchID.DefaultCellStyle = dataGridViewCellStyle5;
-            this.Column_searchID.HeaderText = "ID";
-            this.Column_searchID.Name = "Column_searchID";
-            this.Column_searchID.ReadOnly = true;
-            this.Column_searchID.Width = 70;
-            // 
-            // Column_searchTag
-            // 
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            this.Column_searchTag.DefaultCellStyle = dataGridViewCellStyle6;
-            this.Column_searchTag.HeaderText = "Tag";
-            this.Column_searchTag.Name = "Column_searchTag";
-            this.Column_searchTag.ReadOnly = true;
-            this.Column_searchTag.Width = 167;
             // 
             // label1
             // 
@@ -196,6 +181,33 @@
             this.button_deleteTag.UseVisualStyleBackColor = true;
             this.button_deleteTag.Click += new System.EventHandler(this.button_deleteTag_Click);
             // 
+            // Column_searchID
+            // 
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            this.Column_searchID.DefaultCellStyle = dataGridViewCellStyle2;
+            this.Column_searchID.HeaderText = "ID";
+            this.Column_searchID.Name = "Column_searchID";
+            this.Column_searchID.ReadOnly = true;
+            this.Column_searchID.Width = 70;
+            // 
+            // Column_searchTag
+            // 
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            this.Column_searchTag.DefaultCellStyle = dataGridViewCellStyle3;
+            this.Column_searchTag.HeaderText = "Tag";
+            this.Column_searchTag.Name = "Column_searchTag";
+            this.Column_searchTag.ReadOnly = true;
+            this.Column_searchTag.Width = 105;
+            // 
+            // Column_Items
+            // 
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            this.Column_Items.DefaultCellStyle = dataGridViewCellStyle4;
+            this.Column_Items.HeaderText = "Items";
+            this.Column_Items.Name = "Column_Items";
+            this.Column_Items.ReadOnly = true;
+            this.Column_Items.Width = 60;
+            // 
             // TagToolWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -227,8 +239,6 @@
         private System.Windows.Forms.Button button_search;
         private System.Windows.Forms.TextBox textBox_search;
         private System.Windows.Forms.DataGridView dataGridView_tags;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column_searchID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column_searchTag;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label_createTag;
         private System.Windows.Forms.TextBox textBox_createName;
@@ -238,5 +248,8 @@
         private System.Windows.Forms.Label label_editTag;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button button_deleteTag;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column_searchID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column_searchTag;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column_Items;
     }
 }

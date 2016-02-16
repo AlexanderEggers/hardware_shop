@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hardware_Shop_Client.Tools;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data.SQLite;
@@ -109,6 +110,13 @@ namespace Hardware_Shop_Client
             Enabled = false;
             TagToolWindow tagToolWindow = new TagToolWindow();
             tagToolWindow.Show();
+        }
+
+        private void button_category_Click(object sender, EventArgs e)
+        {
+            Enabled = false;
+            CategoryToolWindow categoryToolWindow = new CategoryToolWindow();
+            categoryToolWindow.Show();
         }
 
         public void executeSearch()

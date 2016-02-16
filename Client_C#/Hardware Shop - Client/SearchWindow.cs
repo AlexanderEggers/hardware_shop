@@ -104,6 +104,13 @@ namespace Hardware_Shop_Client
             resetSearchWindow();
         }
 
+        private void button_tags_Click(object sender, EventArgs e)
+        {
+            Enabled = false;
+            TagToolWindow tagToolWindow = new TagToolWindow();
+            tagToolWindow.Show();
+        }
+
         public void executeSearch()
         {
             string text = textBox_search.Text;
@@ -357,7 +364,7 @@ namespace Hardware_Shop_Client
             reader = command.ExecuteReader();
             while (reader.Read())
             {
-                amount++;
+                userID = (int)reader["id"];
             }
             reader.Close();
 

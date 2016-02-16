@@ -98,6 +98,7 @@
             this.button_tags.TabIndex = 2;
             this.button_tags.Text = "Tags";
             this.button_tags.UseVisualStyleBackColor = true;
+            this.button_tags.Click += new System.EventHandler(this.button_tags_Click);
             // 
             // button_userlist
             // 

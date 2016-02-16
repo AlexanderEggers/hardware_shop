@@ -127,6 +127,7 @@
             this.button_subcategory.TabIndex = 5;
             this.button_subcategory.Text = "Subcategory";
             this.button_subcategory.UseVisualStyleBackColor = true;
+            this.button_subcategory.Click += new System.EventHandler(this.button_subcategory_Click);
             // 
             // button_manufacture
             // 

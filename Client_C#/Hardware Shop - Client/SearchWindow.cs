@@ -119,6 +119,13 @@ namespace Hardware_Shop_Client
             categoryToolWindow.Show();
         }
 
+        private void button_subcategory_Click(object sender, EventArgs e)
+        {
+            Enabled = false;
+            SubCategoryToolWindow subcategoryToolWindow = new SubCategoryToolWindow();
+            subcategoryToolWindow.Show();
+        }
+
         public void executeSearch()
         {
             string text = textBox_search.Text;

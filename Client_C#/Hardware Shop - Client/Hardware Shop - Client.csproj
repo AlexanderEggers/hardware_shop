@@ -107,6 +107,12 @@
     <Compile Include="Tools\CategoryToolWindow.Designer.cs">
       <DependentUpon>CategoryToolWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="Tools\SubCategoryToolWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tools\SubCategoryToolWindow.Designer.cs">
+      <DependentUpon>SubCategoryToolWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="Tools\TagToolWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -143,6 +149,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Tools\CategoryToolWindow.resx">
       <DependentUpon>CategoryToolWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools\SubCategoryToolWindow.resx">
+      <DependentUpon>SubCategoryToolWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Tools\TagToolWindow.resx">
       <DependentUpon>TagToolWindow.cs</DependentUpon>

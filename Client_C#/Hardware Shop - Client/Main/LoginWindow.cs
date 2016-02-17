@@ -9,7 +9,6 @@ namespace Hardware_Shop_Client
         public LoginWindow()
         {
             InitializeComponent();
-            this.StartPosition = FormStartPosition.CenterScreen;
         }
 
         protected override void OnClosed(EventArgs e)

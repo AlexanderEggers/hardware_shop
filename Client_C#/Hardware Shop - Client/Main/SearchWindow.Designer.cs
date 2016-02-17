@@ -28,11 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
             this.button_search = new System.Windows.Forms.Button();
             this.button_editor = new System.Windows.Forms.Button();
             this.button_tags = new System.Windows.Forms.Button();
@@ -59,14 +65,20 @@
             this.label_sortBy = new System.Windows.Forms.Label();
             this.checkBox_sortDescending = new System.Windows.Forms.CheckBox();
             this.searchDataView = new System.Windows.Forms.DataGridView();
-            this.Column_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column_Editor = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column_Category = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column_Manufacturer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.comboBox_date = new System.Windows.Forms.ComboBox();
             this.comboBox_edit = new System.Windows.Forms.ComboBox();
             this.button_reset = new System.Windows.Forms.Button();
             this.comboBox_maxResults = new System.Windows.Forms.ComboBox();
+            this.Column_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column_Views = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column_Editor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column_Category = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column_Subcategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column_Manufacturer = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column_Title = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column_Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column_Edit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column_Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.searchDataView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -292,7 +304,8 @@
             "",
             "id",
             "title",
-            "category"});
+            "category",
+            "views"});
             this.comboBox_sortBy.Location = new System.Drawing.Point(881, 74);
             this.comboBox_sortBy.Name = "comboBox_sortBy";
             this.comboBox_sortBy.Size = new System.Drawing.Size(95, 21);
@@ -326,67 +339,36 @@
             this.searchDataView.AllowUserToResizeRows = false;
             this.searchDataView.BackgroundColor = System.Drawing.SystemColors.Control;
             this.searchDataView.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.searchDataView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.searchDataView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle12;
             this.searchDataView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.searchDataView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column_ID,
+            this.Column_Views,
             this.Column_Editor,
             this.Column_Category,
-            this.Column_Manufacturer});
+            this.Column_Subcategory,
+            this.Column_Manufacturer,
+            this.Column_Title,
+            this.Column_Date,
+            this.Column_Edit,
+            this.Column_Status});
             this.searchDataView.Location = new System.Drawing.Point(3, 150);
             this.searchDataView.MultiSelect = false;
             this.searchDataView.Name = "searchDataView";
             this.searchDataView.ReadOnly = true;
             this.searchDataView.RowHeadersVisible = false;
             this.searchDataView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.searchDataView.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.searchDataView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.searchDataView.Size = new System.Drawing.Size(982, 416);
             this.searchDataView.TabIndex = 28;
             this.searchDataView.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.searchDataView_CellMouseDoubleClick);
-            // 
-            // Column_ID
-            // 
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            this.Column_ID.DefaultCellStyle = dataGridViewCellStyle2;
-            this.Column_ID.HeaderText = "ID";
-            this.Column_ID.Name = "Column_ID";
-            this.Column_ID.ReadOnly = true;
-            this.Column_ID.Width = 245;
-            // 
-            // Column_Editor
-            // 
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            this.Column_Editor.DefaultCellStyle = dataGridViewCellStyle3;
-            this.Column_Editor.HeaderText = "Editor";
-            this.Column_Editor.Name = "Column_Editor";
-            this.Column_Editor.ReadOnly = true;
-            this.Column_Editor.Width = 245;
-            // 
-            // Column_Category
-            // 
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            this.Column_Category.DefaultCellStyle = dataGridViewCellStyle4;
-            this.Column_Category.HeaderText = "Category";
-            this.Column_Category.Name = "Column_Category";
-            this.Column_Category.ReadOnly = true;
-            this.Column_Category.Width = 245;
-            // 
-            // Column_Manufacturer
-            // 
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-            this.Column_Manufacturer.DefaultCellStyle = dataGridViewCellStyle5;
-            this.Column_Manufacturer.HeaderText = "Manufacturer";
-            this.Column_Manufacturer.Name = "Column_Manufacturer";
-            this.Column_Manufacturer.ReadOnly = true;
-            this.Column_Manufacturer.Width = 245;
             // 
             // comboBox_date
             // 
@@ -438,6 +420,86 @@
             this.comboBox_maxResults.Name = "comboBox_maxResults";
             this.comboBox_maxResults.Size = new System.Drawing.Size(95, 21);
             this.comboBox_maxResults.TabIndex = 32;
+            // 
+            // Column_ID
+            // 
+            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Control;
+            this.Column_ID.DefaultCellStyle = dataGridViewCellStyle13;
+            this.Column_ID.HeaderText = "ID";
+            this.Column_ID.Name = "Column_ID";
+            this.Column_ID.ReadOnly = true;
+            // 
+            // Column_Views
+            // 
+            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Control;
+            this.Column_Views.DefaultCellStyle = dataGridViewCellStyle14;
+            this.Column_Views.HeaderText = "Views";
+            this.Column_Views.Name = "Column_Views";
+            this.Column_Views.ReadOnly = true;
+            // 
+            // Column_Editor
+            // 
+            dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Control;
+            this.Column_Editor.DefaultCellStyle = dataGridViewCellStyle15;
+            this.Column_Editor.HeaderText = "Editor";
+            this.Column_Editor.Name = "Column_Editor";
+            this.Column_Editor.ReadOnly = true;
+            // 
+            // Column_Category
+            // 
+            dataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.Control;
+            this.Column_Category.DefaultCellStyle = dataGridViewCellStyle16;
+            this.Column_Category.HeaderText = "Category";
+            this.Column_Category.Name = "Column_Category";
+            this.Column_Category.ReadOnly = true;
+            // 
+            // Column_Subcategory
+            // 
+            dataGridViewCellStyle17.BackColor = System.Drawing.SystemColors.Control;
+            this.Column_Subcategory.DefaultCellStyle = dataGridViewCellStyle17;
+            this.Column_Subcategory.HeaderText = "Subcategory";
+            this.Column_Subcategory.Name = "Column_Subcategory";
+            this.Column_Subcategory.ReadOnly = true;
+            // 
+            // Column_Manufacturer
+            // 
+            dataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Control;
+            this.Column_Manufacturer.DefaultCellStyle = dataGridViewCellStyle18;
+            this.Column_Manufacturer.HeaderText = "Manufacturer";
+            this.Column_Manufacturer.Name = "Column_Manufacturer";
+            this.Column_Manufacturer.ReadOnly = true;
+            // 
+            // Column_Title
+            // 
+            dataGridViewCellStyle19.BackColor = System.Drawing.SystemColors.Control;
+            this.Column_Title.DefaultCellStyle = dataGridViewCellStyle19;
+            this.Column_Title.HeaderText = "Title";
+            this.Column_Title.Name = "Column_Title";
+            this.Column_Title.ReadOnly = true;
+            // 
+            // Column_Date
+            // 
+            dataGridViewCellStyle20.BackColor = System.Drawing.SystemColors.Control;
+            this.Column_Date.DefaultCellStyle = dataGridViewCellStyle20;
+            this.Column_Date.HeaderText = "Date";
+            this.Column_Date.Name = "Column_Date";
+            this.Column_Date.ReadOnly = true;
+            // 
+            // Column_Edit
+            // 
+            dataGridViewCellStyle21.BackColor = System.Drawing.SystemColors.Control;
+            this.Column_Edit.DefaultCellStyle = dataGridViewCellStyle21;
+            this.Column_Edit.HeaderText = "Edit";
+            this.Column_Edit.Name = "Column_Edit";
+            this.Column_Edit.ReadOnly = true;
+            // 
+            // Column_Status
+            // 
+            dataGridViewCellStyle22.BackColor = System.Drawing.SystemColors.Control;
+            this.Column_Status.DefaultCellStyle = dataGridViewCellStyle22;
+            this.Column_Status.HeaderText = "Status";
+            this.Column_Status.Name = "Column_Status";
+            this.Column_Status.ReadOnly = true;
             // 
             // SearchWindow
             // 
@@ -511,13 +573,19 @@
         private System.Windows.Forms.Label label_sortBy;
         private System.Windows.Forms.CheckBox checkBox_sortDescending;
         private System.Windows.Forms.DataGridView searchDataView;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column_ID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column_Editor;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column_Category;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column_Manufacturer;
         private System.Windows.Forms.ComboBox comboBox_date;
         private System.Windows.Forms.ComboBox comboBox_edit;
         private System.Windows.Forms.Button button_reset;
         private System.Windows.Forms.ComboBox comboBox_maxResults;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column_ID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column_Views;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column_Editor;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column_Category;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column_Subcategory;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column_Manufacturer;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column_Title;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column_Date;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column_Edit;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column_Status;
     }
 }

@@ -89,7 +89,7 @@
             this.button_login.UseVisualStyleBackColor = true;
             this.button_login.Click += new System.EventHandler(this.button_login_Click);
             // 
-            // Login
+            // LoginWindow
             // 
             this.AcceptButton = this.button_login;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -101,7 +101,8 @@
             this.Controls.Add(this.label_password);
             this.Controls.Add(this.label_username);
             this.Controls.Add(this.label1);
-            this.Name = "Login";
+            this.Name = "LoginWindow";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -28,7 +28,6 @@ namespace Hardware_Shop_Client
 
             searchWindow = new SearchWindow();
             editorWindow = new EditorWindow();
-            tagWindow = new TagWindow();
 
             Application.Run(new LoginWindow());
         }

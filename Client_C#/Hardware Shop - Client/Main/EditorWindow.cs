@@ -38,7 +38,6 @@ namespace Hardware_Shop_Client
             comboBox_user.Text = ClientMain.user;
         }
 
-        //Updates all fields regarding the database entry
         public void openExistingItem(int id)
         {
             string sql = "SELECT main.id,category_name, status_name,"
@@ -74,7 +73,7 @@ namespace Hardware_Shop_Client
             }
             reader.Close();
 
-            resetTagWindows();
+            resetTagInfos();
             initContentTable();
         }
 
@@ -113,11 +112,27 @@ namespace Hardware_Shop_Client
 
         private void comboBox_category_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            string sql = "DELETE FROM content_input WHERE main_id = " + currentItemId + ";";
-            SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
-            command.ExecuteNonQuery();
+            if (MessageBox.Show("Do you really want to change the category? All value1 entries will be deleted from this item!", 
+                "Warning", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                string sql = "DELETE FROM content_input WHERE main_id = " + currentItemId + ";";
+                SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
+                command.ExecuteNonQuery();
 
-            initContentTable();
+                initContentTable();
+            }
+            else
+            {
+                string sql = "SELECT category_name FROM main "
+                   + "INNER JOIN category ON main.category = category.id "
+                   + "WHERE main.id = " + currentItemId + ";";
+                SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
+
+                SQLiteDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                    comboBox_category.Text = (string)reader["category_name"];
+                reader.Close();
+            }
         }
 
         private void button_close_Click(object sender, EventArgs e)
@@ -204,9 +219,7 @@ namespace Hardware_Shop_Client
                 openExistingItem(amount);
             }
             else
-            {
                 MessageBox.Show("Something went wrong.", "Error Message");
-            }
         }
 
         private void saveCurrentItem()
@@ -333,7 +346,7 @@ namespace Hardware_Shop_Client
             return id;
         }
 
-        public void resetTagWindows()
+        public void resetTagInfos()
         {
             dataGridView_normalTags.Rows.Clear();
             dataGridView_masterTags.Rows.Clear();
@@ -346,16 +359,10 @@ namespace Hardware_Shop_Client
             SQLiteDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {
-                int tagID = (int)reader["tag_id"];
-
                 if ((int)reader["tag_category"] == 0)
-                {
-                    dataGridView_normalTags.Rows.Add(tagID, reader["tag_name"], reader["Views"]);
-                }
+                    dataGridView_normalTags.Rows.Add((int)reader["tag_id"], reader["tag_name"], reader["Views"]);
                 else
-                {
-                    dataGridView_masterTags.Rows.Add(tagID, reader["tag_name"], reader["Views"]);
-                }
+                    dataGridView_masterTags.Rows.Add((int)reader["tag_id"], reader["tag_name"], reader["Views"]);
             }
             reader.Close();
         }

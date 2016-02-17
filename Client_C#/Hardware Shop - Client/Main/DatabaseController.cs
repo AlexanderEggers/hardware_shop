@@ -12,9 +12,7 @@ namespace Hardware_Shop_Client
             string path = "../../../../DB.sql";
 
             if (!File.Exists(path))
-            {
                 path = "DB.sql";
-            }
 
             m_dbConnection = new SQLiteConnection("Data Source=" + path + ";Version=3;");
             m_dbConnection.Open();

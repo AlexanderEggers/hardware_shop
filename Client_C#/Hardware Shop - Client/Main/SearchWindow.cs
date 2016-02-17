@@ -37,9 +37,11 @@ namespace Hardware_Shop_Client
             comboBox_maxResults.Text = "30";
             textBox_search.Text = "";
 
-            string sql = "SELECT main.id,category_name,"
-                        + "manufacturer_name,user_name FROM main "
+            string sql = "SELECT main.id,category_name,subcategory_name,"
+                        + "manufacturer_name,user_name,title,date,edit,status_name,views FROM main "
                         + "INNER JOIN category ON main.category = category.id "
+                        + "INNER JOIN subcategory ON main.subcategory = subcategory.id "
+                        + "INNER JOIN status ON main.status = status.id "
                         + "INNER JOIN manufacturer ON main.manufacturer = manufacturer.id "
                         + "INNER JOIN user ON main.user = user.id LIMIT " + comboBox_maxResults.Text + ";";
             SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
@@ -47,10 +49,17 @@ namespace Hardware_Shop_Client
             searchDataView.Rows.Clear();
             SQLiteDataReader reader = command.ExecuteReader();
             while (reader.Read())
-            {
-                searchDataView.Rows.Add((int)reader["id"], (string)reader["user_name"],
-                    (string)reader["category_name"], (string)reader["manufacturer_name"]);
-            }
+                searchDataView.Rows.Add(
+                    reader["id"],
+                    reader["views"],
+                    reader["user_name"],
+                    reader["category_name"],
+                    reader["subcategory_name"],
+                    reader["manufacturer_name"],
+                    reader["title"],
+                    reader["date"],
+                    reader["edit"],
+                    reader["status_name"]);
             reader.Close();
         }
 
@@ -107,7 +116,7 @@ namespace Hardware_Shop_Client
 
         private void button_tags_Click(object sender, EventArgs e)
         {
-            if(ClientMain.user_role >= ClientMain.USER_ROLE_MANAGER)
+            if (ClientMain.user_role >= ClientMain.USER_ROLE_MANAGER)
             {
                 Enabled = false;
                 TagToolWindow tagToolWindow = new TagToolWindow();
@@ -158,16 +167,18 @@ namespace Hardware_Shop_Client
         public void executeSearch()
         {
             string text = textBox_search.Text;
-            int tempItemID;
             bool insertFilter = false, numberic = false;
 
-            string sql = "SELECT main.id,category_name,"
-                        + "manufacturer_name,user_name,date,edit FROM main "
+            string sql = "SELECT main.id,category_name,subcategory_name,"
+                        + "manufacturer_name,user_name,status_name,title,date,edit,views FROM main "
                         + "INNER JOIN category ON main.category = category.id "
+                        + "INNER JOIN subcategory ON main.subcategory = subcategory.id "
                         + "INNER JOIN manufacturer ON main.manufacturer = manufacturer.id "
+                        + "INNER JOIN status ON main.status = status.id "
                         + "INNER JOIN user ON main.user = user.id "
                         + "WHERE";
 
+            int tempItemID;
             if (int.TryParse(textBox_search.Text, out tempItemID))
             {
                 sql = sql + " main.id = " + text;
@@ -219,11 +230,15 @@ namespace Hardware_Shop_Client
             {
                 ArrayList data = new ArrayList();
                 data.Add(reader["id"]);
+                data.Add(reader["views"]);
                 data.Add(reader["user_name"]);
                 data.Add(reader["category_name"]);
+                data.Add(reader["subcategory_name"]);
                 data.Add(reader["manufacturer_name"]);
+                data.Add(reader["title"]);
                 data.Add(reader["date"]);
                 data.Add(reader["edit"]);
+                data.Add(reader["status_name"]);
 
                 searchResults.Add((int)data[0], data);
             }
@@ -231,21 +246,21 @@ namespace Hardware_Shop_Client
 
             searchResults = adjustSearchResultsByDate(searchResults, comboBox_date.Text, "date");
             searchResults = adjustSearchResultsByDate(searchResults, comboBox_edit.Text, "edit");
-            searchDataView.Rows.Clear();
 
+            searchDataView.Rows.Clear();
             List<int> keyList = new List<int>(searchResults.Keys);
             for (int i = 0; i <= int.Parse(comboBox_maxResults.Text) && i < keyList.Count; i++)
             {
                 ArrayList data = searchResults[keyList[i]];
-                searchDataView.Rows.Add(data[0], data[1], data[2], data[3]);
+                searchDataView.Rows.Add(data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7], data[8], data[9]);
             }
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="searchResults">Dictionary which hold a arraylist structure: id, user_name, 
-        /// category_name, manufacture_name, date, edit</param>
+        /// <param name="searchResults">Dictionary which hold a arraylist structure: 
+        /// id, views, user, category, subcategory, manufacture, title date, edit, status</param>
         /// <param name="dateFilter">Reference which date filter have been selected</param>
         /// <returns></returns>
         private Dictionary<int, ArrayList> adjustSearchResultsByDate(Dictionary<int, ArrayList> searchResults, string dateFilter, string reference)
@@ -275,10 +290,10 @@ namespace Hardware_Shop_Client
             {
                 string date;
 
-                if (reference == "Date")
-                    date = (string)data[4];
+                if (reference == "date")
+                    date = (string)data[7];
                 else
-                    date = (string)data[5];
+                    date = (string)data[8];
 
                 string[] dateSplite = date.Split(new Char[] { '-' });
 
@@ -361,7 +376,6 @@ namespace Hardware_Shop_Client
                         + "WHERE main_id = " + itemID + ";";
             SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
 
-            searchDataView.Rows.Clear();
             SQLiteDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {

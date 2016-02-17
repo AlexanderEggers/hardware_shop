@@ -22,3 +22,4 @@ C:\Users\Alexander\Documents\Projekte\HardwareShop\Client_C#\Hardware Shop - Cli
 C:\Users\Alexander\Documents\Projekte\HardwareShop\Client_C#\Hardware Shop - Client\obj\Release\Hardware Shop - Client.csproj.GenerateResource.Cache
 C:\Users\Alexander\Documents\Projekte\HardwareShop\Client_C#\Hardware Shop - Client\obj\Release\Hardware Shop - Client.exe
 C:\Users\Alexander\Documents\Projekte\HardwareShop\Client_C#\Hardware Shop - Client\obj\Release\Hardware Shop - Client.pdb
+C:\Users\Alexander\Documents\Projekte\HardwareShop\Client_C#\Hardware Shop - Client\obj\Release\Hardware Shop - Client.csprojResolveAssemblyReference.cache

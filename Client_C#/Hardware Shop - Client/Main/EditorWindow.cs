@@ -277,18 +277,21 @@ namespace Hardware_Shop_Client
 
                 if (contentID != -1)
                 {
-                    bool success = false;
-                    sql = "SELECT value2 FROM content_input "
+                    int valueID = -1;
+                    sql = "SELECT id,value2 FROM content_input "
                     + "WHERE main_id = " + currentItemId + " AND value1 = " + contentID + ";";
                     command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
 
                     reader = command.ExecuteReader();
                     while (reader.Read())
-                        success = true;
+                        valueID = (int)reader["id"];
                     reader.Close();
 
-                    if (success)
-                        updateContent(contentID, value2);
+                    if (valueID != -1)
+                        if(value2 != "")
+                            updateContent(valueID, value2);
+                        else
+                            deleteContent(valueID);
                     else
                         insertNewContent(contentID, value2);
                 }
@@ -318,6 +321,13 @@ namespace Hardware_Shop_Client
             string sql = "UPDATE content_input " +
                 "SET value2 = '" + value2 + "'" +
                 " WHERE id = " + value1 + ";";
+            SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
+            command.ExecuteNonQuery();
+        }
+
+        private void deleteContent(int valueID)
+        {
+            string sql = "DELETE FROM content_input WHERE id = " + valueID + ";";
             SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
             command.ExecuteNonQuery();
         }

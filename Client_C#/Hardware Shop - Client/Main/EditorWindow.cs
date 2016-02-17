@@ -1,4 +1,4 @@
-﻿using Hardware_Shop_Client.article;
+﻿using Hardware_Shop_Client.Main;
 using System;
 using System.Collections.Generic;
 using System.Data.SQLite;

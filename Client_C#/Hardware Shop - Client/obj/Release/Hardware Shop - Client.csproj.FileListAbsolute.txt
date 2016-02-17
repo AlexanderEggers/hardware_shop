@@ -1,0 +1,24 @@
+C:\Users\Alexander\Documents\Projekte\HardwareShop\Client_C#\Hardware Shop - Client\bin\Release\Hardware Shop - Client.exe.config
+C:\Users\Alexander\Documents\Projekte\HardwareShop\Client_C#\Hardware Shop - Client\bin\Release\Hardware Shop - Client.exe
+C:\Users\Alexander\Documents\Projekte\HardwareShop\Client_C#\Hardware Shop - Client\bin\Release\Hardware Shop - Client.pdb
+C:\Users\Alexander\Documents\Projekte\HardwareShop\Client_C#\Hardware Shop - Client\bin\Release\EntityFramework.dll
+C:\Users\Alexander\Documents\Projekte\HardwareShop\Client_C#\Hardware Shop - Client\bin\Release\EntityFramework.SqlServer.dll
+C:\Users\Alexander\Documents\Projekte\HardwareShop\Client_C#\Hardware Shop - Client\bin\Release\System.Data.SQLite.dll
+C:\Users\Alexander\Documents\Projekte\HardwareShop\Client_C#\Hardware Shop - Client\bin\Release\System.Data.SQLite.EF6.dll
+C:\Users\Alexander\Documents\Projekte\HardwareShop\Client_C#\Hardware Shop - Client\bin\Release\System.Data.SQLite.Linq.dll
+C:\Users\Alexander\Documents\Projekte\HardwareShop\Client_C#\Hardware Shop - Client\bin\Release\System.Data.SQLite.xml
+C:\Users\Alexander\Documents\Projekte\HardwareShop\Client_C#\Hardware Shop - Client\bin\Release\EntityFramework.xml
+C:\Users\Alexander\Documents\Projekte\HardwareShop\Client_C#\Hardware Shop - Client\bin\Release\EntityFramework.SqlServer.xml
+C:\Users\Alexander\Documents\Projekte\HardwareShop\Client_C#\Hardware Shop - Client\obj\Release\Hardware_Shop_Client.EditorWindow.resources
+C:\Users\Alexander\Documents\Projekte\HardwareShop\Client_C#\Hardware Shop - Client\obj\Release\Hardware_Shop_Client.LoginWindow.resources
+C:\Users\Alexander\Documents\Projekte\HardwareShop\Client_C#\Hardware Shop - Client\obj\Release\Hardware_Shop_Client.SearchWindow.resources
+C:\Users\Alexander\Documents\Projekte\HardwareShop\Client_C#\Hardware Shop - Client\obj\Release\Hardware_Shop_Client.Properties.Resources.resources
+C:\Users\Alexander\Documents\Projekte\HardwareShop\Client_C#\Hardware Shop - Client\obj\Release\Hardware_Shop_Client.TagWindow.resources
+C:\Users\Alexander\Documents\Projekte\HardwareShop\Client_C#\Hardware Shop - Client\obj\Release\Hardware_Shop_Client.Tools.CategoryToolWindow.resources
+C:\Users\Alexander\Documents\Projekte\HardwareShop\Client_C#\Hardware Shop - Client\obj\Release\Hardware_Shop_Client.Tools.ManufacturerToolWindow.resources
+C:\Users\Alexander\Documents\Projekte\HardwareShop\Client_C#\Hardware Shop - Client\obj\Release\Hardware_Shop_Client.Tools.SubCategoryToolWindow.resources
+C:\Users\Alexander\Documents\Projekte\HardwareShop\Client_C#\Hardware Shop - Client\obj\Release\Hardware_Shop_Client.TagToolWindow.resources
+C:\Users\Alexander\Documents\Projekte\HardwareShop\Client_C#\Hardware Shop - Client\obj\Release\Hardware_Shop_Client.Tools.UserToolWindow.resources
+C:\Users\Alexander\Documents\Projekte\HardwareShop\Client_C#\Hardware Shop - Client\obj\Release\Hardware Shop - Client.csproj.GenerateResource.Cache
+C:\Users\Alexander\Documents\Projekte\HardwareShop\Client_C#\Hardware Shop - Client\obj\Release\Hardware Shop - Client.exe
+C:\Users\Alexander\Documents\Projekte\HardwareShop\Client_C#\Hardware Shop - Client\obj\Release\Hardware Shop - Client.pdb

@@ -1,4 +1,5 @@
 ﻿using System.Data.SQLite;
+using System.IO;
 
 namespace Hardware_Shop_Client
 {
@@ -8,7 +9,14 @@ namespace Hardware_Shop_Client
 
         public DatabaseController()
         {
-            m_dbConnection = new SQLiteConnection("Data Source=../../../../DB.sql;Version=3;");
+            string path = "../../../../DB.sql";
+
+            if (!File.Exists(path))
+            {
+                path = "DB.sql";
+            }
+
+            m_dbConnection = new SQLiteConnection("Data Source=" + path + ";Version=3;");
             m_dbConnection.Open();
         }
 

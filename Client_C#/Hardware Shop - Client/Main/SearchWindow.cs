@@ -107,23 +107,52 @@ namespace Hardware_Shop_Client
 
         private void button_tags_Click(object sender, EventArgs e)
         {
-            Enabled = false;
-            TagToolWindow tagToolWindow = new TagToolWindow();
-            tagToolWindow.Show();
+            if(ClientMain.user_role >= ClientMain.USER_ROLE_MANAGER)
+            {
+                Enabled = false;
+                TagToolWindow tagToolWindow = new TagToolWindow();
+                tagToolWindow.Show();
+            }
         }
 
         private void button_category_Click(object sender, EventArgs e)
         {
-            Enabled = false;
-            CategoryToolWindow categoryToolWindow = new CategoryToolWindow();
-            categoryToolWindow.Show();
+            if (ClientMain.user_role >= ClientMain.USER_ROLE_MANAGER)
+            {
+                Enabled = false;
+                CategoryToolWindow categoryToolWindow = new CategoryToolWindow();
+                categoryToolWindow.Show();
+            }
         }
 
         private void button_subcategory_Click(object sender, EventArgs e)
         {
-            Enabled = false;
-            SubCategoryToolWindow subcategoryToolWindow = new SubCategoryToolWindow();
-            subcategoryToolWindow.Show();
+            if (ClientMain.user_role >= ClientMain.USER_ROLE_MANAGER)
+            {
+                Enabled = false;
+                SubCategoryToolWindow subcategoryToolWindow = new SubCategoryToolWindow();
+                subcategoryToolWindow.Show();
+            }
+        }
+
+        private void button_manufacture_Click(object sender, EventArgs e)
+        {
+            if (ClientMain.user_role >= ClientMain.USER_ROLE_MANAGER)
+            {
+                Enabled = false;
+                ManufacturerToolWindow manufacturerToolWindow = new ManufacturerToolWindow();
+                manufacturerToolWindow.Show();
+            }
+        }
+
+        private void button_user_Click(object sender, EventArgs e)
+        {
+            if (ClientMain.user_role == ClientMain.USER_ROLE_ADMIN)
+            {
+                Enabled = false;
+                UserToolWindow userToolWindow = new UserToolWindow();
+                userToolWindow.Show();
+            }
         }
 
         public void executeSearch()
@@ -386,7 +415,7 @@ namespace Hardware_Shop_Client
             if (userID != -1)
             {
                 sql = "INSERT INTO content_access (id,main_id,user_id,date) "
-                + "VALUES (" + amount + ", " + itemID + ", " + userID + ", " + DateTime.Now + ");";
+                + "VALUES (" + amount + ", " + itemID + ", " + userID + ", '" + DateTime.Now + "');";
                 command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
                 command.ExecuteNonQuery();
             }

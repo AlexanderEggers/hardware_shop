@@ -38,3 +38,5 @@ C:\Users\Alexander\Documents\Projekte\HardwareShop\Client_C#\Hardware Shop - Cli
 C:\Users\Alexander\Documents\Projekte\HardwareShop\Client_C#\Hardware Shop - Client\obj\Debug\Hardware_Shop_Client.TagToolWindow.resources
 C:\Users\Alexander\Documents\Projekte\HardwareShop\Client_C#\Hardware Shop - Client\obj\Debug\Hardware_Shop_Client.Tools.CategoryToolWindow.resources
 C:\Users\Alexander\Documents\Projekte\HardwareShop\Client_C#\Hardware Shop - Client\obj\Debug\Hardware_Shop_Client.Tools.SubCategoryToolWindow.resources
+C:\Users\Alexander\Documents\Projekte\HardwareShop\Client_C#\Hardware Shop - Client\obj\Debug\Hardware_Shop_Client.Tools.ManufacturerToolWindow.resources
+C:\Users\Alexander\Documents\Projekte\HardwareShop\Client_C#\Hardware Shop - Client\obj\Debug\Hardware_Shop_Client.Tools.UserToolWindow.resources

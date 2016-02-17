@@ -100,7 +100,76 @@ namespace Hardware_Shop_Client.Tools
         private void dataGridView_results_SelectionChanged(object sender, EventArgs e)
         {
             if (dataGridView_results.SelectedRows.Count > 0)
+            {
                 textBox_edit.Text = (string)dataGridView_results.SelectedRows[0].Cells[1].Value;
+                initValue1Table();
+            }    
+        }
+
+        private void button_value1Save_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow row in dataGridView_value1Results.Rows)
+            {
+                if(string.IsNullOrEmpty(row.Cells[0].FormattedValue.ToString()))
+                {
+                    if(string.IsNullOrEmpty(row.Cells[1].FormattedValue.ToString()))
+                        continue;
+
+                    int amount = 0;
+
+                    string sql = "SELECT id FROM input;";
+                    SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
+
+                    SQLiteDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                        amount++;
+                    reader.Close();
+
+                    sql = "INSERT INTO input (id,category_id,value1) "
+                        + "VALUES (" + amount + ", " + dataGridView_results.SelectedRows[0].Cells[0].Value 
+                        + ", '" + row.Cells[1].Value + "'); ";
+                    command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
+                    command.ExecuteNonQuery();
+                } else
+                {
+                    string sql = "UPDATE input " +
+                        "SET value1 = '" + row.Cells[1].Value + "'" +
+                        " WHERE id = " + row.Cells[0].Value + ";";
+                    SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
+                    command.ExecuteNonQuery();
+                }
+            }
+
+            MessageBox.Show("All value1 entries has been saved.", "Info");
+        }
+
+        private void button_value1Delete_Click(object sender, EventArgs e)
+        {
+            if (dataGridView_value1Results.SelectedRows.Count > 0)
+            {
+                int amount = 0;
+
+                string sql = "SELECT id FROM content_input WHERE value1 = " + dataGridView_results.SelectedRows[0].Cells[0].Value + ";";
+
+                SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
+                SQLiteDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                    amount++;
+                reader.Close();
+
+                if(amount == 0)
+                {
+                    sql = "DELETE FROM input WHERE value1 = '" + dataGridView_value1Results.SelectedRows[0].Cells[1].Value + "';";
+                    command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
+                    command.ExecuteNonQuery();
+
+                    MessageBox.Show("Selected value1 has been deleted.", "Info");
+                    initValue1Table();
+                } else
+                {
+                    MessageBox.Show("Selected value1 cannot be deleted because of remaining items related to this value1 entry.", "Info");
+                }
+            }
         }
 
         private void executeSearch()
@@ -136,6 +205,21 @@ namespace Hardware_Shop_Client.Tools
                 }
             }
 
+            reader.Close();
+        }
+
+        private void initValue1Table()
+        {
+            string sql = "SELECT id,value1 FROM input WHERE category_id = "
+                    + dataGridView_results.SelectedRows[0].Cells[0].Value + ";";
+            SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
+            SQLiteDataReader reader = command.ExecuteReader();
+
+            dataGridView_value1Results.Rows.Clear();
+            while (reader.Read())
+            {
+                dataGridView_value1Results.Rows.Add((int)reader["id"], (string)reader["value1"]);
+            }
             reader.Close();
         }
     }

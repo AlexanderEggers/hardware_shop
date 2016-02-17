@@ -129,7 +129,7 @@ public class DatabaseCreator {
         
         stmt = c.createStatement();
         sql = "INSERT INTO user (id,user_name,password,role) "
-                + "VALUES (1, 'Admin', 'root', 1);";
+                + "VALUES (1, 'Admin', 'root', 3);";
         stmt.executeUpdate(sql);
         
         stmt = c.createStatement();

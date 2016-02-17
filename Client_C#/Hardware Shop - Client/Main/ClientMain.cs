@@ -9,7 +9,14 @@ namespace Hardware_Shop_Client
         public static SearchWindow searchWindow;
         public static EditorWindow editorWindow;
         public static TagWindow tagWindow;
+
         public static string user;
+        public static int user_role;
+
+        public readonly static int USER_ROLE_ADMIN = 3;
+        public readonly static int USER_ROLE_MANAGER = 2;
+        public readonly static int USER_ROLE_EDITOR = 1;
+        public readonly static int USER_ROLE_USER = 0;
 
         [STAThread]
         static void Main()

@@ -36,7 +36,7 @@
             this.button_search = new System.Windows.Forms.Button();
             this.button_editor = new System.Windows.Forms.Button();
             this.button_tags = new System.Windows.Forms.Button();
-            this.button_userlist = new System.Windows.Forms.Button();
+            this.button_user = new System.Windows.Forms.Button();
             this.button_category = new System.Windows.Forms.Button();
             this.button_subcategory = new System.Windows.Forms.Button();
             this.button_manufacture = new System.Windows.Forms.Button();
@@ -100,14 +100,15 @@
             this.button_tags.UseVisualStyleBackColor = true;
             this.button_tags.Click += new System.EventHandler(this.button_tags_Click);
             // 
-            // button_userlist
+            // button_user
             // 
-            this.button_userlist.Location = new System.Drawing.Point(257, -1);
-            this.button_userlist.Name = "button_userlist";
-            this.button_userlist.Size = new System.Drawing.Size(87, 31);
-            this.button_userlist.TabIndex = 3;
-            this.button_userlist.Text = "Userlist";
-            this.button_userlist.UseVisualStyleBackColor = true;
+            this.button_user.Location = new System.Drawing.Point(257, -1);
+            this.button_user.Name = "button_user";
+            this.button_user.Size = new System.Drawing.Size(87, 31);
+            this.button_user.TabIndex = 3;
+            this.button_user.Text = "User";
+            this.button_user.UseVisualStyleBackColor = true;
+            this.button_user.Click += new System.EventHandler(this.button_user_Click);
             // 
             // button_category
             // 
@@ -137,6 +138,7 @@
             this.button_manufacture.TabIndex = 6;
             this.button_manufacture.Text = "Manufacture";
             this.button_manufacture.UseVisualStyleBackColor = true;
+            this.button_manufacture.Click += new System.EventHandler(this.button_manufacture_Click);
             // 
             // textBox_search
             // 
@@ -468,7 +470,7 @@
             this.Controls.Add(this.button_manufacture);
             this.Controls.Add(this.button_subcategory);
             this.Controls.Add(this.button_category);
-            this.Controls.Add(this.button_userlist);
+            this.Controls.Add(this.button_user);
             this.Controls.Add(this.button_tags);
             this.Controls.Add(this.button_editor);
             this.Controls.Add(this.button_search);
@@ -486,7 +488,7 @@
         private System.Windows.Forms.Button button_search;
         private System.Windows.Forms.Button button_editor;
         private System.Windows.Forms.Button button_tags;
-        private System.Windows.Forms.Button button_userlist;
+        private System.Windows.Forms.Button button_user;
         private System.Windows.Forms.Button button_category;
         private System.Windows.Forms.Button button_subcategory;
         private System.Windows.Forms.Button button_manufacture;

@@ -37,13 +37,13 @@ namespace Hardware_Shop_Client
             comboBox_maxResults.Text = "30";
             textBox_search.Text = "";
 
-            string sql = "SELECT main.id,category_name,subcategory_name,"
-                        + "manufacturer_name,user_name,title,date,edit,status_name,views FROM main "
-                        + "INNER JOIN category ON main.category = category.id "
-                        + "INNER JOIN subcategory ON main.subcategory = subcategory.id "
-                        + "INNER JOIN status ON main.status = status.id "
-                        + "INNER JOIN manufacturer ON main.manufacturer = manufacturer.id "
-                        + "INNER JOIN user ON main.user = user.id LIMIT " + comboBox_maxResults.Text + ";";
+            string sql = "SELECT article.id,category_name,subcategory_name,"
+                        + "manufacturer_name,user_name,title,date,edit,status_name,views FROM article "
+                        + "INNER JOIN category ON article.category = category.id "
+                        + "INNER JOIN subcategory ON article.subcategory = subcategory.id "
+                        + "INNER JOIN status ON article.status = status.id "
+                        + "INNER JOIN manufacturer ON article.manufacturer = manufacturer.id "
+                        + "INNER JOIN user ON article.user = user.id LIMIT " + comboBox_maxResults.Text + ";";
             SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
 
             searchDataView.Rows.Clear();
@@ -169,25 +169,25 @@ namespace Hardware_Shop_Client
             string text = textBox_search.Text;
             bool insertFilter = false, numberic = false;
 
-            string sql = "SELECT main.id,category_name,subcategory_name,"
-                        + "manufacturer_name,user_name,status_name,title,date,edit,views FROM main "
-                        + "INNER JOIN category ON main.category = category.id "
-                        + "INNER JOIN subcategory ON main.subcategory = subcategory.id "
-                        + "INNER JOIN manufacturer ON main.manufacturer = manufacturer.id "
-                        + "INNER JOIN status ON main.status = status.id "
-                        + "INNER JOIN user ON main.user = user.id "
+            string sql = "SELECT article.id,category_name,subcategory_name,"
+                        + "manufacturer_name,user_name,status_name,title,date,edit,views FROM article "
+                        + "INNER JOIN category ON article.category = category.id "
+                        + "INNER JOIN subcategory ON article.subcategory = subcategory.id "
+                        + "INNER JOIN manufacturer ON article.manufacturer = manufacturer.id "
+                        + "INNER JOIN status ON article.status = status.id "
+                        + "INNER JOIN user ON article.user = user.id "
                         + "WHERE";
 
             int tempItemID;
             if (int.TryParse(textBox_search.Text, out tempItemID))
             {
-                sql = sql + " main.id = " + text;
+                sql = sql + " article.id = " + text;
                 insertFilter = true;
                 numberic = true;
             }
             else if (textBox_search.Text != "")
             {
-                sql = sql + " main.title LIKE '%" + text + "%'";
+                sql = sql + " article.title LIKE '%" + text + "%'";
                 insertFilter = true;
             }
 
@@ -202,9 +202,9 @@ namespace Hardware_Shop_Client
                 if (comboBox_sortBy.Text != "")
                 {
                     if (checkBox_sortDescending.Checked)
-                        sql = sql + " ORDER BY main." + comboBox_sortBy.Text + " DESC";
+                        sql = sql + " ORDER BY article." + comboBox_sortBy.Text + " DESC";
                     else
-                        sql = sql + " ORDER BY main." + comboBox_sortBy.Text + " ASC";
+                        sql = sql + " ORDER BY article." + comboBox_sortBy.Text + " ASC";
                 }
             }
             else
@@ -321,9 +321,9 @@ namespace Hardware_Shop_Client
                 if (success)
                 {
                     if (filterBefore)
-                        return " AND main." + type + " = " + id;
+                        return " AND article." + type + " = " + id;
                     else
-                        return " main." + type + " = " + id;
+                        return " article." + type + " = " + id;
                 }
                 else
                     return "";
@@ -361,7 +361,7 @@ namespace Hardware_Shop_Client
 
             reference.Items.Clear();
 
-            if(table == "status" || table == "user")
+            if (table == "status" || table == "user")
                 reference.Items.Add("");
 
             SQLiteDataReader reader = command.ExecuteReader();
@@ -381,7 +381,7 @@ namespace Hardware_Shop_Client
 
             string sql = "SELECT user_name, date FROM content_access "
                         + "INNER JOIN user ON content_access.user_id = user.id "
-                        + "WHERE main_id = " + itemID + ";";
+                        + "WHERE article_id = " + itemID + ";";
             SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
 
             SQLiteDataReader reader = command.ExecuteReader();
@@ -412,16 +412,14 @@ namespace Hardware_Shop_Client
 
         private void addContentAccessBlock(int itemID)
         {
-            int amount = 0, userID = -1;
+            int lastID = 0, userID = -1;
 
             string sql = "SELECT id FROM content_access;";
             SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
 
             SQLiteDataReader reader = command.ExecuteReader();
             while (reader.Read())
-            {
-                amount++;
-            }
+                lastID = (int)reader["id"];
             reader.Close();
 
             sql = "SELECT id FROM user WHERE user_name = '" + ClientMain.user + "';";
@@ -436,8 +434,8 @@ namespace Hardware_Shop_Client
 
             if (userID != -1)
             {
-                sql = "INSERT INTO content_access (id,main_id,user_id,date) "
-                + "VALUES (" + amount + ", " + itemID + ", " + userID + ", '" + DateTime.Now + "');";
+                sql = "INSERT INTO content_access (id,article_id,user_id,date) "
+                + "VALUES (" + (lastID + 1) + ", " + itemID + ", " + userID + ", '" + DateTime.Now + "');";
                 command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
                 command.ExecuteNonQuery();
             }

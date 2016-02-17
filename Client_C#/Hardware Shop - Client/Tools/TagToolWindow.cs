@@ -19,24 +19,25 @@ namespace Hardware_Shop_Client
 
         private void button_create_Click(object sender, EventArgs e)
         {
-            int amount = 0;
+            int lastID = 0;
 
             string sql = "SELECT id FROM tag;";
             SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
 
             SQLiteDataReader reader = command.ExecuteReader();
             while (reader.Read())
-                amount++;
+                lastID = (int)reader["id"];
             reader.Close();
 
             sql = "INSERT INTO tag (id,tag_name) "
-                + "VALUES (" + amount + ", '" + textBox_create.Text + "');";
+                + "VALUES (" + (lastID + 1) + ", '" + textBox_create.Text + "');";
             command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
             command.ExecuteNonQuery();
 
             MessageBox.Show("Tag has been created.", "Info");
 
             textBox_search.Text = textBox_create.Text;
+            textBox_create.Text = "";
             executeSearch();
         }
 
@@ -80,7 +81,7 @@ namespace Hardware_Shop_Client
                 executeSearch();
             }
             else
-                MessageBox.Show("Tag cannot be deleted because of remaining items related to this tag.", "Info");
+                MessageBox.Show("Tag cannot be deleted because of rearticleing items related to this tag.", "Info");
         }
 
         private void button_search_Click(object sender, EventArgs e)
@@ -107,7 +108,7 @@ namespace Hardware_Shop_Client
         {
             string sql;
 
-            if (textBox_search.Text != "")
+            if (textBox_search.Text == "")
                 sql = "SELECT id,tag_name FROM tag;";
             else
                 sql = "SELECT id,tag_name FROM tag"

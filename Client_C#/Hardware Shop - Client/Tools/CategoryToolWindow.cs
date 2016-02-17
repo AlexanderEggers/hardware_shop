@@ -19,24 +19,25 @@ namespace Hardware_Shop_Client.Tools
 
         private void button_create_Click(object sender, EventArgs e)
         {
-            int amount = 0;
+            int lastID = 0;
 
             string sql = "SELECT id FROM category;";
             SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
 
             SQLiteDataReader reader = command.ExecuteReader();
             while (reader.Read())
-                amount++;
+                lastID = (int)reader["id"];
             reader.Close();
 
             sql = "INSERT INTO category (id,category_name) "
-                + "VALUES (" + amount + ", '" + textBox_create.Text + "');";
+                + "VALUES (" + (lastID + 1) + ", '" + textBox_create.Text + "');";
             command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
             command.ExecuteNonQuery();
 
             MessageBox.Show("Category has been created.", "Info");
 
             textBox_search.Text = textBox_create.Text;
+            textBox_create.Text = "";
             executeSearch();
         }
 
@@ -60,7 +61,7 @@ namespace Hardware_Shop_Client.Tools
         {
             int categoryID = (int)dataGridView_results.SelectedRows[0].Cells[0].Value, amount = 0;
 
-            string sql = "SELECT id FROM main WHERE category = " + categoryID + ";";
+            string sql = "SELECT id FROM article WHERE category = " + categoryID + ";";
             SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
 
             SQLiteDataReader reader = command.ExecuteReader();
@@ -80,7 +81,7 @@ namespace Hardware_Shop_Client.Tools
                 executeSearch();
             }
             else
-                MessageBox.Show("Category cannot be deleted because of remaining items related to this category.", "Info");
+                MessageBox.Show("Category cannot be deleted because of rearticleing items related to this category.", "Info");
         }
 
         private void button_search_Click(object sender, EventArgs e)
@@ -103,34 +104,35 @@ namespace Hardware_Shop_Client.Tools
             {
                 textBox_edit.Text = (string)dataGridView_results.SelectedRows[0].Cells[1].Value;
                 initValue1Table();
-            }    
+            }
         }
 
         private void button_value1Save_Click(object sender, EventArgs e)
         {
             foreach (DataGridViewRow row in dataGridView_value1Results.Rows)
             {
-                if(string.IsNullOrEmpty(row.Cells[0].FormattedValue.ToString()))
+                if (string.IsNullOrEmpty(row.Cells[0].FormattedValue.ToString()))
                 {
-                    if(string.IsNullOrEmpty(row.Cells[1].FormattedValue.ToString()))
+                    if (string.IsNullOrEmpty(row.Cells[1].FormattedValue.ToString()))
                         continue;
 
-                    int amount = 0;
+                    int lastID = 0;
 
                     string sql = "SELECT id FROM input;";
                     SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
 
                     SQLiteDataReader reader = command.ExecuteReader();
                     while (reader.Read())
-                        amount++;
+                        lastID = (int)reader["id"];
                     reader.Close();
 
                     sql = "INSERT INTO input (id,category_id,value1) "
-                        + "VALUES (" + amount + ", " + dataGridView_results.SelectedRows[0].Cells[0].Value 
+                        + "VALUES (" + (lastID + 1) + ", " + dataGridView_results.SelectedRows[0].Cells[0].Value
                         + ", '" + row.Cells[1].Value + "'); ";
                     command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
                     command.ExecuteNonQuery();
-                } else
+                }
+                else
                 {
                     string sql = "UPDATE input " +
                         "SET value1 = '" + row.Cells[1].Value + "'" +
@@ -141,11 +143,13 @@ namespace Hardware_Shop_Client.Tools
             }
 
             MessageBox.Show("All value1 entries has been saved.", "Info");
+            initValue1Table();
         }
 
         private void button_value1Delete_Click(object sender, EventArgs e)
         {
-            if (dataGridView_value1Results.SelectedRows.Count > 0)
+            if (dataGridView_value1Results.SelectedRows.Count > 0
+                && string.IsNullOrEmpty(dataGridView_results.SelectedRows[0].Cells[0].FormattedValue.ToString()))
             {
                 int amount = 0;
 
@@ -157,26 +161,29 @@ namespace Hardware_Shop_Client.Tools
                     amount++;
                 reader.Close();
 
-                if(amount == 0)
+                if (amount == 0)
                 {
-                    sql = "DELETE FROM input WHERE value1 = '" + dataGridView_value1Results.SelectedRows[0].Cells[1].Value + "';";
+                    sql = "DELETE FROM input WHERE value1 = '"
+                        + dataGridView_value1Results.SelectedRows[0].Cells[1].Value + "' AND category_id = "
+                        + dataGridView_results.SelectedRows[0].Cells[0].Value + ";";
                     command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
                     command.ExecuteNonQuery();
 
                     MessageBox.Show("Selected value1 has been deleted.", "Info");
                     initValue1Table();
-                } else
-                {
-                    MessageBox.Show("Selected value1 cannot be deleted because of remaining items related to this value1 entry.", "Info");
                 }
+                else
+                    MessageBox.Show("Selected value1 cannot be deleted because of rearticleing items related to this value1 entry.", "Info");
             }
+            else
+                MessageBox.Show("Unsaved value1 entries cannot be deleted.", "Info");
         }
 
         private void executeSearch()
         {
             string sql;
 
-            if (textBox_search.Text != "")
+            if (textBox_search.Text == "")
                 sql = "SELECT id,category_name FROM category;";
             else
                 sql = "SELECT id,category_name FROM category"
@@ -191,7 +198,7 @@ namespace Hardware_Shop_Client.Tools
             {
                 int amount = 0;
 
-                string sql2 = "SELECT id FROM main WHERE category = " + reader["id"] + ";";
+                string sql2 = "SELECT id FROM article WHERE category = " + reader["id"] + ";";
                 SQLiteCommand command2 = new SQLiteCommand(sql2, ClientMain.databaseController.getConnection());
 
                 SQLiteDataReader reader2 = command2.ExecuteReader();
@@ -199,7 +206,7 @@ namespace Hardware_Shop_Client.Tools
                     amount++;
                 reader2.Close();
 
-                if((string)reader["category_name"] != "")
+                if ((string)reader["category_name"] != "")
                 {
                     dataGridView_results.Rows.Add((int)reader["id"], (string)reader["category_name"], amount);
                 }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace Hardware_Shop_Client.Main
+namespace Hardware_Shop_Client.article
 {
     public partial class URLWindow : Form
     {
@@ -27,9 +27,9 @@ namespace Hardware_Shop_Client.Main
             string[] url = textBox_urlName.Text.Split(new Char[] { ' ' });
             string newURL = "";
 
-            foreach(string part in url)
+            foreach (string part in url)
             {
-                if(newURL == "")
+                if (newURL == "")
                     newURL = part;
                 else
                     newURL = newURL + "_" + part;

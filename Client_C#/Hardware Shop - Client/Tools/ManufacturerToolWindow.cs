@@ -19,24 +19,25 @@ namespace Hardware_Shop_Client.Tools
 
         private void button_create_Click(object sender, EventArgs e)
         {
-            int amount = 0;
+            int lastID = 0;
 
             string sql = "SELECT id FROM manufacturer;";
             SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
 
             SQLiteDataReader reader = command.ExecuteReader();
             while (reader.Read())
-                amount++;
+                lastID = (int)reader["id"];
             reader.Close();
 
             sql = "INSERT INTO manufacturer (id,manufacturer_name) "
-                + "VALUES (" + amount + ", '" + textBox_create.Text + "');";
+                + "VALUES (" + (lastID + 1) + ", '" + textBox_create.Text + "');";
             command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
             command.ExecuteNonQuery();
 
             MessageBox.Show("Manufacturer has been created.", "Info");
 
             textBox_search.Text = textBox_create.Text;
+            textBox_create.Text = "";
             executeSearch();
         }
 
@@ -60,7 +61,7 @@ namespace Hardware_Shop_Client.Tools
         {
             int manufacturerID = (int)dataGridView_results.SelectedRows[0].Cells[0].Value, amount = 0;
 
-            string sql = "SELECT id FROM main WHERE manufacturer = " + manufacturerID + ";";
+            string sql = "SELECT id FROM article WHERE manufacturer = " + manufacturerID + ";";
             SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
 
             SQLiteDataReader reader = command.ExecuteReader();
@@ -80,7 +81,7 @@ namespace Hardware_Shop_Client.Tools
                 executeSearch();
             }
             else
-                MessageBox.Show("Manufacturer cannot be deleted because of remaining items related to this manufacturer.", "Info");
+                MessageBox.Show("Manufacturer cannot be deleted because of rearticleing items related to this manufacturer.", "Info");
         }
 
         private void button_search_Click(object sender, EventArgs e)
@@ -107,7 +108,7 @@ namespace Hardware_Shop_Client.Tools
         {
             string sql;
 
-            if (textBox_search.Text != "")
+            if (textBox_search.Text == "")
                 sql = "SELECT id,manufacturer_name FROM manufacturer;";
             else
                 sql = "SELECT id,manufacturer_name FROM manufacturer"
@@ -122,7 +123,7 @@ namespace Hardware_Shop_Client.Tools
             {
                 int amount = 0;
 
-                string sql2 = "SELECT id FROM main WHERE manufacturer = " + reader["id"] + ";";
+                string sql2 = "SELECT id FROM article WHERE manufacturer = " + reader["id"] + ";";
                 SQLiteCommand command2 = new SQLiteCommand(sql2, ClientMain.databaseController.getConnection());
 
                 SQLiteDataReader reader2 = command2.ExecuteReader();

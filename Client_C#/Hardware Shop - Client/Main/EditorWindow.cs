@@ -1,4 +1,4 @@
-﻿using Hardware_Shop_Client.Main;
+﻿using Hardware_Shop_Client.article;
 using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
@@ -45,14 +45,14 @@ namespace Hardware_Shop_Client
 
         public void openExistingItem(int id)
         {
-            string sql = "SELECT main.id,category_name, status_name,"
-                        + "subcategory_name,user_name, title, url, name, date, edit, manufacturer_name FROM main "
-                        + "INNER JOIN category ON main.category = category.id "
-                        + "INNER JOIN subcategory ON main.subcategory = subcategory.id "
-                        + "INNER JOIN manufacturer ON main.manufacturer = manufacturer.id "
-                        + "INNER JOIN user ON main.user = user.id "
-                        + "INNER JOIN status ON main.status = status.id "
-                        + "WHERE main.id = " + id + ";";
+            string sql = "SELECT article.id,category_name, status_name,"
+                        + "subcategory_name,user_name, title, url, name, date, edit, manufacturer_name FROM article "
+                        + "INNER JOIN category ON article.category = category.id "
+                        + "INNER JOIN subcategory ON article.subcategory = subcategory.id "
+                        + "INNER JOIN manufacturer ON article.manufacturer = manufacturer.id "
+                        + "INNER JOIN user ON article.user = user.id "
+                        + "INNER JOIN status ON article.status = status.id "
+                        + "WHERE article.id = " + id + ";";
             SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
 
             SQLiteDataReader reader = command.ExecuteReader();
@@ -91,7 +91,7 @@ namespace Hardware_Shop_Client
                 Dictionary<int, string> content = new Dictionary<int, string>();
 
                 string sql = "SELECT value1, value2 FROM content_input "
-                + "WHERE main_id = " + currentItemId + ";";
+                + "WHERE article_id = " + currentItemId + ";";
                 SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
 
                 SQLiteDataReader reader = command.ExecuteReader();
@@ -120,7 +120,7 @@ namespace Hardware_Shop_Client
             if (MessageBox.Show("Do you really want to change the category? All value1 entries will be deleted from this item!", 
                 "Warning", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
-                string sql = "DELETE FROM content_input WHERE main_id = " + currentItemId + ";";
+                string sql = "DELETE FROM content_input WHERE article_id = " + currentItemId + ";";
                 SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
                 command.ExecuteNonQuery();
 
@@ -128,9 +128,9 @@ namespace Hardware_Shop_Client
             }
             else
             {
-                string sql = "SELECT category_name FROM main "
-                   + "INNER JOIN category ON main.category = category.id "
-                   + "WHERE main.id = " + currentItemId + ";";
+                string sql = "SELECT category_name FROM article "
+                   + "INNER JOIN category ON article.category = category.id "
+                   + "WHERE article.id = " + currentItemId + ";";
                 SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
 
                 SQLiteDataReader reader = command.ExecuteReader();
@@ -190,14 +190,14 @@ namespace Hardware_Shop_Client
 
         private void saveNewItem()
         {
-            int amount = 0, category = -1, subcategory = -1, manufacturer = -1, user = -1, status = -1;
+            int lastID = 0, category = -1, subcategory = -1, manufacturer = -1, user = -1, status = -1;
 
-            string sql = "SELECT id from main;";
+            string sql = "SELECT id from article;";
             SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
 
             SQLiteDataReader reader = command.ExecuteReader();
             while (reader.Read())
-                amount++;
+                lastID = (int)reader["id"];
             reader.Close();
 
             category = getItemID("category", comboBox_category);
@@ -208,9 +208,9 @@ namespace Hardware_Shop_Client
 
             if (category != -1 && subcategory != -1 && manufacturer != -1 && user != -1 && status != -1)
             {
-                sql = "INSERT INTO main (id,category,subcategory,manufacturer,user,status,title,url,name,date,edit,views) "
+                sql = "INSERT INTO article (id,category,subcategory,manufacturer,user,status,title,url,name,date,edit,views) "
                 + "VALUES (" +
-                amount + "," +
+                (lastID + 1) + "," +
                 category + "," +
                 subcategory + "," +
                 manufacturer + "," +
@@ -228,7 +228,7 @@ namespace Hardware_Shop_Client
                 saveContentFields();
 
                 MessageBox.Show("Item has been created.", "Info");
-                openExistingItem(amount);
+                openExistingItem(lastID + 1);
             }
             else
                 MessageBox.Show("Something went wrong.", "Error Message");
@@ -246,7 +246,7 @@ namespace Hardware_Shop_Client
 
             if (category != -1 && subcategory != -1 && manufacturer != -1 && user != -1 && status != -1)
             {
-                string sql = "UPDATE main " +
+                string sql = "UPDATE article " +
                 "SET category = " + category + "," +
                 "subcategory = " + subcategory + "," +
                 "manufacturer = " + manufacturer + "," +
@@ -291,7 +291,7 @@ namespace Hardware_Shop_Client
                 {
                     int valueID = -1;
                     sql = "SELECT id,value2 FROM content_input "
-                    + "WHERE main_id = " + currentItemId + " AND value1 = " + contentID + ";";
+                    + "WHERE article_id = " + currentItemId + " AND value1 = " + contentID + ";";
                     command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
 
                     reader = command.ExecuteReader();
@@ -312,18 +312,18 @@ namespace Hardware_Shop_Client
 
         private void insertNewContent(int value1, string value2)
         {
-            int amount = 0;
+            int lastID = 0;
 
             string sql = "SELECT id FROM content_input;";
             SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
 
             SQLiteDataReader reader = command.ExecuteReader();
             while (reader.Read())
-                amount++;
+                lastID = (int)reader["id"];
             reader.Close();
 
-            sql = "INSERT INTO content_input (id,main_id,value1,value2) "
-                + "VALUES (" + amount + "," + currentItemId + "," + value1 + ", '" + value2 + "');";
+            sql = "INSERT INTO content_input (id,article_id,value1,value2) "
+                + "VALUES (" + (lastID + 1) + "," + currentItemId + "," + value1 + ", '" + value2 + "');";
             command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
             command.ExecuteNonQuery();
         }
@@ -346,7 +346,7 @@ namespace Hardware_Shop_Client
 
         private void deleteItem(int id)
         {
-            string sql = "DELETE FROM main WHERE id = " + id + ";";
+            string sql = "DELETE FROM article WHERE id = " + id + ";";
             SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
             command.ExecuteNonQuery();
 
@@ -375,7 +375,7 @@ namespace Hardware_Shop_Client
 
             string sql = "SELECT tag_id, tag_category, tag_name, views FROM search "
                         + "INNER JOIN tag ON search.tag_id = tag.id "
-                        + "WHERE main_id = " + currentItemId + ";";
+                        + "WHERE article_id = " + currentItemId + ";";
             SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
 
             SQLiteDataReader reader = command.ExecuteReader();
@@ -405,7 +405,7 @@ namespace Hardware_Shop_Client
         {
             if (currentItemId != -1)
             {
-                string sql = "DELETE FROM content_access WHERE main_id = " + currentItemId + ";";
+                string sql = "DELETE FROM content_access WHERE article_id = " + currentItemId + ";";
                 SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
                 command.ExecuteNonQuery();
             }

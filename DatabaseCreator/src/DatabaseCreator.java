@@ -36,7 +36,7 @@ public class DatabaseCreator {
         stmt.executeUpdate(sql);
 
         stmt = c.createStatement();
-        sql = "CREATE TABLE main "
+        sql = "CREATE TABLE article "
                 + "(id             INT      PRIMARY KEY     NOT NULL,"
                 + " category       INT                      ,"
                 + " subcategory    INT                      ,"
@@ -54,7 +54,7 @@ public class DatabaseCreator {
         stmt = c.createStatement();
         sql = "CREATE TABLE content_input "
                 + "(id             INT      PRIMARY KEY     NOT NULL,"
-                + " main_id        TEXT                     NOT NULL,"
+                + " article_id        TEXT                     NOT NULL,"
                 + " value1         INT                      NOT NULL,"
                 + " value2         TEXT                     NOT NULL)";
         stmt.executeUpdate(sql);
@@ -93,7 +93,7 @@ public class DatabaseCreator {
         stmt = c.createStatement();
         sql = "CREATE TABLE search "
                 + "(id              INT      PRIMARY KEY     NOT NULL,"
-                + " main_id         INT                      NOT NULL,"
+                + " article_id         INT                      NOT NULL,"
                 + " tag_id          INT                      NOT NULL,"
                 + " tag_category    INT                      NOT NULL,"
                 + " views           INT                      NOT NULL)";
@@ -109,13 +109,13 @@ public class DatabaseCreator {
         sql = "CREATE TABLE wishlist "
                 + "(id              INT      PRIMARY KEY     NOT NULL,"
                 + " user_id         INT                      NOT NULL,"
-                + " main_id         INT                      NOT NULL)";
+                + " article_id         INT                      NOT NULL)";
         stmt.executeUpdate(sql);
         
         stmt = c.createStatement();
         sql = "CREATE TABLE content_access "
                 + "(id             INT      PRIMARY KEY     NOT NULL,"
-                + " main_id        INT                      NOT NULL,"
+                + " article_id        INT                      NOT NULL,"
                 + " user_id        INT                      NOT NULL,"
                 + " date           TEXT                     NOT NULL)";
         stmt.executeUpdate(sql);
@@ -133,12 +133,12 @@ public class DatabaseCreator {
         stmt.executeUpdate(sql);
         
         stmt = c.createStatement();
-        sql = "INSERT INTO main (id,category,subcategory,manufacturer,user,status,title,url,name,date,edit,views) "
+        sql = "INSERT INTO article (id,category,subcategory,manufacturer,user,status,title,url,name,date,edit,views) "
                 + "VALUES (0, 1, 1, 1, 1, 0, 'Test1', 'test1', 'Test Entry 1', '15-11-04', '15-11-04-00-11-57', 0);";
         stmt.executeUpdate(sql);
         
         stmt = c.createStatement();
-        sql = "INSERT INTO main (id,category,subcategory,manufacturer,user,status,title,url,name,date,edit,views) "
+        sql = "INSERT INTO article (id,category,subcategory,manufacturer,user,status,title,url,name,date,edit,views) "
                 + "VALUES (1, 2, 1, 2, 1, 1, 'Test2', 'test2', 'Test Entry 2', '15-11-04', '15-11-04-00-11-43', 0);";
         stmt.executeUpdate(sql);
         
@@ -213,12 +213,12 @@ public class DatabaseCreator {
         stmt.executeUpdate(sql);
         
         stmt = c.createStatement();
-        sql = "INSERT INTO search (id,main_id,tag_id,tag_category,views) "
+        sql = "INSERT INTO search (id,article_id,tag_id,tag_category,views) "
                 + "VALUES (0, 0, 0, 0, 5);";
         stmt.executeUpdate(sql);
         
         stmt = c.createStatement();
-        sql = "INSERT INTO search (id,main_id,tag_id,tag_category,views) "
+        sql = "INSERT INTO search (id,article_id,tag_id,tag_category,views) "
                 + "VALUES (1, 0, 1, 1, 15);";
         stmt.executeUpdate(sql);
     }

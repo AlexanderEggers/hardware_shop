@@ -36,7 +36,7 @@ namespace Hardware_Shop_Client
 
             string sql = "SELECT tag_id, tag_category, tag_name, views FROM search "
                         + "INNER JOIN tag ON search.tag_id = tag.id "
-                        + "WHERE main_id = " + itemID + ";";
+                        + "WHERE article_id = " + itemID + ";";
             SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
 
             SQLiteDataReader reader = command.ExecuteReader();
@@ -90,14 +90,14 @@ namespace Hardware_Shop_Client
 
         private void button_save_Click(object sender, EventArgs e)
         {
-            int amount = 0;
+            int lastID = 0;
 
             string sql = "SELECT id from search;";
             SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
 
             SQLiteDataReader reader = command.ExecuteReader();
             while (reader.Read())
-                amount++;
+                lastID = (int)reader["id"];
             reader.Close();
 
             foreach (int tagID in selectedTags)
@@ -109,9 +109,9 @@ namespace Hardware_Shop_Client
                 else
                     tagCategory = 1;
 
-                sql = "INSERT INTO search (id,main_id,tag_id,tag_category,views) "
+                sql = "INSERT INTO search (id,article_id,tag_id,tag_category,views) "
                             + "VALUES ("
-                            + amount + ","
+                            + (lastID + 1) + ","
                             + itemID + ","
                             + tagID + ","
                             + tagCategory + ","
@@ -119,7 +119,7 @@ namespace Hardware_Shop_Client
                 command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
                 command.ExecuteNonQuery();
 
-                amount++;
+                lastID++;
             }
 
             foreach (int tagID in removedTags)

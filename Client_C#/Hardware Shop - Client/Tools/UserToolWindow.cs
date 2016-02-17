@@ -19,29 +19,33 @@ namespace Hardware_Shop_Client.Tools
 
         private void button_create_Click(object sender, EventArgs e)
         {
-            int amount = 0;
+            int lastID = 0;
 
             string sql = "SELECT id FROM user;";
             SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
 
             SQLiteDataReader reader = command.ExecuteReader();
             while (reader.Read())
-                amount++;
+                lastID++;
             reader.Close();
 
             int role;
-            if(int.TryParse(textBox_createRole.Text, out role) && role < 4 && role >= 0)
+            if (int.TryParse(textBox_createRole.Text, out role) && role < 4 && role >= 0)
             {
                 sql = "INSERT INTO user (id,user_name,password,role) "
-                + "VALUES (" + amount + ", '" + textBox_createName.Text + "', '" + textBox_createPassword.Text + "', " + role + ");";
+                + "VALUES (" + (lastID + 1) + ", '" + textBox_createName.Text + "', '" + textBox_createPassword.Text + "', " + role + ");";
                 command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
                 command.ExecuteNonQuery();
 
                 MessageBox.Show("User has been created.", "Info");
 
                 textBox_search.Text = textBox_createName.Text;
+                textBox_createRole.Text = "";
+                textBox_createPassword.Text = "";
+                textBox_createRole.Text = "";
                 executeSearch();
-            } else
+            }
+            else
                 MessageBox.Show("The field role must be numberic under certain rules (0 = User; 1 = Editor; 2 = Manager; 3 = Admin).", "Error");
         }
 
@@ -50,19 +54,21 @@ namespace Hardware_Shop_Client.Tools
             int userID = (int)dataGridView_results.SelectedRows[0].Cells[0].Value;
 
             int role;
-            if (int.TryParse(textBox_createRole.Text, out role) && role < 4 && role >= 0)
+            if (int.TryParse(textBox_editRole.Text, out role) && role < 4 && role >= 0)
             {
                 string sql = "UPDATE user " +
-                "SET user_name = '" + textBox_editName.Text + "' ," +
-                "SET password = '" + textBox_editPassword.Text + "' ," +
-                "SET role = " + textBox_editRole.Text + "" +
+                "SET user_name = '" + textBox_editName.Text + "', " +
+                "password = '" + textBox_editPassword.Text + "', " +
+                "role = " + textBox_editRole.Text +
                 " WHERE id = " + userID + ";";
+
                 SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
                 command.ExecuteNonQuery();
 
                 MessageBox.Show("User has been edited.", "Info");
 
                 textBox_search.Text = textBox_editName.Text;
+                textBox_editPassword.Text = "";
                 executeSearch();
             }
             else
@@ -73,7 +79,7 @@ namespace Hardware_Shop_Client.Tools
         {
             int userID = (int)dataGridView_results.SelectedRows[0].Cells[0].Value, amount = 0;
 
-            string sql = "SELECT id FROM main WHERE user = " + userID + ";";
+            string sql = "SELECT id FROM article WHERE user = " + userID + ";";
             SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
 
             SQLiteDataReader reader = command.ExecuteReader();
@@ -93,7 +99,7 @@ namespace Hardware_Shop_Client.Tools
                 executeSearch();
             }
             else
-                MessageBox.Show("User cannot be deleted because of remaining items related to this user.", "Info");
+                MessageBox.Show("User cannot be deleted because of rearticleing items related to this user.", "Info");
         }
 
         private void button_search_Click(object sender, EventArgs e)
@@ -126,14 +132,14 @@ namespace Hardware_Shop_Client.Tools
                 }
                 reader.Close();
             }
-                
+
         }
 
         private void executeSearch()
         {
             string sql;
 
-            if (textBox_search.Text != "")
+            if (textBox_search.Text == "")
                 sql = "SELECT id,user_name FROM user;";
             else
                 sql = "SELECT id,user_name FROM user"
@@ -148,7 +154,7 @@ namespace Hardware_Shop_Client.Tools
             {
                 int amount = 0;
 
-                string sql2 = "SELECT id FROM main WHERE user = " + reader["id"] + ";";
+                string sql2 = "SELECT id FROM article WHERE user = " + reader["id"] + ";";
                 SQLiteCommand command2 = new SQLiteCommand(sql2, ClientMain.databaseController.getConnection());
 
                 SQLiteDataReader reader2 = command2.ExecuteReader();

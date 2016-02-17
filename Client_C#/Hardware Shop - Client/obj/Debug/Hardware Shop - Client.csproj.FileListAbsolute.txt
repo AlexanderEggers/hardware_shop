@@ -40,3 +40,4 @@ C:\Users\Alexander\Documents\Projekte\HardwareShop\Client_C#\Hardware Shop - Cli
 C:\Users\Alexander\Documents\Projekte\HardwareShop\Client_C#\Hardware Shop - Client\obj\Debug\Hardware_Shop_Client.Tools.SubCategoryToolWindow.resources
 C:\Users\Alexander\Documents\Projekte\HardwareShop\Client_C#\Hardware Shop - Client\obj\Debug\Hardware_Shop_Client.Tools.ManufacturerToolWindow.resources
 C:\Users\Alexander\Documents\Projekte\HardwareShop\Client_C#\Hardware Shop - Client\obj\Debug\Hardware_Shop_Client.Tools.UserToolWindow.resources
+C:\Users\Alexander\Documents\Projekte\HardwareShop\Client_C#\Hardware Shop - Client\obj\Debug\Hardware_Shop_Client.Main.URLWindow.resources

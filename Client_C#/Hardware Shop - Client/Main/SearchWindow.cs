@@ -28,10 +28,10 @@ namespace Hardware_Shop_Client
             resetGUIObject("user", comboBox_user);
             resetGUIObject("status", comboBox_status);
 
-            comboBox_date.SelectedText = "";
-            comboBox_edit.SelectedText = "";
+            comboBox_date.SelectedIndex = 0;
+            comboBox_edit.SelectedIndex = 0;
 
-            comboBox_sortBy.SelectedText = "";
+            comboBox_sortBy.SelectedIndex = 0;
             checkBox_sortDescending.CheckState = CheckState.Unchecked;
 
             comboBox_maxResults.Text = "30";
@@ -202,9 +202,9 @@ namespace Hardware_Shop_Client
                 if (comboBox_sortBy.Text != "")
                 {
                     if (checkBox_sortDescending.Checked)
-                        sql = sql + " ORDER BY main." + comboBox_sortBy.Text + " ASC";
-                    else
                         sql = sql + " ORDER BY main." + comboBox_sortBy.Text + " DESC";
+                    else
+                        sql = sql + " ORDER BY main." + comboBox_sortBy.Text + " ASC";
                 }
             }
             else
@@ -330,7 +330,11 @@ namespace Hardware_Shop_Client
             }
             else
             {
-                success = false;
+                if (filterBefore)
+                    success = true;
+                else
+                    success = false;
+
                 return "";
             }
         }
@@ -356,6 +360,10 @@ namespace Hardware_Shop_Client
             SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
 
             reference.Items.Clear();
+
+            if(table == "status" || table == "user")
+                reference.Items.Add("");
+
             SQLiteDataReader reader = command.ExecuteReader();
             while (reader.Read())
                 reference.Items.Add((string)reader[table + "_name"]);

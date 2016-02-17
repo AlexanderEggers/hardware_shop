@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hardware_Shop_Client.Main;
+using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Windows.Forms;
@@ -36,6 +37,10 @@ namespace Hardware_Shop_Client
             textBox_title.Text = "";
             textBox_url.Text = "";
             comboBox_user.Text = ClientMain.user;
+
+            dataGridView_normalTags.Rows.Clear();
+            dataGridView_masterTags.Rows.Clear();
+            dataGridView_content.Rows.Clear();
         }
 
         public void openExistingItem(int id)
@@ -174,6 +179,13 @@ namespace Hardware_Shop_Client
         {
             if (currentItemId != -1)
                 deleteItem(currentItemId);
+        }
+
+        private void button_url_Click(object sender, EventArgs e)
+        {
+            URLWindow urlWindow = new URLWindow();
+            urlWindow.Show();
+            Enabled = false;
         }
 
         private void saveNewItem()

@@ -30,8 +30,8 @@ public class DatabaseCreator {
         stmt = c.createStatement();
         String sql = "CREATE TABLE user "
                 + "(id              INT     PRIMARY KEY     NOT NULL,"
-                + " user_name       CHAR(15)                NOT NULL,"
-                + " password        CHAR(15)                NOT NULL,"
+                + " user_name       TEXT                    NOT NULL,"
+                + " password        TEXT                    NOT NULL,"
                 + " role            INT                     NOT NULL)";
         stmt.executeUpdate(sql);
 
@@ -42,7 +42,7 @@ public class DatabaseCreator {
                 + " subcategory    INT                      ,"
                 + " manufacturer   INT                      ,"
                 + " user           INT                      NOT NULL,"
-                + " status         INT                      ,"
+                + " status         INT                      NOT NULL,"
                 + " title          TEXT                     ,"
                 + " url            TEXT                     ,"
                 + " name           TEXT                     ,"
@@ -134,12 +134,12 @@ public class DatabaseCreator {
         
         stmt = c.createStatement();
         sql = "INSERT INTO main (id,category,subcategory,manufacturer,user,status,title,url,name,date,edit,views) "
-                + "VALUES (0, 1, 1, 1, 1, 0, 'Test1', '/test1', 'Test Entry 1', '15-11-04', '15-11-04-00-11-57', 0);";
+                + "VALUES (0, 1, 1, 1, 1, 0, 'Test1', 'test1', 'Test Entry 1', '15-11-04', '15-11-04-00-11-57', 0);";
         stmt.executeUpdate(sql);
         
         stmt = c.createStatement();
         sql = "INSERT INTO main (id,category,subcategory,manufacturer,user,status,title,url,name,date,edit,views) "
-                + "VALUES (1, 2, 1, 2, 1, 1, 'Test2', '/test2', 'Test Entry 2', '15-11-04', '15-11-04-00-11-43', 0);";
+                + "VALUES (1, 2, 1, 2, 1, 1, 'Test2', 'test2', 'Test Entry 2', '15-11-04', '15-11-04-00-11-43', 0);";
         stmt.executeUpdate(sql);
         
         stmt = c.createStatement();

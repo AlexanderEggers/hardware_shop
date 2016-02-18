@@ -81,7 +81,7 @@ namespace Hardware_Shop_Client.Tools
                 executeSearch();
             }
             else
-                MessageBox.Show("Category cannot be deleted because of rearticleing items related to this category.", "Info");
+                MessageBox.Show("Category cannot be deleted because of remaining items related to this category.", "Info");
         }
 
         private void button_search_Click(object sender, EventArgs e)
@@ -173,7 +173,7 @@ namespace Hardware_Shop_Client.Tools
                     initValue1Table();
                 }
                 else
-                    MessageBox.Show("Selected value1 cannot be deleted because of rearticleing items related to this value1 entry.", "Info");
+                    MessageBox.Show("Selected value1 cannot be deleted because of remaining items related to this value1 entry.", "Info");
             }
             else
                 MessageBox.Show("Unsaved value1 entries cannot be deleted.", "Info");

@@ -99,7 +99,7 @@ namespace Hardware_Shop_Client.Tools
                 executeSearch();
             }
             else
-                MessageBox.Show("User cannot be deleted because of rearticleing items related to this user.", "Info");
+                MessageBox.Show("User cannot be deleted because of remaining items related to this user.", "Info");
         }
 
         private void button_search_Click(object sender, EventArgs e)

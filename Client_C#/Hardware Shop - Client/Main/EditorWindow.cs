@@ -70,7 +70,12 @@ namespace Hardware_Shop_Client
 
                 currentItemId = (int)reader["id"];
                 label_id.Text = "ID: " + reader["id"];
-                label_edit.Text = "Last Edit: " + reader["edit"];
+
+                string edit = (string)reader["edit"];
+                string[] editSplite = edit.Split(new Char[] { '-' });
+
+                label_edit.Text = "Last Edit: " + "20" + editSplite[0] + "/" + editSplite[1] + "/" + editSplite[2] 
+                    + " - " + editSplite[3] + ":" + editSplite[4] + ":" + editSplite[5];
 
                 textBox_name.Text = reader["name"] + "";
                 textBox_title.Text = reader["title"] + "";

@@ -5,6 +5,8 @@ using System.Windows.Forms;
 
 namespace Hardware_Shop_Client
 {
+    //hinzufügen master geht noch nicht
+    //editor zeigt nur ein element bei den listen an
     public partial class TagWindow : Form
     {
         private ArrayList selectedTags, normalTags, masterTags, removedTags;
@@ -81,6 +83,7 @@ namespace Hardware_Shop_Client
                 {
                     masterTags.Add(tagID);
                     normalTags.Remove(tagID);
+                    selectedTags.Add(tagID);
                     dataGridView_masterTags.Rows.Add(tagID,
                         dataGridView_normalTags.SelectedRows[0].Cells[1].Value, getTagViews(tagID));
                     dataGridView_normalTags.Rows.Remove(dataGridView_normalTags.SelectedRows[0]);
@@ -142,6 +145,30 @@ namespace Hardware_Shop_Client
             executeSearch();
         }
 
+        private void button_createTag_Click(object sender, EventArgs e)
+        {
+            int lastID = 0;
+
+            string sql = "SELECT id FROM tag;";
+            SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
+
+            SQLiteDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+                lastID = (int)reader["id"];
+            reader.Close();
+
+            sql = "INSERT INTO tag (id,tag_name) "
+                + "VALUES (" + (lastID + 1) + ", '" + textBox_newTag.Text + "');";
+            command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
+            command.ExecuteNonQuery();
+
+            MessageBox.Show("Tag has been created.", "Info");
+
+            textBox_search.Text = textBox_newTag.Text;
+            textBox_newTag.Text = "";
+            executeSearch();
+        }
+
         private void textBox_search_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Enter)
@@ -194,7 +221,7 @@ namespace Hardware_Shop_Client
                 removedTags.Add(tagID);
         }
 
-        private void addNewTag(int tagID, String name)
+        private void addNewTag(int tagID, string name)
         {
             if (!checkSelectedTags(tagID))
             {

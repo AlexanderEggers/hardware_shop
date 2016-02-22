@@ -13,3 +13,4 @@ DatabaseCreator/build/
 DatabaseCreator/nbproject/private/
 Client/build/
 Client/nbproject/private/
+node_modules/

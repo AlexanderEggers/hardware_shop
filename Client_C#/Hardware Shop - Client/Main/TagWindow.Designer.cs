@@ -51,15 +51,15 @@
             this.button_close = new System.Windows.Forms.Button();
             this.button_addTag = new System.Windows.Forms.Button();
             this.dataGridView_masterTags = new System.Windows.Forms.DataGridView();
-            this.Column_masterTagID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column_masterTagName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column_masterTagViews = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button_addMasterTag = new System.Windows.Forms.Button();
             this.button_search = new System.Windows.Forms.Button();
             this.button_removeTag = new System.Windows.Forms.Button();
             this.button_removeMasterTag = new System.Windows.Forms.Button();
             this.button_createTag = new System.Windows.Forms.Button();
             this.textBox_newTag = new System.Windows.Forms.TextBox();
+            this.Column_masterTagID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column_masterTagName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column_masterTagViews = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_tags)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_normalTags)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_masterTags)).BeginInit();
@@ -246,33 +246,6 @@
             this.dataGridView_masterTags.TabIndex = 64;
             this.dataGridView_masterTags.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataGridView_masterTags_KeyDown);
             // 
-            // Column_masterTagID
-            // 
-            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
-            this.Column_masterTagID.DefaultCellStyle = dataGridViewCellStyle9;
-            this.Column_masterTagID.HeaderText = "ID";
-            this.Column_masterTagID.Name = "Column_masterTagID";
-            this.Column_masterTagID.ReadOnly = true;
-            this.Column_masterTagID.Width = 70;
-            // 
-            // Column_masterTagName
-            // 
-            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control;
-            this.Column_masterTagName.DefaultCellStyle = dataGridViewCellStyle10;
-            this.Column_masterTagName.HeaderText = "Master Tag";
-            this.Column_masterTagName.Name = "Column_masterTagName";
-            this.Column_masterTagName.ReadOnly = true;
-            this.Column_masterTagName.Width = 117;
-            // 
-            // Column_masterTagViews
-            // 
-            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Control;
-            this.Column_masterTagViews.DefaultCellStyle = dataGridViewCellStyle11;
-            this.Column_masterTagViews.HeaderText = "Views";
-            this.Column_masterTagViews.Name = "Column_masterTagViews";
-            this.Column_masterTagViews.ReadOnly = true;
-            this.Column_masterTagViews.Width = 50;
-            // 
             // button_addMasterTag
             // 
             this.button_addMasterTag.Location = new System.Drawing.Point(350, 310);
@@ -330,6 +303,34 @@
             this.textBox_newTag.Size = new System.Drawing.Size(156, 20);
             this.textBox_newTag.TabIndex = 69;
             // 
+            // Column_masterTagID
+            // 
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
+            this.Column_masterTagID.DefaultCellStyle = dataGridViewCellStyle9;
+            this.Column_masterTagID.HeaderText = "ID";
+            this.Column_masterTagID.Name = "Column_masterTagID";
+            this.Column_masterTagID.ReadOnly = true;
+            this.Column_masterTagID.Width = 70;
+            // 
+            // Column_masterTagName
+            // 
+            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control;
+            this.Column_masterTagName.DefaultCellStyle = dataGridViewCellStyle10;
+            this.Column_masterTagName.HeaderText = "Master Tag";
+            this.Column_masterTagName.Name = "Column_masterTagName";
+            this.Column_masterTagName.ReadOnly = true;
+            this.Column_masterTagName.Width = 117;
+            // 
+            // Column_masterTagViews
+            // 
+            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.Control;
+            this.Column_masterTagViews.DefaultCellStyle = dataGridViewCellStyle11;
+            this.Column_masterTagViews.HeaderText = "Views";
+            this.Column_masterTagViews.Name = "Column_masterTagViews";
+            this.Column_masterTagViews.ReadOnly = true;
+            this.Column_masterTagViews.Width = 50;
+            // 
             // TagWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -375,12 +376,12 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_tagID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_tagName;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_tagViews;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column_masterTagID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column_masterTagName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column_masterTagViews;
         private System.Windows.Forms.Button button_removeTag;
         private System.Windows.Forms.Button button_removeMasterTag;
         private System.Windows.Forms.Button button_createTag;
         private System.Windows.Forms.TextBox textBox_newTag;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column_masterTagID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column_masterTagName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column_masterTagViews;
     }
 }

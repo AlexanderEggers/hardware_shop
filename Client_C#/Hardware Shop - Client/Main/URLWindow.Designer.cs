@@ -1,4 +1,4 @@
-﻿namespace Hardware_Shop_Client.article
+﻿namespace Hardware_Shop_Client.Main
 {
     partial class URLWindow
     {

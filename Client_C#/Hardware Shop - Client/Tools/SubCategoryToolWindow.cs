@@ -81,7 +81,7 @@ namespace Hardware_Shop_Client.Tools
                 executeSearch();
             }
             else
-                MessageBox.Show("Subcategory cannot be deleted because of rearticleing items related to this subcategory.", "Info");
+                MessageBox.Show("Subcategory cannot be deleted because of remaining items related to this subcategory.", "Info");
         }
 
         private void button_search_Click(object sender, EventArgs e)

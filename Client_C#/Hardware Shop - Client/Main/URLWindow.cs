@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace Hardware_Shop_Client.article
+namespace Hardware_Shop_Client.Main
 {
     public partial class URLWindow : Form
     {

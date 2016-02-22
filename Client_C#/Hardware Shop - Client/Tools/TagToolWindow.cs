@@ -81,7 +81,7 @@ namespace Hardware_Shop_Client
                 executeSearch();
             }
             else
-                MessageBox.Show("Tag cannot be deleted because of rearticleing items related to this tag.", "Info");
+                MessageBox.Show("Tag cannot be deleted because of remaining items related to this tag.", "Info");
         }
 
         private void button_search_Click(object sender, EventArgs e)

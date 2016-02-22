@@ -380,16 +380,16 @@ namespace Hardware_Shop_Client
 
             string sql = "SELECT tag_id, tag_category, tag_name, views FROM search "
                         + "INNER JOIN tag ON search.tag_id = tag.id "
-                        + "WHERE article_id = " + currentItemId + ";";
+                        + "WHERE article_id = " + currentItemId + " ORDER BY tag_id;";
             SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
 
             SQLiteDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {
                 if ((int)reader["tag_category"] == 0)
-                    dataGridView_normalTags.Rows.Add((int)reader["tag_id"], reader["tag_name"], reader["Views"]);
+                    dataGridView_normalTags.Rows.Add(reader["tag_id"], reader["tag_name"], reader["Views"]);
                 else
-                    dataGridView_masterTags.Rows.Add((int)reader["tag_id"], reader["tag_name"], reader["Views"]);
+                    dataGridView_masterTags.Rows.Add(reader["tag_id"], reader["tag_name"], reader["Views"]);
             }
             reader.Close();
         }

@@ -28,17 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridView_tags = new System.Windows.Forms.DataGridView();
             this.Column_searchID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column_searchTag = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -73,14 +73,14 @@
             this.dataGridView_tags.AllowUserToResizeRows = false;
             this.dataGridView_tags.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dataGridView_tags.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView_tags.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView_tags.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView_tags.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_tags.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column_searchID,
@@ -99,8 +99,8 @@
             // 
             // Column_searchID
             // 
-            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Control;
-            this.Column_searchID.DefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            this.Column_searchID.DefaultCellStyle = dataGridViewCellStyle2;
             this.Column_searchID.HeaderText = "ID";
             this.Column_searchID.Name = "Column_searchID";
             this.Column_searchID.ReadOnly = true;
@@ -108,8 +108,8 @@
             // 
             // Column_searchTag
             // 
-            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Control;
-            this.Column_searchTag.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            this.Column_searchTag.DefaultCellStyle = dataGridViewCellStyle3;
             this.Column_searchTag.HeaderText = "Tag";
             this.Column_searchTag.Name = "Column_searchTag";
             this.Column_searchTag.ReadOnly = true;
@@ -123,14 +123,14 @@
             this.dataGridView_normalTags.AllowUserToResizeRows = false;
             this.dataGridView_normalTags.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dataGridView_normalTags.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView_normalTags.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView_normalTags.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridView_normalTags.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_normalTags.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column_tagID,
@@ -150,8 +150,8 @@
             // 
             // Column_tagID
             // 
-            dataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.Control;
-            this.Column_tagID.DefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            this.Column_tagID.DefaultCellStyle = dataGridViewCellStyle5;
             this.Column_tagID.HeaderText = "ID";
             this.Column_tagID.Name = "Column_tagID";
             this.Column_tagID.ReadOnly = true;
@@ -159,8 +159,8 @@
             // 
             // Column_tagName
             // 
-            dataGridViewCellStyle17.BackColor = System.Drawing.SystemColors.Control;
-            this.Column_tagName.DefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            this.Column_tagName.DefaultCellStyle = dataGridViewCellStyle6;
             this.Column_tagName.HeaderText = "Tag";
             this.Column_tagName.Name = "Column_tagName";
             this.Column_tagName.ReadOnly = true;
@@ -168,8 +168,8 @@
             // 
             // Column_tagViews
             // 
-            dataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Control;
-            this.Column_tagViews.DefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
+            this.Column_tagViews.DefaultCellStyle = dataGridViewCellStyle7;
             this.Column_tagViews.HeaderText = "Views";
             this.Column_tagViews.Name = "Column_tagViews";
             this.Column_tagViews.ReadOnly = true;
@@ -221,14 +221,14 @@
             this.dataGridView_masterTags.AllowUserToResizeRows = false;
             this.dataGridView_masterTags.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dataGridView_masterTags.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle19.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle19.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle19.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle19.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle19.SelectionForeColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView_masterTags.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle19;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView_masterTags.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
             this.dataGridView_masterTags.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_masterTags.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column_masterTagID,
@@ -248,8 +248,8 @@
             // 
             // Column_masterTagID
             // 
-            dataGridViewCellStyle20.BackColor = System.Drawing.SystemColors.Control;
-            this.Column_masterTagID.DefaultCellStyle = dataGridViewCellStyle20;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
+            this.Column_masterTagID.DefaultCellStyle = dataGridViewCellStyle9;
             this.Column_masterTagID.HeaderText = "ID";
             this.Column_masterTagID.Name = "Column_masterTagID";
             this.Column_masterTagID.ReadOnly = true;
@@ -257,8 +257,8 @@
             // 
             // Column_masterTagName
             // 
-            dataGridViewCellStyle21.BackColor = System.Drawing.SystemColors.Control;
-            this.Column_masterTagName.DefaultCellStyle = dataGridViewCellStyle21;
+            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control;
+            this.Column_masterTagName.DefaultCellStyle = dataGridViewCellStyle10;
             this.Column_masterTagName.HeaderText = "Master Tag";
             this.Column_masterTagName.Name = "Column_masterTagName";
             this.Column_masterTagName.ReadOnly = true;
@@ -266,8 +266,8 @@
             // 
             // Column_masterTagViews
             // 
-            dataGridViewCellStyle22.BackColor = System.Drawing.SystemColors.Control;
-            this.Column_masterTagViews.DefaultCellStyle = dataGridViewCellStyle22;
+            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Control;
+            this.Column_masterTagViews.DefaultCellStyle = dataGridViewCellStyle11;
             this.Column_masterTagViews.HeaderText = "Views";
             this.Column_masterTagViews.Name = "Column_masterTagViews";
             this.Column_masterTagViews.ReadOnly = true;
@@ -279,7 +279,7 @@
             this.button_addMasterTag.Name = "button_addMasterTag";
             this.button_addMasterTag.Size = new System.Drawing.Size(43, 23);
             this.button_addMasterTag.TabIndex = 65;
-            this.button_addMasterTag.Text = "Add";
+            this.button_addMasterTag.Text = "Down";
             this.button_addMasterTag.UseVisualStyleBackColor = true;
             this.button_addMasterTag.Click += new System.EventHandler(this.button_addMasterTag_Click);
             // 
@@ -309,7 +309,7 @@
             this.button_removeMasterTag.Name = "button_removeMasterTag";
             this.button_removeMasterTag.Size = new System.Drawing.Size(57, 23);
             this.button_removeMasterTag.TabIndex = 68;
-            this.button_removeMasterTag.Text = "Remove";
+            this.button_removeMasterTag.Text = "Up";
             this.button_removeMasterTag.UseVisualStyleBackColor = true;
             this.button_removeMasterTag.Click += new System.EventHandler(this.button_removeMasterTag_Click);
             // 

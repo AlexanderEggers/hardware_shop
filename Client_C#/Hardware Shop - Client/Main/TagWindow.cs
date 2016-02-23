@@ -6,10 +6,9 @@ using System.Windows.Forms;
 namespace Hardware_Shop_Client
 {
     //hinzufügen master geht noch nicht
-    //editor zeigt nur ein element bei den listen an
     public partial class TagWindow : Form
     {
-        private ArrayList selectedTags, normalTags, masterTags, removedTags;
+        private ArrayList newTags, normalTags, masterTags, removedTags, updatedTags;
         private int itemID;
 
         public TagWindow()
@@ -27,10 +26,11 @@ namespace Hardware_Shop_Client
         public void openWindow(int itemID)
         {
             this.itemID = itemID;
-            selectedTags = new ArrayList();
+            newTags = new ArrayList();
             normalTags = new ArrayList();
             masterTags = new ArrayList();
             removedTags = new ArrayList();
+            updatedTags = new ArrayList();
 
             dataGridView_tags.Rows.Clear();
             dataGridView_normalTags.Rows.Clear();
@@ -38,7 +38,7 @@ namespace Hardware_Shop_Client
 
             string sql = "SELECT tag_id, tag_category, tag_name, views FROM search "
                         + "INNER JOIN tag ON search.tag_id = tag.id "
-                        + "WHERE article_id = " + itemID + ";";
+                        + "WHERE article_id = " + itemID + " ORDER BY tag_id ASC;";
             SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
 
             SQLiteDataReader reader = command.ExecuteReader();
@@ -78,16 +78,12 @@ namespace Hardware_Shop_Client
             if (dataGridView_normalTags.SelectedRows.Count > 0)
             {
                 int tagID = (int)dataGridView_normalTags.SelectedRows[0].Cells[0].Value;
-
-                if (!masterTags.Contains(tagID))
-                {
-                    masterTags.Add(tagID);
-                    normalTags.Remove(tagID);
-                    selectedTags.Add(tagID);
-                    dataGridView_masterTags.Rows.Add(tagID,
-                        dataGridView_normalTags.SelectedRows[0].Cells[1].Value, getTagViews(tagID));
-                    dataGridView_normalTags.Rows.Remove(dataGridView_normalTags.SelectedRows[0]);
-                }
+                masterTags.Add(tagID);
+                normalTags.Remove(tagID);
+                updatedTags.Add(tagID);
+                dataGridView_masterTags.Rows.Add(tagID, dataGridView_normalTags.SelectedRows[0].Cells[1].Value,
+                    dataGridView_normalTags.SelectedRows[0].Cells[2].Value);
+                dataGridView_normalTags.Rows.Remove(dataGridView_normalTags.SelectedRows[0]);
             }
         }
 
@@ -103,7 +99,7 @@ namespace Hardware_Shop_Client
                 lastID = (int)reader["id"];
             reader.Close();
 
-            foreach (int tagID in selectedTags)
+            foreach (int tagID in newTags)
             {
                 int tagCategory;
 
@@ -127,7 +123,23 @@ namespace Hardware_Shop_Client
 
             foreach (int tagID in removedTags)
             {
-                sql = "DELETE FROM search WHERE id = " + tagID + ";";
+                sql = "DELETE FROM search WHERE tag_id = " + tagID + " AND article_id = " + itemID + ";";
+                command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
+                command.ExecuteNonQuery();
+            }
+
+            foreach (int tagID in updatedTags)
+            {
+                int tagCategory;
+
+                if (normalTags.Contains(tagID))
+                    tagCategory = 0;
+                else
+                    tagCategory = 1;
+
+                sql = "UPDATE search " +
+                "SET tag_category = " + tagCategory +
+                " WHERE tag_id = " + tagID + " AND article_id = " + itemID + ";";
                 command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
                 command.ExecuteNonQuery();
             }
@@ -195,7 +207,13 @@ namespace Hardware_Shop_Client
             {
                 int tagID = (int)dataGridView_masterTags.SelectedRows[0].Cells[0].Value;
                 masterTags.Remove(tagID);
-                deleteTag(tagID);
+                normalTags.Add(tagID);
+
+                if(!newTags.Contains(tagID))
+                    updatedTags.Add(tagID);
+
+                dataGridView_normalTags.Rows.Add(tagID, dataGridView_masterTags.SelectedRows[0].Cells[1].Value,
+                    dataGridView_masterTags.SelectedRows[0].Cells[2].Value);
                 dataGridView_masterTags.Rows.Remove(dataGridView_masterTags.SelectedRows[0]);
             }
         }
@@ -209,14 +227,21 @@ namespace Hardware_Shop_Client
         private void dataGridView_masterTags_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Delete)
-                button_removeMasterTag_Click(sender, e);
-
+            {
+                if (dataGridView_masterTags.SelectedRows.Count > 0)
+                {
+                    int tagID = (int)dataGridView_masterTags.SelectedRows[0].Cells[0].Value;
+                    masterTags.Remove(tagID);
+                    deleteTag(tagID);
+                    dataGridView_masterTags.Rows.Remove(dataGridView_masterTags.SelectedRows[0]);
+                }
+            }
         }
 
         private void deleteTag(int tagID)
         {
-            if (selectedTags.Contains(tagID))
-                selectedTags.Remove(tagID);
+            if (newTags.Contains(tagID))
+                newTags.Remove(tagID);
             else
                 removedTags.Add(tagID);
         }
@@ -226,7 +251,7 @@ namespace Hardware_Shop_Client
             if (!checkSelectedTags(tagID))
             {
                 dataGridView_normalTags.Rows.Add(tagID, name, getTagViews(tagID));
-                selectedTags.Add(tagID);
+                newTags.Add(tagID);
                 normalTags.Add(tagID);
 
                 if (removedTags.Contains(tagID))
@@ -236,7 +261,7 @@ namespace Hardware_Shop_Client
 
         private bool checkSelectedTags(int tagID)
         {
-            return normalTags.Contains(tagID) || masterTags.Contains(tagID) || selectedTags.Contains(tagID);
+            return normalTags.Contains(tagID) || masterTags.Contains(tagID) || newTags.Contains(tagID);
         }
 
         private void executeSearch()
@@ -255,7 +280,7 @@ namespace Hardware_Shop_Client
         private int getTagViews(int tagID)
         {
             string sql = "SELECT views FROM search "
-                        + "WHERE tag_id = " + tagID + ";";
+                        + "WHERE tag_id = " + tagID + " AND article_id = " + itemID + ";";
             SQLiteCommand command = new SQLiteCommand(sql, ClientMain.databaseController.getConnection());
 
             SQLiteDataReader reader = command.ExecuteReader();

@@ -56,7 +56,7 @@ app.listen(3000,function(){
     console.log("Live at Port 3000");
 });
 
-
+/*
 function toggleNext(el) {
     var next=el.nextSibling;
     while(next.nodeType != 1) next=next.nextSibling;
@@ -69,4 +69,8 @@ function toggleNextById(el) {
     clicker.className+=" "+ccn;
     clicker.onclick=function() {toggleNext(this)}
     toggleNext(clicker);
+
 }
+*/
+
+

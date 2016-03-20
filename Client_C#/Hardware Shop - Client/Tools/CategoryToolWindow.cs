@@ -4,19 +4,35 @@ using System.Windows.Forms;
 
 namespace Hardware_Shop_Client.Tools
 {
+    /// <summary>
+    /// Dies ist die GUI Klasse zum Category Tool Fenster. Das Fenster dient zum Bearbeiten von Kategorien.
+    /// </summary>
     public partial class CategoryToolWindow : Form
     {
+        /// <summary>
+        /// Interne Initialisierung der GUI Elemente des Fensters.
+        /// </summary>
         public CategoryToolWindow()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Diese Funktion wird ausgeführt wenn das Fenster via "X" geschlossen wird. Dies ist wichtig um alle 
+        /// relevanten Threads vom Client zu beenden und gleichzeitig die Datenbank Schnittstelle zu schließen.
+        /// </summary>
+        /// <param name="e">Internes Argument welches weitere Infos zu diesem "Schließen" Event hält</param>
         protected override void OnClosed(EventArgs e)
         {
             base.OnClosed(e);
             ClientMain.searchWindow.Enabled = true;
         }
 
+        /// <summary>
+        /// Wenn der Benutzer auf den "Create" Button klickt, wird eine neue Kategorie in die Datenbank geschrieben.
+        /// </summary>
+        /// <param name="sender">Beobachtes GUI Element des Observers</param>
+        /// <param name="e">Event Parameter der GUI</param>
         private void button_create_Click(object sender, EventArgs e)
         {
             int lastID = 0;
@@ -41,6 +57,12 @@ namespace Hardware_Shop_Client.Tools
             executeSearch();
         }
 
+        /// <summary>
+        /// Wenn der Benutzer auf den "Edit" Button klickt, wird eine bestehende Kategorie in der Datenbank geändert auf
+        /// Basis der Benutzereingabe. Die Kategorie, welche bearbeitet wird, basiert auf der Auswahl von der Tabelle.
+        /// </summary>
+        /// <param name="sender">Beobachtes GUI Element des Observers</param>
+        /// <param name="e">Event Parameter der GUI</param>
         private void button_edit_Click(object sender, EventArgs e)
         {
             int categoryID = (int)dataGridView_results.SelectedRows[0].Cells[0].Value;
@@ -57,6 +79,12 @@ namespace Hardware_Shop_Client.Tools
             executeSearch();
         }
 
+        /// <summary>
+        /// Wenn der Benutzer auf den "Delete" Button klickt, wird eine bestehende Kategorie in der Datenbank gelöscht.
+        /// Die Kategorie, welche gelöscht wird, basiert auf der Auswahl von der Tabelle.
+        /// </summary>
+        /// <param name="sender">Beobachtes GUI Element des Observers</param>
+        /// <param name="e">Event Parameter der GUI</param>
         private void button_delete_Click(object sender, EventArgs e)
         {
             int categoryID = (int)dataGridView_results.SelectedRows[0].Cells[0].Value, amount = 0;
@@ -84,11 +112,21 @@ namespace Hardware_Shop_Client.Tools
                 MessageBox.Show("Category cannot be deleted because of remaining items related to this category.", "Info");
         }
 
+        /// <summary>
+        /// Wenn der Benutzer auf den "Search" Button klickt, wird die Suche nach Kategorien ausgeführt.
+        /// </summary>
+        /// <param name="sender">Beobachtes GUI Element des Observers</param>
+        /// <param name="e">Event Parameter der GUI</param>
         private void button_search_Click(object sender, EventArgs e)
         {
             executeSearch();
         }
 
+        /// <summary>
+        /// Wenn der Benutzer im Suchfeld die Taste "Enter" drückt, wird die Suche ausgeführt.
+        /// </summary>
+        /// <param name="sender">Beobachtes GUI Element des Observers</param>
+        /// <param name="e">Event Parameter der GUI</param>
         private void textBox_search_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Enter)
@@ -98,6 +136,12 @@ namespace Hardware_Shop_Client.Tools
             }
         }
 
+        /// <summary>
+        /// Wenn der Benutzer in der Tabelle seine Auswahl der Kategorie (welche er angeklickt hat) ändert,
+        /// wird die Textbox angepasst, die zum ggf. angepassen des Namens verwendet wird.
+        /// </summary>
+        /// <param name="sender">Beobachtes GUI Element des Observers</param>
+        /// <param name="e">Event Parameter der GUI</param>
         private void dataGridView_results_SelectionChanged(object sender, EventArgs e)
         {
             if (dataGridView_results.SelectedRows.Count > 0)
@@ -107,6 +151,13 @@ namespace Hardware_Shop_Client.Tools
             }
         }
 
+        /// <summary>
+        /// Wenn der Benutzer auf den "Save" Button klickt, werden die aktuellen eingetragenen value1 Werte abgesichert.
+        /// Die Value1 Werte sind die möglichen Bezeichner für die Kategorie, wodurch anderen Benutzern vorgeschrieben wird, welche
+        /// Inhalte diese bestimmte Kategorie haben kann (z.B. CPU: Anzahl der Kerne, Taktfrequenz, etc).
+        /// </summary>
+        /// <param name="sender">Beobachtes GUI Element des Observers</param>
+        /// <param name="e">Event Parameter der GUI</param>
         private void button_value1Save_Click(object sender, EventArgs e)
         {
             foreach (DataGridViewRow row in dataGridView_value1Results.Rows)
@@ -146,6 +197,11 @@ namespace Hardware_Shop_Client.Tools
             initValue1Table();
         }
 
+        /// <summary>
+        /// Wenn der Benutzer auf den "Delete" Button klickt, wird der ausgewählte value1 Wert gelöscht.
+        /// </summary>
+        /// <param name="sender">Beobachtes GUI Element des Observers</param>
+        /// <param name="e">Event Parameter der GUI</param>
         private void button_value1Delete_Click(object sender, EventArgs e)
         {
             if (dataGridView_value1Results.SelectedRows.Count > 0
@@ -179,6 +235,10 @@ namespace Hardware_Shop_Client.Tools
                 MessageBox.Show("Unsaved value1 entries cannot be deleted.", "Info");
         }
 
+        /// <summary>
+        /// Diese Funktion kümmert sich um die Suche nach Kategorien. Es wird dabei nach exakten Treffern und nach ähnlichen
+        /// Namen gesucht.
+        /// </summary>
         private void executeSearch()
         {
             string sql;
@@ -215,6 +275,9 @@ namespace Hardware_Shop_Client.Tools
             reader.Close();
         }
 
+        /// <summary>
+        /// Diese Funktion initialisiert die value1 Tabelle für die aktuell ausgewählte Kategorie der anderen Tabelle.
+        /// </summary>
         private void initValue1Table()
         {
             string sql = "SELECT id,value1 FROM input WHERE category_id = "

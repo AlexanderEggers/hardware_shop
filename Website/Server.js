@@ -4,14 +4,97 @@ Erstellt von Linh Do
 verwendete Quelle: https://www.codementor.io/nodejs/tutorial/build-website-from-scratch-using-expressjs-and-bootstrap
  */
 
-
 //loading the dependencies
 var express = require("express");
 var app = express();
 var router = express.Router();
-//in the folder 'views' are the html-files
-var path = __dirname + '/views/';
+var $ = require('jquery');
 
+//in the folder 'views' are the html-files
+//var path = __dirname + '/views/';
+var path = require ('path');
+app.use(express.static(path.join(__dirname + '.../views')));
+app.set('view engine', 'ejs');
+
+var sqlite3 = require('sqlite3').verbose();
+var dbFile = "./DB.sql";
+var db = new sqlite3.Database(dbFile);
+
+var articleList = [];
+var wishLists = [];
+var wishListNumber = 0;
+
+
+//createWLF();
+//
+
+var operations = {
+    deleteWishlistArt : function(wishlist_id){
+    var statement = db.prepare('DELETE FROM `wishlist` WHERE `id`==(?)');
+    statement.run(wishlist_id);
+    statement.finalize();
+    },
+
+    createWLF : function (callback) {
+        wishListNumber = 1;
+        console.log("WishlistNR " + wishListNumber);
+        db.serialize(function() {
+            db.each("SELECT id FROM wishlist ", function(err, row) {
+                wishListNumber++;
+                console.log("WishlistNR " + wishListNumber);
+                console.log("WishlistID " + row.id);
+            });
+            db.serialize(function() {
+                var statement = db.prepare('INSERT INTO `wishlist` (`id`, `user_id`, `article_id`) ' +
+                    'VALUES (?, ?, ?)');
+                console.log("WishlistNR " + wishListNumber);
+                statement.run(2, 1, 0);
+                statement.finalize();
+            })
+        });
+
+        console.log("CREATEWLF");
+    }
+}
+//operations.deleteWishlistArt(1);
+//operations.createWLF();
+
+//deleteWishlistArt(0);
+exports.operations = operations;
+
+
+db.serialize(function() {
+    //all articles as an array
+    db.each("SELECT article.id, article.views, category.category_name, status.status_name, " +
+        "subcategory.subcategory_name, manufacturer.manufacturer_name, user.user_name," +
+        "article.title, article.date, article.edit "
+        + " FROM article "
+        + "INNER JOIN status ON article.status = status.id "
+        + "INNER JOIN subcategory ON article.subcategory = subcategory.id "
+        + "INNER JOIN manufacturer ON article.manufacturer = manufacturer.id "
+        + "INNER JOIN user ON article.user = user.id "
+        + "INNER JOIN category ON article.category = category.id", function(err, row) {
+        console.log("Article ID " + row.id + ", " + "catName: " + " " + row.category_name +
+            ", staName: " + row.status_name+ ", title: "+ row.title);
+        articleList.push({id: row.id, views: row.views, userName: row.user_name,
+            catName: row.category_name, subcatName: row.subcategory_name,
+            manuName: row.manufacturer_name, title: row.title, date: row.date, edit: row.edit,
+            staName: row.status_name})
+    })
+
+    //all wishlists as an array
+
+    db.each("SELECT id, user_id, article_id "
+        + " FROM wishlist ", function(err, row) {
+        //console.log("Wishlist ID " + row.id);
+        wishLists.push({id: row.id, user_id: row.user_id, article_id: row.article_id})
+        wishListNumber++;
+        //console.log("WishlistNR " + wishListNumber);
+    })
+});
+//db.close();
+exports.articleList =  articleList;
+exports.wishLists = wishLists;
 
 //defined the Router middle layer, which will be executed before any other routes.
 //This route will be used to print the type of HTTP request the particular Route
@@ -25,15 +108,26 @@ router.use(function (req,res,next) {
 
 //sendFile()" function is for sending files to a web browser
 router.get("/",function(req,res){
-    res.sendFile(path + "index.html");
+    //res.sendFile(path + "index.html");
+    res.render('index', {
+        title: 'The index page!',
+        articleList: articleList
+    });
 });
 
+
 router.get("/wishlist",function(req,res){
-    res.sendFile(path + "wishlist.html");
+    //res.sendFile(path + "wishlist.html");
+    res.render('wishlist', {
+        wishLists: wishLists,
+        articleList: articleList,
+        operations: operations
+        //deleteWishlistArt: deleteWishlistArt
+    });
 });
 
 router.get("/contact",function(req,res){
-    res.sendFile(path + "contact.html");
+    res.render('contact', {});
 });
 
 //use the Routes we have defined above
@@ -44,37 +138,14 @@ app.use(express.static('views'));
 //get executed when the incoming request is not matching any route.
 //in this case its the 404.html
 app.use("*",function(req,res){
-    res.sendFile(path + "404.html");
+    res.render('404');
 });
 
 app.listen(3000,function(){
     console.log("Live at Port 3000");
 });
 
+var createWishlist = require('./views/createWishlist'),
+    sys = require('sys');
 
-
-
-
-
-
-var sqlite3 = require('sqlite3').verbose();
-var dbFile = "./DB.sql";
-var db = new sqlite3.Database(dbFile);
-
-var posts = [];
-db.serialize(function() {
-    db.each("SELECT id, category FROM article", function(err, row) {
-        console.log(row.id + ": " + row.id + " " + row.category);
-        posts.push({id: row.id, category: row.category})
-    }, function() {
-        // All done fetching records, render response
-        console.log("dynamic", {title: "Dynamic", posts: posts})
-    })
-});
-db.close();
-exports.postsExp =  posts;
-
-
-
-
-
+sys.puts(createWishlist.test());

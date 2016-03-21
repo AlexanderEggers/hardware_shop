@@ -1,7 +1,6 @@
 /*
 Server.js
-Erstellt von Linh Do
-verwendete Quelle: https://www.codementor.io/nodejs/tutorial/build-website-from-scratch-using-expressjs-and-bootstrap
+
  */
 
 var sqlite3 = require('sqlite3').verbose();

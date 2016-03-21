@@ -10,6 +10,14 @@ public class DatabaseCreator {
     private static Connection c;
     private static Statement stmt;
 
+    /**
+     * Erstellt ein neues Database Creator Objekt. Dieses Objekt ist für
+     * das Erstellen der .db Datei zuständig.
+     * 
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     * @throws IOException 
+     */
     public DatabaseCreator() throws ClassNotFoundException, SQLException, IOException {
         String path = "../DB.sql";
         File file = new File(path);
@@ -26,6 +34,11 @@ public class DatabaseCreator {
         c.setAutoCommit(false);
     }
 
+    /**
+     * Diese Methode füllt die Datenbank mit den Tables.
+     * 
+     * @throws Exception 
+     */
     private void builtData() throws Exception {
         stmt = c.createStatement();
         String sql = "CREATE TABLE user "
@@ -54,7 +67,7 @@ public class DatabaseCreator {
         stmt = c.createStatement();
         sql = "CREATE TABLE content_input "
                 + "(id             INT      PRIMARY KEY     NOT NULL,"
-                + " article_id        TEXT                     NOT NULL,"
+                + " article_id     TEXT                     NOT NULL,"
                 + " value1         INT                      NOT NULL,"
                 + " value2         TEXT                     NOT NULL)";
         stmt.executeUpdate(sql);
@@ -93,7 +106,7 @@ public class DatabaseCreator {
         stmt = c.createStatement();
         sql = "CREATE TABLE search "
                 + "(id              INT      PRIMARY KEY     NOT NULL,"
-                + " article_id         INT                      NOT NULL,"
+                + " article_id      INT                      NOT NULL,"
                 + " tag_id          INT                      NOT NULL,"
                 + " tag_category    INT                      NOT NULL,"
                 + " views           INT                      NOT NULL)";
@@ -109,18 +122,24 @@ public class DatabaseCreator {
         sql = "CREATE TABLE wishlist "
                 + "(id              INT      PRIMARY KEY     NOT NULL,"
                 + " user_id         INT                      NOT NULL,"
-                + " article_id         INT                      NOT NULL)";
+                + " article_id      INT                      NOT NULL)";
         stmt.executeUpdate(sql);
         
         stmt = c.createStatement();
         sql = "CREATE TABLE content_access "
                 + "(id             INT      PRIMARY KEY     NOT NULL,"
-                + " article_id        INT                      NOT NULL,"
+                + " article_id     INT                      NOT NULL,"
                 + " user_id        INT                      NOT NULL,"
                 + " date           TEXT                     NOT NULL)";
         stmt.executeUpdate(sql);
     }
 
+    /**
+     * Diese Methode ist für den default Inhalt der Datenbank zuständig und ordnet
+     * das den jeweiligen Tables zu.
+     * 
+     * @throws Exception 
+     */
     private void initStartContent() throws Exception {
         stmt = c.createStatement();
         String sql = "INSERT INTO user (id,user_name,password,role) "
@@ -223,6 +242,12 @@ public class DatabaseCreator {
         stmt.executeUpdate(sql);
     }
 
+    /**
+     * Main-Methode des Database Creator, der die Verbindung aufbaut und
+     * später wieder schließt.
+     * 
+     * @param args 
+     */
     public static void main(String args[]) {
         try {
             DatabaseCreator creator = new DatabaseCreator();

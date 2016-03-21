@@ -4,19 +4,35 @@ using System.Windows.Forms;
 
 namespace Hardware_Shop_Client.Tools
 {
+    /// <summary>
+    /// Dies ist die GUI Klasse zum User Tool Fenster. Das Fenster dient zum Bearbeiten von Usern.
+    /// </summary>
     public partial class UserToolWindow : Form
     {
+        /// <summary>
+        /// Interne Initialisierung der GUI Elemente des Fensters.
+        /// </summary>
         public UserToolWindow()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Diese Funktion wird ausgeführt wenn das Fenster via "X" geschlossen wird. Dies ist wichtig um alle 
+        /// relevanten Threads vom Client zu beenden und gleichzeitig die Datenbank Schnittstelle zu schließen.
+        /// </summary>
+        /// <param name="e">Internes Argument welches weitere Infos zu diesem "Schließen" Event hält</param>
         protected override void OnClosed(EventArgs e)
         {
             base.OnClosed(e);
             ClientMain.searchWindow.Enabled = true;
         }
 
+        /// <summary>
+        /// Wenn der Benutzer auf den "Create" Button klickt, wird ein neuer User in die Datenbank geschrieben.
+        /// </summary>
+        /// <param name="sender">Beobachtes GUI Element des Observers</param>
+        /// <param name="e">Event Parameter der GUI</param>
         private void button_create_Click(object sender, EventArgs e)
         {
             int lastID = 0;
@@ -49,6 +65,12 @@ namespace Hardware_Shop_Client.Tools
                 MessageBox.Show("The field role must be numberic under certain rules (0 = User; 1 = Editor; 2 = Manager; 3 = Admin).", "Error");
         }
 
+        /// <summary>
+        /// Wenn der Benutzer auf den "Edit" Button klickt, wird ein bestehender User in der Datenbank geändert auf
+        /// Basis der Benutzereingabe. Der User, welcher bearbeitet wird, basiert auf der Auswahl von der Tabelle.
+        /// </summary>
+        /// <param name="sender">Beobachtes GUI Element des Observers</param>
+        /// <param name="e">Event Parameter der GUI</param>
         private void button_edit_Click(object sender, EventArgs e)
         {
             int userID = (int)dataGridView_results.SelectedRows[0].Cells[0].Value;
@@ -75,6 +97,12 @@ namespace Hardware_Shop_Client.Tools
                 MessageBox.Show("The field role must be numberic under certain rules (0 = User; 1 = Editor; 2 = Manager; 3 = Admin).", "Error");
         }
 
+        /// <summary>
+        /// Wenn der Benutzer auf den "Delete" Button klickt, wird ein bestehender User in der Datenbank gelöscht.
+        /// Der User, welcher gelöscht wird, basiert auf der Auswahl von der Tabelle.
+        /// </summary>
+        /// <param name="sender">Beobachtes GUI Element des Observers</param>
+        /// <param name="e">Event Parameter der GUI</param>
         private void button_delete_Click(object sender, EventArgs e)
         {
             int userID = (int)dataGridView_results.SelectedRows[0].Cells[0].Value, amount = 0;
@@ -102,11 +130,21 @@ namespace Hardware_Shop_Client.Tools
                 MessageBox.Show("User cannot be deleted because of remaining items related to this user.", "Info");
         }
 
+        /// <summary>
+        /// Wenn der Benutzer auf den "Search" Button klickt, wird die Suche nach Usern ausgeführt.
+        /// </summary>
+        /// <param name="sender">Beobachtes GUI Element des Observers</param>
+        /// <param name="e">Event Parameter der GUI</param>
         private void button_search_Click(object sender, EventArgs e)
         {
             executeSearch();
         }
 
+        /// <summary>
+        /// Wenn der Benutzer im Suchfeld die Taste "Enter" drückt, wird die Suche ausgeführt.
+        /// </summary>
+        /// <param name="sender">Beobachtes GUI Element des Observers</param>
+        /// <param name="e">Event Parameter der GUI</param>
         private void textBox_search_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Enter)
@@ -116,6 +154,12 @@ namespace Hardware_Shop_Client.Tools
             }
         }
 
+        /// <summary>
+        /// Wenn der Benutzer in der Tabelle seine Auswahl der User (welche er angeklickt hat) ändert,
+        /// wird die Textbox angepasst, die zum ggf. angepassen des Namens verwendet wird.
+        /// </summary>
+        /// <param name="sender">Beobachtes GUI Element des Observers</param>
+        /// <param name="e">Event Parameter der GUI</param>
         private void dataGridView_results_SelectionChanged(object sender, EventArgs e)
         {
             if (dataGridView_results.SelectedRows.Count > 0)
@@ -135,6 +179,10 @@ namespace Hardware_Shop_Client.Tools
 
         }
 
+        /// <summary>
+        /// Diese Funktion kümmert sich um die Suche nach Usern. Es wird dabei nach exakten Treffern und nach ähnlichen
+        /// Namen gesucht.
+        /// </summary>
         private void executeSearch()
         {
             string sql;

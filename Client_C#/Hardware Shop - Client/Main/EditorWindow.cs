@@ -6,15 +6,30 @@ using System.Windows.Forms;
 
 namespace Hardware_Shop_Client
 {
+    /// <summary>
+    /// Dies ist die GUI Klasse zum Editor Fenster. Das Editor Fenster dient für die Erstellung/Änderung von Artikeln.
+    /// </summary>
     public partial class EditorWindow : Form
     {
+        /// <summary>
+        /// Referenz ID für das aktuell ausgewählte artikel. Diese wird benötigt um später dieses wieder abzuspeichern
+        /// um eventuell den Tag Manager zu öffnen.
+        /// </summary>
         private int currentItemId = -1;
 
+        /// <summary>
+        /// Interne Initialisierung der GUI Elemente des Fensters.
+        /// </summary>
         public EditorWindow()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Diese Funktion wird ausgeführt wenn das Fenster via "X" geschlossen wird. Dies ist wichtig um alle 
+        /// relevanten Threads vom Client zu beenden und gleichzeitig die Datenbank Schnittstelle zu schließen.
+        /// </summary>
+        /// <param name="e">Internes Argument welches weitere Infos zu diesem "Schließen" Event hält</param>
         protected override void OnClosed(EventArgs e)
         {
             deleteContentAccessBlock();
@@ -22,6 +37,10 @@ namespace Hardware_Shop_Client
             ClientMain.exit();
         }
 
+        /// <summary>
+        /// Setzt alle relevanten GUI Elemente zurück um sicher zu stellen, dass keine Werte von ggf. 
+        /// alten Aufrufen vorhanden sind.
+        /// </summary>
         public void resetEditor()
         {
             resetGUIObject("category", comboBox_category);
@@ -43,6 +62,11 @@ namespace Hardware_Shop_Client
             dataGridView_content.Rows.Clear();
         }
 
+        /// <summary>
+        /// Diese Funktion sorgt dafür dass ein bestehender Artikel aus der Datenbank geöffnet wird und die
+        /// relevanten GUI Elemente mit den jeweiligen Informationen aus diesem Artikel gefüttert werden.
+        /// </summary>
+        /// <param name="id">ID des bestehenden Artikels</param>
         public void openExistingItem(int id)
         {
             string sql = "SELECT article.id,category_name, status_name,"
@@ -87,6 +111,13 @@ namespace Hardware_Shop_Client
             initContentTable();
         }
 
+        /// <summary>
+        /// Initialisiert und befüllt die Inhaltstabelle vom Artikel. Die Inhaltstabelle befindet sich am unteren rechten Rand
+        /// im Editor Fenster. Diese Tabelle holt sich auf Basis der Kategorie die value1 und value2 Werte. Die value1 Werte entsprechen
+        /// Bezeichnern, wie "Anzahl der Kerne", "Speichergröße" oder "Lesegeschwindigkeit" und der value2 Wert der Tabelle entspricht
+        /// den jeweiigen Werten von dem Artikel zu diesem Bezeichner. Beispiel: Artikel ist eine CPU, dann könnte bei dem value1-
+        /// Bezeichner so etwas stehen wie "3 Kerne".
+        /// </summary>
         public void initContentTable()
         {
             dataGridView_content.Rows.Clear();
@@ -120,6 +151,13 @@ namespace Hardware_Shop_Client
             }
         }
 
+        /// <summary>
+        /// Diese Funktion ist ein Observer für die Dropbox von der Kategorie. Wenn der Benutzer die Kategorie ändert, bekommt
+        /// der Benutzer eine kurze Warnung, dass alle value1/value2 Werte dieses Artikels aus der Datenbank gelöscht werden, sollte
+        /// er die Kategorie wechseln. An dieser Stelle kann der Benutzer seine Eingabe außerdem rückgangig machen.
+        /// </summary>
+        /// <param name="sender">Beobachtes GUI Element des Observers</param>
+        /// <param name="e">Event Parameter der GUI</param>
         private void comboBox_category_SelectionChangeCommitted(object sender, EventArgs e)
         {
             if (MessageBox.Show("Do you really want to change the category? All value1 entries will be deleted from this item!", 
@@ -145,6 +183,12 @@ namespace Hardware_Shop_Client
             }
         }
 
+        /// <summary>
+        /// Wenn der Benutzer auf den "Close" Button klickt, wird das Editor Fenster versteckt und das Suchfenster wird
+        /// wieder angezeigt. Außerdem werden die Suchergebnisse wieder zurückgesetzt.
+        /// </summary>
+        /// <param name="sender">Beobachtes GUI Element des Observers</param>
+        /// <param name="e">Event Parameter der GUI</param>
         private void button_close_Click(object sender, EventArgs e)
         {
             deleteContentAccessBlock();
@@ -154,11 +198,23 @@ namespace Hardware_Shop_Client
             currentItemId = -1;
         }
 
+        /// <summary>
+        /// Wenn der Benuzer auf den "New" Button klickt wird der Editor vollständig zurückgesetzt damit der Benutzer
+        /// die Arbeit an einem neuen Artikel starten kann.
+        /// </summary>
+        /// <param name="sender">Beobachtes GUI Element des Observers</param>
+        /// <param name="e">Event Parameter der GUI</param>
         private void button_new_Click(object sender, EventArgs e)
         {
             resetEditor();
         }
 
+        /// <summary>
+        /// Wenn der Benutzer auf den "Save" Button geklickt hat, dann wird der aktuelle Artikel mit den Inhalten der GUI Elemente
+        /// des Editors gespeichert. Dabei wird unterschieden zwischen einem neuen Artikel und einem bestehenden Artikel.
+        /// </summary>
+        /// <param name="sender">Beobachtes GUI Element des Observers</param>
+        /// <param name="e">Event Parameter der GUI</param>
         private void button_save_Click(object sender, EventArgs e)
         {
             if (currentItemId != -1)
@@ -167,6 +223,13 @@ namespace Hardware_Shop_Client
                 saveNewItem();
         }
 
+        /// <summary>
+        /// Wenn der Benutzer auf "Edit Tags" klickt, wird das Tag Fenster geöffnet und das Editor Fenster deaktiviert, damit der
+        /// Eingabefokus des Benutzer immer nur auf ein Fenster gerichtet ist. Das Tag Fenster kann nur geöffnet werden, wenn der
+        /// Artikel schon in der Datenbank besteht.
+        /// </summary>
+        /// <param name="sender">Beobachtes GUI Element des Observers</param>
+        /// <param name="e">Event Parameter der GUI</param>
         private void button_editTags_Click(object sender, EventArgs e)
         {
             if (currentItemId != -1)
@@ -180,12 +243,25 @@ namespace Hardware_Shop_Client
                 MessageBox.Show("Item needs to be saved to access the tag manager.", "Error Message");
         }
 
+        /// <summary>
+        /// Wenn der Benutzer auf den "Delete" Button klickt wird der derzeitige, bestehende(!) Artikel aus der Datenbank
+        /// gelöscht.
+        /// </summary>
+        /// <param name="sender">Beobachtes GUI Element des Observers</param>
+        /// <param name="e">Event Parameter der GUI</param>
         private void button_delete_Click(object sender, EventArgs e)
         {
             if (currentItemId != -1)
                 deleteItem(currentItemId);
         }
 
+        /// <summary>
+        /// Wenn der Benutzer auf den Button "URL" klick, wird ein kleines Fenster geöffnet in dem der Benutzer die URL Endung
+        /// des Artikels eingeben kann. Dies ist in gewissen Rahmen relevant für Google, wodurch ggf. bessere Suchergebnisse zustande
+        /// kommnen. Außerdem dient dieses Fenster dazu die URL richtig zu formatieren, sodass die später keine etwaligen Probleme macht.
+        /// </summary>
+        /// <param name="sender">Beobachtes GUI Element des Observers</param>
+        /// <param name="e">Event Parameter der GUI</param>
         private void button_url_Click(object sender, EventArgs e)
         {
             URLWindow urlWindow = new URLWindow();
@@ -193,6 +269,9 @@ namespace Hardware_Shop_Client
             Enabled = false;
         }
 
+        /// <summary>
+        /// Diese Funktion speichert einen neuen Artikel. Dies wird über die "INSERT" Operation von SQL durchgeführt.
+        /// </summary>
         private void saveNewItem()
         {
             int lastID = 0, category = -1, subcategory = -1, manufacturer = -1, user = -1, status = -1;
@@ -239,6 +318,9 @@ namespace Hardware_Shop_Client
                 MessageBox.Show("Something went wrong.", "Error Message");
         }
 
+        /// <summary>
+        /// Diese Funktion aktualisiert einen bestehenden Artikel mit Hilfe der "UPDATE" SQL Operation.
+        /// </summary>
         private void saveCurrentItem()
         {
             int category = -1, subcategory = -1, manufacturer = -1, user = -1, status = -1;
@@ -275,6 +357,9 @@ namespace Hardware_Shop_Client
                 MessageBox.Show("Something went wrong.", "Error Message");
         }
 
+        /// <summary>
+        /// Diese Funktion speichert die Inhaltstabelle (value1/value2) Angaben in die Datenbank in Referenz zu der Artikel ID.
+        /// </summary>
         private void saveContentFields()
         {
             for (int i = 0; i < dataGridView_content.Rows.Count; i++)
@@ -315,6 +400,11 @@ namespace Hardware_Shop_Client
             }
         }
 
+        /// <summary>
+        /// Diese Funktion fügt ein neues value1/value2 Paar in die Tabelle.
+        /// </summary>
+        /// <param name="value1">Bezeichner (Referenz)</param>
+        /// <param name="value2">Artikelwert</param>
         private void insertNewContent(int value1, string value2)
         {
             int lastID = 0;
@@ -333,6 +423,11 @@ namespace Hardware_Shop_Client
             command.ExecuteNonQuery();
         }
 
+        /// <summary>
+        /// Diese Funktion aktualisiert ein value1/value2 Paar in der Tabelle.
+        /// </summary>
+        /// <param name="value1">Bezeichner (Referenz)</param>
+        /// <param name="value2">Artikelwert</param>
         private void updateContent(int value1, string value2)
         {
             string sql = "UPDATE content_input " +
@@ -342,6 +437,10 @@ namespace Hardware_Shop_Client
             command.ExecuteNonQuery();
         }
 
+        /// <summary>
+        /// Löscht ein value1/value2 Wert von diesem Artikel.
+        /// </summary>
+        /// <param name="valueID">Bezeichner (Referenz)</param>
         private void deleteContent(int valueID)
         {
             string sql = "DELETE FROM content_input WHERE id = " + valueID + ";";
@@ -349,6 +448,10 @@ namespace Hardware_Shop_Client
             command.ExecuteNonQuery();
         }
 
+        /// <summary>
+        /// Löscht ein Artikel mit einer bestimmten ID.
+        /// </summary>
+        /// <param name="id">ID des Artikels welches gelöscht werden soll</param>
         private void deleteItem(int id)
         {
             string sql = "DELETE FROM article WHERE id = " + id + ";";
@@ -359,6 +462,13 @@ namespace Hardware_Shop_Client
             resetEditor();
         }
 
+        /// <summary>
+        /// Holt sich die Feld ID eines bestimmten Eingabewertes einer ComboBox in der GUI. Diese wird
+        /// benötigt um den Wert beim abspeichern zu verwenden.
+        /// </summary>
+        /// <param name="table">Tabelle worauf sich das GUI Objekt bezieht</param>
+        /// <param name="reference">GUI Objekt wovon sich der Eingabewert vom Benutzer geholt werden soll</param>
+        /// <returns></returns>
         private int getItemID(String table, ComboBox reference)
         {
             int id = -1;
@@ -373,6 +483,10 @@ namespace Hardware_Shop_Client
             return id;
         }
 
+        /// <summary>
+        /// Diese Funktion kümmert sich um den Tag Editor. Dieser wird zurückgesetzt durch diese Funktion
+        /// und mithilfe der Artikel ID ggf. wieder mit Informationen gefüttert.
+        /// </summary>
         public void resetTagInfos()
         {
             dataGridView_normalTags.Rows.Clear();
@@ -394,6 +508,11 @@ namespace Hardware_Shop_Client
             reader.Close();
         }
 
+        /// <summary>
+        /// Diese Funktion setzt den Wert eines GUI Objektes zurück, damit keine Altdaten angezeigt werden.
+        /// </summary>
+        /// <param name="table">Tabelle worauf sich das GUI Objekt bezieht</param>
+        /// <param name="reference">GUI Objekt wovon sich der Eingabewert vom Benutzer geholt werden soll</param>
         private void resetGUIObject(String table, ComboBox reference)
         {
             string sql = "SELECT " + table + "_name FROM " + table + ";";
@@ -406,6 +525,11 @@ namespace Hardware_Shop_Client
             reader.Close();
         }
 
+        /// <summary>
+        /// Diese Funktion kümmert sich um das Entblocken der sogenannten Inhaltssperre. Wenn ein Benutzer einen Artikel 
+        /// geöffnet hat, dann wird nämlich dieser Artikel für alle anderen Benutzer gesperrt bis dieser den Artikel wieder 
+        /// geschlossen hat. Das soll verhindern dass es eventuell zu Speicherproblemen kommt oder falsche Angaben gespeichert werden.
+        /// </summary>
         private void deleteContentAccessBlock()
         {
             if (currentItemId != -1)

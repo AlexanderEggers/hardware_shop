@@ -7,19 +7,38 @@ using System.Windows.Forms;
 
 namespace Hardware_Shop_Client
 {
+    /// <summary>
+    /// Dies stellt die GUI Klasse das Suchfensters. Dieses struktuiert die Suchanfragen des Benutzers und ermöglicht so
+    /// eine Übersicht über die relevanten Artikel in der Datenbank. Gleichzeitig ist das Fenster das Hauptfenster des Clients
+    /// und ermöglicht zugriff auf etliche Tools, welche dazu dienen um bestimmte Inhalte der Datenbank zu bearbeiten (Kategorien,
+    /// Tags, Benutzer).
+    /// </summary>
     public partial class SearchWindow : Form
     {
+        /// <summary>
+        /// Interne Initialisierung der GUI Elemente des Fensters.
+        /// </summary>
         public SearchWindow()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Diese Funktion wird ausgeführt wenn das Fenster via "X" geschlossen wird. Dies ist wichtig um alle 
+        /// relevanten Threads vom Client zu beenden und gleichzeitig die Datenbank Schnittstelle zu schließen.
+        /// </summary>
+        /// <param name="e">Internes Argument welches weitere Infos zu diesem "Schließen" Event hält</param>
         protected override void OnClosed(EventArgs e)
         {
             base.OnClosed(e);
             ClientMain.exit();
         }
 
+        /// <summary>
+        /// Setzt alle relevanten GUI Elemente zurück um sicher zu stellen, dass keine Werte von ggf. 
+        /// alten Aufrufen vorhanden sind bzw. wenn der Benutzer alle Eingaben zurückgesetzt haben möchte via "x" neben
+        /// dem Suchfeld.
+        /// </summary>
         public void resetSearchWindow()
         {
             resetGUIObject("category", comboBox_category);
@@ -63,6 +82,14 @@ namespace Hardware_Shop_Client
             reader.Close();
         }
 
+        /// <summary>
+        /// Diese Funktion wird ausgeführt wenn der Benutzer auf den "Search" Button geklickt hat, welche die 
+        /// Eingabe aus dem Suchtextfeld nimmt und darauf basierend entweder direkt einen Artikel öffnet (wenn 
+        /// die Eingabe nur aus einer Zahl besteht und diese in der Datenbank hinterlegt ist) oder Artikel vorschlägt,
+        /// die zu der Eingabe passen.
+        /// </summary>
+        /// <param name="sender">Beobachtes GUI Element des Observers</param>
+        /// <param name="e">Event Parameter der GUI</param>
         private void button_search_Click(object sender, EventArgs e)
         {
             int itemID = -1;
@@ -79,6 +106,12 @@ namespace Hardware_Shop_Client
                 executeSearch();
         }
 
+        /// <summary>
+        /// Diese Funktion kümmert sich darum wenn man im Suchtextfeld die Taste "Enter" drückt. Daraufhin wird die
+        /// Suche, wie beim "Search" Button, ausgeführt.
+        /// </summary>
+        /// <param name="sender">Beobachtes GUI Element des Observers</param>
+        /// <param name="e">Event Parameter der GUI</param>
         private void textBox_search_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Enter)
@@ -88,6 +121,13 @@ namespace Hardware_Shop_Client
             }
         }
 
+        /// <summary>
+        /// Diese Funktion wird ausgeführt wenn der Benutzer einen Doppelklick auf einen Tabelleneintrag in den
+        /// Suchergebnissen ausführt. Auf Basis des geklickten Artikels in den Suchergebnissen wird dann der Editor geöffnet.
+        /// Gleichzeitig wird überprüft ob nicht ein anderer Benutzer schon diesen Artikel geöffnet hat.
+        /// </summary>
+        /// <param name="sender">Beobachtes GUI Element des Observers</param>
+        /// <param name="e">Event Parameter der GUI</param>
         private void searchDataView_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             int itemID = (int)searchDataView.Rows[e.RowIndex].Cells[0].Value;
@@ -102,6 +142,12 @@ namespace Hardware_Shop_Client
             }
         }
 
+        /// <summary>
+        /// Diese Funktion wird ausgeführt wenn der Benutzer auf den "Editor" Button klickt. Es wird dann das Editor
+        /// Fenster aufgerufen.
+        /// </summary>
+        /// <param name="sender">Beobachtes GUI Element des Observers</param>
+        /// <param name="e">Event Parameter der GUI</param>
         private void button_editor_Click(object sender, EventArgs e)
         {
             Hide();
@@ -109,11 +155,24 @@ namespace Hardware_Shop_Client
             ClientMain.editorWindow.Show();
         }
 
+        /// <summary>
+        /// Diese Funktion wird ausgeführt wenn der Benutzer auf das "x" neben den Suchfeld klickt. Es wird dann
+        /// das komplette Suchfenster bzgl. der ausgewählten Inhalte zurückgesetzt.
+        /// </summary>
+        /// <param name="sender">Beobachtes GUI Element des Observers</param>
+        /// <param name="e">Event Parameter der GUI</param>
         private void button_reset_Click(object sender, EventArgs e)
         {
             resetSearchWindow();
         }
 
+        /// <summary>
+        /// Diese Funktion wird ausgeführt wenn der Benutzer auf den "Tags" Button klickt. Es wird dann das Tag Tool
+        /// Fenster geöffnet. Dieses Fenster dient dazu die Tags für die Artikel anzupassen bzw. weitere hinzufügen.
+        /// Dieses Fenster können nur Benutzer mit einer Benutzerrolle die mindestens "Manager" entspricht öffnen.
+        /// </summary>
+        /// <param name="sender">Beobachtes GUI Element des Observers</param>
+        /// <param name="e">Event Parameter der GUI</param>
         private void button_tags_Click(object sender, EventArgs e)
         {
             if (ClientMain.user_role >= ClientMain.USER_ROLE_MANAGER)
@@ -124,6 +183,13 @@ namespace Hardware_Shop_Client
             }
         }
 
+        /// <summary>
+        /// Diese Funktion wird ausgeführt wenn der Benutzer auf den "Category" Button klickt. Diese öffnet das Category Tool in dem 
+        /// der Benutzer die Kategorien der Artikel bearbeiten kann. Dieses Fenster können nur Benutzer mit einer Benutzerrolle die 
+        /// mindestens "Manager" entspricht öffnen.
+        /// </summary>
+        /// <param name="sender">Beobachtes GUI Element des Observers</param>
+        /// <param name="e">Event Parameter der GUI</param>
         private void button_category_Click(object sender, EventArgs e)
         {
             if (ClientMain.user_role >= ClientMain.USER_ROLE_MANAGER)
@@ -134,6 +200,13 @@ namespace Hardware_Shop_Client
             }
         }
 
+        /// <summary>
+        /// Diese Funktion wird ausgeführt wenn der Benutzer auf den "Subcategory" Button klickt. Diese öffnet das Subcategory Tool 
+        /// in dem der Benutzer die Sub-Kategorien der Artikel bearbeiten kann. Dieses Fenster können nur Benutzer mit einer 
+        /// Benutzerrolle die mindestens "Manager" entspricht öffnen.
+        /// </summary>
+        /// <param name="sender">Beobachtes GUI Element des Observers</param>
+        /// <param name="e">Event Parameter der GUI</param>
         private void button_subcategory_Click(object sender, EventArgs e)
         {
             if (ClientMain.user_role >= ClientMain.USER_ROLE_MANAGER)
@@ -144,6 +217,13 @@ namespace Hardware_Shop_Client
             }
         }
 
+        /// <summary>
+        /// Diese Funktion wird ausgeführt wenn der Benutzer auf den "Manufacture" Button klickt. Diese öffnet das Manufacture Tool 
+        /// in dem der Benutzer die Hersteller der Artikel bearbeiten kann. Dieses Fenster können nur Benutzer mit einer 
+        /// Benutzerrolle die mindestens "Manager" entspricht öffnen.
+        /// </summary>
+        /// <param name="sender">Beobachtes GUI Element des Observers</param>
+        /// <param name="e">Event Parameter der GUI</param>
         private void button_manufacture_Click(object sender, EventArgs e)
         {
             if (ClientMain.user_role >= ClientMain.USER_ROLE_MANAGER)
@@ -154,6 +234,13 @@ namespace Hardware_Shop_Client
             }
         }
 
+        /// <summary>
+        /// Diese Funktion wird ausgeführt wenn der Benutzer auf den "User" Button klickt. Diese öffnet das User Tool 
+        /// in dem der Benutzer die anderen User des Clients bearbeiten. Dieses Fenster können nur Benutzer mit einer 
+        /// Benutzerrolle "Admin" öffnen.
+        /// </summary>
+        /// <param name="sender">Beobachtes GUI Element des Observers</param>
+        /// <param name="e">Event Parameter der GUI</param>
         private void button_user_Click(object sender, EventArgs e)
         {
             if (ClientMain.user_role == ClientMain.USER_ROLE_ADMIN)
@@ -164,6 +251,11 @@ namespace Hardware_Shop_Client
             }
         }
 
+        /// <summary>
+        /// Diese Funktion führt auf Basis des Suchtextfeldes eine Suche nach passenden Artikeln durch. Als Referenz wird der 
+        /// Artikel Title genommen. Auf Basis der Auswahl der GUI Einstellungen im Suchfenster wird die Suche teilweise noch weiter
+        /// eingeschränkt (Kategorie, Hersteller, Status usw.).
+        /// </summary>
         public void executeSearch()
         {
             string text = textBox_search.Text;
@@ -257,7 +349,8 @@ namespace Hardware_Shop_Client
         }
 
         /// <summary>
-        /// 
+        /// Diese Funktion dient dazu das Suchergebnis speziell anhand der Einstellung der "last_edit" Dropbox, welche
+        /// Ergebnis nur in einem bestimmten Zeitraum anzeigen soll.
         /// </summary>
         /// <param name="searchResults">Dictionary which hold a arraylist structure: 
         /// id, views, user, category, subcategory, manufacture, title date, edit, status</param>
@@ -311,6 +404,16 @@ namespace Hardware_Shop_Client
             return searchResults;
         }
 
+        /// <summary>
+        /// Diese Funktion holt sich weitere Bedinungen für die Suche, wenn das jeweilige GUI Objekt eine Auswahl drinnen hat.
+        /// Dabei wird beachtet ob es schon Filter gibt (bzgl des "AND").
+        /// </summary>
+        /// <param name="type">Typ des Filters (Bedingung), wie Status, Hersteller</param>
+        /// <param name="reference">Referenz GUI Objekt</param>
+        /// <param name="filterBefore">Ob es davor schon einen Filter in der Bedinung der SQL Anfrage gibt. 
+        /// Relevant für das AND in der Bedinung.</param>
+        /// <param name="success">Gibt an ob ein Filter erstellt wurde oder nicht. Dient als "filterBefore" für den nächsten Filter.</param>
+        /// <returns>Gibt die Bedingung zurück die direkt in die SQL Anfrage eingebaut werden kann</returns>
         private string getFilterSQLData(string type, ComboBox reference, bool filterBefore, out bool success)
         {
             if (reference.Text != "")
@@ -339,6 +442,14 @@ namespace Hardware_Shop_Client
             }
         }
 
+        /// <summary>
+        /// Holt auf Basis eines Wortes und eines Typen (Table) die jeweilige ID dieses Eintrages, womit dann Anfragen gemacht
+        /// werden können.
+        /// </summary>
+        /// <param name="reference">Wort wovon die ID geholt werden soll</param>
+        /// <param name="type">Typ bzw. Table in der Datenbank wo genau in der Datenbank nach gesucht werden soll</param>
+        /// <param name="id">ID des Wortes welches gesucht wurde</param>
+        /// <returns>Gibt an ob eine ID gefunden wurde oder nicht</returns>
         private bool getSQLContentID(string reference, string type, out int id)
         {
             id = -1;
@@ -354,6 +465,13 @@ namespace Hardware_Shop_Client
             return id != -1 ? true : false;
         }
 
+        /// <summary>
+        /// Setzt das jeweilige GUI Objekt zurück und holt sich aus der Datenbank die neuste Referenz der Auswahlmöglichkeiten der
+        /// ComboBox, sollte sich in der Zwischenzeit etwas geändert haben.
+        /// </summary>
+        /// <param name="table">Relevante Table die überprüft werden soll ob neue Auswahlmöglichkeiten für 
+        /// diese ComboBox vorhanden sind</param>
+        /// <param name="reference">Referenz GUI ComboBox</param>
         private void resetGUIObject(String table, ComboBox reference)
         {
             string sql = "SELECT " + table + "_name FROM " + table + ";";
@@ -373,8 +491,8 @@ namespace Hardware_Shop_Client
         /// <summary>
         /// Checks if a certain item can be access regarding the rule that only ONE editor can access a specific item.
         /// </summary>
-        /// <param name="itemID">Specific item id which needs to be checked.</param>
-        /// <returns>boolean which let the open request through or not.</returns>
+        /// <param name="itemID">Specific item id which needs to be checked</param>
+        /// <returns>boolean which let the open request through or not</returns>
         private bool isAccessible(int itemID)
         {
             string user = "", date = "";
@@ -410,6 +528,11 @@ namespace Hardware_Shop_Client
             }
         }
 
+        /// <summary>
+        /// Fügt eine Zugangssperre zu einem bestimmten Artikel hinzu wodurch andere Benutzer nicht mehr auf diesen Artikel zugreifen
+        /// können damit es nicht zu Speicherkonflikten kommt oder ähnliches.
+        /// </summary>
+        /// <param name="itemID">ID des Artikels</param>
         private void addContentAccessBlock(int itemID)
         {
             int lastID = 0, userID = -1;
